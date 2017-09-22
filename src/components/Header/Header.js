@@ -11,7 +11,7 @@ function Header() {
         <Navigation className={s.nav} />
         <Link className={s.brand} to="/">
           <img />
-          <span className={s.brandTxt}></span>
+          <span className={s.brandTxt}>SFU</span>
         </Link>
         <div className={s.banner}>
           <h1 className={s.bannerTitle}>Security Request System</h1>
