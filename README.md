@@ -1,3 +1,4 @@
+```
 .
 ├── /build/                     # The folder for compiled output
 ├── /node_modules/              # 3rd-party libraries and utilities
@@ -15,6 +16,7 @@
 │   └── /webpack.config.js      # Configurations for client-side and server-side bundles
 └── package.json                # The list of 3rd party libraries and utilities
 
+
 Install dependencies using 'npm install' before build from source 
 
 Several npm commands to build and deploy application on your own working environment
@@ -25,3 +27,4 @@ npm deploy
 npm test
 npm copy
 npm clean
+```
