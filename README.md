@@ -16,6 +16,7 @@
 │   └── /webpack.config.js      # Configurations for client-side and server-side bundles
 └── package.json                # The list of 3rd party libraries and utilities
 
+Test
 
 Install dependencies using 'npm install' before build from source 
 
