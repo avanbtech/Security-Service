@@ -3,9 +3,35 @@
 This is group Gammas CMPT 373 Term Project.  We are developing a web application form to replace the current SFU security services request system with an online solution, that the "customer" can fill out the necessary information, which then will be automatically accessible to security for further processing.
 We are using the MERN stack to complete this project, consisting of MongoDB (NoSQL Database), Express (Framework for web applications) , React (Front end framework - HTML/CSS etc.), and Node.js (Server side, back end framework) as the underlying frameworks.
 
-## Initial setup instructions 
+## Initial setup instructions (Last edited 9/24/17)
 
-**(Requires more detailed initial setup information here to be filled too)**
+The following instructions are for **Windows**. You can find a more detailed documentation (which includes other OS!) [here](https://developer.mozilla.org/en-US/docs/Learn/Server-side/Express_Nodejs/development_environment). 
+
+### Node.js
+
+- Go [here](https://nodejs.org/en/) and install node.js. The LTS version should suffice, and follow the installation prompts.
+- Test to make sure that both node.js and npm, the node package manager are installed properly. Use the following commands in a command prompt (I suggest git bash, the prompt that comes with installing git on your computer!) to test.
+
+```
+node -v
+npm -v
+```
+
+You should get an output that looks like this:
+
+```
+node -v
+v7.10.0
+
+npm -v
+4.2.0
+```
+### Express
+
+- Express is simply another library we acquire from the node package manager (npm) of node.js. This should already be done in the skeleton code, so you shouldn't need to do anything!
+- However, if you want to learn what is going on, please read [this](https://developer.mozilla.org/en-US/docs/Learn/Server-side/Express_Nodejs/development_environment#Using_NPM). It will explain how to set it up on a new project.
+
+### Additional npm commands
 
 Please install dependencies using 'npm install' before build from source 
 
