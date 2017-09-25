@@ -49,10 +49,11 @@ Please follow this coding style when making commits to the respository: [Javascr
 ## Group resources
 Please take a look at the following resources to keep up with our current group activities:  
 
-- [Weekly meeting summary google doc](https://docs.google.com/document/d/1DAsxf96ypMyuNfbaBrvUkC6CPIX9Hvi8qmMhc5HrUuI/edit?usp=sharing)
-- [Slack group](https://cmpt373-gamma.slack.com/)
+- [Weekly meeting summary (google doc)](https://docs.google.com/document/d/1DAsxf96ypMyuNfbaBrvUkC6CPIX9Hvi8qmMhc5HrUuI/edit?usp=sharing)
+- [Iteration 1 customer requirements summary (google doc)](https://docs.google.com/document/d/16YwL5praOUuRy7GNxN219VJEGl4KNf1sNi21Z0sgkVc/edit)
 - [Iteration 1 initial design concept (Last updated: 9/18/17)](http://puu.sh/xI7aE/4fb65bdaa8.jpg)
 - [Initial customer project presentation (Last updated: 9/14/17) - Link attempts to download pptx file to your computer!](http://puu.sh/xI7kv/687fbc6111.pptx)
+- [Our slack group (link)](https://cmpt373-gamma.slack.com/)
 
 
 ## Study resources
