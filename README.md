@@ -1,4 +1,25 @@
-#Test
+
+# Security Service Request System 
+## About
+This is group Gammas CMPT 373 Term Project.  We are developing a web application form to replace the current SFU security services request system with an online solution, that the "customer" can fill out the necessary information, which then will be automatically accessible to security for further processing.
+We are using the MERN stack to complete this project, consisting of MongoDB (NoSQL Database), Express (Framework for web applications) , React (Front end framework - HTML/CSS etc.), and Node.js (Server side, back end framework) as the underlying frameworks.
+
+## Initial setup instructions 
+
+Please install dependencies using 'npm install' before build from source 
+
+Here are several npm commands to build and deploy the application on your own working environment:
+
+```
+npm start
+npm build
+npm deploy
+npm test
+npm copy
+npm clean
+```
+
+## Directory structure 
 
 ```
 .
@@ -17,17 +38,7 @@
 │   ├── /start.js               # Launches the development web server with "live reload"
 │   └── /webpack.config.js      # Configurations for client-side and server-side bundles
 └── package.json                # The list of 3rd party libraries and utilities
-
-Test
-
-Install dependencies using 'npm install' before build from source 
-
-Several npm commands to build and deploy application on your own working environment
-
-npm start
-npm build
-npm deploy
-npm test
-npm copy
-npm clean
 ```
+
+
+
