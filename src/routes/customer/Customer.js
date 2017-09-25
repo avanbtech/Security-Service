@@ -11,8 +11,9 @@ function Customer({ title }) {
       <div className={s.container}>
         <h1>{title}</h1>
         <p>Security System Form</p>
+        <p><Form /></p>
       </div>
-      <Form />
+      
     </div>
   );
 }
