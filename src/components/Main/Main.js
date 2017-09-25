@@ -8,7 +8,7 @@ function Main({ className }) {
   return (
     <div className={cx(s.root, className)} role="Main">
       <Link className={s.link} to="/Customer">Security Request Form</Link>
-      <p> xxx </p>
+      <p>    Check Status   </p>
     </div>
   );
 }

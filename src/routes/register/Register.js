@@ -7,7 +7,7 @@ function Register({ title }) {
     <div className={s.root}>
       <div className={s.container}>
         <h1>{title}</h1>
-        <p>Currently do not have SFU API for registration</p>
+        <p>Currently do not have SFU API for Login</p>
       </div>
     </div>
   );
