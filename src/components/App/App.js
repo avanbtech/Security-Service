@@ -50,7 +50,6 @@ class App extends Component {
       <div>
         <Header />
         {this.props.children}
-        <Main />
         <Feedback />
         <Footer />
       </div>
