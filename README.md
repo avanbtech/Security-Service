@@ -1,7 +1,7 @@
-# Security Service Request System (Last edited 9/24/17, by Alex)
+# Security Service Request System (Last edited 9/25/17, by Alex)
 ## About
 This is group Gamma's CMPT 373 Term Project.  We are developing a web application form to replace the current SFU security services request system with an online solution, that the "customer" can fill out the necessary information, which then will be automatically accessible to security for further processing.
-We are using the MERN stack to complete this project, consisting of MongoDB (NoSQL Database) (or maybe graphql, to be determined!), Express (Framework for web applications), React (Front end framework - HTML/CSS etc.), and Node.js (Server side, back end framework) as the underlying frameworks.
+We are using the MERN(ish) stack to complete this project, consisting of a SQL database (name to be determined?), Express (Framework for web applications), React (Front end framework - HTML/CSS etc.), and Node.js (Server side, back end framework) as the underlying frameworks.
 
 ## Initial setup instructions 
 
@@ -32,9 +32,14 @@ npm -v
 - Express is simply another library we acquire from the node package manager (npm) of node.js. This should already be done in the skeleton code, so you shouldn't need to do anything!
 - However, if you want to learn what is going on, please read [this](https://developer.mozilla.org/en-US/docs/Learn/Server-side/Express_Nodejs/development_environment#Using_NPM). It will explain how to set it up on a new project.
 
+### React.js
+
+- To have React, our front end framework communicate with Express, our middle-ware, please read [this](https://daveceddia.com/create-react-app-express-backend/) guide.
+- This step should be already completed in our master branch, so you don't need to worry about it either!
+
 ### Additional npm commands and information
 
-Please install the required dependencies using 'npm install' before building from the source.
+Please install the required dependencies using 'npm install' before building from the source. You would do this inside the main directory that branches to everything else shown below in directory structure.
 
 Here are several npm commands to help build and deploy the application on your own working environment:
 
@@ -79,8 +84,9 @@ Please follow this coding style when making commits to the respository: [Javascr
 ## Group resources
 Please take a look at the following resources to keep up with our current group activities:  
 
+- [9/25/17 meeting - issues/tickets (whiteboard picture)](https://puu.sh/xIY0E/7d68b2d65a.jpg)
 - [Weekly meeting summary (google doc)](https://docs.google.com/document/d/1DAsxf96ypMyuNfbaBrvUkC6CPIX9Hvi8qmMhc5HrUuI/edit?usp=sharing)
-- [Iteration 1 customer requirements summary (google doc)](https://docs.google.com/document/d/16YwL5praOUuRy7GNxN219VJEGl4KNf1sNi21Z0sgkVc/edit)
+- [Iteration 1 customer requirements summary (google doc)](https://docs.google.com/document/d/16YwL5praOUuRy7GNxN219VJEGl4KNf1sNi21Z0sgkVc/edit) 
 - [Iteration 1 initial design concept (Last updated: 9/18/17)](http://puu.sh/xI7aE/4fb65bdaa8.jpg)
 - [Initial customer project presentation (Last updated: 9/14/17) - Link attempts to download pptx file to your computer!](http://puu.sh/xI7kv/687fbc6111.pptx)
 - [Our slack group (link)](https://cmpt373-gamma.slack.com/)
