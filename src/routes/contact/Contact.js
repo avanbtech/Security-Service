@@ -23,9 +23,9 @@ var ContactInfo = React.createClass({
           {/*Add Pharah's real full name here:*/}
         var names = ['Raymond Huang: xiruih@sfu.ca', 'Junru Tao: junrut@sfu.ca', 'Alex Zhang: cwzhang@sfu.ca',
         'Angel Singh: asa179@sfu.ca', 'Lester Chee: lochee@sfu.ca', 'Sankait Kumar: sankaitk@sfu.ca', 'Jeff Yan: mingjiey@sfu.ca',
-        'Pharah: fnobakht@sfu.ca', 'Contact Everyone: 373-gamma@sfu.ca'];
+        'Faranak Nobakhtian: fnobakht@sfu.ca', 'Contact Everyone: 373-gamma@sfu.ca'];
 
-        var namesList = names.map(function(name){
+        var Faranak NobakhtiannamesList = names.map(function(name){
                         return <li> <p><b>{name}</b></p> </li>;
                       })
 
