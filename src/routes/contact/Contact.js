@@ -7,31 +7,47 @@ function Contact({ title }) {
     <div className={s.root}>
       <div className={s.container}>
         <h1>{title}</h1>
-
-{/*ContactInfo Function is below this function*/}
-    <ContactInfo/>
+        
+    <ContactInfo developerInfo={developerInfo} />
 
       </div>
     </div>
   );
 }
 
-{/*This part of the code can be encapsulated better by moving the function elsewhere. Storing our names and emails in a database would be even better to allow CSS styling of both email and names*/}
-var ContactInfo = React.createClass({
-    render: function() {
 
-          {/*Add Pharah's real full name here:*/}
-        var names = ['Raymond Huang: xiruih@sfu.ca', 'Junru Tao: junrut@sfu.ca', 'Alex Zhang: cwzhang@sfu.ca',
-        'Angel Singh: asa179@sfu.ca', 'Lester Chee: lochee@sfu.ca', 'Sankait Kumar: sankaitk@sfu.ca', 'Jeff Yan: mingjiey@sfu.ca',
-        'Faranak Nobakhtian: fnobakht@sfu.ca', 'Contact Everyone: 373-gamma@sfu.ca'];
+{/*This part of the code can be encapsulated better by moving the function elsewhere and importing it perhaps*/}
+function ContactInfo(props) {
 
-        var Faranak NobakhtiannamesList = names.map(function(name){
-                        return <li> <p><b>{name}</b></p> </li>;
-                      })
+  const content = props.developerInfo.map((developer) =>
 
-        return  <ul>{ namesList }</ul>
-    }
-});
+    <div key={developer.id}>
+
+{/*Edit html for developer name and ids here*/}
+    <li><p> <b>{developer.name}: </b>
+    {developer.sfuid}@sfu.ca </p></li>
+
+    </div>
+  );
+  return (
+    <div>
+    <ul> {content} </ul>
+    </div>
+  );
+}
+
+{/*Fill out developer name and emails here*/}
+const developerInfo = [
+  {id: 1, name: 'Raymond Huang', sfuid: 'xiruih'},
+  {id: 2, name: 'Junru Tao', sfuid: 'junrut'},
+  {id: 3, name: 'Alex Zhang', sfuid: 'cwzhang'},
+  {id: 4, name: 'Angel Singh', sfuid: 'asa179'},
+  {id: 5, name: 'Lester Chee', sfuid: 'lochee'},
+  {id: 6, name: 'Sankait Kumar', sfuid: 'sankaitk'},
+  {id: 7, name: 'Jeff Yan', sfuid: 'mingjiey'},
+  {id: 8, name: 'Faranak Nobakhtian', sfuid: 'fnobakht'},
+  {id: 9, name: 'Contact Everyone', sfuid: '373-gamma'},
+];
 
 Contact.propTypes = { title: PropTypes.string.isRequired };
 
