@@ -12,6 +12,8 @@ import passport from './core/passport';
 import schema from './data/schema';
 import Router from './routes';
 import assets from './assets';
+
+import graphql from 'graphql';
 import { port, auth, analytics } from './config';
 
 const server = global.server = express();

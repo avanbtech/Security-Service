@@ -1,72 +1,32 @@
-import db from 'pg';
-import Promise from 'bluebird';
-import { databaseUrl } from '../config';
+import Sequelize from 'sequelize';
 
-// TODO: Customize database connection settings
-/* jscs:disable requireCamelCaseOrUpperCaseIdentifiers */
-db.defaults.ssl = true;
-db.defaults.poolSize = 2;
-db.defaults.application_name = 'RSK';
-/* jscs:enable requireCamelCaseOrUpperCaseIdentifiers */
+const Conn = new Sequelize(
+  'demoDB',
+  'root',
+  'laroiya@1996',
+  {
+    dialect: 'mysql',
+    host: 'localhost'
+  }
+);
 
-/**
- * Promise-based wrapper for pg.Client
- * https://github.com/brianc/node-postgres/wiki/Client
- */
-function AsyncClient(client) {
-  this.client = client;
-  this.query = this.query.bind(this);
-  this.end = this.end.bind(this);
-}
+const Form = Conn.define('form', {
+  id: {
+    type: Sequelize.INTEGER,
+    allowNull: false,
+    primaryKey: true
+  },
+  status: {
+    type: Sequelize.STRING,
+    allowNull: false
+  },
+  statusDate: {
+    type: Sequelize.STRING,
+    allowNull: true
+  }
+});
 
-AsyncClient.prototype.query = function query(sql, ...args) {
-  return new Promise((resolve, reject) => {
-    if (args.length) {
-      this.client.query(sql, args, (err, result) => {
-        if (err) {
-          reject(err);
-        } else {
-          resolve(result);
-        }
-      });
-    } else {
-      this.client.query(sql, (err, result) => {
-        if (err) {
-          reject(err);
-        } else {
-          resolve(result);
-        }
-      });
-    }
-  });
-};
+Conn.sync({ force: false});
 
-AsyncClient.prototype.end = function end() {
-  this.client.end();
-};
 
-/**
- * Promise-based wrapper for pg.connect()
- * https://github.com/brianc/node-postgres/wiki/pg
- */
-db.connect = (connect => callback => new Promise((resolve, reject) => {
-  connect.call(db, databaseUrl, (err, client, done) => {
-    if (err) {
-      if (client) {
-        done(client);
-      }
-
-      reject(err);
-    } else {
-      callback(new AsyncClient(client)).then(() => {
-        done();
-        resolve();
-      }).catch(error => {
-        done(client);
-        reject(error);
-      });
-    }
-  });
-}))(db.connect);
-
-export default db;
+export default Conn;
