@@ -40,7 +40,7 @@ npm -v
 
 ### Additional npm commands and information
 
-Please install the required dependencies using 'npm install' before building from the source. You would do this inside the main directory that branches to everything else shown below in directory structure.
+Please install the required dependencies using 'npm install' before building from the source. You would do this inside the main directory that branches to everything else shown below in directory structure. After 'npm install', call 'npm start' to start the server. You can see our current deployment at localhost:3000. If there are any issues, ask someone about it.
 
 Here are several npm commands to help build and deploy the application on your own working environment:
 
