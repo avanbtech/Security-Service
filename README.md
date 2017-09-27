@@ -1,4 +1,4 @@
-# Security Service Request System (Last edited 9/25/17, by Alex)
+# Security Service Request System (Last edited 9/27/17, by Alex)
 ## About
 This is group Gamma's CMPT 373 Term Project.  We are developing a web application form to replace the current SFU security services request system with an online solution, that the "customer" can fill out the necessary information, which then will be automatically accessible to security for further processing.
 We are using the MERN(ish) stack to complete this project, consisting of a SQL database (name to be determined?), Express (Framework for web applications), React (Front end framework - HTML/CSS etc.), and Node.js (Server side, back end framework) as the underlying frameworks.
@@ -87,6 +87,7 @@ Here is our current directory structure and a brief explaination of what everyth
 ## Group resources
 Please take a look at the following resources to keep up with our current group activities:  
 
+- [Weekly tutorial name tag template](http://www.volkside.com/2009/05/workshop-name-plate-template/)
 - [9/25/17 meeting - initial ticket/issue assignments](https://puu.sh/xIYaf/564f6c12f8.png)
 - [9/25/17 meeting - issues/tickets (whiteboard picture)](https://puu.sh/xIY0E/7d68b2d65a.jpg)  
 - [Weekly meeting summary (google doc)](https://docs.google.com/document/d/1DAsxf96ypMyuNfbaBrvUkC6CPIX9Hvi8qmMhc5HrUuI/edit?usp=sharing)  
