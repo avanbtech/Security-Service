@@ -1,0 +1,9 @@
+The database name is called "securityrequestsystem".
+The table name is "requestinformation".
+The "id" is referred to the unique number for checking status.
+The "statusDate" is the date of the processing, admitted, or refuse etc.
+The "date" is the event date in the request information section.
+The type tinyint(4) is the boolean type in mysql.
+
+If there are some type or name problems, please contact me on slack or email. I will change it.
+Jeff Yan. email:mingjiey@sfu.ca
