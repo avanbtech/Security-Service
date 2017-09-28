@@ -10,6 +10,8 @@ const Conn = new Sequelize(
   }
 );
 
+
+//DB TABLE DEFINITIONS
 const Form = Conn.define('form', {
   id: {
     type: Sequelize.INTEGER,
@@ -32,10 +34,10 @@ const Form = Conn.define('form', {
     type: Sequelize.STRING,
     allowNull: false
   },
-  // date: {
-  //   type: Sequelize.DATE,
-  //   allowNull: false
-  // },
+  date: {
+    type: Sequelize.DATE,
+    allowNull: false
+  },
   requestBy: {
     type: Sequelize.STRING,
     allowNull: false
@@ -50,9 +52,10 @@ const Form = Conn.define('form', {
   },
   email: {
     type: Sequelize.STRING,
-    allowNull: false
-
-    //ADD VALIDATE FUNCTION
+    allowNull: false,
+    validate: {
+      isEmail: true
+    }
   },
   nameOfevent: {
     type: Sequelize.STRING,
@@ -70,33 +73,85 @@ const Form = Conn.define('form', {
     type: Sequelize.INTEGER,
     allowNull: false
   },
-  // eventDates: {
-  //   type: [Sequelize.DATE],
-  //   allowNull: false
-  //
-  //   //CHECK IF IT HAS TO BE A LIST
-  // }
+  eventDates: {
+    type: Sequelize.STRING,
+    allowNull: false,
+
+    get: () => {
+        return this.getDataValue('eventDates').split(';');
+    },
+    set: function (val) {
+       this.setDataValue('eventDates',val.join(';'));
+       console.log('set');
+    }
+  },
+  times: {
+    type: Sequelize.INTEGER,
+    allowNull: false,
+  },
+  details: {
+    type: Sequelize.STRING,
+    allowNull: true
+  },
+  accountCode: {
+    type: Sequelize.INTEGER,
+    allowNull: false
+  },
+  invoice: {
+    type: Sequelize.INTEGER,
+    allowNull: false
+  },
+  authorizedBy: {
+    type: Sequelize.STRING,
+    allowNull: false
+  },
+  authorizedID: {
+    type: Sequelize.STRING,
+    allowNull: false
+  },
+  authorizedDate: {
+    type: Sequelize.DATE,
+    allowNull: false
+  },
+  authorizedPhone: {
+    type: Sequelize.STRING,
+    allowNull: false
+  }
 });
 
-Conn.sync({ force: true}).then(() => {
-  var datetime = new Date("2017-09-01");
+Conn.sync({ force: false});
 
-  return Form.create({
-    id: 0,
-    status: 'Pending',
-    statusDate: new Date(2011, 0, 1, 0, 0, 0, 0),
-    sfuBCID: 50505,
-    department: 'APPSC',
-    requestBy: 'Sankait',
-    phone: '7782417856',
-    fax: '',
-    email: 'sankaitk@sfu.ca',
-    nameOfevent: 'BOOM',
-    licensed: 100,
-    location: 'Home',
-    numberOfattendees: 10,
-  })
-});
+//DEMO QUERY
+
+// Conn.sync({ force: true}).then(() => {
+//   var datetime = new Date("2017-09-01");
+//
+//   return Form.create({
+//     id: 0,
+//     status: 'Pending',
+//     statusDate: new Date(2011, 0, 1, 0, 0, 0, 0),
+//     sfuBCID: 50505,
+//     department: 'APPSC',
+//     date: new Date(2013, 0, 1, 0, 0, 0, 0),
+//     requestBy: 'Sankait',
+//     phone: '7782417856',
+//     fax: '',
+//     email: 'sankaitk@sfu.ca',
+//     nameOfevent: 'BOOM',
+//     licensed: 100,
+//     location: 'Home',
+//     numberOfattendees: 10,
+//     eventDates: [(new Date(2012, 0, 1, 0, 0, 0, 0)).toString(), (new Date(2019, 0, 1, 0, 0, 0, 0)).toString()],
+//     times: 21,
+//     details: 'THIS IS DETAIL',
+//     accountCode: 420,
+//     invoice: 32,
+//     authorizedBy: 'Sankait',
+//     authorizedID: '42342fkfdsf',
+//     authorizedDate: new Date(2012, 2,2,0,0,0,0),
+//     authorizedPhone: 7782415848
+//   })
+// });
 
 
 export default Conn;
