@@ -12,6 +12,7 @@ const routes = [
   require('./routes/login'),
   require('./routes/register'),
   require('./routes/customer'),
+  require('./routes/status')
 ];
 
 const router = new Router(on => {
