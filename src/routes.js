@@ -12,7 +12,8 @@ const routes = [
   require('./routes/login'),
   require('./routes/register'),
   require('./routes/customer'),
-  require('./routes/status')
+  require('./routes/status'),
+  require('./routes/statusform'),
 ];
 
 const router = new Router(on => {
