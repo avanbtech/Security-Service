@@ -1,8 +1,91 @@
-import React from 'react';
-import Main from '../../components/Main';
-import s from './form.scss';
+import React, { Component } from 'react'
+import { Form } from 'semantic-ui-react'
 
-export default class From extends React.Component{
+const options = [
+  { key: 'y', text: 'Yes', value: 'yes' },
+  { key: 'n', text: 'No', value: 'no' },
+]
+
+class FormExampleSubcomponentControl extends Component {
+  state = {
+  		date:'',
+		department:'',
+		requestBy:'',
+		id:'',
+		phone:'',
+		fax:'',
+		email:'',
+		nameOfEvent:'',
+		licensed:'',
+		location:'',
+		numberOfAttendees:'',
+		eventDate:'',
+		time:'',
+		detail:'',
+		accountCode:'',
+		authorizedBy:'',
+		authorizedID:'',
+		authoriedDate:'',
+		authorizedSignature:'',
+		authorizedPhone:''
+  }
+
+/*handleChange = (e, { value }) => this.setState({ value })*/
+
+
+change = e =>{
+	this.setState({
+		[e.target.name]: e.target.value
+	});
+};
+	
+
+onSubmit = e =>{
+	e.preventDefault();
+	console.log(this.state);
+}
+
+
+  render() {
+   const { value } = this.state
+    return (
+      <Form>
+
+        <Form.Group widths='equal'>
+          <Form.Input 
+          	name = "date"
+          	label='Date' 
+          	placeholder='Date' 
+			onChange = {e => this.change(e)}
+          />
+          <Form.Input 
+          	label='Last name' 
+          	placeholder='Last name' 
+          	onChange = {e => this.change(e)}
+          />
+          <Form.Select 
+          	label='Gender' 
+          	options={options} placeholder='Gender' 
+          />
+
+        </Form.Group>
+        <Form.Group inline>
+          <label>Size</label>
+          <Form.Radio label='Small' value='sm' checked={value === 'sm'} onChange={this.handleChange} />
+          <Form.Radio label='Medium' value='md' checked={value === 'md'} onChange={this.handleChange} />
+          <Form.Radio label='Large' value='lg' checked={value === 'lg'} onChange={this.handleChange} />
+        </Form.Group>
+        <Form.TextArea label='About' placeholder='Tell us more about you...' />
+        <Form.Checkbox label='I agree to the Terms and Conditions' />
+        <Form.Button onClick = {e => this.onSubmit(e)}>Submit</Form.Button>
+      </Form>
+    )
+  }
+}
+
+export default FormExampleSubcomponentControl
+
+/*export default class From extends React.Component{
 	state={
 		date:'',
 		department:'',
@@ -173,3 +256,4 @@ export default class From extends React.Component{
 		);
 	}
 }
+*/
