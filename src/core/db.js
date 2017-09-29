@@ -76,7 +76,7 @@ const Form = Conn.define('form', {
   eventDates: {
     type: Sequelize.STRING,
     allowNull: false,
-      
+
     set: function (val) {
        this.setDataValue('eventDates',val.join(';'));
     }
