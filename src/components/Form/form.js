@@ -11,34 +11,53 @@ const options = [
 
 class FormExampleSubcomponentControl extends Component {
   state = {
-  		date:'',
+    date:'',
+    dateError:'',
 		department:'',
+    departmentError:'',
 		requestBy:'',
+    requestByError:'',
 		id:'',
+    idError:'',
 		phone:'',
+    phoneError:'',
 		fax:'',
+    faxError:'',
 		email:'',
+    emailError:'',
 		nameOfEvent:'',
+    nameOfEventError:'',
 		location:'',
+    locationError:'',
 		numberOfAttendees:'',
+    numberOfAttendeesError:'',
 		eventDate:'',
+    eventDateEroor:'',
 		time:'',
+    timeError:'',
 		detail:'',
+    detaitError:'',
 		accountCode:'',
+    accountCodeError:'',
 		authorizedBy:'',
+    authorizedByError:'',
 		authorizedID:'',
+    authorizedIDError:'',
 		authorizedDate:'',
+    authorizedDateError:'',
 		authorizedSignature:'',
-		authorizedPhone:''
+    authorizedSignatureError:'',
+		authorizedPhone:'',
+    authorizedPhoneError:''
 	}
-	
+
 
 	change = e =>{
 		this.setState({
 			[e.target.name]: e.target.value
 		});
 	}
-	
+
 
 	onSubmit = e =>{
 		e.preventDefault();
@@ -62,10 +81,10 @@ class FormExampleSubcomponentControl extends Component {
 
 
   	render() {
-	   	const { value } = this.state 
+	   	const { value } = this.state
 	    return (
 	      	<Form>
-	      		
+
 	      		<h2> Request Information </h2>
 	        	<Form.Group widths='equal'>
 	        		<Form.Field required>
@@ -85,7 +104,7 @@ class FormExampleSubcomponentControl extends Component {
 	          		<Form.Field required>
 	        			<label> SFU ID or BCDL </label>
 	          			<Form.Input name='id' placeholder='SFU ID or BCDL' onChange = {e => this.change(e)} />
-	          		</Form.Field>	
+	          		</Form.Field>
 	        	</Form.Group>
 	        	<Form.Group widths='equal'>
 	        		<Form.Field required>
@@ -102,7 +121,7 @@ class FormExampleSubcomponentControl extends Component {
 	        		<label>  Type/Name of Event </label>
 	        		<Form.Input name='nameOfEvent' placeholder='Type/Name of Event' onChange = {e => this.change(e)} />
 	        	</Form.Field>
-	        	<Form.Field required>	
+	        	<Form.Field required>
 	        		<Form.Group inline>
 	        		{/* "value" in data package represent the state of this part */}
 		          		<label> Licensed </label>
@@ -131,8 +150,8 @@ class FormExampleSubcomponentControl extends Component {
 	          		</Form.Field>
 	        	</Form.Group>
 	        	<Form.TextArea name='detail' label='Details' placeholder='Details of request(Please submit with photo of area and floor if applicable)' onChange = {e => this.change(e)}/>
-	        	
-	        	
+
+
 
 	        	<h2> Payment Detail </h2>
 	        	<Form.Field required>
@@ -141,7 +160,7 @@ class FormExampleSubcomponentControl extends Component {
 	        	</Form.Field>
 	        	<Form.Checkbox label='Please Invoice' /> {/* "did not intergrated into data package yet */}
 
-	        	
+
 
 	        	<h2> Authorization Detail </h2>
 	        	<Form.Group widths='equal'>
@@ -179,7 +198,7 @@ class FormExampleSubcomponentControl extends Component {
 	        	</Form.Field>
 	        	<Form.Button onClick = {e => this.onSubmit(e)} onChange = {this.FormExampleSuccess}>Submit</Form.Button>
 
-	       
+
 	      	</Form>
     	)
   	}
