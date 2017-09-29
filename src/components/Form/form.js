@@ -32,141 +32,142 @@ export default class From extends React.Component{
 
 	onSubmit = e =>{
 		e.preventDefault();
-		console.log(this.state);
 	}
 
 	render() {
 		return (
 			<div className={s.root}>
       			<div className={s.container}>
-					<form>
-							<input 
+					<form
+            action="/customer"
+            method="post">
+							<input
 								name = "date"
-								placeholder = "Date" 
-								value = {this.state.date} 
+								placeholder = "Date"
+								value = {this.state.date}
 								onChange = {e => this.change(e)}
 							/>
-							<input 
+							<input
 								name = "department"
-								placeholder = "Department" 
-								value = {this.state.department} 
+								placeholder = "Department"
+								value = {this.state.department}
 								onChange = {e => this.change(e)}
 							/>
 							<br />
-							<input 
+							<input
 								name = "firstName"
-								placeholder = "First name" 
-								value = {this.state.firstName} 
+								placeholder = "First name"
+								value = {this.state.firstName}
 								onChange = {e => this.change(e)}
 							/>
-							<input 
+							<input
 								name = "requestBy"
-								placeholder = "Request By" 
-								value = {this.state.requestby} 
+								placeholder = "Request By"
+								value = {this.state.requestby}
 								onChange = {e => this.change(e)}
 							/>
-							<input 
+							<input
 								name = "id"
-								placeholder = "SFU ID or BCDL" 
-								value = {this.state.id} 
+								placeholder = "SFU ID or BCDL"
+								value = {this.state.id}
 								onChange = {e => this.change(e)}
 							/>
 							<br />
-							<input 
+							<input
 								name = "phone"
-								placeholder = "Phone" 
-								value = {this.state.phone} 
+								placeholder = "Phone"
+								value = {this.state.phone}
 								onChange = {e => this.change(e)}
 							/>
-							<input 
+							<input
 								name = "fax"
-								placeholder = "Fax" 
-								value = {this.state.fax} 
+								placeholder = "Fax"
+								value = {this.state.fax}
 								onChange = {e => this.change(e)}
 							/>
-							<input 
+							<input
 								name = "email"
 								placeholder="Email"
-								value={this.state.email} 
+								value={this.state.email}
 								onChange={e => this.change(e)}
 							/>
 							<br />
-							<input 
+							<input
 								name = "nameOfEvent"
 								placeholder="Name of Event"
-								value={this.state.nameOfEvent} 
+								value={this.state.nameOfEvent}
 								onChange={e => this.change(e)}
 							/>
-							<input 
+							<input
 								name = "licensed"
-								placeholder = "Licensed" 
-								value = {this.state.licensed} 
+								placeholder = "Licensed"
+								value = {this.state.licensed}
 								onChange = {e => this.change(e)}
 							/>
 							<br />
-							<input 
+							<input
 								name = "location"
-								placeholder = "Location of Event" 
-								value = {this.state.location} 
+								placeholder = "Location of Event"
+								value = {this.state.location}
 								onChange = {e => this.change(e)}
 							/>
-							<input 
+							<input
 								name = "location"
-								placeholder = "Location of Event" 
-								value = {this.state.location} 
+								placeholder = "Location of Event"
+								value = {this.state.location}
 								onChange = {e => this.change(e)}
 							/>
-							<input 
+							<input
 								name = "numberOfAttendees"
-								placeholder = "# of Attendees" 
-								value = {this.state.numberOfAttendees} 
+								placeholder = "# of Attendees"
+								value = {this.state.numberOfAttendees}
 								onChange = {e => this.change(e)}
 							/>
 							<br />
-							<input 
+							<input
 								name = "eventDate"
-								placeholder = "Event Date" 
-								value = {this.state.eventDate} 
+								placeholder = "Event Date"
+								value = {this.state.eventDate}
 								onChange = {e => this.change(e)}
 							/>
-							<input 
+							<input
 								name = "time"
-								placeholder = "Time(s)" 
-								value = {this.state.time} 
+								placeholder = "Time(s)"
+								value = {this.state.time}
 								onChange = {e => this.change(e)}
 							/>
 							<br />
-							<input 
+							<input
 								name = "detail"
-								placeholder = "Details" 
-								value = {this.state.detail} 
+								placeholder = "Details"
+								value = {this.state.detail}
 								onChange = {e => this.change(e)}
 							/>
 
 
 							<p> Authorized Deatils </p>
 
-							<input 
+							<input
 								name = "firstName"
-								placeholder = "First name" 
-								value = {this.state.firstName} 
+								placeholder = "First name"
+								value = {this.state.firstName}
 								onChange = {e => this.change(e)}
 							/>
-							<input 
+							<input
 								name = "lastName"
-								placeholder = "Last name" 
-								value = {this.state.lastName} 
+								placeholder = "Last name"
+								value = {this.state.lastName}
 								onChange = {e => this.change(e)}
 							/>
-							<input 
+							<input
 								name = "userName"
 								placeholder = "User name"
-								value = {this.state.firstName} 
+								value = {this.state.firstName}
 								onChange = {e => this.change(e)}
 							/>
-							
+
 							<br />
-							<button onClick = {e => this.onSubmit(e)}>Submit </button>
+							<button>Submit </button>
 					</form>
 				</div>
 			</div>
