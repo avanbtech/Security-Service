@@ -9,9 +9,8 @@ function Customer({ title }) {
   return (
     <div className={s.root}>
       <div className={s.container}>
-        <h1>{title}</h1>
         <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.12/semantic.min.css"></link>
-        <p>Security System Form</p>
+        <h1>Security Request Form</h1>
         <Form />
       </div>
       
