@@ -1,21 +1,183 @@
 import {
-  GraphQLSchema as Schema,
-  GraphQLObjectType as ObjectType,
+  GraphQLObjectType,
+  GraphQLInt,
+  GraphQLString,
+  GraphQLList,
+  GraphQLSchema
 } from 'graphql';
 
-import me from './queries/me';
-import content from './queries/content';
-import news from './queries/news';
+import GraphQLDate from 'graphql-date';
 
-const schema = new Schema({
-  query: new ObjectType({
-    name: 'Query',
-    fields: {
-      me,
-      content,
-      news,
-    },
-  }),
+import Db from '../core/db';
+
+//Types
+const Form  = new GraphQLObjectType({
+  name: 'Form',
+  description: 'Form submission type',
+  fields: () => {
+    return {
+      id: {
+        type: GraphQLInt,
+        resolve(form) {
+          return form.id;
+        }
+      },
+      status: {
+        type: GraphQLString,
+        resolve(form) {
+          return form.status;
+        }
+      },
+      statusDate: {
+        type: GraphQLDate,
+        resolve(form) {
+          return form.statusDate;
+        }
+      },
+      sfuBCID: {
+        type: GraphQLString,
+        resolve(form) {
+          return form.sfuBCID;
+        }
+      },
+      department: {
+        type: GraphQLString,
+        resolve(form) {
+          return form.department;
+        }
+      },
+      date: {
+        type: GraphQLDate,
+        resolve(form) {
+          return form.date;
+        }
+      },
+      requestBy: {
+        type: GraphQLString,
+        resolve(form) {
+          return form.requestBy;
+        }
+      },
+      phone: {
+        type: GraphQLString,
+        resolve(form) {
+          return form.phone;
+        }
+      },
+      fax: {
+        type: GraphQLString,
+        resolve(form) {
+          return form.fax;
+        }
+      },
+      email: {
+        type: GraphQLString,
+        resolve(form) {
+          return form.email;
+        }
+      },
+      nameOfevent: {
+        type: GraphQLString,
+        resolve(form) {
+          return form.nameOfevent;
+        }
+      },
+      licensed: {
+        type: GraphQLInt,
+        resolve(form) {
+          return form.licensed;
+        }
+      },
+      location: {
+        type: GraphQLString,
+        resolve(form) {
+          return form.location;
+        }
+      },
+      numberOfattendees: {
+        type: GraphQLInt,
+        resolve(form) {
+          return form.numberOfattendees;
+        }
+      },
+      eventDates: {
+        type: new GraphQLList(GraphQLString),
+        resolve(form) {
+          var dates = form.eventDates.split(';');
+          return dates;
+        }
+      },
+      times: {
+        type: GraphQLInt,
+        resolve(form) {
+          return form.times;
+        }
+      },
+      details: {
+        type: GraphQLString,
+        resolve(form) {
+          return form.details;
+        }
+      },
+      accountCode: {
+        type: GraphQLInt,
+        resolve(form) {
+          return form.accountCode;
+        }
+      },
+      invoice: {
+        type: GraphQLInt,
+        resolve(form) {
+          return form.invoice;
+        }
+      },
+      authorizedBy: {
+        type: GraphQLString,
+        resolve(form) {
+          return form.authorizedBy;
+        }
+      },
+      authorizedID: {
+        type: GraphQLString,
+        resolve(form) {
+          return form.authorizedID;
+        }
+      },
+      authorizedDate: {
+        type: GraphQLDate,
+        resolve(form) {
+          return form.authorizedDate;
+        }
+      },
+      authorizedPhone: {
+        type: GraphQLString,
+        resolve(form) {
+          return form.authorizedPhone;
+        }
+      }
+    };
+  }
 });
 
-export default schema;
+
+//Queries
+const Query = new GraphQLObjectType({
+  name: 'Query',
+  description: 'Root Query',
+  fields: () => {
+    return {
+      form: {
+        type: new GraphQLList(Form),
+        resolve(root, args) {
+          return Db.models.form.findAll({where: args});
+        }
+      }
+    };
+  }
+});
+
+const Schema = new GraphQLSchema({
+  query: Query
+});
+
+export default Schema;
