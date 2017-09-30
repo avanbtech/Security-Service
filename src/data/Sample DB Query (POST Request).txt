@@ -1,0 +1,4 @@
+curl -X POST \
+-H "Content-Type: application/json" \
+-d '{"query": "{ form { id, location, eventDates, requestBy } }"}' \
+http://localhost:3001/graphql
