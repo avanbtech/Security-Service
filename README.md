@@ -85,7 +85,7 @@ Here is our current directory structure and a brief explaination of what everyth
 - To be filled!
 
 ## Transport Layer Security
-Please take a look at the following about TLS
+Please take a look at the following to learn about TLS. We need to implement TLS v1.2 in our web application:
 
 -[Our Gitlab wiki](https://csil-git1.cs.surrey.sfu.ca/sankaitk/CMPT373-Gamma/wikis/transport-layer-security-(tls)-information-and-implementation)
 -[Wikipedia](https://en.wikipedia.org/wiki/Transport_Layer_Security)
