@@ -41,6 +41,7 @@ npm -v
 ### Additional npm commands and information
 
 Please install the required dependencies using 'npm install' before building from the source. You would do this inside the main directory that branches to everything else shown below in directory structure.
+- Please also run "npm install semantic-ui-react --save" and "npm install semantic-ui-css --save" as well.
 
 Here are several npm commands to help build and deploy the application on your own working environment:
 
