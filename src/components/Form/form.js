@@ -66,10 +66,18 @@ class FormExampleSubcomponentControl extends Component {
     let isError = false;
     const errors = {};
 
-    if (this.state.requestBy.length < 5 ){
+    if (this.state.requestBy.length < 3 ){
       isError = true;
-      errors.requestByError = "Requestet by should be atleast 5 characters long";
-      console.log(errors);
+      errors.requestByError = "Full name should be provided";
+    }
+
+    // TODO: validate date, request date shoud be equal or bigger than today
+
+    // TODO: validate SFU ID
+
+    if (this.state.phone.length < 10){
+      isError = true;
+      errors.phoneError = "Phone number should be a 10 digit number";
     }
 
     if (isError){
@@ -159,17 +167,41 @@ class FormExampleSubcomponentControl extends Component {
 	        	<Form.Group widths='equal'>
 	        		<Form.Field required>
 	        			<label> Phone </label>
-	          			<Form.Input name='phone' placeholder='Phone' onChange = {e => this.change(e)} errorText={this.state.phoneError} />
+	          			<TextField
+                    fullWidth={true}
+                    name='phone'
+                    placeholder='Phone'
+                    onChange = {e => this.change(e)}
+                    errorText={this.state.phoneError} />
 	          		</Form.Field>
-	          		<Form.Input name='fax' label='Fax' placeholder='Fax' onChange = {e => this.change(e)} errorText={this.state.faxError} />
+              <Form.Field>
+              <label> Fax </label>
+	          		<TextField
+                  fullWidth={true}
+                  name='fax'
+                  label='Fax'
+                  placeholder='Fax'
+                  onChange = {e => this.change(e)}
+                  errorText={this.state.faxError} />
+              </Form.Field>
 	          		<Form.Field required>
 	        			<label> Email </label>
-	          			<Form.Input name='email' placeholder='Email' onChange = {e => this.change(e)} errorText={this.state.emailError} />
+	          			<TextField
+                    fullWidth={true}
+                    name='email'
+                    placeholder='Email'
+                    onChange = {e => this.change(e)}
+                    errorText={this.state.emailError} />
 	          		</Form.Field>
 	        	</Form.Group>
 	        	<Form.Field required>
 	        		<label>  Type/Name of Event </label>
-	        		<Form.Input name='nameOfEvent' placeholder='Type/Name of Event' onChange = {e => this.change(e)} errorText={this.state.nameOfEventError} />
+	        		<TextField
+                fullWidth={true}
+                name='nameOfEvent'
+                placeholder='Type/Name of Event'
+                onChange = {e => this.change(e)}
+                errorText={this.state.nameOfEventError} />
 	        	</Form.Field>
 	        	<Form.Field required>
 	        		<Form.Group inline>
@@ -182,31 +214,58 @@ class FormExampleSubcomponentControl extends Component {
 	        	<Form.Group widths='equal'>
 	        		<Form.Field required>
 		          		<label> Location of Event </label>
-	          			<Form.Input name='location' placeholder='Location of Event' onChange = {e => this.change(e)} errorText={this.state.locationError} />
+	          			<TextField
+                    fullWidth={true}
+                    name='location'
+                    placeholder='Location of Event'
+                    onChange = {e => this.change(e)}
+                    errorText={this.state.locationError} />
 	          		</Form.Field>
 	          		<Form.Field required>
 		          		<label> # of Attendees </label>
-	          			<Form.Input name='numberOfAttendees' placeholder='# of Attendees' onChange = {e => this.change(e)} errorText={this.state.numberOfAttendeesError} />
+	          			<TextField
+                    fullWidth={true}
+                    name='numberOfAttendees'
+                    placeholder='# of Attendees'
+                    onChange = {e => this.change(e)}
+                    errorText={this.state.numberOfAttendeesError} />
 	          		</Form.Field>
 	        	</Form.Group>
 	        	<Form.Group widths='equal'>
 	        		<Form.Field required>
 		          		<label> Event Date </label>
-	          			<Form.Input name='eventDate' placeholder='Event Date' onChange = {e => this.change(e)} errorText={this.state.eventDateEroor} />
+	          			<DatePicker
+                    fullWidth={true}
+                    name='eventDate'
+                    placeholder='Event Date'
+                    onChange = {e => this.change(e)}
+                    errorText={this.state.eventDateEroor} />
 	          		</Form.Field>
 	          		<Form.Field required>
 		          		<label> Time(s) </label>
-	          			<Form.Input name='time' placeholder='Time(s)' onChange = {e => this.change(e)} errorText={this.state.timeError} />
+	          			<TextField
+                    fullWidth={true}
+                    name='time'
+                    placeholder='Time(s)'
+                    onChange = {e => this.change(e)}
+                    errorText={this.state.timeError} />
 	          		</Form.Field>
 	        	</Form.Group>
-	        	<Form.TextArea name='detail' label='Details' placeholder='Details of request(Please submit with photo of area and floor if applicable)' onChange = {e => this.change(e)} errorText={this.state.detailError} />
-
-
-
+	        	<Form.TextArea
+              name='detail'
+              label='Details'
+              placeholder='Details of request(Please submit with photo of area and floor if applicable)'
+              onChange = {e => this.change(e)}
+              errorText={this.state.detailError} />
 	        	<h2> Payment Detail </h2>
 	        	<Form.Field required>
 		          	<label> Account Code </label>
-	        		<Form.Input name='accountCode' placeholder='Account Code' onChange = {e => this.change(e)} errorText={this.state.accountCodeError} />
+	        		<TextField
+                fullWidth={true}
+                name='accountCode'
+                placeholder='Account Code'
+                onChange = {e => this.change(e)}
+                errorText={this.state.accountCodeError} />
 	        	</Form.Field>
 	        	<Form.Checkbox label='Please Invoice' /> {/* "did not intergrated into data package yet */}
 
@@ -216,25 +275,50 @@ class FormExampleSubcomponentControl extends Component {
 	        	<Form.Group widths='equal'>
 	        		<Form.Field required>
 		          		<label> Authorized By </label>
-	          			<Form.Input name='authorizedBy' placeholder='Authorized By' onChange = {e => this.change(e)} errorText={this.state.authorizedByError} />
+	          			<TextField
+                    fullWidth={true}
+                    name='authorizedBy'
+                    placeholder='Authorized By'
+                    onChange = {e => this.change(e)}
+                    errorText={this.state.authorizedByError} />
 	          		</Form.Field>
 	          		<Form.Field required>
 		          		<label> SFU ID/BCDL </label>
-	          			<Form.Input name='authorizedID' placeholder='SFU ID/BCDL' onChange = {e => this.change(e)} errorText={this.state.authorizedIDError} />
+	          			<TextField
+                    fullWidth={true}
+                    name='authorizedID'
+                    placeholder='SFU ID/BCDL'
+                    onChange = {e => this.change(e)}
+                    errorText={this.state.authorizedIDError} />
 	          		</Form.Field>
 					<Form.Field required>
 		          		<label> Date </label>
-	        			<Form.Input name='authorizedDate' placeholder='Date' onChange = {e => this.change(e)} errorText={this.state.authorizedDateError} />
+	        			<TextField
+                  fullWidth={true}
+                  name='authorizedDate'
+                  placeholder='Date'
+                  onChange = {e => this.change(e)}
+                  errorText={this.state.authorizedDateError} />
 	        		</Form.Field>
 	        	</Form.Group>
 	        	<Form.Group widths='equal'>
 	        		<Form.Field required>
 		          		<label> Signature </label>
-	          			<Form.Input name='authorizedSignature' placeholder='Signature' onChange = {e => this.change(e)} errorText={this.state.authorizedSignatureError} />
+	          			<TextField
+                    fullWidth={true}
+                    name='authorizedSignature'
+                    placeholder='Signature'
+                    onChange = {e => this.change(e)}
+                    errorText={this.state.authorizedSignatureError} />
 	          		</Form.Field>
 	          		<Form.Field required>
 		          		<label> Phone </label>
-	          			<Form.Input name='authorizedPhone' placeholder='Phone' onChange = {e => this.change(e)} errorText={this.state.authorizedPhoneError} />
+	          			<TextField
+                    fullWidth={true}
+                    name='authorizedPhone'
+                    placeholder='Phone'
+                    onChange = {e => this.change(e)}
+                    errorText={this.state.authorizedPhoneError} />
 	          		</Form.Field>
 	        	</Form.Group>
 
