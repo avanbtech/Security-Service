@@ -254,20 +254,18 @@ class FormExampleSubcomponentControl extends Component {
 	        			<label> Request By </label>
 	          			<TextField
                     fullWidth={true}
-                    type="text"
                     name='requestBy'
-                    value={this.state.requestBy}
                     placeholder='Request By'
                     onChange = {e => this.change(e)}
+                    value = {this.state.requestBy}
                     errorText={this.state.requestByError}/>
 	          		</Form.Field>
 	          		<Form.Field required>
 	        			<label> SFU ID or BCDL </label>
 	          			<TextField
-                    fullWidth={true}
-                    type="text"
-                    name='id'
-                    placeholder='SFU ID or BCDL'
+                    fullWidth = {true}
+                    name = "id"
+                    placeholder = 'SFU ID or BCDL'
                     onChange = {e => this.change(e)}
                     errorText={this.state.idError} />
 	          		</Form.Field>
@@ -376,9 +374,6 @@ class FormExampleSubcomponentControl extends Component {
                 errorText={this.state.accountCodeError} />
 	        	</Form.Field>
 	        	<Form.Checkbox label='Please Invoice' /> {/* "did not intergrated into data package yet */}
-
-
-
 	        	<h2> Authorization Detail </h2>
 	        	<Form.Group widths='equal'>
 	        		<Form.Field required>
@@ -439,8 +434,6 @@ class FormExampleSubcomponentControl extends Component {
 	        		</Form.Group>
 	        	</Form.Field>
 	        	<Form.Button onClick = {e => this.onSubmit(e)} onChange = {this.FormExampleSuccess}>Submit</Form.Button>
-
-
 	      	</Form>
         </MuiThemeProvider>
     	)
