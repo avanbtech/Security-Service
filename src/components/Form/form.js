@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Button, 	Form, Message } from 'semantic-ui-react'
-import s from './form.scss'
+import TextField from "material-ui/TextField"
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 
 const options = [
   { key: 'y', text: 'Yes', value: 'yes' },
@@ -53,14 +54,37 @@ class FormExampleSubcomponentControl extends Component {
 
 
 	change = e =>{
+    console.log("OnChange called");
+    this.props.onChange({[e.target.name]: e.target.value});
 		this.setState({
 			[e.target.name]: e.target.value
 		});
 	}
 
+	validate = () => {
+    let isError = false;
+    const errors = {};
+
+    if (this.state.requestBy.length < 5 ){
+      isError = true;
+      errors.requestByError = "Requestet by should be atleast 5 characters long";
+      console.log(errors);
+    }
+
+    if (isError){
+      console.log('setting state');
+      this.setState({
+        ...this.state,
+        ...errors
+      });
+      console.log(this.state);
+    }
+    return isError;
+  };
+
 	onSubmit = e =>{
 		e.preventDefault();
-		const error = validate();
+		const error = this.validate();
 		if (!error){
       console.log(this.state);
     }
@@ -85,8 +109,9 @@ class FormExampleSubcomponentControl extends Component {
   	render() {
 	   	const { value } = this.state
 	    return (
-	      	<Form>
-
+        <MuiThemeProvider>
+	      	<Form action="/customer"
+                method="post">
 	      		<h2> Request Information </h2>
 	        	<Form.Group widths='equal'>
 	        		<Form.Field required>
@@ -101,7 +126,14 @@ class FormExampleSubcomponentControl extends Component {
 	        	<Form.Group widths='equal'>
 	        		<Form.Field required>
 	        			<label> Request By </label>
-	          			<Form.Input name='requestBy' placeholder='Request By' onChange = {e => this.change(e)} errorText={this.state.requestByError} />
+	          			<TextField
+                    fullWidth={true}
+                    type="text"
+                    name='requestBy'
+                    value={this.state.requestBy}
+                    placeholder='Request By'
+                    onChange = {e => this.change(e)}
+                    errorText={this.state.requestByError}/>
 	          		</Form.Field>
 	          		<Form.Field required>
 	        			<label> SFU ID or BCDL </label>
@@ -202,6 +234,7 @@ class FormExampleSubcomponentControl extends Component {
 
 
 	      	</Form>
+        </MuiThemeProvider>
     	)
   	}
 }
