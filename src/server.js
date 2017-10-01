@@ -133,23 +133,70 @@ server.use((err, req, res, next) => { // eslint-disable-line no-unused-vars
   }));
 });
 
+
+// The following code launches the TLS v1.2 server
+// To be merged into main server when everything is suitable
+// Can be accessed at port: 3005
+// Created with reference to: https://www.sitepoint.com/how-to-use-ssltls-with-node-js/
+// https://nodejs.org/api/tls.html#tls_tls_ssl_concepts
+// https://github.com/nodejs/help/issues/253
+
+
+//Generate encrypted key in terminal with: openssl genrsa -des3 -out server.enc.key 1024
+
+
+//Issue certificate signing request with: openssl req -new -key server.enc.key -out server.csr
+//The following is our server.enc.key field entries:
+
+
+{/*Country Name (2 letter code) [AU]:CA
+State or Province Name (full name) [Some-State]:British Columbia
+Locality Name (eg, city) []:Vancouver
+Organization Name (eg, company) [Internet Widgits Pty Ltd]:Simon Fraser University
+Organizational Unit Name (eg, section) []:Security Services
+Common Name (e.g. server FQDN or YOUR name) []:CMPT 373
+Email Address []:cwzhang@sfu.ca
+
+Please enter the following 'extra' attributes
+to be sent with your certificate request
+A challenge password []:cmpt373
+An optional company name []:SFU */}
+
+
+//If required, remove the encryption/password with: openssl rsa -in server.enc.key -out server.key
+
+
+//Self sign the certificate with: openssl x509 -req -days 365 -in server.csr -signkey server.key -out server.crt
+//Certificate lasts 365 days from creation.
+
+
+// To be completed. Need to make it work for server and client side handshakes, and have client generate a certificate as necessary.
+
+const TLSPort = 3005;
+
+var fs = require('fs');
+var app = require('express')();
+var https = require('https');
+
+//Set the options for creating the server, includes the TLS key and certification
+var options = {
+    key  : fs.readFileSync('server.key'),
+    cert : fs.readFileSync('server.crt')
+};
+
+app.get('/', function (req, res) {
+   res.send('Hello World!');
+});
+
+//Creates the HTTPS/TLS server on TLSPort
+https.createServer(options, server).listen(TLSPort, () => {
+     console.log('The HTTPS/TLS server is running on port ' + TLSPort);
+});
+
 //
 // Launch the server
 // -----------------------------------------------------------------------------
 server.listen(port, () => {
   /* eslint-disable no-console */
   console.log(`The server is running at http://localhost:${port}/`);
-});
-
-// Launch the TLS v1.2 server
-// To be merged into main server when everything is suitable
-// Can be accessed at port 3005
-
-const tlsport = 3005;
-
-var https = require('https');
-var http = require('http');
-
-http.createServer(server).listen(tlsport, function () {
-   console.log('##### Started http server on port ' + tlsport);
 });
