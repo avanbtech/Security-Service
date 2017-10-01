@@ -91,6 +91,7 @@ Please take a look at the following to learn about TLS. We need to implement TLS
 -[Our Gitlab wiki](https://csil-git1.cs.surrey.sfu.ca/sankaitk/CMPT373-Gamma/wikis/transport-layer-security-(tls)-information-and-implementation)
 -[Wikipedia](https://en.wikipedia.org/wiki/Transport_Layer_Security)
 -[Sitepoint security stack + node.js](https://www.sitepoint.com/how-to-use-ssltls-with-node-js/)
+-[Node.js express middleware structure tutorial](https://blog.risingstack.com/your-first-node-js-http-server/)
 
 ## Group resources
 Please take a look at the following resources to keep up with our current group activities:  
