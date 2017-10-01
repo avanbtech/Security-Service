@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Button, 	Form, Message } from 'semantic-ui-react'
 import TextField from "material-ui/TextField"
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
+import DatePicker from 'material-ui/DatePicker';
 
 const options = [
   { key: 'y', text: 'Yes', value: 'yes' },
@@ -116,11 +117,20 @@ class FormExampleSubcomponentControl extends Component {
 	        	<Form.Group widths='equal'>
 	        		<Form.Field required>
 	        			<label> Date </label>
-	          			<Form.Input name='date' placeholder='Date' onChange = {e => this.change(e)} errorText={this.state.dateError} />
+	          			<DatePicker
+                    fullWidth={true}
+                    type="text"
+                    placeholder='Date'
+                    onChange = {e => this.change(e)}
+                    errorText={this.state.dateError}/>
 	          		</Form.Field>
 	          		<Form.Field required>
 	        			<label> Department </label>
-	          			<Form.Select name='department' options={options} placeholder='Department' errorText={this.state.departmentError} />
+	          			<Form.Select
+                    name='department'
+                    options={options}
+                    placeholder='Department'
+                    errorText={this.state.departmentError} />
 	          		</Form.Field>
 	        	</Form.Group>
 	        	<Form.Group widths='equal'>
@@ -137,7 +147,13 @@ class FormExampleSubcomponentControl extends Component {
 	          		</Form.Field>
 	          		<Form.Field required>
 	        			<label> SFU ID or BCDL </label>
-	          			<Form.Input name='id' placeholder='SFU ID or BCDL' onChange = {e => this.change(e)} errorText={this.state.idError} />
+	          			<TextField
+                    fullWidth={true}
+                    type="text"
+                    name='id'
+                    placeholder='SFU ID or BCDL'
+                    onChange = {e => this.change(e)}
+                    errorText={this.state.idError} />
 	          		</Form.Field>
 	        	</Form.Group>
 	        	<Form.Group widths='equal'>
