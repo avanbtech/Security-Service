@@ -1,3 +1,6 @@
+/* Express server handling file, server.js*/
+/* Read here for more information regarding the structure of this file: https://blog.risingstack.com/your-first-node-js-http-server/ */
+
 import 'babel-polyfill';
 import path from 'path';
 import express from 'express';
