@@ -140,3 +140,16 @@ server.listen(port, () => {
   /* eslint-disable no-console */
   console.log(`The server is running at http://localhost:${port}/`);
 });
+
+// Launch the TLS v1.2 server
+// To be merged into main server when everything is suitable
+// Can be accessed at port 3005
+
+const tlsport = 3005;
+
+var https = require('https');
+var http = require('http');
+
+http.createServer(server).listen(tlsport, function () {
+   console.log('##### Started http server on port ' + tlsport);
+});
