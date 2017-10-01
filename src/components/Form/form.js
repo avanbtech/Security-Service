@@ -34,7 +34,7 @@ class FormExampleSubcomponentControl extends Component {
 		numberOfAttendees:'',
     numberOfAttendeesError:'',
 		eventDate:'',
-    eventDateEroor:'',
+    eventDateError:'',
 		time:'',
     timeError:'',
 		detail:'',
@@ -55,12 +55,19 @@ class FormExampleSubcomponentControl extends Component {
 
 
 	change = e =>{
-    console.log("OnChange called");
-    this.props.onChange({[e.target.name]: e.target.value});
 		this.setState({
 			[e.target.name]: e.target.value
 		});
 	}
+
+	validateDate = (inputDate) => {
+    console.log(inputDate);
+    if(Date.parse(inputDate) - Date.parse(new Date()) < 0)
+    {
+      return false;
+    }
+    return true;
+  }
 
 	validate = () => {
     let isError = false;
@@ -70,23 +77,123 @@ class FormExampleSubcomponentControl extends Component {
       isError = true;
       errors.requestByError = "Full name should be provided";
     }
+    else {
+      errors.requestByError = "";
+    }
 
     // TODO: validate date, request date shoud be equal or bigger than today
 
     // TODO: validate SFU ID
 
-    if (this.state.phone.length < 10){
+    var phoneno = /^\d{10}$/;
+    if(!this.state.phone.match(phoneno))
+    {
       isError = true;
       errors.phoneError = "Phone number should be a 10 digit number";
     }
+    else
+    {
+      errors.phoneError = "";
+    }
+
+    var phoneno = /^\d{10}$/;
+    if(this.state.phone.length > 0 && !this.state.phone.match(phoneno))
+    {
+      isError = true;
+      errors.faxError = "Fax should be a 10 digit number";
+    }
+    else
+    {
+      errors.faxError = "";
+    }
+
+    var emailTest = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    if(!emailTest.test(this.state.email)) {
+      isError = true;
+      errors.emailError = 'A valid email should be provided';
+    }
+    else {
+      errors.emailError = '';
+    }
+
+    if (this.state.nameOfEvent.replace(/\s/g, "").length == 0 ){
+      isError = true;
+      errors.nameOfEventError = 'Name of event should be provided';
+    }
+    else {
+      errors.nameOfEventError = '';
+    }
+
+    if (this.state.location.replace(/\s/g, "").length == 0 ){
+      isError = true;
+      errors.locationError = 'Event location should be provided';
+    }
+    else {
+      errors.locationError = '';
+    }
+
+    if (isNaN(this.state.location.numberOfAttendees)){
+      isError = true;
+      errors.numberOfAttendeesError = 'Number of attendees should be provided';
+    }
+    else {
+      errors.numberOfAttendeesError = '';
+    }
+
+    if(!this.validateDate(this.state.date))
+    {
+      errors.dateError = "Request date is not valid";
+    }
+    else {
+      errors.dateError = "";
+    }
+
+    if(!this.validateDate(this.state.eventDate))
+    {
+      errors.eventDateError = "Event date is not valid";
+    }
+    else {
+      errors.eventDateError = "";
+    }
+
+    if (this.state.accountCode.replace(/\s/g, "").length == 0 ){
+      isError = true;
+      errors.accountCodeError = 'Account code should be provided';
+    }
+    else {
+      errors.accountCodeError = '';
+    }
+
+    if (this.state.authorizedBy.replace(/\s/g, "").length == 0 ){
+      isError = true;
+      errors.authorizedByError = 'Authorized person should be provided';
+    }
+    else {
+      errors.authorizedByError = '';
+    }
+
+    if (this.state.authorizedID.replace(/\s/g, "").length == 0 ){
+      isError = true;
+      errors.authorizedIDError = 'Authorized ID should be provided';
+    }
+    else {
+      errors.authorizedIDError = '';
+    }
+
+    if(!this.state.authorizedPhone.match(phoneno))
+    {
+      isError = true;
+      errors.authorizedPhoneError = "Phone number should be a 10 digit number";
+    }
+    else {
+      errors.authorizedPhoneError = "";
+    }
 
     if (isError){
-      console.log('setting state');
       this.setState({
         ...this.state,
         ...errors
       });
-      console.log(this.state);
     }
     return isError;
   };
@@ -125,9 +232,10 @@ class FormExampleSubcomponentControl extends Component {
 	        	<Form.Group widths='equal'>
 	        		<Form.Field required>
 	        			<label> Date </label>
-	          			<DatePicker
+	          			<TextField
                     fullWidth={true}
-                    type="text"
+                    name='date'
+                    value={this.state.date}
                     placeholder='Date'
                     onChange = {e => this.change(e)}
                     errorText={this.state.dateError}/>
@@ -234,12 +342,12 @@ class FormExampleSubcomponentControl extends Component {
 	        	<Form.Group widths='equal'>
 	        		<Form.Field required>
 		          		<label> Event Date </label>
-	          			<DatePicker
+	          			<TextField
                     fullWidth={true}
                     name='eventDate'
                     placeholder='Event Date'
                     onChange = {e => this.change(e)}
-                    errorText={this.state.eventDateEroor} />
+                    errorText={this.state.eventDateError} />
 	          		</Form.Field>
 	          		<Form.Field required>
 		          		<label> Time(s) </label>
