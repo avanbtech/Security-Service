@@ -1,4 +1,4 @@
-# Security Service Request System (Last edited 9/25/17, by Alex)
+# Security Service Request System (Last edited 9/30/17, by Alex)
 ## About
 This is group Gamma's CMPT 373 Term Project.  We are developing a web application form to replace the current SFU security services request system with an online solution, that the "customer" can fill out the necessary information, which then will be automatically accessible to security for further processing.
 We are using the MERN(ish) stack to complete this project, consisting of a SQL database (name to be determined?), Express (Framework for web applications), React (Front end framework - HTML/CSS etc.), and Node.js (Server side, back end framework) as the underlying frameworks.
@@ -41,6 +41,7 @@ npm -v
 ### Additional npm commands and information
 
 Please install the required dependencies using 'npm install' before building from the source. You would do this inside the main directory that branches to everything else shown below in directory structure.
+- Please also run "npm install semantic-ui-react --save" and "npm install semantic-ui-css --save" as well.
 
 Here are several npm commands to help build and deploy the application on your own working environment:
 
@@ -83,6 +84,14 @@ Here is our current directory structure and a brief explaination of what everyth
 
 ## Current features
 - To be filled!
+
+## Transport Layer Security
+Please take a look at the following to learn about TLS. We need to implement TLS v1.2 in our web application:
+
+-[Our Gitlab wiki](https://csil-git1.cs.surrey.sfu.ca/sankaitk/CMPT373-Gamma/wikis/transport-layer-security-(tls)-information-and-implementation)
+-[Wikipedia](https://en.wikipedia.org/wiki/Transport_Layer_Security)
+-[Sitepoint security stack + node.js](https://www.sitepoint.com/how-to-use-ssltls-with-node-js/)
+-[Node.js express middleware structure tutorial](https://blog.risingstack.com/your-first-node-js-http-server/)
 
 ## Group resources
 Please take a look at the following resources to keep up with our current group activities:  
