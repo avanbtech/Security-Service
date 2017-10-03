@@ -9,7 +9,6 @@ import GraphHTTP from 'express-graphql';
 import jwt from 'jsonwebtoken';
 import ReactDOM from 'react-dom/server';
 import PrettyError from 'pretty-error';
-import passport from './core/passport';
 import schema from './data/schema';
 import Router from './routes';
 import assets from './assets';
