@@ -1,15 +1,17 @@
 import Sequelize from 'sequelize';
 
+
 // Add your configuration for DB
-// const Conn = new Sequelize(
-//   'requestform',
-//   'root',
-//   'enter password here',
-//   {
-//     dialect: 'mysql',
-//     host: 'localhost'
-//   }
-// );
+//const Conn = new Sequelize(
+  //'demodb',
+  //'root',
+  //'cmpt373gamma',
+  //{
+    //dialect: 'mysql',
+    //host: 'localhost'
+  //}
+//);
+
 
 //DB TABLE DEFINITIONS
 const Form = Conn.define('form', {
