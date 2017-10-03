@@ -1,17 +1,15 @@
 import Sequelize from 'sequelize';
 
-
 // Add your configuration for DB
-//const Conn = new Sequelize(
-  //'demodb',
-  //'root',
-  //'cmpt373gamma',
-  //{
-    //dialect: 'mysql',
-    //host: 'localhost'
-  //}
-//);
-
+// const Conn = new Sequelize(
+//   'requestform',
+//   'root',
+//   'enter password here',
+//   {
+//     dialect: 'mysql',
+//     host: 'localhost'
+//   }
+// );
 
 //DB TABLE DEFINITIONS
 const Form = Conn.define('form', {
@@ -148,7 +146,7 @@ Conn.sync({ force: true}).then(() => {
     authorizedID: '42342fkfdsf',
     authorizedDate: new Date(2012, 2,2,0,0,0,0),
     authorizedPhone: 7782415848
-  })
+  });
 });
 
 
