@@ -19,10 +19,6 @@ function Status({ title }) {
 {/*Create a loop to display each request the user has submitted so far*/}
         <ul>
 
-        <li><p><Link className={s.link} to="/StatusForm">Check status of 1st request</Link></p></li>
-        <li><p><Link className={s.link} to="/StatusForm">Check status of 2nd request</Link></p></li>
-        <li><p><Link className={s.link} to="/StatusForm">Check status of 3rd request</Link></p></li>
-
         </ul>
       </div>
 
