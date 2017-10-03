@@ -422,7 +422,7 @@ class FormExampleSubcomponentControl extends Component {
                     fullWidth={true}
                     name='date'
                     value={this.state.date}
-                    placeholder='Date'
+                    placeholder='YYYY-MM-DD'
                     onChange = {e => this.change(e)}
                     errorText={this.state.dateError}/>
 	          		</Form.Field>
@@ -462,7 +462,7 @@ class FormExampleSubcomponentControl extends Component {
 	          			<TextField
                     fullWidth={true}
                     name='phone'
-                    placeholder='Phone'
+                    placeholder='XXX-XXX-XXXX'
                     onChange = {e => this.change(e)}
                     errorText={this.state.phoneError} />
 	          		</Form.Field>
@@ -472,7 +472,7 @@ class FormExampleSubcomponentControl extends Component {
                   fullWidth={true}
                   name='fax'
                   label='Fax'
-                  placeholder='Fax'
+                  placeholder='XXX-XXX-XXXX'
                   onChange = {e => this.change(e)}
                   errorText={this.state.faxError} />
               </Form.Field>
@@ -529,7 +529,7 @@ class FormExampleSubcomponentControl extends Component {
 	          			<TextField
                     fullWidth={true}
                     name='eventDate'
-                    placeholder='Event Date'
+                    placeholder='YYYY-MM-DD'
                     onChange = {e => this.change(e)}
                     errorText={this.state.eventDateError} />
 	          		</Form.Field>
@@ -538,7 +538,7 @@ class FormExampleSubcomponentControl extends Component {
 	          			<TextField
                     fullWidth={true}
                     name='time'
-                    placeholder='Time(s)'
+                    placeholder='HH:MM'
                     onChange = {e => this.change(e)}
                     errorText={this.state.timeError} />
 	          		</Form.Field>
@@ -554,7 +554,7 @@ class FormExampleSubcomponentControl extends Component {
 	        		<TextField
                 fullWidth={true}
                 name='accountCode'
-                placeholder='Account Code'
+                placeholder='OOOO-FF-DDDD-PPPPP or OOOO-FF-JJJJJJJJ'
                 onChange = {e => this.change(e)}
                 errorText={this.state.accountCodeError} />
 	        	</Form.Field>
@@ -604,7 +604,7 @@ class FormExampleSubcomponentControl extends Component {
 	          			<TextField
                     fullWidth={true}
                     name='authorizedPhone'
-                    placeholder='Phone'
+                    placeholder='XXX-XXX-XXXX'
                     onChange = {e => this.change(e)}
                     errorText={this.state.authorizedPhoneError} />
 	          		</Form.Field>
