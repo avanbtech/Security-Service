@@ -62,8 +62,8 @@ class FormExampleSubcomponentControl extends Component {
 
 	validateDate = (inputDate) => {
     console.log(inputDate);
-    if(Date.parse(inputDate) - Date.parse(new Date()) < 0)
-    {
+    var requestDate = /([20]\d{2}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))/;
+    if (!inputDate.match(requestDate) || Date.parse(inputDate) - Date.parse(new Date()) < 0){
       return false;
     }
     return true;
@@ -81,9 +81,22 @@ class FormExampleSubcomponentControl extends Component {
       errors.requestByError = "";
     }
 
-    // TODO: validate date, request date shoud be equal or bigger than today
+    if (!this.validateDate(this.state.date)){
+      isError = true;
+      errors.dateError = "Date should be in YYYY-MM-DD format";
+    }
+    else{
+      errors.dateError = "";
+    }
 
-    // TODO: validate SFU ID
+    if (this.state.id.replace(/\s/g, "").length == 0){
+      isError = true;
+      errors.idError = "SFU ID or BCDL should be provided";
+    }
+    else{
+      errors.idError = "";
+    }
+
 
     var phoneno = /^\d{10}$/;
     if(!this.state.phone.match(phoneno))
@@ -132,7 +145,7 @@ class FormExampleSubcomponentControl extends Component {
       errors.locationError = '';
     }
 
-    if (isNaN(this.state.location.numberOfAttendees)){
+    if (isNaN(this.state.numberOfAttendees) || this.state.numberOfAttendees.replace(/\s/g, "").length == 0){
       isError = true;
       errors.numberOfAttendeesError = 'Number of attendees should be provided';
     }
@@ -140,20 +153,22 @@ class FormExampleSubcomponentControl extends Component {
       errors.numberOfAttendeesError = '';
     }
 
-    if(!this.validateDate(this.state.date))
-    {
-      errors.dateError = "Request date is not valid";
-    }
-    else {
-      errors.dateError = "";
-    }
-
     if(!this.validateDate(this.state.eventDate))
     {
-      errors.eventDateError = "Event date is not valid";
+      isError = true;
+      errors.eventDateError = "Date should be in YYYY-MM-DD format";
     }
     else {
       errors.eventDateError = "";
+    }
+
+    var eventTime = /^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]/;
+    if (!this.state.time.match(eventTime) || this.state.time.replace(/\s/g, "").length == 0){
+      isError = true;
+      errors.timeError = "Time should be in HH:MM format";
+    }
+    else{
+      errors.timeError = "";
     }
 
     if (this.state.accountCode.replace(/\s/g, "").length == 0 ){
@@ -162,6 +177,15 @@ class FormExampleSubcomponentControl extends Component {
     }
     else {
       errors.accountCodeError = '';
+    }
+
+    if (!this.validateDate(this.state.authorizedDate)){
+      console.log(this.state.authorizedDate);
+      isError = true;
+      errors.authorizedDateError = "Date should be in YYYY-MM-DD format";
+    }
+    else{
+        errors.authorizedDateError = "";
     }
 
     if (this.state.authorizedBy.replace(/\s/g, "").length == 0 ){
