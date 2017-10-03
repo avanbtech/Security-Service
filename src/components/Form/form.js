@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { Button, 	Form, Message } from 'semantic-ui-react'
-import s from './form.scss'
+import TextField from "material-ui/TextField"
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
+import DatePicker from 'material-ui/DatePicker';
 
 const options = [
   { key: '1.', text: '_', value: '_' },
@@ -100,7 +102,7 @@ const options = [
   { key: '95.', text: 'INTERNATIONAL STUDIES & LATIN AMERICAN STUDIES, SCHOOL FOR', value: 'INTERNATIONAL STUDIES & LATIN AMERICAN STUDIES, SCHOOL FOR' },
   { key: '96.', text: 'IRMACS (INTERDISCIPLINARY RESEARCH IN THE MATHEMATICAL AND COMPUTATIONAL SCIENCE CENTRE)', value: 'IRMACS (INTERDISCIPLINARY RESEARCH IN THE MATHEMATICAL AND COMPUTATIONAL SCIENCE CENTRE)' },
   { key: '97.', text: 'IT SERVICES', value: 'IT SERVICES' },
-  { key: '98.', text: 'IT SERVICES - A&T (Applications & Technology), ES (Enterprise Systems [includes SIMS]), PMO (Project Management Office)', 
+  { key: '98.', text: 'IT SERVICES - A&T (Applications & Technology), ES (Enterprise Systems [includes SIMS]), PMO (Project Management Office)',
   				value: 'IT SERVICES - A&T (Applications & Technology), ES (Enterprise Systems [includes SIMS]), PMO (Project Management Office)' },
   { key: '99.', text: 'IT SERVICES - CARS (CLIENT AND RESEARCH SERVICES)', value: 'IT SERVICES - CARS (CLIENT AND RESEARCH SERVICES)' },
   { key: '100.', text: 'IT SERVICES - CTA (CLASSROOM TECHNOLOGY & AUDIO VISUAL SERVICES)', value: 'IT SERVICES - CTA (CLASSROOM TECHNOLOGY & AUDIO VISUAL SERVICES)' },
@@ -172,44 +174,222 @@ const options = [
   { key: '165.', text: 'WEST COAST LINE', value: 'WEST COAST LINE' },
   { key: '166.', text: 'WILDLIFE ECOLOGY (CWE), CENTRE FOR', value: 'WILDLIFE ECOLOGY (CWE), CENTRE FOR' },
   { key: '167.', text: 'WOMEN"S CENTRE', value: 'WOMEN"S CENTRE' },
-]	
+]
 
 
 
 class FormExampleSubcomponentControl extends Component {
   state = {
-  		date:'',
+    date:'',
+    dateError:'',
 		department:'',
-		requestBy:'',
+    requestBy:'',
+    requestByError:'',
 		id:'',
+    idError:'',
 		phone:'',
+    phoneError:'',
 		fax:'',
+    faxError:'',
 		email:'',
+    emailError:'',
 		nameOfEvent:'',
+    nameOfEventError:'',
 		location:'',
+    locationError:'',
 		numberOfAttendees:'',
+    numberOfAttendeesError:'',
 		eventDate:'',
+    eventDateError:'',
 		time:'',
+    timeError:'',
 		detail:'',
-		accountCode:'',
+    accountCode:'',
+    accountCodeError:'',
 		authorizedBy:'',
+    authorizedByError:'',
 		authorizedID:'',
+    authorizedIDError:'',
 		authorizedDate:'',
+    authorizedDateError:'',
 		authorizedSignature:'',
-		authorizedPhone:''
+    authorizedSignatureError:'',
+		authorizedPhone:'',
+    authorizedPhoneError:''
 	}
-	
+
 
 	change = e =>{
 		this.setState({
 			[e.target.name]: e.target.value
 		});
 	}
-	
+
+	validateDate = (inputDate) => {
+    var requestDate = /([20]\d{2}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))/;
+    if (!inputDate.match(requestDate) || Date.parse(inputDate) - Date.parse(new Date()) < 0){
+      return false;
+    }
+    return true;
+  }
+
+	validate = () => {
+    let isError = false;
+    const errors = {};
+
+    if (this.state.requestBy.length < 3 ){
+      isError = true;
+      errors.requestByError = "Full name should be provided";
+    }
+    else {
+      errors.requestByError = "";
+    }
+
+    if (!this.validateDate(this.state.date)){
+      isError = true;
+      errors.dateError = "Date should be in YYYY-MM-DD format";
+    }
+    else{
+      errors.dateError = "";
+    }
+
+    if (this.state.id.replace(/\s/g, "").length == 0){
+      isError = true;
+      errors.idError = "SFU ID or BCDL should be provided";
+    }
+    else{
+      errors.idError = "";
+    }
+
+
+    var phoneno = /^\d{10}$/;
+    var phone2 = /^\d{3}-\d{3}-\d{4}$/;
+    if(!this.state.phone.match(phoneno) && !this.state.phone.match(phone2))
+    {
+      isError = true;
+      errors.phoneError = "Phone number should be in XXXXXXXXXX or XXX-XXX-XXXX format";
+    }
+    else
+    {
+      errors.phoneError = "";
+    }
+
+    if(this.state.fax.length > 0 && !this.state.fax.match(phoneno) && !this.state.fax.match(phone2))
+    {
+      isError = true;
+      errors.faxError = "Fax number should be in XXXXXXXXXX or XXX-XXX-XXXX format";
+    }
+    else
+    {
+      errors.faxError = "";
+    }
+
+    var emailTest = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    if(!emailTest.test(this.state.email)) {
+      isError = true;
+      errors.emailError = 'A valid email should be provided';
+    }
+    else {
+      errors.emailError = '';
+    }
+
+    if (this.state.nameOfEvent.replace(/\s/g, "").length == 0 ){
+      isError = true;
+      errors.nameOfEventError = 'Name of event should be provided';
+    }
+    else {
+      errors.nameOfEventError = '';
+    }
+
+    if (this.state.location.replace(/\s/g, "").length == 0 ){
+      isError = true;
+      errors.locationError = 'Event location should be provided';
+    }
+    else {
+      errors.locationError = '';
+    }
+
+    if (isNaN(this.state.numberOfAttendees) || this.state.numberOfAttendees.replace(/\s/g, "").length == 0){
+      isError = true;
+      errors.numberOfAttendeesError = 'Number of attendees should be provided';
+    }
+    else {
+      errors.numberOfAttendeesError = '';
+    }
+
+    if(!this.validateDate(this.state.eventDate))
+    {
+      isError = true;
+      errors.eventDateError = "Date should be in YYYY-MM-DD format";
+    }
+    else {
+      errors.eventDateError = "";
+    }
+
+    var eventTime = /^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]/;
+    if (!this.state.time.match(eventTime) || this.state.time.replace(/\s/g, "").length == 0){
+      isError = true;
+      errors.timeError = "Time should be in HH:MM format";
+    }
+    else{
+      errors.timeError = "";
+    }
+
+    var accountCode1 = /^\d{4}-\d{2}-\d{4}-\d{5}$/;
+    var accountCode2 = /^\d{4}-\d{2}-?\d{8}$/;
+    if (!this.state.accountCode.match(accountCode1) && !this.state.accountCode.match(accountCode2)){
+      isError = true;
+      errors.accountCodeError = 'Account code should be in OOOO-FF-DDDD-PPPPP or OOOO-FF-JJJJJJJJ format';
+    }
+    else {
+      errors.accountCodeError = '';
+    }
+
+    if (!this.validateDate(this.state.authorizedDate)){
+      isError = true;
+      errors.authorizedDateError = "Date should be in YYYY-MM-DD format";
+    }
+    else{
+        errors.authorizedDateError = "";
+    }
+
+    if (this.state.authorizedBy.replace(/\s/g, "").length == 0 ){
+      isError = true;
+      errors.authorizedByError = 'Authorized person should be provided';
+    }
+    else {
+      errors.authorizedByError = '';
+    }
+
+    if (this.state.authorizedID.replace(/\s/g, "").length == 0 ){
+      isError = true;
+      errors.authorizedIDError = 'Authorized ID should be provided';
+    }
+    else {
+      errors.authorizedIDError = '';
+    }
+
+    if(!this.state.authorizedPhone.match(phoneno) && !this.state.authorizedPhone.match(phone2))
+    {
+      isError = true;
+      errors.authorizedPhoneError = "Phone number should be in XXXXXXXXXX or XXX-XXX-XXXX format";
+    }
+    else {
+      errors.authorizedPhoneError = "";
+    }
+
+    this.setState({
+        ...this.state,
+        ...errors
+    });
+    return isError;
+  };
 
 	onSubmit = e =>{
-		e.preventDefault();
-		console.log(this.state);
+    const error = this.validate();
+    if (error){
+      e.preventDefault();
+    }
 	};
 
 
@@ -229,47 +409,93 @@ class FormExampleSubcomponentControl extends Component {
 
 
   	render() {
-	   	const { value } = this.state 
+	   	const { value } = this.state
 	    return (
-	      	<Form>
-	      		
+        <MuiThemeProvider>
+	      	<Form action="/customer"
+                method="post">
 	      		<h2> Request Information </h2>
 	        	<Form.Group widths='equal'>
 	        		<Form.Field required>
 	        			<label> Date </label>
-	          			<Form.Input name='date' placeholder='Date' onChange = {e => this.change(e)} />
+	          			<TextField
+                    fullWidth={true}
+                    name='date'
+                    value={this.state.date}
+                    placeholder='YYYY-MM-DD'
+                    onChange = {e => this.change(e)}
+                    errorText={this.state.dateError}/>
 	          		</Form.Field>
 	          		<Form.Field required>
 	        			<label> Department </label>
-	          			<Form.Select name='department' options={options} placeholder='Department' onChange = {e => this.change(e)} />
+	          			<Form.Select
+                    name='department'
+                    options={options}
+                    placeholder='Department'
+                    onChange = {e => this.change(e)} />
 	          		</Form.Field>
 	        	</Form.Group>
 	        	<Form.Group widths='equal'>
 	        		<Form.Field required>
 	        			<label> Request By </label>
-	          			<Form.Input name='requestBy' placeholder='Request By' onChange = {e => this.change(e)} />
+	          			<TextField
+                    fullWidth={true}
+                    name='requestBy'
+                    placeholder='Request By'
+                    onChange = {e => this.change(e)}
+                    value = {this.state.requestBy}
+                    errorText={this.state.requestByError}/>
 	          		</Form.Field>
 	          		<Form.Field required>
 	        			<label> SFU ID or BCDL </label>
-	          			<Form.Input name='id' placeholder='SFU ID or BCDL' onChange = {e => this.change(e)} />
-	          		</Form.Field>	
+	          			<TextField
+                    fullWidth = {true}
+                    name = "id"
+                    placeholder = 'SFU ID or BCDL'
+                    onChange = {e => this.change(e)}
+                    errorText={this.state.idError} />
+	          		</Form.Field>
 	        	</Form.Group>
 	        	<Form.Group widths='equal'>
 	        		<Form.Field required>
 	        			<label> Phone </label>
-	          			<Form.Input name='phone' placeholder='Phone' onChange = {e => this.change(e)} />
+	          			<TextField
+                    fullWidth={true}
+                    name='phone'
+                    placeholder='XXX-XXX-XXXX'
+                    onChange = {e => this.change(e)}
+                    errorText={this.state.phoneError} />
 	          		</Form.Field>
-	          		<Form.Input name='fax' label='Fax' placeholder='Fax' onChange = {e => this.change(e)} />
+              <Form.Field>
+              <label> Fax </label>
+	          		<TextField
+                  fullWidth={true}
+                  name='fax'
+                  label='Fax'
+                  placeholder='XXX-XXX-XXXX'
+                  onChange = {e => this.change(e)}
+                  errorText={this.state.faxError} />
+              </Form.Field>
 	          		<Form.Field required>
 	        			<label> Email </label>
-	          			<Form.Input name='email' placeholder='Email' onChange = {e => this.change(e)} />
+	          			<TextField
+                    fullWidth={true}
+                    name='email'
+                    placeholder='Email'
+                    onChange = {e => this.change(e)}
+                    errorText={this.state.emailError} />
 	          		</Form.Field>
 	        	</Form.Group>
 	        	<Form.Field required>
 	        		<label>  Type/Name of Event </label>
-	        		<Form.Input name='nameOfEvent' placeholder='Type/Name of Event' onChange = {e => this.change(e)} />
+	        		<TextField
+                fullWidth={true}
+                name='nameOfEvent'
+                placeholder='Type/Name of Event'
+                onChange = {e => this.change(e)}
+                errorText={this.state.nameOfEventError} />
 	        	</Form.Field>
-	        	<Form.Field required>	
+	        	<Form.Field required>
 	        		<Form.Group inline>
 	        		{/* "value" in data package represent the state of this part */}
 		          		<label> Licensed </label>
@@ -280,59 +506,107 @@ class FormExampleSubcomponentControl extends Component {
 	        	<Form.Group widths='equal'>
 	        		<Form.Field required>
 		          		<label> Location of Event </label>
-	          			<Form.Input name='location' placeholder='Location of Event' onChange = {e => this.change(e)} />
+	          			<TextField
+                    fullWidth={true}
+                    name='location'
+                    placeholder='Location of Event'
+                    onChange = {e => this.change(e)}
+                    errorText={this.state.locationError} />
 	          		</Form.Field>
 	          		<Form.Field required>
 		          		<label> # of Attendees </label>
-	          			<Form.Input name='numberOfAttendees' placeholder='# of Attendees' onChange = {e => this.change(e)} />
+	          			<TextField
+                    fullWidth={true}
+                    name='numberOfAttendees'
+                    placeholder='# of Attendees'
+                    onChange = {e => this.change(e)}
+                    errorText={this.state.numberOfAttendeesError} />
 	          		</Form.Field>
 	        	</Form.Group>
 	        	<Form.Group widths='equal'>
 	        		<Form.Field required>
 		          		<label> Event Date </label>
-	          			<Form.Input name='eventDate' placeholder='Event Date' onChange = {e => this.change(e)} />
+	          			<TextField
+                    fullWidth={true}
+                    name='eventDate'
+                    placeholder='YYYY-MM-DD'
+                    onChange = {e => this.change(e)}
+                    errorText={this.state.eventDateError} />
 	          		</Form.Field>
 	          		<Form.Field required>
 		          		<label> Time(s) </label>
-	          			<Form.Input name='time' placeholder='Time(s)' onChange = {e => this.change(e)} />
+	          			<TextField
+                    fullWidth={true}
+                    name='time'
+                    placeholder='HH:MM'
+                    onChange = {e => this.change(e)}
+                    errorText={this.state.timeError} />
 	          		</Form.Field>
 	        	</Form.Group>
-	        	<Form.TextArea name='detail' label='Details' placeholder='Details of request(Please submit with photo of area and floor if applicable)' onChange = {e => this.change(e)}/>
-	        	
-	        	
-
+	        	<Form.TextArea
+              name='detail'
+              label='Details'
+              placeholder='Details of request(Please submit with photo of area and floor if applicable)'
+              onChange = {e => this.change(e)} />
 	        	<h2> Payment Detail </h2>
 	        	<Form.Field required>
 		          	<label> Account Code </label>
-	        		<Form.Input name='accountCode' placeholder='Account Code' onChange = {e => this.change(e)} />
+	        		<TextField
+                fullWidth={true}
+                name='accountCode'
+                placeholder='OOOO-FF-DDDD-PPPPP or OOOO-FF-JJJJJJJJ'
+                onChange = {e => this.change(e)}
+                errorText={this.state.accountCodeError} />
 	        	</Form.Field>
 	        	<Form.Checkbox label='Please Invoice' /> {/* "did not intergrated into data package yet */}
-
-	        	
-
 	        	<h2> Authorization Detail </h2>
 	        	<Form.Group widths='equal'>
 	        		<Form.Field required>
 		          		<label> Authorized By </label>
-	          			<Form.Input name='authorizedBy' placeholder='Authorized By' onChange = {e => this.change(e)} />
+	          			<TextField
+                    fullWidth={true}
+                    name='authorizedBy'
+                    placeholder='Authorized By'
+                    onChange = {e => this.change(e)}
+                    errorText={this.state.authorizedByError} />
 	          		</Form.Field>
 	          		<Form.Field required>
 		          		<label> SFU ID/BCDL </label>
-	          			<Form.Input name='authorizedID' placeholder='SFU ID/BCDL' onChange = {e => this.change(e)} />
+	          			<TextField
+                    fullWidth={true}
+                    name='authorizedID'
+                    placeholder='SFU ID/BCDL'
+                    onChange = {e => this.change(e)}
+                    errorText={this.state.authorizedIDError} />
 	          		</Form.Field>
 					<Form.Field required>
 		          		<label> Date </label>
-	        			<Form.Input name='authorizedDate' placeholder='Date' onChange = {e => this.change(e)} />
+	        			<TextField
+                  fullWidth={true}
+                  name='authorizedDate'
+                  placeholder='Date'
+                  onChange = {e => this.change(e)}
+                  errorText={this.state.authorizedDateError} />
 	        		</Form.Field>
 	        	</Form.Group>
 	        	<Form.Group widths='equal'>
 	        		<Form.Field required>
 		          		<label> Signature </label>
-	          			<Form.Input name='authorizedSignature' placeholder='Signature' onChange = {e => this.change(e)} />
+	          			<TextField
+                    fullWidth={true}
+                    name='authorizedSignature'
+                    placeholder='Signature'
+                    onChange = {e => this.change(e)}
+                    errorText={this.state.authorizedSignatureError} />
 	          		</Form.Field>
 	          		<Form.Field required>
 		          		<label> Phone </label>
-	          			<Form.Input name='authorizedPhone' placeholder='Phone' onChange = {e => this.change(e)} />
+	          			<TextField
+                    fullWidth={true}
+                    name='authorizedPhone'
+                    placeholder='XXX-XXX-XXXX'
+                    onChange = {e => this.change(e)}
+                    errorText={this.state.authorizedPhoneError} />
 	          		</Form.Field>
 	        	</Form.Group>
 
@@ -345,9 +619,8 @@ class FormExampleSubcomponentControl extends Component {
 	        		</Form.Group>
 	        	</Form.Field>
 	        	<Form.Button onClick = {e => this.onSubmit(e)} onChange = {this.FormExampleSuccess}>Submit</Form.Button>
-
-	       
 	      	</Form>
+        </MuiThemeProvider>
     	)
   	}
 }

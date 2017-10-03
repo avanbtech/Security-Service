@@ -12,6 +12,7 @@ import PrettyError from 'pretty-error';
 import schema from './data/schema';
 import Router from './routes';
 import assets from './assets';
+var expressValidator = require('express-validator');
 
 import graphql from 'graphql';
 import { port, auth, analytics } from './config';
@@ -32,6 +33,7 @@ server.use(express.static(path.join(__dirname, 'public')));
 server.use(cookieParser());
 server.use(bodyParser.urlencoded({ extended: true }));
 server.use(bodyParser.json());
+server.use(expressValidator());
 
 //
 // Authentication
