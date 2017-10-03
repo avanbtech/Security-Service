@@ -9,7 +9,6 @@ import GraphHTTP from 'express-graphql';
 import jwt from 'jsonwebtoken';
 import ReactDOM from 'react-dom/server';
 import PrettyError from 'pretty-error';
-import passport from './core/passport';
 import schema from './data/schema';
 import Router from './routes';
 import assets from './assets';
@@ -35,31 +34,6 @@ server.use(bodyParser.urlencoded({ extended: true }));
 server.use(bodyParser.json());
 
 //
-// Authentication
-// -----------------------------------------------------------------------------
-server.use(expressJwt({
-  secret: auth.jwt.secret,
-  credentialsRequired: false,
-  /* jscs:disable requireCamelCaseOrUpperCaseIdentifiers */
-  getToken: req => req.cookies.id_token,
-  /* jscs:enable requireCamelCaseOrUpperCaseIdentifiers */
-}));
-//server.use(passport.initialize());
-
-// server.get('/login/facebook',
-//   passport.authenticate('facebook', { scope: ['email', 'user_location'], session: false })
-// );
-// server.get('/login/facebook/return',
-//   passport.authenticate('facebook', { failureRedirect: '/login', session: false }),
-//   (req, res) => {
-//     const expiresIn = 60 * 60 * 24 * 180; // 180 days
-//     const token = jwt.sign(req.user, auth.jwt.secret, { expiresIn });
-//     res.cookie('id_token', token, { maxAge: 1000 * expiresIn, httpOnly: true });
-//     res.redirect('/');
-//   }
-// );
-
-//
 // Register API middleware
 // -----------------------------------------------------------------------------
 server.use('/graphql', expressGraphQL(req => ({
@@ -68,12 +42,6 @@ server.use('/graphql', expressGraphQL(req => ({
   rootValue: { request: req },
   pretty: process.env.NODE_ENV !== 'production',
 })));
-
-// server.use('/graphql', GraphHTTP({
-//   schema: schema,
-//   pretty: true,
-//   graphiql: true
-// }));
 
 //
 // Register server-side rendering middleware
