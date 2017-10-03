@@ -183,8 +183,7 @@ class FormExampleSubcomponentControl extends Component {
     date:'',
     dateError:'',
 		department:'',
-    departmentError:'',
-		requestBy:'',
+    requestBy:'',
     requestByError:'',
 		id:'',
     idError:'',
@@ -205,8 +204,7 @@ class FormExampleSubcomponentControl extends Component {
 		time:'',
     timeError:'',
 		detail:'',
-    detailError:'',
-		accountCode:'',
+    accountCode:'',
     accountCodeError:'',
 		authorizedBy:'',
     authorizedByError:'',
@@ -228,7 +226,6 @@ class FormExampleSubcomponentControl extends Component {
 	}
 
 	validateDate = (inputDate) => {
-    console.log(inputDate);
     var requestDate = /([20]\d{2}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))/;
     if (!inputDate.match(requestDate) || Date.parse(inputDate) - Date.parse(new Date()) < 0){
       return false;
@@ -347,7 +344,6 @@ class FormExampleSubcomponentControl extends Component {
     }
 
     if (!this.validateDate(this.state.authorizedDate)){
-      console.log(this.state.authorizedDate);
       isError = true;
       errors.authorizedDateError = "Date should be in YYYY-MM-DD format";
     }
@@ -380,21 +376,21 @@ class FormExampleSubcomponentControl extends Component {
       errors.authorizedPhoneError = "";
     }
 
-    if (isError){
-      this.setState({
+    this.setState({
         ...this.state,
         ...errors
-      });
-    }
+    });
     return isError;
   };
 
 	onSubmit = e =>{
-		e.preventDefault();
-		const error = this.validate();
-		if (!error){
-      console.log(this.state);
+    const error = this.validate();
+    if (error){
+      return;
     }
+    console.log(this.state);
+		e.preventDefault();
+    this.props.onSubmit();
 	};
 
 
@@ -437,7 +433,6 @@ class FormExampleSubcomponentControl extends Component {
                     name='department'
                     options={options}
                     placeholder='Department'
-                    errorText={this.state.departmentError}
                     onChange = {e => this.change(e)} />
 	          		</Form.Field>
 	        	</Form.Group>
@@ -553,8 +548,7 @@ class FormExampleSubcomponentControl extends Component {
               name='detail'
               label='Details'
               placeholder='Details of request(Please submit with photo of area and floor if applicable)'
-              onChange = {e => this.change(e)}
-              errorText={this.state.detailError} />
+              onChange = {e => this.change(e)} />
 	        	<h2> Payment Detail </h2>
 	        	<Form.Field required>
 		          	<label> Account Code </label>
