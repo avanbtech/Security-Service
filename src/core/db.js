@@ -1,15 +1,15 @@
 import Sequelize from 'sequelize';
 
-const Conn = new Sequelize(
-  'demodb',
-  'root',
-  'laroiya@1996',
-  {
-    dialect: 'mysql',
-    host: 'localhost'
-  }
-);
-
+// Add your configuration for DB
+// const Conn = new Sequelize(
+//   'requestform',
+//   'root',
+//   'enter password here',
+//   {
+//     dialect: 'mysql',
+//     host: 'localhost'
+//   }
+// );
 
 //DB TABLE DEFINITIONS
 const Form = Conn.define('form', {
