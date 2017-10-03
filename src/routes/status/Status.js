@@ -15,10 +15,10 @@ function Status({ title }) {
     <div className={s.root}>
       <div className={s.container}>
         <h1>{title}</h1>
-
-{/*Create a loop to display each request the user has submitted so far*/}
         <ul>
-
+        <li><p><Link className={s.link} to="/StatusForm">Check status of request</Link></p></li>
+        <input type="text" name="search" placeholder="Enter ID here..."/>
+        <input type="submit" value="Search" class= "btn btn-default"/>
         </ul>
       </div>
 
