@@ -1,14 +1,16 @@
 import Sequelize from 'sequelize';
 
-const Conn = new Sequelize(
-  'demodb',
-  'root',
-  'laroiya@1996',
-  {
-    dialect: 'mysql',
-    host: 'localhost'
-  }
-);
+
+// Add your configuration for DB
+//const Conn = new Sequelize(
+  //'demodb',
+  //'root',
+  //'cmpt373gamma',
+  //{
+    //dialect: 'mysql',
+    //host: 'localhost'
+  //}
+//);
 
 
 //DB TABLE DEFINITIONS
