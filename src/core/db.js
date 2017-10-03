@@ -146,7 +146,7 @@ Conn.sync({ force: true}).then(() => {
     authorizedID: '42342fkfdsf',
     authorizedDate: new Date(2012, 2,2,0,0,0,0),
     authorizedPhone: 7782415848
-  })
+  });
 });
 
 

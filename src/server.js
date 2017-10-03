@@ -36,13 +36,13 @@ server.use(bodyParser.json());
 //
 // Authentication
 // -----------------------------------------------------------------------------
-server.use(expressJwt({
-  secret: auth.jwt.secret,
-  credentialsRequired: false,
-  /* jscs:disable requireCamelCaseOrUpperCaseIdentifiers */
-  getToken: req => req.cookies.id_token,
-  /* jscs:enable requireCamelCaseOrUpperCaseIdentifiers */
-}));
+// server.use(expressJwt({
+//   secret: auth.jwt.secret,
+//   credentialsRequired: false,
+//   /* jscs:disable requireCamelCaseOrUpperCaseIdentifiers */
+//   getToken: req => req.cookies.id_token,
+//   /* jscs:enable requireCamelCaseOrUpperCaseIdentifiers */
+// }));
 
 //
 // Register API middleware
