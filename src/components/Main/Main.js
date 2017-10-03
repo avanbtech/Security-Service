@@ -7,8 +7,14 @@ import Link from '../Link';
 function Main({ className }) {
   return (
     <div className={cx(s.root, className)} role="Main">
-      <Link className={s.link} to="/Customer">Security Request Form</Link>
-      <p>    Check Status   </p>
+    <ul>
+
+    <li><Link className={s.link} to="/Customer">Security Request Form</Link></li>
+
+      {/*To be moved depending where this will be used*/}
+      <li><Link className={s.link} to="/Status">Check Security Requests</Link></li>
+
+      </ul>
     </div>
   );
 }
