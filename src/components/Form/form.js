@@ -263,21 +263,21 @@ class FormExampleSubcomponentControl extends Component {
 
 
     var phoneno = /^\d{10}$/;
-    if(!this.state.phone.match(phoneno))
+    var phone2 = /^\d{3}-\d{3}-\d{4}$/;
+    if(!this.state.phone.match(phoneno) && !this.state.phone.match(phone2))
     {
       isError = true;
-      errors.phoneError = "Phone number should be a 10 digit number";
+      errors.phoneError = "Phone number should be in XXXXXXXXXX or XXX-XXX-XXXX format";
     }
     else
     {
       errors.phoneError = "";
     }
 
-    var phoneno = /^\d{10}$/;
-    if(this.state.phone.length > 0 && !this.state.phone.match(phoneno))
+    if(this.state.fax.length > 0 && !this.state.fax.match(phoneno) && !this.state.fax.match(phone2))
     {
       isError = true;
-      errors.faxError = "Fax should be a 10 digit number";
+      errors.faxError = "Fax number should be in XXXXXXXXXX or XXX-XXX-XXXX format";
     }
     else
     {
@@ -335,9 +335,11 @@ class FormExampleSubcomponentControl extends Component {
       errors.timeError = "";
     }
 
-    if (this.state.accountCode.replace(/\s/g, "").length == 0 ){
+    var accountCode1 = /^\d{4}-\d{2}-\d{4}-\d{5}$/;
+    var accountCode2 = /^\d{4}-\d{2}-?\d{8}$/;
+    if (!this.state.accountCode.match(accountCode1) && !this.state.accountCode.match(accountCode2)){
       isError = true;
-      errors.accountCodeError = 'Account code should be provided';
+      errors.accountCodeError = 'Account code should be in OOOO-FF-DDDD-PPPPP or OOOO-FF-JJJJJJJJ format';
     }
     else {
       errors.accountCodeError = '';
@@ -367,10 +369,10 @@ class FormExampleSubcomponentControl extends Component {
       errors.authorizedIDError = '';
     }
 
-    if(!this.state.authorizedPhone.match(phoneno))
+    if(!this.state.authorizedPhone.match(phoneno) && !this.state.authorizedPhone.match(phone2))
     {
       isError = true;
-      errors.authorizedPhoneError = "Phone number should be a 10 digit number";
+      errors.authorizedPhoneError = "Phone number should be in XXXXXXXXXX or XXX-XXX-XXXX format";
     }
     else {
       errors.authorizedPhoneError = "";
@@ -386,11 +388,8 @@ class FormExampleSubcomponentControl extends Component {
 	onSubmit = e =>{
     const error = this.validate();
     if (error){
-      return;
+      e.preventDefault();
     }
-    console.log(this.state);
-		e.preventDefault();
-    this.props.onSubmit();
 	};
 
 
