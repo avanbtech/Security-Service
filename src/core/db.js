@@ -1,14 +1,16 @@
 import Sequelize from 'sequelize';
 
-const Conn = new Sequelize(
-  'demodb',
-  'root',
-  'laroiya@1996',
-  {
-    dialect: 'mysql',
-    host: 'localhost'
-  }
-);
+
+// Add your configuration for DB
+//const Conn = new Sequelize(
+  //'demodb',
+  //'root',
+  //'cmpt373gamma',
+  //{
+    //dialect: 'mysql',
+    //host: 'localhost'
+  //}
+//);
 
 
 //DB TABLE DEFINITIONS
@@ -146,7 +148,7 @@ Conn.sync({ force: true}).then(() => {
     authorizedID: '42342fkfdsf',
     authorizedDate: new Date(2012, 2,2,0,0,0,0),
     authorizedPhone: 7782415848
-  })
+  });
 });
 
 

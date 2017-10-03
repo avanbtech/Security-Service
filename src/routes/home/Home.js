@@ -4,7 +4,7 @@ import s from './Home.scss';
 import Link from '../../components/Link';
 import Main from '../../components/Main';
 
-function Home({ news }) {
+function Home() {
   return (
     <div className={s.root}>
       <div className={s.container}>
@@ -14,13 +14,5 @@ function Home({ news }) {
     </div>
   );
 }
-
-Home.propTypes = {
-  news: PropTypes.arrayOf(PropTypes.shape({
-    title: PropTypes.string.isRequired,
-    link: PropTypes.string.isRequired,
-    contentSnippet: PropTypes.string,
-  })).isRequired,
-};
 
 export default withStyles(Home, s);
