@@ -1,7 +1,11 @@
-# Security Service Request System (Last edited 9/30/17, by Alex)
+# Security Service Request System (Last edited 10/04/17)
 ## About
 This is group Gamma's CMPT 373 Term Project.  We are developing a web application form to replace the current SFU security services request system with an online solution, that the "customer" can fill out the necessary information, which then will be automatically accessible to security for further processing.
 We are using the MERN(ish) stack to complete this project, consisting of a SQL database (name to be determined?), Express (Framework for web applications), React (Front end framework - HTML/CSS etc.), and Node.js (Server side, back end framework) as the underlying frameworks.
+
+## Project Description
+The Security Service Request System is a system in which a user can fill out and send security service request.
+A security staff member can then see a list of pending requests and choose to review them. The security side of the request will be filled then by a staff member, then forwarded to the appropriate parties.
 
 ## Initial setup instructions 
 
@@ -112,4 +116,42 @@ Please take a look at these following tutorials if you need to brush up on your 
 - [Introduction to Node.js (w3schools)](https://www.w3schools.com/nodejs/)
 - [Express/Node.js tutorial](https://developer.mozilla.org/en-US/docs/Learn/Server-side/Express_Nodejs)
 - [React with Express/Node.js tutorial](https://daveceddia.com/create-react-app-express-backend/)
+
+## Use Cases
+
+1. Create Security Service Request
+- User Launches web application
+- User sees main page
+- User selects option to submit a security service request form
+- User sees a form to fill out with information regarding the event
+- User fills form and submits by pressing complete
+
+Variation 1
+- User hits submit without filling out all appropriate fields
+- System prompts for the fields
+- System won't submit request until all fields are filled out
+
+Variation 2
+- User saves the form
+- User sends form to third party who can authenticate it
+- Third party finished form and submits it
+
+2. Review Service Request
+- Security User launches application
+- Security sees main page
+- Security logs in with credentials
+- User sees list of requests
+- User opens request to review it
+- User fills out appropriate fields
+- User chooses distribution (who to forward to)
+- User completes the form and forwards it to the appropriate parties
+
+Variation 1
+- User sorts through list of request to see most recent
+- User then proceeds to review request
+
+Variation 2
+- User fills in request partially
+- User chooses not to complete the request and saves request
+- System updates request status to work in progress
 
