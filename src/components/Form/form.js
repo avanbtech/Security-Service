@@ -5,6 +5,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import DatePicker from 'material-ui/DatePicker';
 import DropDownMenu from 'material-ui/DropDownMenu';
 import MenuItem from 'material-ui/MenuItem';
+import SelectField from 'material-ui/SelectField';
 
 const styles = {
   customWidth: {
@@ -267,13 +268,12 @@ class FormExampleSubcomponentControl extends Component {
 
 	          		<Form.Field required>
 	        			  <label> Department </label>
-	          			<DropDownMenu 
+	          			<SelectField 
                     maxHeight={300} 
                     value={this.state.value} 
                     onChange={this.handleChangeMenu}
                     style={styles.customWidth}
                     autoWidth={true}
-
                   >
                     <MenuItem key={1} primaryText={'_'} value={'_' } />
                     <MenuItem key={2} primaryText={'_4D LABS'} value={'_4D LABS' } />
@@ -441,7 +441,7 @@ class FormExampleSubcomponentControl extends Component {
                     <MenuItem key={165} primaryText={'WEST COAST LINE'} value={'WEST COAST LINE' } />
                     <MenuItem key={166} primaryText={'WILDLIFE ECOLOGY (CWE), CENTRE FOR'} value={'WILDLIFE ECOLOGY (CWE), CENTRE FOR' } />
                     <MenuItem key={167} primaryText={'WOMEN"S CENTRE'} value={'WOMEN"S CENTRE' } />
-                  </DropDownMenu>
+                  </SelectField>
 	          		</Form.Field>
 	        	</Form.Group>
 	        	<Form.Group widths='equal'>
