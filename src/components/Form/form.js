@@ -446,12 +446,12 @@ class FormExampleSubcomponentControl extends Component {
 	          		</Form.Field>
 	          		<Form.Field required>
 	        			<label> Department </label>
-	          			<Form.Select
-                    name='department'
+                <Form.Select
                     options={options}
                     value={this.state.department}
                     placeholder='Department'
                     onChange = {this.handleDepartmentChange} />
+                <Form.Input type="hidden" name="department" value={this.state.department} />
 	          		</Form.Field>
 	        	</Form.Group>
 	        	<Form.Group widths='equal'>
