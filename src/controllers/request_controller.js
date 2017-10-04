@@ -29,6 +29,7 @@ function incrementNum() {
 	var integer = parseInt(NUM);
 
 	if (integer == 0) {
+		NUM = "0001";
 		return integer;
 	}
 
