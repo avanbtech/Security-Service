@@ -59,7 +59,7 @@ const Form = Conn.define('form', {
       isEmail: true
     }
   },
-  nameOfevent: {
+  nameOfEvent: {
     type: Sequelize.STRING,
     allowNull: false,
   },
@@ -138,7 +138,7 @@ Conn.sync({ force: true});
 //     phone: '7782417856',
 //     fax: '',
 //     email: 'sankaitk@sfu.ca',
-//     nameOfevent: 'BOOM',
+//     nameOfEvent: 'BOOM',
 //     licensed: 'yes',
 //     location: 'Home',
 //     numberOfattendees: 10,
