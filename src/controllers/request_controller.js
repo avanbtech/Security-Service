@@ -30,6 +30,11 @@ function incrementNum() {
 
 	if (integer == 0) {
 		NUM = "0001";
+
+		integer = integer.toString();
+		while (integer.length < 4) {
+		integer = "0" + integer;
+		}
 		return integer;
 	}
 
