@@ -3,42 +3,75 @@ import db from '../core/db';
 var NUM = "0000";
 var YEAR = "00";
 
-function uniqueID() {
-	var d = new Date();
-	var fullYear = d.getFullYear().toString(); // eg. 2017
-	var abbrevYear = fullYear.slice(-2); // eg. 17
+// function uniqueID() {
+// 	var d = new Date();
+// 	var fullYear = d.getFullYear().toString(); // eg. 2017
+// 	var abbrevYear = fullYear.slice(-2); // eg. 17
+//
+// 	var oldYear = parseInt(YEAR);
+// 	abbrevYear = parseInt(abbrevYear);
+//
+// 	if(oldYear < abbrevYear) {
+// 		YEAR = abbrevYear.toString();
+// 		NUM = "0000";
+// 	}
+// 	abbrevYear = abbrevYear.toString();
+//
+// 	var num = IncNum();
+//
+// 	var ID = abbrevYear + "-" + num;
+//
+// 	return ID;
+// }
 
-	var oldYear = parseInt(YEAR);
-	abbrevYear = parseInt(abbrevYear);
+function uni_ID() {
+  var date = new Date();
+  var fullYear = date.getFullYear();
 
-	if(oldYear < abbrevYear) {
-		YEAR = abbrevYear.toString();
-		NUM = "0000";
-	}
-	abbrevYear = abbrevYear.toString();
-
-	var num = incrementNum();
-
-	var ID = abbrevYear + "-" + num;
-
-	return ID;
+  return fullYear.toString().substr(2) + "-" + IncNum();
 }
 
-//increase the sequential number - max number is 9999
-function incrementNum() {
-	var integer = parseInt(NUM);
+// //increase the sequential number - max number is 9999
+// function incrementNum() {
+// 	var integer = parseInt(NUM);
+//
+// 	if (integer === 0) {
+// 		NUM = "0001";
+//
+// 		integer = integer.toString();
+// 		while (integer.length < 4) {
+// 		integer = "0" + integer;
+// 		}
+// 		return integer;
+// 	}
+//
+// 	if (integer < 10000) {
+// 		integer++;
+// 	}
+//
+// 	integer = integer.toString();
+// 	while (integer.length < 4) {
+// 		integer = "0" + integer;
+// 	}
+//
+// 	NUM = integer;
+// 	return integer;
+// }
 
-	if (integer < 10000 && integer != 0) {
-		integer++;
-	}
+function IncNum() {
+  var int_num = parseInt(NUM);
 
-	integer = integer.toString();
-	while (integer.length < 4) {
-		integer = "0" + integer;
-	}
+  if(int_num !== null && int_num < 10000) {
+    int_num += 1;
+  }
 
-	NUM = integer;
-	return integer;
+  NUM = String(int_num);
+
+  while(NUM.length < 4) {
+    NUM = "0" + NUM;
+  }
+
+  return NUM;
 }
 
 function getCurrDate() {
@@ -55,7 +88,7 @@ function stringBody(req) {
 
   db.models.form.create({
 
-    id: uniqueID(),
+    id: uni_ID(),
     status: 'Processing',
     statusDate: getCurrDate(),
     sfuBCID: req.body.id,
