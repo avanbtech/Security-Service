@@ -28,7 +28,17 @@ function uniqueID() {
 function incrementNum() {
 	var integer = parseInt(NUM);
 
-	if (integer < 10000 && integer != 0) {
+	if (integer == 0) {
+		NUM = "0001";
+
+		integer = integer.toString();
+		while (integer.length < 4) {
+		integer = "0" + integer;
+		}
+		return integer;
+	}
+
+	if (integer < 10000) {
 		integer++;
 	}
 
