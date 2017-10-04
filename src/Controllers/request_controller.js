@@ -1,7 +1,85 @@
+import db from '../core/db';
+
+var NUM = "0000";
+var YEAR = "00";
+function uniqueID() {
+  var d = new Date();
+  var fullYear = toString(d.getFullYear()); // eg. 2017
+  var abbrevYear = fullYear.slice(-2); // eg. 17
+  checkForNewYear(abbrevYear);
+  var num = incrementNum();
+
+  var ID = abbrevYear + "-" + num;
+  return ID;
+}
+//increase the sequential number - max number is 9999
+function incrementNum() {
+  var integer = parseInt(NUM)
+  if (integer < 10000 && integer != 0) {
+    integer++;
+  }
+  integer = integer.toString();
+  while (integer.length() < 5) {
+    integer = "0" + integer;
+  }
+  NUM = integer;
+  return integer;
+}
+//check if the year has changed - if yes, reset sequential number and
+// set YEAR to the new year
+//does nothing if the year is the same as the sequential number should not be
+// reset till the year changes
+function checkForNewYear(abbrevYear) {
+  var oldYear = parseInt(YEAR);
+  parseInt(abbrevYear);
+  if(oldYear < abbrevYear) {
+    YEAR = abbrevYear.toString();
+    NUM = "0000";
+  }
+}
+
+function getCurrDate() {
+  var today = new Date();
+
+  var year = today.getFullYear();
+  var month = today.getMonth();
+  var day = today.getDay();
+
+  return year + '-' + month + '-' + day;
+}
+
+function stringBody(req) {
+
+  db.models.form.create({
+    id: req.body.id,
+    status: 'Processing',
+    statusDate: getCurrDate(),
+    sfuBCID: req.body.id,
+    department: 'INSERT DEPARTMENT HERE',    // NO WAY TO GET THE DEPT
+    date: getCurrDate(),
+    requestBy: req.body.requestBy,
+    phone: req.body.phone,
+    fax: req.body.fax,
+    email: req.body.email,
+    nameOfevent: 'NAME OF EVENT',      // UNABLE TO GET THE NAME OF EVENT
+    licensed: req.body.licensed,      // make mandatory
+    location: req.body.location,
+    numberOfattendees: 10000,         //UNABLE TO RETRIEVE NUM FROM FORM USING TEMP NUMBER
+    eventDates: [req.body.eventDate],
+    times: req.body.time,
+    details: req.body.detail,
+    accountCode: req.body.accountCode,
+    invoice: 99999,
+    authorizedBy: 'Insert Person here',
+    authorizedID: '42342fkfdsf',
+    authorizedDate: new Date(2012, 2,2,0,0,0,0),
+    authorizedPhone: 7782415848
+  });
+}
 
 
 exports.request_post = function(req, res, next) {
-  console.log(req.body);
+
 
   req.checkBody('date', 'date name must be specified').notEmpty();
   req.checkBody('department', 'department must be specified').notEmpty();
@@ -56,5 +134,9 @@ exports.request_post = function(req, res, next) {
   req.filter('time').escape();
   req.filter('time').trim();
 
+  stringBody(req);
+
   res.redirect('/');
 };
+
+
