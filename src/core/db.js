@@ -16,7 +16,7 @@ const Conn = new Sequelize(
 //DB TABLE DEFINITIONS
 const Form = Conn.define('form', {
   id: {
-    type: Sequelize.INTEGER,
+    type: Sequelize.STRING,
     allowNull: false,
     primaryKey: true
   },

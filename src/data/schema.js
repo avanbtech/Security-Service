@@ -17,7 +17,7 @@ const Form  = new GraphQLObjectType({
   fields: () => {
     return {
       id: {
-        type: GraphQLInt,
+        type: GraphQLString,
         resolve(form) {
           return form.id;
         }
