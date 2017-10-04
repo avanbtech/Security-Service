@@ -2,40 +2,43 @@ import db from '../core/db';
 
 var NUM = "0000";
 var YEAR = "00";
-function uniqueID() {
-  var d = new Date();
-  var fullYear = toString(d.getFullYear()); // eg. 2017
-  var abbrevYear = fullYear.slice(-2); // eg. 17
-  checkForNewYear(abbrevYear);
-  var num = incrementNum();
 
-  var ID = abbrevYear + "-" + num;
-  return ID;
+function uniqueID() {
+	var d = new Date();
+	var fullYear = d.getFullYear().toString(); // eg. 2017
+	var abbrevYear = fullYear.slice(-2); // eg. 17
+
+	var oldYear = parseInt(YEAR);
+	abbrevYear = parseInt(abbrevYear);
+
+	if(oldYear < abbrevYear) {
+		YEAR = abbrevYear.toString();
+		NUM = "0000";
+	}
+	abbrevYear = abbrevYear.toString();
+
+	var num = incrementNum();
+	
+	var ID = abbrevYear + "-" + num;
+
+	return ID;
 }
+
 //increase the sequential number - max number is 9999
 function incrementNum() {
-  var integer = parseInt(NUM)
-  if (integer < 10000 && integer != 0) {
-    integer++;
-  }
-  integer = integer.toString();
-  while (integer.length() < 5) {
-    integer = "0" + integer;
-  }
-  NUM = integer;
-  return integer;
-}
-//check if the year has changed - if yes, reset sequential number and
-// set YEAR to the new year
-//does nothing if the year is the same as the sequential number should not be
-// reset till the year changes
-function checkForNewYear(abbrevYear) {
-  var oldYear = parseInt(YEAR);
-  parseInt(abbrevYear);
-  if(oldYear < abbrevYear) {
-    YEAR = abbrevYear.toString();
-    NUM = "0000";
-  }
+	var integer = parseInt(NUM);
+
+	if (integer < 10000 && integer != 0) {
+		integer++;
+	}
+
+	integer = integer.toString();
+	while (integer.length < 4) {
+		integer = "0" + integer;
+	}
+
+	NUM = integer;
+	return integer;
 }
 
 function getCurrDate() {
@@ -51,6 +54,7 @@ function getCurrDate() {
 function stringBody(req) {
 
   db.models.form.create({
+  	uniqueid: uniqueid();
     id: req.body.id,
     status: 'Processing',
     statusDate: getCurrDate(),
