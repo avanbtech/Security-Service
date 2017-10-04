@@ -388,6 +388,14 @@ class FormExampleSubcomponentControl extends Component {
       errors.licensedError = "";
     }
 
+    if(this.state.authorizedSignature.replace('/\s/g','').length == 0){
+      isError = true;
+      errors.authorizedSignatureError = "This field cannot be empty";
+    }
+    else {
+      errors.authorizedSignatureError = "";
+    }
+
     this.setState({
         ...this.state,
         ...errors
