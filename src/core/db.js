@@ -2,15 +2,15 @@ import Sequelize from 'sequelize';
 
 
 // Add your configuration for DB
-//const Conn = new Sequelize(
-  //'demodb',
-  //'root',
-  //'cmpt373gamma',
-  //{
-    //dialect: 'mysql',
-    //host: 'localhost'
-  //}
-//);
+const Conn = new Sequelize(
+  'demodb',
+  'root',
+  'laroiya@1996',
+  {
+    dialect: 'mysql',
+    host: 'localhost',
+  }
+);
 
 
 //DB TABLE DEFINITIONS
@@ -64,7 +64,7 @@ const Form = Conn.define('form', {
     allowNull: false,
   },
   licensed: {
-    type: Sequelize.INTEGER,
+    type: Sequelize.STRING,
     allowNull: false,
   },
   location: {
@@ -84,7 +84,7 @@ const Form = Conn.define('form', {
     }
   },
   times: {
-    type: Sequelize.INTEGER,
+    type: Sequelize.STRING,
     allowNull: false,
   },
   details: {
@@ -92,7 +92,7 @@ const Form = Conn.define('form', {
     allowNull: true
   },
   accountCode: {
-    type: Sequelize.INTEGER,
+    type: Sequelize.STRING,
     allowNull: false
   },
   invoice: {
@@ -121,35 +121,38 @@ const Form = Conn.define('form', {
 
 //DEMO QUERY
 
-Conn.sync({ force: true}).then(() => {
-  var datetime = new Date("2017-09-01");
+Conn.sync({ force: true});
 
-  return Form.create({
-    id: 0,
-    status: 'Pending',
-    statusDate: new Date(2011, 0, 1, 0, 0, 0, 0),
-    sfuBCID: 50505,
-    department: 'APPSC',
-    date: new Date(2013, 0, 1, 0, 0, 0, 0),
-    requestBy: 'Sankait',
-    phone: '7782417856',
-    fax: '',
-    email: 'sankaitk@sfu.ca',
-    nameOfevent: 'BOOM',
-    licensed: 100,
-    location: 'Home',
-    numberOfattendees: 10,
-    eventDates: [(new Date(2012, 0, 1, 0, 0, 0, 0)).toString(), (new Date(2019, 0, 1, 0, 0, 0, 0)).toString()],
-    times: 21,
-    details: 'THIS IS DETAIL',
-    accountCode: 420,
-    invoice: 32,
-    authorizedBy: 'Sankait',
-    authorizedID: '42342fkfdsf',
-    authorizedDate: new Date(2012, 2,2,0,0,0,0),
-    authorizedPhone: 7782415848
-  });
-});
+
+// .then(() => {
+//   var datetime = new Date("2017-09-01");
+//
+//   return Form.create({
+//     id: 0,
+//     status: 'Pending',
+//     statusDate: new Date(2011, 0, 1, 0, 0, 0, 0),
+//     sfuBCID: 50505,
+//     department: 'APPSC',
+//     date: new Date(2013, 0, 1, 0, 0, 0, 0),
+//     requestBy: 'Sankait',
+//     phone: '7782417856',
+//     fax: '',
+//     email: 'sankaitk@sfu.ca',
+//     nameOfevent: 'BOOM',
+//     licensed: 'yes',
+//     location: 'Home',
+//     numberOfattendees: 10,
+//     eventDates: [(new Date(2012, 0, 1, 0, 0, 0, 0)).toString(), (new Date(2019, 0, 1, 0, 0, 0, 0)).toString()],
+//     times: "5:45",
+//     details: 'THIS IS DETAIL',
+//     accountCode: "420",
+//     invoice: 32,
+//     authorizedBy: 'Sankait',
+//     authorizedID: '42342fkfdsf',
+//     authorizedDate: new Date(2012, 2,2,0,0,0,0),
+//     authorizedPhone: 7782415848
+//   });
+// }
 
 
 export default Conn;

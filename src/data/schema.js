@@ -176,6 +176,78 @@ const Query = new GraphQLObjectType({
   }
 });
 
+//Input types
+var FormArgs = {
+  id: {
+    type: GraphQLInt,
+  },
+  status: {
+    type: GraphQLString,
+  },
+  statusDate: {
+    type: GraphQLString,
+  },
+  sfuBCID: {
+    type: GraphQLString,
+  },
+  department: {
+    type: GraphQLString,
+  },
+  date: {
+    type: GraphQLString,
+  },
+  requestBy: {
+    type: GraphQLString,
+  },
+  phone: {
+    type: GraphQLString,
+  },
+  fax: {
+    type: GraphQLString,
+  },
+  email: {
+    type: GraphQLString,
+  },
+  nameOfevent: {
+    type: GraphQLString,
+  },
+  licensed: {
+    type: GraphQLString,
+  },
+  location: {
+    type: GraphQLString,
+  },
+  numberOfattendees: {
+    type: GraphQLInt,
+  },
+  eventDates: {
+    type: GraphQLString
+  },
+  times: {
+    type: GraphQLString,
+  },
+  details: {
+    type: GraphQLString,
+  },
+  accountCode: {
+    type: GraphQLString,
+  },
+  invoice: {
+    type: GraphQLInt,
+  },
+  authorizedBy: {
+    type: GraphQLString,
+  },
+  authorizedID: {
+    type: GraphQLString,
+  },
+  authorizedDate: {
+    type: GraphQLString,
+  },
+  authorizedPhone: {
+    type: GraphQLString,
+  }
+}
 
 // Mutations
 const Mutation = new GraphQLObjectType({
@@ -185,42 +257,33 @@ const Mutation = new GraphQLObjectType({
     return {
       addForm: {
         type: Form,
-        args: {
-          id: {
-            type: GraphQLInt
-          },
-          requestBy: {
-            type: GraphQLString
-          },
-          phone: {
-            type: GraphQLInt
-          }
-        },
+        args: FormArgs,
+
         resolve(source, args) {
           return Db.models.form.create({
             id: args.id,
-            status: 'Pending',
-            statusDate: new Date(2011, 0, 1, 0, 0, 0, 0),
-            sfuBCID: 50505,
-            department: 'APPSC',
-            date: new Date(2013, 0, 1, 0, 0, 0, 0),
+            status: args.status,
+            statusDate: args.statusDate,
+            sfuBCID: args.sfuBCID,
+            department: args.department,
+            date: args.date,
             requestBy: args.requestBy,
             phone: args.phone,
-            fax: '',
-            email: 'sankaitk@sfu.ca',
-            nameOfevent: 'BOOM',
-            licensed: 100,
-            location: 'Home',
-            numberOfattendees: 10,
-            eventDates: [(new Date(2012, 0, 1, 0, 0, 0, 0)).toString(), (new Date(2019, 0, 1, 0, 0, 0, 0)).toString()],
-            times: 21,
-            details: 'THIS IS DETAIL',
-            accountCode: 420,
-            invoice: 32,
-            authorizedBy: 'Sankait',
-            authorizedID: '42342fkfdsf',
-            authorizedDate: new Date(2012, 2,2,0,0,0,0),
-            authorizedPhone: 7782415848
+            fax: args.fax,
+            email: args.email,
+            nameOfevent: args.nameOfevent,
+            licensed: args.licensed,
+            location: args.location,
+            numberOfattendees: args.numberOfattendees,
+            eventDates: args.eventDates.split(';'),
+            times: args.times,
+            details: args.details,
+            accountCode: args.accountCode,
+            invoice: args.invoice,
+            authorizedBy: args.authorizedBy,
+            authorizedID: args.authorizedID,
+            authorizedDate: args.authorizedDate,
+            authorizedPhone: args.authorizedPhone
           });
         }
       }

@@ -1,8 +1,10 @@
+import db from '../core/db';
+
 var NUM = "0000";
 var YEAR = "00";
 function uniqueID() {
   var d = new Date();
-  var fullYear = d.getFullYear(); // eg. 2017
+  var fullYear = toString(d.getFullYear()); // eg. 2017
   var abbrevYear = fullYear.slice(-2); // eg. 17
   checkForNewYear(abbrevYear);
   var num = incrementNum();
@@ -16,7 +18,7 @@ function incrementNum() {
   if (integer < 10000 && integer != 0) {
     integer++;
   }
-  integer.toString();
+  integer = integer.toString();
   while (integer.length() < 5) {
     integer = "0" + integer;
   }
@@ -36,8 +38,76 @@ function checkForNewYear(abbrevYear) {
   }
 }
 
+function getCurrDate() {
+  var today = new Date();
+
+  var year = today.getFullYear();
+  var month = today.getMonth();
+  var day = today.getDay();
+
+  return year + '-' + month + '-' + day;
+}
+
+function stringBody(req) {
+
+  console.log("\n\n\nHERE\n\n\n");
+
+  db.models.form.create({
+    id: req.body.id,
+    status: 'Processing',
+    statusDate: getCurrDate(),
+    sfuBCID: req.body.id,
+    department: 'INSERT DEPARTMENT HERE',    // NO WAY TO GET THE DEPT
+    date: getCurrDate(),
+    requestBy: req.body.requestBy,
+    phone: req.body.phone,
+    fax: req.body.fax,
+    email: req.body.email,
+    nameOfevent: 'NAME OF EVENT',      // UNABLE TO GET THE NAME OF EVENT
+    licensed: req.body.licensed,
+    location: req.body.location,
+    numberOfattendees: 10000, //UNABLE TO RETRIEVE NUM FROM FORM USING TEMP NUMBER
+    eventDates: [req.body.eventDate],
+    times: req.body.time,
+    details: req.body.detail,
+    accountCode: req.body.accountCode,
+    invoice: 99999,
+    authorizedBy: 'Insert Person here',
+    authorizedID: '42342fkfdsf',
+    authorizedDate: new Date(2012, 2,2,0,0,0,0),
+    authorizedPhone: 7782415848
+  });
+
+
+  // var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
+  // var request = new XMLHttpRequest();
+  // request.responseType = 'json';
+  // request.open("POST", "/graphql");
+  // request.setRequestHeader("Content-Type", "application/json");
+  // request.setRequestHeader("Accept", "application/json");
+  //
+  //
+  //
+  // var mutation_str = `'{"query": "mutation {addForm(id: ${req.body.id},
+  // status: \"${req.body.date}\", statusDate: \"2017-10-3\",
+  // sfuBCID: \"gdg\", department: \"dsfn\", date: \"2017-10-3\",
+  // requestBy: \"45353\", phone: \"34242\", fax: \"\", email: \"sankait@sfu.ca\",
+  // nameOfevent: \"dajn\", licensed: 234342, location: \"burnaby\", numberOfattendees: 2331,
+  // eventDates: \"2017-08-9;2017-09-08\", times: 2331, details: \"Fsdf\",
+  // accountCode: 3324, invoice: 32432, authorizedBy: \"Fsfds\", authorizedID: \"fsdfdsF\",
+  // authorizedDate: \"2017-10-3\", authorizedPhone: \"3r43r4f\"){id}}"}'`;
+  //
+  // request.send(mutation_str);
+  // request.onload = function () {
+  //   console.log('\n\ndata returned:', xhr.response);
+  // }
+
+  //console.log(mutation_str);
+}
+
+
 exports.request_post = function(req, res, next) {
-  console.log(req.body);
+
 
   req.checkBody('date', 'date name must be specified').notEmpty();
   req.checkBody('department', 'department must be specified').notEmpty();
@@ -92,5 +162,9 @@ exports.request_post = function(req, res, next) {
   req.filter('time').escape();
   req.filter('time').trim();
 
+  stringBody(req);
+
   res.redirect('/');
 };
+
+
