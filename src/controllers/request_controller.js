@@ -14,7 +14,7 @@ function uniqueID() {
     YEAR = abbrevYear.toString();
     NUM = "0000";
   }
-  
+
   return abbrevYear.toString() + "-" + IncNum();
 }
 
@@ -82,7 +82,7 @@ function stringBody(req) {
 
   db.models.form.create({
 
-    id: uni_ID(),
+    id: uniqueID(),
     status: 'Processing',
     statusDate: getCurrDate(),
     sfuBCID: req.body.id,
@@ -92,7 +92,7 @@ function stringBody(req) {
     phone: req.body.phone,
     fax: req.body.fax,
     email: req.body.email,
-    nameOfevent: 'NAME OF EVENT',      // UNABLE TO GET THE NAME OF EVENT
+    nameOfEvent: req.body.nameOfEvent,      // UNABLE TO GET THE NAME OF EVENT
     licensed: req.body.licensed,      // make mandatory
     location: req.body.location,
     numberOfattendees: 10000,         //UNABLE TO RETRIEVE NUM FROM FORM USING TEMP NUMBER
