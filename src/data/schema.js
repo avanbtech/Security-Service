@@ -76,10 +76,10 @@ const Form  = new GraphQLObjectType({
           return form.email;
         }
       },
-      nameOfevent: {
+      nameOfEvent: {
         type: GraphQLString,
         resolve(form) {
-          return form.nameOfevent;
+          return form.nameOfEvent;
         }
       },
       licensed: {
@@ -208,7 +208,7 @@ var FormArgs = {
   email: {
     type: GraphQLString,
   },
-  nameOfevent: {
+  nameOfEvent: {
     type: GraphQLString,
   },
   licensed: {
@@ -271,7 +271,7 @@ const Mutation = new GraphQLObjectType({
             phone: args.phone,
             fax: args.fax,
             email: args.email,
-            nameOfevent: args.nameOfevent,
+            nameOfEvent: args.nameOfEvent,
             licensed: args.licensed,
             location: args.location,
             numberOfattendees: args.numberOfattendees,

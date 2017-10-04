@@ -52,7 +52,9 @@ class FormExampleSubcomponentControl extends Component {
 		authorizedSignature:'',
     authorizedSignatureError:'',
 		authorizedPhone:'',
-    authorizedPhoneError:''
+    authorizedPhoneError:'',
+    licensed:'',
+    licensedError:''
 	}
 
 
@@ -215,6 +217,22 @@ class FormExampleSubcomponentControl extends Component {
       errors.authorizedPhoneError = "";
     }
 
+    if(this.state.licensed.length == 0){
+      isError = true;
+      errors.licensedError = "This field cannot be empty";
+    }
+    else {
+      errors.licensedError = "";
+    }
+
+    if(this.state.authorizedSignature.replace('/\s/g','').length == 0){
+      isError = true;
+      errors.authorizedSignatureError = "This field cannot be empty";
+    }
+    else {
+      errors.authorizedSignatureError = "";
+    }
+
     this.setState({
         ...this.state,
         ...errors
@@ -232,9 +250,19 @@ class FormExampleSubcomponentControl extends Component {
 
 	handleChange = (e, { value }) => this.setState({ value })
 
+
   handleChangeMenu = (event, index, value) => this.setState({value});
 
-	FormExampleSuccess = () => (
+
+  handleLicensedChecked = (e, {value}) => {
+	  this.setState({licensed: { value }.value});
+  }
+
+  handleDepartmentChange = (e, {value}) => {
+    this.setState({department: {value}.value});
+  }
+
+  FormExampleSuccess = () => (
 	  <Form success>
 	    <Form.Input label='Email' placeholder='joe@schmoe.com' />
 	    <Message
@@ -442,6 +470,7 @@ class FormExampleSubcomponentControl extends Component {
                     <MenuItem key={166} primaryText={'WILDLIFE ECOLOGY (CWE), CENTRE FOR'} value={'WILDLIFE ECOLOGY (CWE), CENTRE FOR' } />
                     <MenuItem key={167} primaryText={'WOMEN"S CENTRE'} value={'WOMEN"S CENTRE' } />
                   </SelectField>
+
 	          		</Form.Field>
 	        	</Form.Group>
 	        	<Form.Group widths='equal'>
@@ -502,14 +531,26 @@ class FormExampleSubcomponentControl extends Component {
                 name='nameOfEvent'
                 placeholder='Type/Name of Event'
                 onChange = {e => this.change(e)}
+                value={this.state.nameOfEvent}
                 errorText={this.state.nameOfEventError} />
 	        	</Form.Field>
 	        	<Form.Field required>
 	        		<Form.Group inline>
 	        		{/* "value" in data package represent the state of this part */}
 		          		<label> Licensed </label>
-		          		<Form.Radio name='licensed' label='Yes' value='yes' checked={value === 'yes'} onChange={this.handleChange} />
-		          		<Form.Radio name='licensed' label='No' value='no' checked={value === 'no'} onChange={this.handleChange} />
+		          		<Form.Radio
+                    name='licensed'
+                    label='Yes'
+                    value='yes'
+                    checked={this.state.licensed === 'yes'}
+                    onChange={this.handleLicensedChecked} />
+		          		<Form.Radio
+                    name='licensed'
+                    label='No'
+                    value='no'
+                    checked={this.state.licensed === 'no'}
+                    onChange={this.handleLicensedChecked} />
+                  <label style={{color:'red'}}>{this.state.licensedError}</label>
 		       		</Form.Group>
 		       	</Form.Field>
 	        	<Form.Group widths='equal'>
@@ -529,6 +570,7 @@ class FormExampleSubcomponentControl extends Component {
                     name='numberOfAttendees'
                     placeholder='# of Attendees'
                     onChange = {e => this.change(e)}
+                    value={this.state.numberOfAttendees}
                     errorText={this.state.numberOfAttendeesError} />
 	          		</Form.Field>
 	        	</Form.Group>
