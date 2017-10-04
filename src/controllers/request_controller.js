@@ -17,38 +17,54 @@ function uniqueID() {
 	}
 	abbrevYear = abbrevYear.toString();
 
-	var num = incrementNum();
+	var num = IncNum();
 
 	var ID = abbrevYear + "-" + num;
 
 	return ID;
 }
 
-//increase the sequential number - max number is 9999
-function incrementNum() {
-	var integer = parseInt(NUM);
+// //increase the sequential number - max number is 9999
+// function incrementNum() {
+// 	var integer = parseInt(NUM);
+//
+// 	if (integer === 0) {
+// 		NUM = "0001";
+//
+// 		integer = integer.toString();
+// 		while (integer.length < 4) {
+// 		integer = "0" + integer;
+// 		}
+// 		return integer;
+// 	}
+//
+// 	if (integer < 10000) {
+// 		integer++;
+// 	}
+//
+// 	integer = integer.toString();
+// 	while (integer.length < 4) {
+// 		integer = "0" + integer;
+// 	}
+//
+// 	NUM = integer;
+// 	return integer;
+// }
 
-	if (integer == 0) {
-		NUM = "0001";
+function IncNum() {
+  var int_num = parseInt(NUM);
 
-		integer = integer.toString();
-		while (integer.length < 4) {
-		integer = "0" + integer;
-		}
-		return integer;
-	}
+  if(int_num !== null && int_num < 10000) {
+    int_num += 1;
+  }
 
-	if (integer < 10000) {
-		integer++;
-	}
+  NUM = String(int_num);
 
-	integer = integer.toString();
-	while (integer.length < 4) {
-		integer = "0" + integer;
-	}
+  while(NUM.length < 4) {
+    NUM = "0" + NUM;
+  }
 
-	NUM = integer;
-	return integer;
+  return NUM;
 }
 
 function getCurrDate() {
