@@ -3,178 +3,14 @@ import { Button, 	Form, Message } from 'semantic-ui-react'
 import TextField from "material-ui/TextField"
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import DatePicker from 'material-ui/DatePicker';
+import DropDownMenu from 'material-ui/DropDownMenu';
+import MenuItem from 'material-ui/MenuItem';
 
-const options = [
-  { key: '1.', text: '_', value: '_' },
-  { key: '2.', text: '_4D LABS', value: '_4D LABS' },
-  { key: '3.', text: 'ABORIGINAL PEOPLES, OFFICE FOR', value: 'ABORIGINAL PEOPLES, OFFICE FOR' },
-  { key: '4.', text: 'ACADEMNIC RELATIONS', value: 'ACADEMNIC RELATIONS' },
-  { key: '5.', text: 'Alectos Therapeutics Inc - Leasee in Discovery 1', value: 'Alectos Therapeutics Inc - Leasee in Discovery 1' },
-  { key: '6.', text: 'ALUMNI RELATIONS', value: 'ALUMNI RELATIONS' },
-  { key: '7.', text: 'ANMIAL RESOURCES CENTRE', value: 'ANMIAL RESOURCES CENTRE' },
-  { key: '8.', text: 'APPLIED SCIENCES, FACULTY OF (includes Dean of Applied Sciences)', value: 'APPLIED SCIENCES, FACULTY OF (includes Dean of Applied Sciences)' },
-  { key: '9.', text: 'APSA - Administrative and Professional Staff Association', value: 'APSA - Administrative and Professional Staff Association' },
-  { key: '10.', text: 'ARCHAEOLOGY', value: 'ARCHAEOLOGY' },
-  { key: '11.', text: 'ARCHIVES & RECORDS MANAGEMENT', value: 'ARCHIVES & RECORDS MANAGEMENT' },
-  { key: '12.', text: 'ART GALLERY', value: 'ART GALLERY' },
-  { key: '13.', text: 'ARTS & SOCIAL SCIENCES, FACULTY OF (FASS) / DEAB OF (DOA FASS)', value: 'ARTS & SOCIAL SCIENCES, FACULTY OF (FASS) / DEAB OF (DOA FASS)' },
-  { key: '14.', text: 'ASIS-CANADA PROGRAM', value: 'ASIS-CANADA PROGRAM' },
-  { key: '15.', text: 'BCNET', value: 'BCNET' },
-  { key: '16.', text: 'BEEDIE SCHOOL OF BUSINESS (BUSINESS ADMINISTRATION, FACULTY OF )', value: 'BEEDIE SCHOOL OF BUSINESS (BUSINESS ADMINISTRATION, FACULTY OF )' },
-  { key: '17.', text: 'BEST', value: 'BEST' },
-  { key: '18.', text: 'BIOLOGICAL SCIENCES, DEPARTMENT OF', value: 'BIOLOGICAL SCIENCES, DEPARTMENT OF' },
-  { key: '19.', text: 'BIOMEDICAL PHYSIOLOGY AND KINESIOLOGY', value: 'BIOMEDICAL PHYSIOLOGY AND KINESIOLOGY' },
-  { key: '20.', text: 'BOARD OF GOVERNORS', value: 'BOARD OF GOVERNORS' },
-  { key: '21.', text: 'BOOKSTORE', value: 'BOOKSTORE' },
-  { key: '22.', text: 'BUREAU DES AFFAIRES FRANCOPHONES ET FRANCOPHILES (BAFF)', value: 'BUREAU DES AFFAIRES FRANCOPHONES ET FRANCOPHILES (BAFF)' },
-  { key: '23.', text: 'CAMPUS PLANNING & DEVELOPMENT', value: 'CAMPUS PLANNING & DEVELOPMENT' },
-  { key: '24.', text: 'CAMPUS SECURITY', value: 'CAMPUS SECURITY' },
-  { key: '25.', text: 'CANADIAN STUDIES, CENTRE FOR', value: 'CANADIAN STUDIES, CENTRE FOR' },
-  { key: '26.', text: 'CANADIAN URBAN RESEARCH STUDIES, INSTITUTE FOR', value: 'CANADIAN URBAN RESEARCH STUDIES, INSTITUTE FOR' },
-  { key: '27.', text: 'CEREMONIES & EVENTS OFFICE', value: 'CEREMONIES & EVENTS OFFICE' },
-  { key: '28.', text: 'CHEMISTRY, DEPARTMENT OF', value: 'CHEMISTRY, DEPARTMENT OF' },
-  { key: '29.', text: 'CHILDCARE CENTRE', value: 'CHILDCARE CENTRE' },
-  { key: '30.', text: 'CJSF RADIO', value: 'CJSF RADIO' },
-  { key: '31.', text: 'COASTAL STUDIES, CENTRE FOR', value: 'COASTAL STUDIES, CENTRE FOR' },
-  { key: '32.', text: 'COGNITIVE SCIENCE PROGRAM', value: 'COGNITIVE SCIENCE PROGRAM' },
-  { key: '33.', text: 'COMMUNICATION, SCHOOL OF', value: 'COMMUNICATION, SCHOOL OF' },
-  { key: '34.', text: 'COMPUTING SCIENCE, SCHOOL OF', value: 'COMPUTING SCIENCE, SCHOOL OF' },
-  { key: '35.', text: 'CO-OP - ARTS & SOCIAL SCIENCES (INCLUDES EDUCATION)', value: 'CO-OP - ARTS & SOCIAL SCIENCES (INCLUDES EDUCATION)' },
-  { key: '36.', text: 'CO-OP - BEEDIE SCHOOL OF BUSINESS (BUSINESS ADMINISTRATION)', value: 'CO-OP - BEEDIE SCHOOL OF BUSINESS (BUSINESS ADMINISTRATION)' },
-  { key: '37.', text: 'CO-OP - Biomedical, Physiology & Kinesiology', value: 'CO-OP - Biomedical, Physiology & Kinesiology' },
-  { key: '38.', text: 'CO-OP - BUSINESS PROGRAM', value: 'CO-OP - BUSINESS PROGRAM' },
-  { key: '39.', text: 'CO-OP - COMMUNICATION PROGRAM', value: 'CO-OP - COMMUNICATION PROGRAM' },
-  { key: '40.', text: 'CO-OP - COMPUTING SCIENCE', value: 'CO-OP - COMPUTING SCIENCE' },
-  { key: '41.', text: 'CO-OP - ENGINEERING SCIENCE', value: 'CO-OP - ENGINEERING SCIENCE' },
-  { key: '42.', text: 'CO-OP - Environment', value: 'CO-OP - Environment' },
-  { key: '43.', text: 'CO-OP - Health Sciences', value: 'CO-OP - Health Sciences' },
-  { key: '44.', text: 'CO-OP - SCIENCE AND ENVIRONMENT', value: 'CO-OP - SCIENCE AND ENVIRONMENT' },
-  { key: '45.', text: 'CO-OP - SCIENCE PROGRAM', value: 'CO-OP - SCIENCE PROGRAM' },
-  { key: '46.', text: 'CO-OP - EDUCATION (MBC - STUDENT SERVICES - WORK INTEGRATED LEARNING)', value: 'CO-OP - EDUCATION (MBC - STUDENT SERVICES - WORK INTEGRATED LEARNING)' },
-  { key: '47.', text: 'CRIMINOLOGY RESEARCH CENTRE', value: 'CRIMINOLOGY RESEARCH CENTRE' },
-  { key: '48.', text: 'CRIMINOLOGY, DEPARTMENT OF', value: 'CRIMINOLOGY, DEPARTMENT OF' },
-  { key: '49.', text: 'CSCD - SUSTAINABLE COMMUNITY DEVELOPMENT, CENTRE FOR (C/O FACULTY OF ENVIRONMENT)', value: 'CSCD - SUSTAINABLE COMMUNITY DEVELOPMENT, CENTRE FOR (C/O FACULTY OF ENVIRONMENT)' },
-  { key: '50.', text: 'CUPE 3338', value: 'CUPE 3338' },
-  { key: '51.', text: 'DIAMOND ALUMNI CENTRE [DAC] (FORMERLY DIAMOND UNIVERSITY CLUB)', value: 'DIAMOND ALUMNI CENTRE [DAC] (FORMERLY DIAMOND UNIVERSITY CLUB)' },
-  { key: '52.', text: 'DOCUMENT SOLUTIONS (formerly REPROGRAPHICS)', value: 'DOCUMENT SOLUTIONS (formerly REPROGRAPHICS)' },
-  { key: '53.', text: 'EARTH SCIENCES, DEPARTMENT OF', value: 'EARTH SCIENCES, DEPARTMENT OF' },
-  { key: '54.', text: 'ECONOMICS, DEPARTMENT OF', value: 'ECONOMICS, DEPARTMENT OF' },
-  { key: '55.', text: 'EDUCATION, FACULTY OF', value: 'EDUCATION, FACULTY OF' },
-  { key: '56.', text: 'ENGINEERING SCIENCE, SCHOOL OF', value: 'ENGINEERING SCIENCE, SCHOOL OF' },
-  { key: '57.', text: 'ENGLISH, DEPARTMENT OF', value: 'ENGLISH, DEPARTMENT OF' },
-  { key: '58.', text: 'ENVIRONMENT, FACULTY OF', value: 'ENVIRONMENT, FACULTY OF' },
-  { key: '59.', text: 'ENVIRONMENTAL HEALTH & SAFETY (AKA OCCUPATIONAL HEALTH & SAFETY OFFICE)', value: 'ENVIRONMENTAL HEALTH & SAFETY (AKA OCCUPATIONAL HEALTH & SAFETY OFFICE)' },
-  { key: '60.', text: 'EXCELLENCE: IMMIGRATION, CENTRE FOR', value: 'EXCELLENCE: IMMIGRATION, CENTRE FOR' },
-  { key: '61.', text: 'EXPERIMENMTAL & CONSTRUCTIVE MATHEMATICS, CENTRE OF (CECM)', value: 'EXPERIMENMTAL & CONSTRUCTIVE MATHEMATICS, CENTRE OF (CECM)' },
-  { key: '62.', text: 'FACILITIES SERVICES - ADMINISTRATION', value: 'FACILITIES SERVICES - ADMINISTRATION' },
-  { key: '63.', text: 'FACILITIES SERVICES - Building & grounds', value: 'FACILITIES SERVICES - Building & grounds' },
-  { key: '64.', text: 'FACILITIES SERVICES - CENTRAL STORES/RECEIVING', value: 'FACILITIES SERVICES - CENTRAL STORES/RECEIVING' },
-  { key: '65.', text: 'FACILITIES SERVICES - DEVELOPMENT', value: 'FACILITIES SERVICES - DEVELOPMENT' },
-  { key: '66.', text: 'FACILITIES SERVICES - ELECTRICAL', value: 'FACILITIES SERVICES - ELECTRICAL' },
-  { key: '67.', text: 'FACILITIES SERVICES - Mechanical Services', value: 'FACILITIES SERVICES - Mechanical Services' },
-  { key: '68.', text: 'FACILITIES SERVICES - OPERATIONS', value: 'FACILITIES SERVICES - OPERATIONS' },
-  { key: '69.', text: 'FACILITIES SERVICES - UNKNOWN', value: 'FACILITIES SERVICES - UNKNOWN' },
-  { key: '70.', text: 'FACULTY ASSOCIATION', value: 'FACULTY ASSOCIATION' },
-  { key: '71.', text: 'FEMINIST INSTITUTE FOR STUDENTS ON LAW AND SOCIETY', value: 'FEMINIST INSTITUTE FOR STUDENTS ON LAW AND SOCIETY' },
-  { key: '72.', text: 'FINANCIAL SERVICES', value: 'FINANCIAL SERVICES' },
-  { key: '73.', text: 'FIRST NATIONS STUDENT CENTRE (STUDENT SERVICES - INDIGENOUS STUDENT CENTRE)', value: 'FIRST NATIONS STUDENT CENTRE (STUDENT SERVICES - INDIGENOUS STUDENT CENTRE)' },
-  { key: '74.', text: 'FIRST NATIONS STUDIES', value: 'FIRST NATIONS STUDIES' },
-  { key: '75.', text: 'FRASER INTERNATIONAL COLLEGE (FIC)', value: 'FRASER INTERNATIONAL COLLEGE (FIC)' },
-  { key: '76.', text: 'FRENCH, DEPARTMENT OF', value: 'FRENCH, DEPARTMENT OF' },
-  { key: '77.', text: 'GENDER, SEXUALITY, AND WOMEN"S STUDIES, DEPARTMENT OF (GSWS)', value: 'GENDER, SEXUALITY, AND WOMEN"S STUDIES, DEPARTMENT OF (GSWS)' },
-  { key: '78.', text: 'GEOGRAPHY, DEPARTMENT OF', value: 'GEOGRAPHY, DEPARTMENT OF' },
-  { key: '79.', text: 'GRADUATE STUDIES, DEAN OF', value: 'GRADUATE STUDIES, DEAN OF' },
-  { key: '80.', text: 'HEALTH SCIENCES, FACULTY OF', value: 'HEALTH SCIENCES, FACULTY OF' },
-  { key: '81.', text: 'HELLENIC STUDIES', value: 'HELLENIC STUDIES' },
-  { key: '82.', text: 'HISTORY, DEPARTMENT OF', value: 'HISTORY, DEPARTMENT OF' },
-  { key: '83.', text: 'HUMAN RESOURCES', value: 'HUMAN RESOURCES' },
-  { key: '84.', text: 'HUMAN RIGHTS OFFICE', value: 'HUMAN RIGHTS OFFICE' },
-  { key: '85.', text: 'HUMANITIES, DEPARTMENT OF', value: 'HUMANITIES, DEPARTMENT OF' },
-  { key: '86.', text: 'HUMANITIES, INSTITUTE FOR THE', value: 'HUMANITIES, INSTITUTE FOR THE' },
-  { key: '87.', text: 'I.E.S.S. (INTERNATIONAL & EXCHANGE STUDENT SERVICES)', value: 'I.E.S.S. (INTERNATIONAL & EXCHANGE STUDENT SERVICES)' },
-  { key: '88.', text: 'IELTS TEST CENTRE', value: 'IELTS TEST CENTRE' },
-  { key: '89.', text: 'INFORMATION CHILDREN', value: 'INFORMATION CHILDREN' },
-  { key: '90.', text: 'INNOVATION OFFICE', value: 'INNOVATION OFFICE' },
-  { key: '91.', text: 'INSTITUTE FOR HEALTH RESEARCH & EDUCATION (IHRE) - PART OF HEALTH SCIENCES, FACULTY OF', value: 'INSTITUTE FOR HEALTH RESEARCH & EDUCATION (IHRE) - PART OF HEALTH SCIENCES, FACULTY OF' },
-  { key: '92.', text: 'INSTITUTIONAL RESEARCH & PLANNING (ANALYTICAL STUDIES)', value: 'INSTITUTIONAL RESEARCH & PLANNING (ANALYTICAL STUDIES)' },
-  { key: '93.', text: 'INTERFAITH/CHAP;AOMCY CENTRE (STUDENT SERVICES)', value: 'INTERFAITH/CHAP;AOMCY CENTRE (STUDENT SERVICES)' },
-  { key: '94.', text: 'INTERNAL AUDITOR', value: 'INTERNAL AUDITOR' },
-  { key: '95.', text: 'INTERNATIONAL STUDIES & LATIN AMERICAN STUDIES, SCHOOL FOR', value: 'INTERNATIONAL STUDIES & LATIN AMERICAN STUDIES, SCHOOL FOR' },
-  { key: '96.', text: 'IRMACS (INTERDISCIPLINARY RESEARCH IN THE MATHEMATICAL AND COMPUTATIONAL SCIENCE CENTRE)', value: 'IRMACS (INTERDISCIPLINARY RESEARCH IN THE MATHEMATICAL AND COMPUTATIONAL SCIENCE CENTRE)' },
-  { key: '97.', text: 'IT SERVICES', value: 'IT SERVICES' },
-  { key: '98.', text: 'IT SERVICES - A&T (Applications & Technology), ES (Enterprise Systems [includes SIMS]), PMO (Project Management Office)',
-  				value: 'IT SERVICES - A&T (Applications & Technology), ES (Enterprise Systems [includes SIMS]), PMO (Project Management Office)' },
-  { key: '99.', text: 'IT SERVICES - CARS (CLIENT AND RESEARCH SERVICES)', value: 'IT SERVICES - CARS (CLIENT AND RESEARCH SERVICES)' },
-  { key: '100.', text: 'IT SERVICES - CTA (CLASSROOM TECHNOLOGY & AUDIO VISUAL SERVICES)', value: 'IT SERVICES - CTA (CLASSROOM TECHNOLOGY & AUDIO VISUAL SERVICES)' },
-  { key: '101.', text: 'IT SERVICES - ICAT (INSTITUTIONAL, COLLABORATION AND AACADEMICCHNOLOGIES)', value: 'IT SERVICES - ICAT (INSTITUTIONAL, COLLABORATION AND AACADEMICCHNOLOGIES)' },
-  { key: '102.', text: 'IT SERVICES - ITI (INFORMATION TECHNOLOGY INFRASTRUCTURE)', value: 'IT SERVICES - ITI (INFORMATION TECHNOLOGY INFRASTRUCTURE)' },
-  { key: '103.', text: 'IT SERVICES - Network Services (NS)', value: 'IT SERVICES - Network Services (NS)' },
-  { key: '104.', text: 'IT SERVICES - PMO IT Major Projects', value: 'IT SERVICES - PMO IT Major Projects' },
-  { key: '105.', text: 'LANGUAGE LEARNING INSTITUTE', value: 'LANGUAGE LEARNING INSTITUTE' },
-  { key: '106.', text: 'LATIN AMERICAN STUDIES', value: 'LATIN AMERICAN STUDIES' },
-  { key: '107.', text: 'LET"S TALK SCIENCE PARTNERSHIP PROGRAM', value: 'LET"S TALK SCIENCE PARTNERSHIP PROGRAM' },
-  { key: '108.', text: 'LIBRARY, W.A.C. BENNETT', value: 'LIBRARY, W.A.C. BENNETT' },
-  { key: '109.', text: 'LIFELONG LEARNING (includes CODE-DISTANCEEDUCATION, CENTRE FOR and 7FM-7th Floor Media) [FORMERLY CONTINUING STUDIES]',
-  				 value: 'LIFELONG LEARNING (includes CODE-DISTANCEEDUCATION, CENTRE FOR and 7FM-7th Floor Media) [FORMERLY CONTINUING STUDIES]' },
-  { key: '110.', text: 'LINGUISTICS', value: 'LINGUISTICS' },
-  { key: '111.', text: 'MAJOR PROJECTS OFFICE (FORMERLY RECEARCH RESOURCE GROUP)', value: 'MAJOR PROJECTS OFFICE (FORMERLY RECEARCH RESOURCE GROUP' },
-  { key: '112.', text: 'MATHEMATICS, DEPARTMENT OF', value: 'MATHEMATICS, DEPARTMENT OF' },
-  { key: '113.', text: 'MBC (STUDENT SERVICES)', value: 'MBC (STUDENT SERVICES' },
-  { key: '114.', text: 'MedChem, CDRD (The Centre for Drug Research and Development) - Lease in Discovery 1', value: 'MedChem, CDRD (The Centre for Drug Research and Development) - Lease in Discovery 1' },
-  { key: '115.', text: 'MEETING, EVENT, AND CONFERENCE SERVICES (MECS)', value: 'MEETING, EVENT, AND CONFERENCE SERVICES (MECS)' },
-  { key: '116.', text: 'MOLECULAR BIOLOGY & BIOCHEMISTRY, DEPARTMENT OF (MBB)', value: 'MOLECULAR BIOLOGY & BIOCHEMISTRY, DEPARTMENT OF (MBB)' },
-  { key: '117.', text: 'OMBUDSPERSON, OFFICE OF THE', value: 'OMBUDSPERSON, OFFICE OF THE' },
-  { key: '118.', text: 'OUT ON CAMPUS', value: 'OUT ON CAMPUS' },
-  { key: '119.', text: 'PACIFIC INSTITUTE FOR THE MATHEMATICAL SCIENCES [PIMS/MITACS]', value: 'PACIFIC INSTITUTE FOR THE MATHEMATICAL SCIENCES [PIMS/MITACS]' },
-  { key: '120.', text: 'PARKING SERVICES', value: 'PARKING SERVICES' },
-  { key: '121.', text: 'PAYROLL', value: 'PAYROLL' },
-  { key: '122.', text: 'PEAK PUBLICATIONS SOCIETY', value: 'PEAK PUBLICATIONS SOCIETY' },
-  { key: '123.', text: 'PHIOSOPHY', value: 'PHIOSOPHY' },
-  { key: '124.', text: 'PHYSICS', value: 'PHYSICS' },
-  { key: '125.', text: 'POLITICAL SCIENCE', value: 'POLITICAL SCIENCE' },
-  { key: '126.', text: 'PRAXOS CEMTRE FOR SCREEMWROTERS', value: 'PRAXOS CEMTRE FOR SCREEMWROTERS' },
-  { key: '127.', text: 'PRESIDENT"S OFFICE', value: 'PRESIDENT"S OFFICE' },
-  { key: '128.', text: 'PSYCHOLOGY', value: 'PSYCHOLOGY' },
-  { key: '129.', text: 'PSYCHOLOGY - CLINICAL PSYCHOLOGY CENTRE', value: 'PSYCHOLOGY - CLINICAL PSYCHOLOGY CENTRE' },
-  { key: '130.', text: 'PUBLIC AFFAIRS & MEDIA RELATIONS (FORMERLY MEDIA & PUBLIC RELATIONS)', value: 'PUBLIC AFFAIRS & MEDIA RELATIONS (FORMERLY MEDIA & PUBLIC RELATIONS)' },
-  { key: '131.', text: 'RADIATION SAFETY OFFICE', value: 'RADIATION SAFETY OFFICE' },
-  { key: '132.', text: 'RECREATIONAL SERVICES & ATHLETICES', value: 'RECREATIONAL SERVICES & ATHLETICES' },
-  { key: '133.', text: 'REM - Unknown - TASC 2', value: 'REM - Unknown - TASC 2' },
-  { key: '134.', text: 'REM (FOR TASC II rooms 7410 & 7420)', value: 'REM (FOR TASC II rooms 7410 & 7420)' },
-  { key: '135.', text: 'REM (RESOURCE & ENVIRONMENTAL MANAGEMENT, SCHOOL OF)', value: 'REM (RESOURCE & ENVIRONMENTAL MANAGEMENT, SCHOOL OF)' },
-  { key: '136.', text: 'RESIDENCE & HOUSING (part of STUDENT SERVICES)', value: 'RESIDENCE & HOUSING (part of STUDENT SERVICES)' },
-  { key: '137.', text: 'RIIM - CENTRE FOR EXCELLENCE/IMMIGRATION', value: 'RIIM - CENTRE FOR EXCELLENCE/IMMIGRATION' },
-  { key: '138.', text: 'S.F.P.I.R.G. (SIMON FRASER PUBLIC INTEREST RESEARCH GROUP)', value: 'S.F.P.I.R.G. (SIMON FRASER PUBLIC INTEREST RESEARCH GROUP)' },
-  { key: '139.', text: 'S.F.S.S. (SIMON FRASER STUDENT SOCIETY)', value: 'S.F.S.S. (SIMON FRASER STUDENT SOCIETY)' },
-  { key: '140.', text: 'SAFETY AND RISK SERVICES [SRS]', value: 'SAFETY AND RISK SERVICES [SRS]' },
-  { key: '141.', text: 'SCIENCE ALIVE', value: 'SCIENCE ALIVE' },
-  { key: '142.', text: 'SCIENCE STORES', value: 'SCIENCE STORES' },
-  { key: '143.', text: 'SCIENCE TECHNICAL CENTRE', value: 'SCIENCE TECHNICAL CENTRE' },
-  { key: '144.', text: 'SCIENCE, DEAN OF', value: 'SCIENCE, DEAN OF' },
-  { key: '145.', text: 'SFU COMMUNITY CORPORATION', value: 'SFU COMMUNITY CORPORATION' },
-  { key: '146.', text: 'SFU Dining Services (Chartwells Canada)', value: 'SFU Dining Services (Chartwells Canada)' },
-  { key: '148.', text: 'SFU THEATRE OFFICES', value: 'SFU THEATRE OFFICES' },
-  { key: '149.', text: 'SOCIOLOGY & ANTHROPOLOGY', value: 'SOCIOLOGY & ANTHROPOLOGY' },
-  { key: '150.', text: 'STATISTICS AND ACTURAIAL SCIENCE', value: 'STATISTICS AND ACTURAIAL SCIENCE' },
-  { key: '151.', text: 'STUDENT DEVELOPMENT', value: 'STUDENT DEVELOPMENT' },
-  { key: '152.', text: 'STUDENT SERVICES - MBC (formerly CAMPUS COMMUNITY SERVICES)', value: 'STUDENT SERVICES - MBC (formerly CAMPUS COMMUNITY SERVICES)' },
-  { key: '153.', text: 'T.S.S.U. (TEACHING SUPPORT STAFF UNION)', value: 'T.S.S.U. (TEACHING SUPPORT STAFF UNION)' },
-  { key: '154.', text: 'TEACHING AND LEARNING CENTRE [TLC] (FORMERLY LEARNING AND INSTRUCTIONAL DEVELOPMENT CENTRE [LIDC])',
-  				 value: 'TEACHING AND LEARNING CENTRE [TLC] (FORMERLY LEARNING AND INSTRUCTIONAL DEVELOPMENT CENTRE [LIDC])' },
-  { key: '155.', text: 'TERRY FOR HUMANITARIAN AWARDS PROGRAM', value: 'TERRY FOR HUMANITARIAN AWARDS PROGRAM' },
-  { key: '156.', text: 'THE GRADUATE STUDENT SOCIETY', value: 'THE GRADUATE STUDENT SOCIETY' },
-  { key: '157.', text: 'TOURISM POLICY AND RESEARCH, CENTRE FOR (CTPR)', value: 'TOURISM POLICY AND RESEARCH, CENTRE FOR (CTPR)' },
-  { key: '158.', text: 'VICE-PRESIDENT, ACADEMIC', value: 'VICE-PRESIDENT, ACADEMIC' },
-  { key: '159.', text: 'Vice-President, External Relations - SFU International [Strand Hall only]', value: 'Vice-President, External Relations - SFU International [Strand Hall only]' },
-  { key: '160.', text: 'VICE-PRESIDENT, EXTERNAL RELATIONS (& Government Relations)', value: 'VICE-PRESIDENT, EXTERNAL RELATIONS (& Government Relations)' },
-  { key: '161.', text: 'VICE-PRESIDENT, FINANCE & ADMINISTRATION', value: 'VICE-PRESIDENT, FINANCE & ADMINISTRATION' },
-  { key: '162.', text: 'VICE-PRESIDENT, LEGAL AFFAIRS', value: 'VICE-PRESIDENT, LEGAL AFFAIRS' },
-  { key: '163.', text: 'Vice-President, Research - OFFICE OF RESEARCH ETHICS (formerly ETHICS POLICY ADMIN)', value: 'Vice-President, Research - OFFICE OF RESEARCH ETHICS (formerly ETHICS POLICY ADMIN)' },
-  { key: '164.', text: 'VICE-PRESIDENT, RESEARCH (INCLUDES UNIVERSITY/INDUSTRY LIAISON OFFICE)', value: 'VICE-PRESIDENT, RESEARCH (INCLUDES UNIVERSITY/INDUSTRY LIAISON OFFICE)' },
-  { key: '165.', text: 'WEST COAST LINE', value: 'WEST COAST LINE' },
-  { key: '166.', text: 'WILDLIFE ECOLOGY (CWE), CENTRE FOR', value: 'WILDLIFE ECOLOGY (CWE), CENTRE FOR' },
-  { key: '167.', text: 'WOMEN"S CENTRE', value: 'WOMEN"S CENTRE' },
-]
+const styles = {
+  customWidth: {
+    width: 600,
+  },
+};
 
 
 
@@ -395,6 +231,8 @@ class FormExampleSubcomponentControl extends Component {
 
 	handleChange = (e, { value }) => this.setState({ value })
 
+  handleChangeMenu = (event, index, value) => this.setState({value});
+
 	FormExampleSuccess = () => (
 	  <Form success>
 	    <Form.Input label='Email' placeholder='joe@schmoe.com' />
@@ -426,13 +264,184 @@ class FormExampleSubcomponentControl extends Component {
                     onChange = {e => this.change(e)}
                     errorText={this.state.dateError}/>
 	          		</Form.Field>
+
 	          		<Form.Field required>
-	        			<label> Department </label>
-	          			<Form.Select
-                    name='department'
-                    options={options}
-                    placeholder='Department'
-                    onChange = {e => this.change(e)} />
+	        			  <label> Department </label>
+	          			<DropDownMenu 
+                    maxHeight={300} 
+                    value={this.state.value} 
+                    onChange={this.handleChangeMenu}
+                    style={styles.customWidth}
+                    autoWidth={true}
+
+                  >
+                    <MenuItem key={1} primaryText={'_'} value={'_' } />
+                    <MenuItem key={2} primaryText={'_4D LABS'} value={'_4D LABS' } />
+                    <MenuItem key={3} primaryText={'ABORIGINAL PEOPLES, OFFICE FOR'} value={'ABORIGINAL PEOPLES, OFFICE FOR' } />
+                    <MenuItem key={4} primaryText={'ACADEMNIC RELATIONS'} value={'ACADEMNIC RELATIONS' } />
+                    <MenuItem key={5} primaryText={'Alectos Therapeutics Inc - Leasee in Discovery 1'} value={'Alectos Therapeutics Inc - Leasee in Discovery 1' } />
+                    <MenuItem key={6} primaryText={'ALUMNI RELATIONS'} value={'ALUMNI RELATIONS' } />
+                    <MenuItem key={7} primaryText={'ANMIAL RESOURCES CENTRE'} value={'ANMIAL RESOURCES CENTRE' } />
+                    <MenuItem key={8} primaryText={'APPLIED SCIENCES, FACULTY OF (includes Dean of Applied Sciences)'} value={'APPLIED SCIENCES, FACULTY OF (includes Dean of Applied Sciences)' } />
+                    <MenuItem key={9} primaryText={'APSA - Administrative and Professional Staff Association'} value={'APSA - Administrative and Professional Staff Association' } />
+                    <MenuItem key={10} primaryText={'ARCHAEOLOGY'} value={'ARCHAEOLOGY' } />
+                    <MenuItem key={11} primaryText={'ARCHIVES & RECORDS MANAGEMENT'} value={'ARCHIVES & RECORDS MANAGEMENT' } />
+                    <MenuItem key={12} primaryText={'ART GALLERY'} value={'ART GALLERY' } />
+                    <MenuItem key={13} primaryText={'ARTS & SOCIAL SCIENCES, FACULTY OF (FASS) / DEAB OF (DOA FASS)'} value={'ARTS & SOCIAL SCIENCES, FACULTY OF (FASS) / DEAB OF (DOA FASS)' } />
+                    <MenuItem key={14} primaryText={'ASIS-CANADA PROGRAM'} value={'ASIS-CANADA PROGRAM' } />
+                    <MenuItem key={15} primaryText={'BCNET'} value={'BCNET' } />
+                    <MenuItem key={16} primaryText={'BEEDIE SCHOOL OF BUSINESS (BUSINESS ADMINISTRATION, FACULTY OF )'} value={'BEEDIE SCHOOL OF BUSINESS (BUSINESS ADMINISTRATION, FACULTY OF )' } />
+                    <MenuItem key={17} primaryText={'BEST'} value={'BEST' } />
+                    <MenuItem key={18} primaryText={'BIOLOGICAL SCIENCES, DEPARTMENT OF'} value={'BIOLOGICAL SCIENCES, DEPARTMENT OF' } />
+                    <MenuItem key={19} primaryText={'BIOMEDICAL PHYSIOLOGY AND KINESIOLOGY'} value={'BIOMEDICAL PHYSIOLOGY AND KINESIOLOGY' } />
+                    <MenuItem key={20} primaryText={'BOARD OF GOVERNORS'} value={'BOARD OF GOVERNORS' } />
+                    <MenuItem key={21} primaryText={'BOOKSTORE'} value={'BOOKSTORE' } />
+                    <MenuItem key={22} primaryText={'BUREAU DES AFFAIRES FRANCOPHONES ET FRANCOPHILES (BAFF)'} value={'BUREAU DES AFFAIRES FRANCOPHONES ET FRANCOPHILES (BAFF)' } />
+                    <MenuItem key={23} primaryText={'CAMPUS PLANNING & DEVELOPMENT'} value={'CAMPUS PLANNING & DEVELOPMENT' } />
+                    <MenuItem key={24} primaryText={'CAMPUS SECURITY'} value={'CAMPUS SECURITY' } />
+                    <MenuItem key={25} primaryText={'CANADIAN STUDIES, CENTRE FOR'} value={'CANADIAN STUDIES, CENTRE FOR' } />
+                    <MenuItem key={26} primaryText={'CANADIAN URBAN RESEARCH STUDIES, INSTITUTE FOR'} value={'CANADIAN URBAN RESEARCH STUDIES, INSTITUTE FOR' } />
+                    <MenuItem key={27} primaryText={'CEREMONIES & EVENTS OFFICE'} value={'CEREMONIES & EVENTS OFFICE' } />
+                    <MenuItem key={28} primaryText={'CHEMISTRY, DEPARTMENT OF'} value={'CHEMISTRY, DEPARTMENT OF' } />
+                    <MenuItem key={29} primaryText={'CHILDCARE CENTRE'} value={'CHILDCARE CENTRE' } />
+                    <MenuItem key={30} primaryText={'CJSF RADIO'} value={'CJSF RADIO' } />
+                    <MenuItem key={31} primaryText={'COASTAL STUDIES, CENTRE FOR'} value={'COASTAL STUDIES, CENTRE FOR' } />
+                    <MenuItem key={32} primaryText={'COGNITIVE SCIENCE PROGRAM'} value={'COGNITIVE SCIENCE PROGRAM' } />
+                    <MenuItem key={33} primaryText={'COMMUNICATION, SCHOOL OF'} value={'COMMUNICATION, SCHOOL OF' } />
+                    <MenuItem key={34} primaryText={'COMPUTING SCIENCE, SCHOOL OF'} value={'COMPUTING SCIENCE, SCHOOL OF' } />
+                    <MenuItem key={35} primaryText={'CO-OP - ARTS & SOCIAL SCIENCES (INCLUDES EDUCATION)'} value={'CO-OP - ARTS & SOCIAL SCIENCES (INCLUDES EDUCATION)' } />
+                    <MenuItem key={36} primaryText={'CO-OP - BEEDIE SCHOOL OF BUSINESS (BUSINESS ADMINISTRATION)'} value={'CO-OP - BEEDIE SCHOOL OF BUSINESS (BUSINESS ADMINISTRATION)' } />
+                    <MenuItem key={37} primaryText={'CO-OP - Biomedical, Physiology & Kinesiology'} value={'CO-OP - Biomedical, Physiology & Kinesiology' } />
+                    <MenuItem key={38} primaryText={'CO-OP - BUSINESS PROGRAM'} value={'CO-OP - BUSINESS PROGRAM' } />
+                    <MenuItem key={39} primaryText={'CO-OP - COMMUNICATION PROGRAM'} value={'CO-OP - COMMUNICATION PROGRAM' } />
+                    <MenuItem key={40} primaryText={'CO-OP - COMPUTING SCIENCE'} value={'CO-OP - COMPUTING SCIENCE' } />
+                    <MenuItem key={41} primaryText={'CO-OP - ENGINEERING SCIENCE'} value={'CO-OP - ENGINEERING SCIENCE' } />
+                    <MenuItem key={42} primaryText={'CO-OP - Environment'} value={'CO-OP - Environment' } />
+                    <MenuItem key={43} primaryText={'CO-OP - Health Sciences'} value={'CO-OP - Health Sciences' } />
+                    <MenuItem key={44} primaryText={'CO-OP - SCIENCE AND ENVIRONMENT'} value={'CO-OP - SCIENCE AND ENVIRONMENT' } />
+                    <MenuItem key={45} primaryText={'CO-OP - SCIENCE PROGRAM'} value={'CO-OP - SCIENCE PROGRAM' } />
+                    <MenuItem key={46} primaryText={'CO-OP - EDUCATION (MBC - STUDENT SERVICES - WORK INTEGRATED LEARNING)'} value={'CO-OP - EDUCATION (MBC - STUDENT SERVICES - WORK INTEGRATED LEARNING)' } />
+                    <MenuItem key={47} primaryText={'CRIMINOLOGY RESEARCH CENTRE'} value={'CRIMINOLOGY RESEARCH CENTRE' } />
+                    <MenuItem key={48} primaryText={'CRIMINOLOGY, DEPARTMENT OF'} value={'CRIMINOLOGY, DEPARTMENT OF' } />
+                    <MenuItem key={49} primaryText={'CSCD - SUSTAINABLE COMMUNITY DEVELOPMENT, CENTRE FOR (C/O FACULTY OF ENVIRONMENT)'} value={'CSCD - SUSTAINABLE COMMUNITY DEVELOPMENT, CENTRE FOR (C/O FACULTY OF ENVIRONMENT)' } />
+                    <MenuItem key={50} primaryText={'CUPE 3338'} value={'CUPE 3338' } />
+                    <MenuItem key={51} primaryText={'DIAMOND ALUMNI CENTRE [DAC] (FORMERLY DIAMOND UNIVERSITY CLUB)'} value={'DIAMOND ALUMNI CENTRE [DAC] (FORMERLY DIAMOND UNIVERSITY CLUB)' } />
+                    <MenuItem key={52} primaryText={'DOCUMENT SOLUTIONS (formerly REPROGRAPHICS)'} value={'DOCUMENT SOLUTIONS (formerly REPROGRAPHICS)' } />
+                    <MenuItem key={53} primaryText={'EARTH SCIENCES, DEPARTMENT OF'} value={'EARTH SCIENCES, DEPARTMENT OF' } />
+                    <MenuItem key={54} primaryText={'ECONOMICS, DEPARTMENT OF'} value={'ECONOMICS, DEPARTMENT OF' } />
+                    <MenuItem key={55} primaryText={'EDUCATION, FACULTY OF'} value={'EDUCATION, FACULTY OF' } />
+                    <MenuItem key={56} primaryText={'ENGINEERING SCIENCE, SCHOOL OF'} value={'ENGINEERING SCIENCE, SCHOOL OF' } />
+                    <MenuItem key={57} primaryText={'ENGLISH, DEPARTMENT OF'} value={'ENGLISH, DEPARTMENT OF' } />
+                    <MenuItem key={58} primaryText={'ENVIRONMENT, FACULTY OF'} value={'ENVIRONMENT, FACULTY OF' } />
+                    <MenuItem key={59} primaryText={'ENVIRONMENTAL HEALTH & SAFETY (AKA OCCUPATIONAL HEALTH & SAFETY OFFICE)'} value={'ENVIRONMENTAL HEALTH & SAFETY (AKA OCCUPATIONAL HEALTH & SAFETY OFFICE)' } />
+                    <MenuItem key={60} primaryText={'EXCELLENCE: IMMIGRATION, CENTRE FOR'} value={'EXCELLENCE: IMMIGRATION, CENTRE FOR' } />
+                    <MenuItem key={61} primaryText={'EXPERIMENMTAL & CONSTRUCTIVE MATHEMATICS, CENTRE OF (CECM)'} value={'EXPERIMENMTAL & CONSTRUCTIVE MATHEMATICS, CENTRE OF (CECM)' } />
+                    <MenuItem key={62} primaryText={'FACILITIES SERVICES - ADMINISTRATION'} value={'FACILITIES SERVICES - ADMINISTRATION' } />
+                    <MenuItem key={63} primaryText={'FACILITIES SERVICES - Building & grounds'} value={'FACILITIES SERVICES - Building & grounds' } />
+                    <MenuItem key={64} primaryText={'FACILITIES SERVICES - CENTRAL STORES/RECEIVING'} value={'FACILITIES SERVICES - CENTRAL STORES/RECEIVING' } />
+                    <MenuItem key={65} primaryText={'FACILITIES SERVICES - DEVELOPMENT'} value={'FACILITIES SERVICES - DEVELOPMENT' } />
+                    <MenuItem key={66} primaryText={'FACILITIES SERVICES - ELECTRICAL'} value={'FACILITIES SERVICES - ELECTRICAL' } />
+                    <MenuItem key={67} primaryText={'FACILITIES SERVICES - Mechanical Services'} value={'FACILITIES SERVICES - Mechanical Services' } />
+                    <MenuItem key={68} primaryText={'FACILITIES SERVICES - OPERATIONS'} value={'FACILITIES SERVICES - OPERATIONS' } />
+                    <MenuItem key={69} primaryText={'FACILITIES SERVICES - UNKNOWN'} value={'FACILITIES SERVICES - UNKNOWN' } />
+                    <MenuItem key={70} primaryText={'FACULTY ASSOCIATION'} value={'FACULTY ASSOCIATION' } />
+                    <MenuItem key={71} primaryText={'FEMINIST INSTITUTE FOR STUDENTS ON LAW AND SOCIETY'} value={'FEMINIST INSTITUTE FOR STUDENTS ON LAW AND SOCIETY' } />
+                    <MenuItem key={72} primaryText={'FINANCIAL SERVICES'} value={'FINANCIAL SERVICES' } />
+                    <MenuItem key={73} primaryText={'FIRST NATIONS STUDENT CENTRE (STUDENT SERVICES - INDIGENOUS STUDENT CENTRE)'} value={'FIRST NATIONS STUDENT CENTRE (STUDENT SERVICES - INDIGENOUS STUDENT CENTRE)' } />
+                    <MenuItem key={74} primaryText={'FIRST NATIONS STUDIES'} value={'FIRST NATIONS STUDIES' } />
+                    <MenuItem key={75} primaryText={'FRASER INTERNATIONAL COLLEGE (FIC)'} value={'FRASER INTERNATIONAL COLLEGE (FIC)' } />
+                    <MenuItem key={76} primaryText={'FRENCH, DEPARTMENT OF'} value={'FRENCH, DEPARTMENT OF' } />
+                    <MenuItem key={77} primaryText={'GENDER, SEXUALITY, AND WOMEN"S STUDIES, DEPARTMENT OF (GSWS)'} value={'GENDER, SEXUALITY, AND WOMEN"S STUDIES, DEPARTMENT OF (GSWS)' } />
+                    <MenuItem key={78} primaryText={'GEOGRAPHY, DEPARTMENT OF'} value={'GEOGRAPHY, DEPARTMENT OF' } />
+                    <MenuItem key={79} primaryText={'GRADUATE STUDIES, DEAN OF'} value={'GRADUATE STUDIES, DEAN OF' } />
+                    <MenuItem key={80} primaryText={'HEALTH SCIENCES, FACULTY OF'} value={'HEALTH SCIENCES, FACULTY OF' } />
+                    <MenuItem key={81} primaryText={'HELLENIC STUDIES'} value={'HELLENIC STUDIES' } />
+                    <MenuItem key={82} primaryText={'HISTORY, DEPARTMENT OF'} value={'HISTORY, DEPARTMENT OF' } />
+                    <MenuItem key={83} primaryText={'HUMAN RESOURCES'} value={'HUMAN RESOURCES' } />
+                    <MenuItem key={84} primaryText={'HUMAN RIGHTS OFFICE'} value={'HUMAN RIGHTS OFFICE' } />
+                    <MenuItem key={85} primaryText={'HUMANITIES, DEPARTMENT OF'} value={'HUMANITIES, DEPARTMENT OF' } />
+                    <MenuItem key={86} primaryText={'HUMANITIES, INSTITUTE FOR THE'} value={'HUMANITIES, INSTITUTE FOR THE' } />
+                    <MenuItem key={87} primaryText={'I.E.S.S. (INTERNATIONAL & EXCHANGE STUDENT SERVICES)'} value={'I.E.S.S. (INTERNATIONAL & EXCHANGE STUDENT SERVICES)' } />
+                    <MenuItem key={88} primaryText={'IELTS TEST CENTRE'} value={'IELTS TEST CENTRE' } />
+                    <MenuItem key={89} primaryText={'INFORMATION CHILDREN'} value={'INFORMATION CHILDREN' } />
+                    <MenuItem key={90} primaryText={'INNOVATION OFFICE'} value={'INNOVATION OFFICE' } />
+                    <MenuItem key={91} primaryText={'INSTITUTE FOR HEALTH RESEARCH & EDUCATION (IHRE) - PART OF HEALTH SCIENCES, FACULTY OF'} value={'INSTITUTE FOR HEALTH RESEARCH & EDUCATION (IHRE) - PART OF HEALTH SCIENCES, FACULTY OF' } />
+                    <MenuItem key={92} primaryText={'INSTITUTIONAL RESEARCH & PLANNING (ANALYTICAL STUDIES)'} value={'INSTITUTIONAL RESEARCH & PLANNING (ANALYTICAL STUDIES)' } />
+                    <MenuItem key={93} primaryText={'INTERFAITH/CHAP;AOMCY CENTRE (STUDENT SERVICES)'} value={'INTERFAITH/CHAP;AOMCY CENTRE (STUDENT SERVICES)' } />
+                    <MenuItem key={94} primaryText={'INTERNAL AUDITOR'} value={'INTERNAL AUDITOR' } />
+                    <MenuItem key={95} primaryText={'INTERNATIONAL STUDIES & LATIN AMERICAN STUDIES, SCHOOL FOR'} value={'INTERNATIONAL STUDIES & LATIN AMERICAN STUDIES, SCHOOL FOR' } />
+                    <MenuItem key={96} primaryText={'IRMACS (INTERDISCIPLINARY RESEARCH IN THE MATHEMATICAL AND COMPUTATIONAL SCIENCE CENTRE)'} value={'IRMACS (INTERDISCIPLINARY RESEARCH IN THE MATHEMATICAL AND COMPUTATIONAL SCIENCE CENTRE)' } />
+                    <MenuItem key={97} primaryText={'IT SERVICES'} value={'IT SERVICES' } />
+                    <MenuItem key={98} primaryText={'IT SERVICES - A&T (Applications & Technology), ES (Enterprise Systems [includes SIMS]), PMO (Project Management Office)'} value={'IT SERVICES - A&T (Applications & Technology), ES (Enterprise Systems [includes SIMS]), PMO (Project Management Office)' } />
+                    <MenuItem key={99} primaryText={'IT SERVICES - CARS (CLIENT AND RESEARCH SERVICES)'} value={'IT SERVICES - CARS (CLIENT AND RESEARCH SERVICES)' } />
+                    <MenuItem key={100} primaryText={'IT SERVICES - CTA (CLASSROOM TECHNOLOGY & AUDIO VISUAL SERVICES)'} value={'IT SERVICES - CTA (CLASSROOM TECHNOLOGY & AUDIO VISUAL SERVICES)' } />
+                    <MenuItem key={101} primaryText={'IT SERVICES - ICAT (INSTITUTIONAL, COLLABORATION AND AACADEMICCHNOLOGIES)'} value={'IT SERVICES - ICAT (INSTITUTIONAL, COLLABORATION AND AACADEMICCHNOLOGIES)' } />
+                    <MenuItem key={102} primaryText={'IT SERVICES - ITI (INFORMATION TECHNOLOGY INFRASTRUCTURE)'} value={'IT SERVICES - ITI (INFORMATION TECHNOLOGY INFRASTRUCTURE)' } />
+                    <MenuItem key={103} primaryText={'IT SERVICES - Network Services (NS)'} value={'IT SERVICES - Network Services (NS)' } />
+                    <MenuItem key={104} primaryText={'IT SERVICES - PMO IT Major Projects'} value={'IT SERVICES - PMO IT Major Projects' } />
+                    <MenuItem key={105} primaryText={'LANGUAGE LEARNING INSTITUTE'} value={'LANGUAGE LEARNING INSTITUTE' } />
+                    <MenuItem key={106} primaryText={'LATIN AMERICAN STUDIES'} value={'LATIN AMERICAN STUDIES' } />
+                    <MenuItem key={107} primaryText={'LET"S TALK SCIENCE PARTNERSHIP PROGRAM'} value={'LET"S TALK SCIENCE PARTNERSHIP PROGRAM' } />
+                    <MenuItem key={108} primaryText={'LIBRARY, W.A.C. BENNETT'} value={'LIBRARY, W.A.C. BENNETT' } />
+                    <MenuItem key={109} primaryText={'LIFELONG LEARNING (includes CODE-DISTANCEEDUCATION, CENTRE FOR and 7FM-7th Floor Media) [FORMERLY CONTINUING STUDIES]'} value={'LIFELONG LEARNING (includes CODE-DISTANCEEDUCATION, CENTRE FOR and 7FM-7th Floor Media) [FORMERLY CONTINUING STUDIES]' } />
+                    <MenuItem key={110} primaryText={'LINGUISTICS'} value={'LINGUISTICS' } />
+                    <MenuItem key={111} primaryText={'MAJOR PROJECTS OFFICE (FORMERLY RECEARCH RESOURCE GROUP)'} value={'MAJOR PROJECTS OFFICE (FORMERLY RECEARCH RESOURCE GROUP' } />
+                    <MenuItem key={112} primaryText={'MATHEMATICS, DEPARTMENT OF'} value={'MATHEMATICS, DEPARTMENT OF' } />
+                    <MenuItem key={113} primaryText={'MBC (STUDENT SERVICES)'} value={'MBC (STUDENT SERVICES' } />
+                    <MenuItem key={114} primaryText={'MedChem, CDRD (The Centre for Drug Research and Development) - Lease in Discovery 1'} value={'MedChem, CDRD (The Centre for Drug Research and Development) - Lease in Discovery 1' } />
+                    <MenuItem key={115} primaryText={'MEETING, EVENT, AND CONFERENCE SERVICES (MECS)'} value={'MEETING, EVENT, AND CONFERENCE SERVICES (MECS)' } />
+                    <MenuItem key={116} primaryText={'MOLECULAR BIOLOGY & BIOCHEMISTRY, DEPARTMENT OF (MBB)'} value={'MOLECULAR BIOLOGY & BIOCHEMISTRY, DEPARTMENT OF (MBB)' } />
+                    <MenuItem key={117} primaryText={'OMBUDSPERSON, OFFICE OF THE'} value={'OMBUDSPERSON, OFFICE OF THE' } />
+                    <MenuItem key={118} primaryText={'OUT ON CAMPUS'} value={'OUT ON CAMPUS' } />
+                    <MenuItem key={119} primaryText={'PACIFIC INSTITUTE FOR THE MATHEMATICAL SCIENCES [PIMS/MITACS]'} value={'PACIFIC INSTITUTE FOR THE MATHEMATICAL SCIENCES [PIMS/MITACS]' } />
+                    <MenuItem key={120} primaryText={'PARKING SERVICES'} value={'PARKING SERVICES' } />
+                    <MenuItem key={121} primaryText={'PAYROLL'} value={'PAYROLL' } />
+                    <MenuItem key={122} primaryText={'PEAK PUBLICATIONS SOCIETY'} value={'PEAK PUBLICATIONS SOCIETY' } />
+                    <MenuItem key={123} primaryText={'PHIOSOPHY'} value={'PHIOSOPHY' } />
+                    <MenuItem key={124} primaryText={'PHYSICS'} value={'PHYSICS' } />
+                    <MenuItem key={125} primaryText={'POLITICAL SCIENCE'} value={'POLITICAL SCIENCE' } />
+                    <MenuItem key={126} primaryText={'PRAXOS CEMTRE FOR SCREEMWROTERS'} value={'PRAXOS CEMTRE FOR SCREEMWROTERS' } />
+                    <MenuItem key={127} primaryText={'PRESIDENT"S OFFICE'} value={'PRESIDENT"S OFFICE' } />
+                    <MenuItem key={128} primaryText={'PSYCHOLOGY'} value={'PSYCHOLOGY' } />
+                    <MenuItem key={129} primaryText={'PSYCHOLOGY - CLINICAL PSYCHOLOGY CENTRE'} value={'PSYCHOLOGY - CLINICAL PSYCHOLOGY CENTRE' } />
+                    <MenuItem key={130} primaryText={'PUBLIC AFFAIRS & MEDIA RELATIONS (FORMERLY MEDIA & PUBLIC RELATIONS)'} value={'PUBLIC AFFAIRS & MEDIA RELATIONS (FORMERLY MEDIA & PUBLIC RELATIONS)' } />
+                    <MenuItem key={131} primaryText={'RADIATION SAFETY OFFICE'} value={'RADIATION SAFETY OFFICE' } />
+                    <MenuItem key={132} primaryText={'RECREATIONAL SERVICES & ATHLETICES'} value={'RECREATIONAL SERVICES & ATHLETICES' } />
+                    <MenuItem key={133} primaryText={'REM - Unknown - TASC 2'} value={'REM - Unknown - TASC 2' } />
+                    <MenuItem key={134} primaryText={'REM (FOR TASC II rooms 7410 & 7420)'} value={'REM (FOR TASC II rooms 7410 & 7420)' } />
+                    <MenuItem key={135} primaryText={'REM (RESOURCE & ENVIRONMENTAL MANAGEMENT, SCHOOL OF)'} value={'REM (RESOURCE & ENVIRONMENTAL MANAGEMENT, SCHOOL OF)' } />
+                    <MenuItem key={136} primaryText={'RESIDENCE & HOUSING (part of STUDENT SERVICES)'} value={'RESIDENCE & HOUSING (part of STUDENT SERVICES)' } />
+                    <MenuItem key={137} primaryText={'RIIM - CENTRE FOR EXCELLENCE/IMMIGRATION'} value={'RIIM - CENTRE FOR EXCELLENCE/IMMIGRATION' } />
+                    <MenuItem key={138} primaryText={'S.F.P.I.R.G. (SIMON FRASER PUBLIC INTEREST RESEARCH GROUP)'} value={'S.F.P.I.R.G. (SIMON FRASER PUBLIC INTEREST RESEARCH GROUP)' } />
+                    <MenuItem key={139} primaryText={'S.F.S.S. (SIMON FRASER STUDENT SOCIETY)'} value={'S.F.S.S. (SIMON FRASER STUDENT SOCIETY)' } />
+                    <MenuItem key={140} primaryText={'SAFETY AND RISK SERVICES [SRS]'} value={'SAFETY AND RISK SERVICES [SRS]' } />
+                    <MenuItem key={141} primaryText={'SCIENCE ALIVE'} value={'SCIENCE ALIVE' } />
+                    <MenuItem key={142} primaryText={'SCIENCE STORES'} value={'SCIENCE STORES' } />
+                    <MenuItem key={143} primaryText={'SCIENCE TECHNICAL CENTRE'} value={'SCIENCE TECHNICAL CENTRE' } />
+                    <MenuItem key={144} primaryText={'SCIENCE, DEAN OF'} value={'SCIENCE, DEAN OF' } />
+                    <MenuItem key={145} primaryText={'SFU COMMUNITY CORPORATION'} value={'SFU COMMUNITY CORPORATION' } />
+                    <MenuItem key={146} primaryText={'SFU Dining Services (Chartwells Canada)'} value={'SFU Dining Services (Chartwells Canada)' } />
+                    <MenuItem key={148} primaryText={'SFU THEATRE OFFICES'} value={'SFU THEATRE OFFICES' } />
+                    <MenuItem key={149} primaryText={'SOCIOLOGY & ANTHROPOLOGY'} value={'SOCIOLOGY & ANTHROPOLOGY' } />
+                    <MenuItem key={150} primaryText={'STATISTICS AND ACTURAIAL SCIENCE'} value={'STATISTICS AND ACTURAIAL SCIENCE' } />
+                    <MenuItem key={151} primaryText={'STUDENT DEVELOPMENT'} value={'STUDENT DEVELOPMENT' } />
+                    <MenuItem key={152} primaryText={'STUDENT SERVICES - MBC (formerly CAMPUS COMMUNITY SERVICES)'} value={'STUDENT SERVICES - MBC (formerly CAMPUS COMMUNITY SERVICES)' } />
+                    <MenuItem key={153} primaryText={'T.S.S.U. (TEACHING SUPPORT STAFF UNION)'} value={'T.S.S.U. (TEACHING SUPPORT STAFF UNION)' } />
+                    <MenuItem key={154} primaryText={'TEACHING AND LEARNING CENTRE [TLC] (FORMERLY LEARNING AND INSTRUCTIONAL DEVELOPMENT CENTRE [LIDC])'} value={'TEACHING AND LEARNING CENTRE [TLC] (FORMERLY LEARNING AND INSTRUCTIONAL DEVELOPMENT CENTRE [LIDC])' } />
+                    <MenuItem key={155} primaryText={'TERRY FOR HUMANITARIAN AWARDS PROGRAM'} value={'TERRY FOR HUMANITARIAN AWARDS PROGRAM' } />
+                    <MenuItem key={156} primaryText={'THE GRADUATE STUDENT SOCIETY'} value={'THE GRADUATE STUDENT SOCIETY' } />
+                    <MenuItem key={157} primaryText={'TOURISM POLICY AND RESEARCH, CENTRE FOR (CTPR)'} value={'TOURISM POLICY AND RESEARCH, CENTRE FOR (CTPR)' } />
+                    <MenuItem key={158} primaryText={'VICE-PRESIDENT, ACADEMIC'} value={'VICE-PRESIDENT, ACADEMIC' } />
+                    <MenuItem key={159} primaryText={'Vice-President, External Relations - SFU International [Strand Hall only]'} value={'Vice-President, External Relations - SFU International [Strand Hall only]' } />
+                    <MenuItem key={160} primaryText={'VICE-PRESIDENT, EXTERNAL RELATIONS (& Government Relations)'} value={'VICE-PRESIDENT, EXTERNAL RELATIONS (& Government Relations)' } />
+                    <MenuItem key={161} primaryText={'VICE-PRESIDENT, FINANCE & ADMINISTRATION'} value={'VICE-PRESIDENT, FINANCE & ADMINISTRATION' } />
+                    <MenuItem key={162} primaryText={'VICE-PRESIDENT, LEGAL AFFAIRS'} value={'VICE-PRESIDENT, LEGAL AFFAIRS' } />
+                    <MenuItem key={163} primaryText={'Vice-President, Research - OFFICE OF RESEARCH ETHICS (formerly ETHICS POLICY ADMIN)'} value={'Vice-President, Research - OFFICE OF RESEARCH ETHICS (formerly ETHICS POLICY ADMIN)' } />
+                    <MenuItem key={164} primaryText={'VICE-PRESIDENT, RESEARCH (INCLUDES UNIVERSITY/INDUSTRY LIAISON OFFICE)'} value={'VICE-PRESIDENT, RESEARCH (INCLUDES UNIVERSITY/INDUSTRY LIAISON OFFICE)' } />
+                    <MenuItem key={165} primaryText={'WEST COAST LINE'} value={'WEST COAST LINE' } />
+                    <MenuItem key={166} primaryText={'WILDLIFE ECOLOGY (CWE), CENTRE FOR'} value={'WILDLIFE ECOLOGY (CWE), CENTRE FOR' } />
+                    <MenuItem key={167} primaryText={'WOMEN"S CENTRE'} value={'WOMEN"S CENTRE' } />
+                  </DropDownMenu>
 	          		</Form.Field>
 	        	</Form.Group>
 	        	<Form.Group widths='equal'>
