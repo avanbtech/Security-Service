@@ -7,9 +7,18 @@ We are using the MERN(ish) stack to complete this project, consisting of a SQL d
 The Security Service Request System is a system in which a user can fill out and send security service request.
 A security staff member can then see a list of pending requests and choose to review them. The security side of the request will be filled then by a staff member, then forwarded to the appropriate parties.
 
-## Initial setup instructions 
+## Run instructions
+- clone the project then follow the following commands
+- $ npm install //(should have node package manager installed on your machine)
+- $ mysqld //(command to run mysql server on local machine download mysql from https://dev.mysql.com/downloads/mysql/)
+- $ npm start
 
+
+## Initial setup instructions 
 The following instructions are for **Windows**. You can find a more detailed documentation (which includes other OS!) [here](https://developer.mozilla.org/en-US/docs/Learn/Server-side/Express_Nodejs/development_environment). 
+
+## Dependencies
+All dependencies should be in package.json and added to the project with npm install
 
 ### Node.js
 
@@ -119,7 +128,7 @@ Please take a look at these following tutorials if you need to brush up on your 
 
 ## Use Cases
 
-1. Create Security Service Request
+Create Security Service Request
 - User Launches web application
 - User sees main page
 - User selects option to submit a security service request form
@@ -136,7 +145,7 @@ Variation 2
 - User sends form to third party who can authenticate it
 - Third party finished form and submits it
 
-2. Review Service Request
+Review Service Request
 - Security User launches application
 - Security sees main page
 - Security logs in with credentials

@@ -61,7 +61,7 @@ const Form = Conn.define('form', {
   },
   nameOfEvent: {
     type: Sequelize.STRING,
-    allowNull: false,
+    allowNull: true,
   },
   licensed: {
     type: Sequelize.STRING,
