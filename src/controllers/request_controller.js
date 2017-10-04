@@ -50,8 +50,6 @@ function getCurrDate() {
 
 function stringBody(req) {
 
-  console.log("\n\n\nHERE\n\n\n");
-
   db.models.form.create({
     id: req.body.id,
     status: 'Processing',
@@ -64,9 +62,9 @@ function stringBody(req) {
     fax: req.body.fax,
     email: req.body.email,
     nameOfevent: 'NAME OF EVENT',      // UNABLE TO GET THE NAME OF EVENT
-    licensed: req.body.licensed,
+    licensed: req.body.licensed,      // make mandatory
     location: req.body.location,
-    numberOfattendees: 10000, //UNABLE TO RETRIEVE NUM FROM FORM USING TEMP NUMBER
+    numberOfattendees: 10000,         //UNABLE TO RETRIEVE NUM FROM FORM USING TEMP NUMBER
     eventDates: [req.body.eventDate],
     times: req.body.time,
     details: req.body.detail,
@@ -77,32 +75,6 @@ function stringBody(req) {
     authorizedDate: new Date(2012, 2,2,0,0,0,0),
     authorizedPhone: 7782415848
   });
-
-
-  // var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
-  // var request = new XMLHttpRequest();
-  // request.responseType = 'json';
-  // request.open("POST", "/graphql");
-  // request.setRequestHeader("Content-Type", "application/json");
-  // request.setRequestHeader("Accept", "application/json");
-  //
-  //
-  //
-  // var mutation_str = `'{"query": "mutation {addForm(id: ${req.body.id},
-  // status: \"${req.body.date}\", statusDate: \"2017-10-3\",
-  // sfuBCID: \"gdg\", department: \"dsfn\", date: \"2017-10-3\",
-  // requestBy: \"45353\", phone: \"34242\", fax: \"\", email: \"sankait@sfu.ca\",
-  // nameOfevent: \"dajn\", licensed: 234342, location: \"burnaby\", numberOfattendees: 2331,
-  // eventDates: \"2017-08-9;2017-09-08\", times: 2331, details: \"Fsdf\",
-  // accountCode: 3324, invoice: 32432, authorizedBy: \"Fsfds\", authorizedID: \"fsdfdsF\",
-  // authorizedDate: \"2017-10-3\", authorizedPhone: \"3r43r4f\"){id}}"}'`;
-  //
-  // request.send(mutation_str);
-  // request.onload = function () {
-  //   console.log('\n\ndata returned:', xhr.response);
-  // }
-
-  //console.log(mutation_str);
 }
 
 
