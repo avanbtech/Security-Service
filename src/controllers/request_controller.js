@@ -2,70 +2,40 @@ import db from '../core/db';
 
 var NUM = "0000";
 var YEAR = "00";
-
 function uniqueID() {
   var d = new Date();
-  var abbrevYear = d.getFullYear().toString().slice(-2);
+  var fullYear = toString(d.getFullYear()); // eg. 2017
+  var abbrevYear = fullYear.slice(-2); // eg. 17
+  checkForNewYear(abbrevYear);
+  var num = incrementNum();
 
+  var ID = abbrevYear + "-" + num;
+  return ID;
+}
+//increase the sequential number - max number is 9999
+function incrementNum() {
+  var integer = parseInt(NUM)
+  if (integer < 10000 && integer != 0) {
+    integer++;
+  }
+  integer = integer.toString();
+  while (integer.length() < 5) {
+    integer = "0" + integer;
+  }
+  NUM = integer;
+  return integer;
+}
+//check if the year has changed - if yes, reset sequential number and
+// set YEAR to the new year
+//does nothing if the year is the same as the sequential number should not be
+// reset till the year changes
+function checkForNewYear(abbrevYear) {
   var oldYear = parseInt(YEAR);
-  abbrevYear = parseInt(abbrevYear);
-
+  parseInt(abbrevYear);
   if(oldYear < abbrevYear) {
     YEAR = abbrevYear.toString();
     NUM = "0000";
   }
-  
-  return abbrevYear.toString() + "-" + IncNum();
-}
-
-// function uni_ID() {
-//   var date = new Date();
-//   var fullYear = date.getFullYear();
-
-//   return fullYear.toString().substr(2) + "-" + IncNum();
-// }
-
-// //increase the sequential number - max number is 9999
-// function incrementNum() {
-// 	var integer = parseInt(NUM);
-//
-// 	if (integer === 0) {
-// 		NUM = "0001";
-//
-// 		integer = integer.toString();
-// 		while (integer.length < 4) {
-// 		integer = "0" + integer;
-// 		}
-// 		return integer;
-// 	}
-//
-// 	if (integer < 10000) {
-// 		integer++;
-// 	}
-//
-// 	integer = integer.toString();
-// 	while (integer.length < 4) {
-// 		integer = "0" + integer;
-// 	}
-//
-// 	NUM = integer;
-// 	return integer;
-// }
-
-function IncNum() {
-  var int_num = parseInt(NUM);
-
-  if(int_num !== null && int_num < 10000) {
-    int_num += 1;
-  }
-
-  NUM = String(int_num);
-
-  while(NUM.length < 4) {
-    NUM = "0" + NUM;
-  }
-
-  return NUM;
 }
 
 function getCurrDate() {
@@ -81,8 +51,7 @@ function getCurrDate() {
 function stringBody(req) {
 
   db.models.form.create({
-
-    id: uni_ID(),
+    id: req.body.id,
     status: 'Processing',
     statusDate: getCurrDate(),
     sfuBCID: req.body.id,
@@ -106,8 +75,6 @@ function stringBody(req) {
     authorizedDate: new Date(2012, 2,2,0,0,0,0),
     authorizedPhone: 7782415848
   });
-
-  console.log(uniqueID());
 }
 
 
