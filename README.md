@@ -9,16 +9,16 @@ A security staff member can then see a list of pending requests and choose to re
 
 ## Run instructions
 - clone the project then follow the following commands
-- $npm install (should have node package manager installed on your machine)
-- $mysqld (command to run mysql server on local machine https://dev.mysql.com/downloads/mysql/)
-- $npm start
+- $ npm install //(should have node package manager installed on your machine)
+- $ mysqld //(command to run mysql server on local machine download mysql from https://dev.mysql.com/downloads/mysql/)
+- $ npm start
 
 
 ## Initial setup instructions 
 The following instructions are for **Windows**. You can find a more detailed documentation (which includes other OS!) [here](https://developer.mozilla.org/en-US/docs/Learn/Server-side/Express_Nodejs/development_environment). 
 
 ## Dependencies
-Listed below...
+All dependencies should be in package.json and added to the project with npm install
 
 ### Node.js
 
