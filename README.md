@@ -4,8 +4,8 @@ This is group Gamma's CMPT 373 Term Project.  We are developing a web applicatio
 We are using the MERN(ish) stack to complete this project, consisting of a SQL database (name to be determined?), Express (Framework for web applications), React (Front end framework - HTML/CSS etc.), and Node.js (Server side, back end framework) as the underlying frameworks.
 
 ## Project Description
-The Security Service Request System is a system in which a user can fill out and send security service request. A security staff member can then see a list of 
-pending requests and choose to review them. The security side of the request will be filled then by a staff member, then forwarded to the appropriate parties.
+The Security Service Request System is a system in which a user can fill out and send security service request.
+A security staff member can then see a list of pending requests and choose to review them. The security side of the request will be filled then by a staff member, then forwarded to the appropriate parties.
 
 ## Initial setup instructions 
 
