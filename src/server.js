@@ -3,19 +3,15 @@ import path from 'path';
 import express from 'express';
 import cookieParser from 'cookie-parser';
 import bodyParser from 'body-parser';
-import expressJwt from 'express-jwt';
 import expressGraphQL from 'express-graphql';
-import GraphHTTP from 'express-graphql';
-import jwt from 'jsonwebtoken';
 import ReactDOM from 'react-dom/server';
 import PrettyError from 'pretty-error';
 import schema from './data/schema';
 import Router from './routes';
 import assets from './assets';
-var expressValidator = require('express-validator');
-
-import graphql from 'graphql';
 import { port, auth, analytics } from './config';
+
+var expressValidator = require('express-validator');
 
 const server = global.server = express();
 
