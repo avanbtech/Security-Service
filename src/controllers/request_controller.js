@@ -18,40 +18,6 @@ function uniqueID() {
   return abbrevYear.toString() + "-" + IncNum();
 }
 
-// function uni_ID() {
-//   var date = new Date();
-//   var fullYear = date.getFullYear();
-
-//   return fullYear.toString().substr(2) + "-" + IncNum();
-// }
-
-// //increase the sequential number - max number is 9999
-// function incrementNum() {
-// 	var integer = parseInt(NUM);
-//
-// 	if (integer === 0) {
-// 		NUM = "0001";
-//
-// 		integer = integer.toString();
-// 		while (integer.length < 4) {
-// 		integer = "0" + integer;
-// 		}
-// 		return integer;
-// 	}
-//
-// 	if (integer < 10000) {
-// 		integer++;
-// 	}
-//
-// 	integer = integer.toString();
-// 	while (integer.length < 4) {
-// 		integer = "0" + integer;
-// 	}
-//
-// 	NUM = integer;
-// 	return integer;
-// }
-
 function IncNum() {
   var int_num = parseInt(NUM);
 
