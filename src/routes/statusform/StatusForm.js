@@ -1,9 +1,6 @@
 import React, { PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import s from './StatusForm.scss';
-import Link from '../../components/Link';
-import Form from '../../components/Form';
-import Main from '../../components/Main';
 
 {/*Status page to check the current status of a request that a user has submitted? URL: /status */}
 function StatusForm({ title }) {
