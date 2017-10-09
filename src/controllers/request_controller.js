@@ -35,42 +35,57 @@ function IncNum() {
 }
 
 function getCurrDate() {
-  var today = new Date();
+  const today = new Date();
 
-  var year = today.getFullYear();
-  var month = today.getMonth();
-  var day = today.getDay();
+  const year = today.getFullYear();
+  const month = today.getMonth();
+  const day = today.getDay();
 
   return year + '-' + month + '-' + day;
 }
 
+function getCommonDBID() {
+  const date = new Date();
+
+  return parseInt(String(date.getMinutes()) + String(date.getSeconds()) + String(date.getUTCMilliseconds()));
+}
+
 function stringBody(req) {
+  const commonDbID = getCommonDBID();
 
-  db.models.form.create({
-
-    id: uniqueID(),
-    status: 'Processing',
-    statusDate: getCurrDate(),
+  db.models.user.create({
+    dbID: commonDbID,
     sfuBCID: req.body.id,
     department: 'INSERT DEPARTMENT HERE',    // NO WAY TO GET THE DEPT
-    date: getCurrDate(),
     requestBy: req.body.requestBy,
     phone: req.body.phone,
     fax: req.body.fax,
     email: req.body.email,
-    nameOfEvent: req.body.nameOfEvent,      // UNABLE TO GET THE NAME OF EVENT
     licensed: req.body.licensed,      // make mandatory
-    location: req.body.location,
-    numberOfattendees: 10000,         //UNABLE TO RETRIEVE NUM FROM FORM USING TEMP NUMBER
-    eventDates: [req.body.eventDate],
-    times: req.body.time,
+  });
+
+  db.models.request.create({
+    accessID: uniqueID(),
+    dbID: commonDbID,
+    status: 'Pending',
+    statusDate: new Date(),
+    date: new Date(),
     details: req.body.detail,
     accountCode: req.body.accountCode,
     invoice: 99999,
-    authorizedBy: 'Insert Person here',
-    authorizedID: '42342fkfdsf',
-    authorizedDate: new Date(2012, 2,2,0,0,0,0),
-    authorizedPhone: 7782415848
+    authorizedBy: req.body.authorizedBy,
+    authorizedID: req.body.authorizedID,
+    authorizedDate: req.body.authorizedDate,
+    authorizedPhone: 7782415848,
+  });
+
+  db.models.event.create({
+    dbID: commonDbID,
+    nameOfEvent: req.body.nameOfEvent,      // UNABLE TO GET THE NAME OF EVENT
+    location: req.body.location,
+    numberOfattendees: req.body.numberOfAttendees, //UNABLE TO RETRIEVE NUM FROM FORM USING TEMP NUMBER
+    eventDates: [req.body.eventDate],   //TODO: CONFIRM DATES ARE JOINED BY ';'
+    times: req.body.time,
   });
 }
 
