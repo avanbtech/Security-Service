@@ -58,7 +58,7 @@ const Request = Conn.define('request', {
     type: Sequelize.STRING,
     allowNull: false,
     unique: true,
-  }
+  },
   dbID: {
     type: Sequelize.INTEGER,
     allowNull: false,
