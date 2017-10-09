@@ -14,9 +14,53 @@ const Conn = new Sequelize(
 
 
 //DB TABLE DEFINITIONS
-const Form = Conn.define('form', {
-  id: {
+const User = Conn.define('user', {
+  dbID: {
+    type: Sequelize.INTEGER,
+    allowNull: false,
+    primaryKey: true,
+  },
+  sfuBCID: {
     type: Sequelize.STRING,
+    allowNull: false,
+  },
+  department: {
+    type: Sequelize.STRING,
+    allowNull: false,
+  },
+  requestBy: {
+    type: Sequelize.STRING,
+    allowNull: false,
+  },
+  phone: {
+    type: Sequelize.STRING,
+    allowNull: false,
+  },
+  fax: {
+    type: Sequelize.STRING,
+    allowNull: true,
+  },
+  email: {
+    type: Sequelize.STRING,
+    allowNull: false,
+    validate: {
+      isEmail: true,
+    }
+  },
+  licensed: {
+    type: Sequelize.STRING,
+    allowNull: false,
+  },
+});
+
+const Request = Conn.define('request', {
+  accessID: {
+    type: Sequelize.STRING,
+    allowNull: false,
+    unique: true,
+  }
+  dbID: {
+    type: Sequelize.INTEGER,
     allowNull: false,
     primaryKey: true
   },
@@ -28,64 +72,9 @@ const Form = Conn.define('form', {
     type: Sequelize.DATE,
     allowNull: false
   },
-  sfuBCID: {
-    type: Sequelize.STRING,
-    allowNull: false
-  },
-  department: {
-    type: Sequelize.STRING,
-    allowNull: false
-  },
   date: {
     type: Sequelize.DATE,
     allowNull: false
-  },
-  requestBy: {
-    type: Sequelize.STRING,
-    allowNull: false
-  },
-  phone: {
-    type: Sequelize.STRING,
-    allowNull: false
-  },
-  fax: {
-    type: Sequelize.STRING,
-    allowNull: true
-  },
-  email: {
-    type: Sequelize.STRING,
-    allowNull: false,
-    validate: {
-      isEmail: true
-    }
-  },
-  nameOfEvent: {
-    type: Sequelize.STRING,
-    allowNull: true,
-  },
-  licensed: {
-    type: Sequelize.STRING,
-    allowNull: false,
-  },
-  location: {
-    type: Sequelize.STRING,
-    allowNull: false
-  },
-  numberOfattendees: {
-    type: Sequelize.INTEGER,
-    allowNull: false
-  },
-  eventDates: {
-    type: Sequelize.STRING,
-    allowNull: false,
-
-    set: function (val) {
-       this.setDataValue('eventDates',val.join(';'));
-    }
-  },
-  times: {
-    type: Sequelize.STRING,
-    allowNull: false,
   },
   details: {
     type: Sequelize.STRING,
@@ -117,42 +106,42 @@ const Form = Conn.define('form', {
   }
 });
 
+const Event = Conn.define('event', {
+  dbID: {
+    type: Sequelize.INTEGER,
+    allowNull: false,
+    primaryKey: true,
+  },
+  nameOfEvent: {
+    type: Sequelize.STRING,
+    allowNull: true,
+  },
+  location: {
+    type: Sequelize.STRING,
+    allowNull: true
+  },
+  numberOfattendees: {
+    type: Sequelize.INTEGER,
+    allowNull: false
+  },
+  eventDates: {
+    type: Sequelize.STRING,
+    allowNull: false,
+
+    set: function (val) {
+      this.setDataValue('eventDates',val.join(';'));
+    }
+  },
+  times: {
+    type: Sequelize.STRING,
+    allowNull: false,
+  },
+});
+
+
 //Conn.sync({ force: false});
 
-//DEMO QUERY
-
 Conn.sync({ force: true});
-
-
-// .then(() => {
-//   var datetime = new Date("2017-09-01");
-//
-//   return Form.create({
-//     id: 0,
-//     status: 'Pending',
-//     statusDate: new Date(2011, 0, 1, 0, 0, 0, 0),
-//     sfuBCID: 50505,
-//     department: 'APPSC',
-//     date: new Date(2013, 0, 1, 0, 0, 0, 0),
-//     requestBy: 'Sankait',
-//     phone: '7782417856',
-//     fax: '',
-//     email: 'sankaitk@sfu.ca',
-//     nameOfEvent: 'BOOM',
-//     licensed: 'yes',
-//     location: 'Home',
-//     numberOfattendees: 10,
-//     eventDates: [(new Date(2012, 0, 1, 0, 0, 0, 0)).toString(), (new Date(2019, 0, 1, 0, 0, 0, 0)).toString()],
-//     times: "5:45",
-//     details: 'THIS IS DETAIL',
-//     accountCode: "420",
-//     invoice: 32,
-//     authorizedBy: 'Sankait',
-//     authorizedID: '42342fkfdsf',
-//     authorizedDate: new Date(2012, 2,2,0,0,0,0),
-//     authorizedPhone: 7782415848
-//   });
-// }
 
 
 export default Conn;

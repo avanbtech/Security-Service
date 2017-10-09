@@ -11,3 +11,43 @@ curl -X POST -H "content-type: application/json" -d '{ "query": "mutation { addF
 
 
 curl -X POST -H "Content-type: application/json" -d '{"query": "mutation {addForm(id: 2322, status: \"dpproved\", statusDate: \"2017-10-3\", sfuBCID: \"gdg\", department: \"dsfn\", date: \"2017-10-3\", requestBy: \"45353\", phone: \"34242\", fax: \"\", email: \"sankait@sfu.ca\", nameOfEvent: \"dajn\", licensed: 234342, location: \"burnaby\", numberOfattendees: 2331, eventDates: \"2017-08-9;2017-09-08\", times: 2331, details: \"Fsdf\", accountCode: 3324, invoice: 32432, authorizedBy: \"Fsfds\", authorizedID: \"fsdfdsF\", authorizedDate: \"2017-10-3\", authorizedPhone: \"3r43r4f\"){id}}"}' http://localhost:3001/graphql
+
+
+/ GraphQL IDE:
+
+mutation {
+  addEvent(dbID: 10, nameOfEvent: "Hello world", location: "BurnabyEH", numberOfattendees: 10, eventDates: "2017-10-09", times: "40", details: "Fuck em") {
+    dbID
+    nameOfEvent
+    location
+    numberOfattendees
+    eventDates
+    times
+    details
+  }
+}
+
+
+
+mutation {
+  addUser(dbID: 102, sfuBCID: "3011298937", department: "FAS", requestBy: "Sankait", phone: "7782417856", fax: "", email: "sankaitk@sfu.ca", licensed: "yes") {
+    dbID
+    sfuBCID
+    department
+    requestBy
+    phone
+    fax
+    email
+    licensed
+  },
+
+  addEvent(dbID: 102, nameOfEvent: "FROSH", location: "Surrey", numberOfattendees: 10, eventDates:"2017-09-10", times: "504") {
+    dbID
+  },
+
+  addRequest(id: 101, status: "Pending", statusDate: "2017-09-10", date: "2017-10-08", details: "Fuckem", accountCode: "ABCD999", invoice: 444, authorizedBy: "Me", authorizedID: "fjdsnk", authorizedDate: "2017-09-21", authorizedPhone: "7782417856") {
+    id
+  }
+}
+
+
