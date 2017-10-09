@@ -109,6 +109,7 @@ const Query = new GraphQLObjectType({
     return {
       user: {
         type: new GraphQLList(User),
+        args: UserArgs,
         resolve(root, args) {
           return Db.models.user.findAll({where: args});
         },
@@ -116,6 +117,7 @@ const Query = new GraphQLObjectType({
 
       request: {
         type: new GraphQLList(Request),
+        args: RequestArgs,
         resolve(root, args) {
           return Db.models.request.findAll({where: args});
         },
