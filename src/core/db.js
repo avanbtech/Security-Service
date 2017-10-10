@@ -17,7 +17,7 @@ const Conn = new Sequelize(
 const User = Conn.define('user', {
   dbID: {
     type: Sequelize.INTEGER,
-    allowNull: false,
+    allowNull: true,
     primaryKey: true,
   },
   sfuBCID: {
@@ -62,7 +62,7 @@ const Request = Conn.define('request', {
   dbID: {
     type: Sequelize.INTEGER,
     allowNull: false,
-    primaryKey: true
+    primaryKey: true,
   },
   status: {
     type: Sequelize.STRING,
@@ -130,7 +130,7 @@ const Event = Conn.define('event', {
 
     set: function (val) {
       this.setDataValue('eventDates',val.join(';'));
-    }
+    },
   },
   times: {
     type: Sequelize.STRING,
@@ -138,10 +138,10 @@ const Event = Conn.define('event', {
   },
 });
 
-
+//FOR DEPLOYING
 //Conn.sync({ force: false});
 
+//FOR TESTING
 Conn.sync({ force: true});
-
 
 export default Conn;

@@ -49,7 +49,7 @@ const Request  = new GraphQLObjectType({
         },
       },
       accountCode: {
-        type: GraphQLInt,
+        type: GraphQLString,
         resolve(request) {
           return request.accountCode;
         },
