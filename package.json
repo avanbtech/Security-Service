@@ -34,6 +34,7 @@
     "passport": "0.3.2",
     "pg": "4.5.1",
     "pretty-error": "2.0.0",
+    "python-shell": "^0.4.0",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "react-routing": "0.0.7",

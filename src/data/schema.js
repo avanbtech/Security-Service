@@ -100,7 +100,6 @@ var EventArgs = {
   },
 };
 
-
 //Queries
 const Query = new GraphQLObjectType({
   name: 'Query',

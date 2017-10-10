@@ -1,4 +1,5 @@
 import db from '../core/db';
+import PythonShell from 'python-shell';
 
 var NUM = "0000";
 var YEAR = "00";
@@ -15,7 +16,7 @@ function uniqueID() {
     NUM = "0000";
   }
 
-  return abbrevYear.toString() + "-" + IncNum();
+  return String(abbrevYear) + '-' + IncNum();
 }
 
 function IncNum() {
@@ -52,6 +53,7 @@ function getCommonDBID() {
 
 function stringBody(req) {
   const commonDbID = getCommonDBID();
+  const uni_ID = uniqueID();
 
   db.models.user.create({
     dbID: commonDbID,
@@ -65,7 +67,7 @@ function stringBody(req) {
   });
 
   db.models.request.create({
-    accessID: uniqueID(),
+    accessID: uni_ID,
     dbID: commonDbID,
     status: 'Pending',
     statusDate: new Date(),
@@ -87,6 +89,21 @@ function stringBody(req) {
     eventDates: [req.body.eventDate],   //TODO: CONFIRM DATES ARE JOINED BY ';'
     times: req.body.time,
   });
+
+  // CODE TO RUN A PYTHON SCRIPT
+
+  // PythonShell.defaultOptions = { scriptPath: '/Users/sankait/Desktop' };
+  // const pyshell = new PythonShell('dem.py');
+  //
+  // pyshell.on('message', function (message) {
+  //   // received a message sent from the Python script (a simple "print" statement)
+  //   console.log(message);
+  // });
+  //
+  // pyshell.end(function (err) {
+  //   if (err) throw err;
+  //   console.log('finished');
+  // });
 }
 
 
