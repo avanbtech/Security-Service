@@ -11,6 +11,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from random import randint
 
+import os
 import datetime
 from datetime import timedelta
 
@@ -53,7 +54,12 @@ def getSFUID():
     return str(randint(300000000, 399999999))
 
 def main():
-    driver = webdriver.Chrome("./chromedriver")
+    if os.name == 'nt':
+        driver = webdriver.Chrome("./chromedriver.exe")
+    elif os.name == 'mac':
+        driver = webdriver.Chrome("./chromedriver")
+
+
     driver.get("localhost:3001/Customer")
 
     date = driver.find_element_by_name("date");
