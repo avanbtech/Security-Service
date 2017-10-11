@@ -1,5 +1,5 @@
 import db from '../core/db';
-import PythonShell from 'python-shell';
+import saveToPDF from '../PyScripts/saveToPDF';
 
 var NUM = "0000";
 var YEAR = "00";
@@ -48,12 +48,14 @@ function getCurrDate() {
 function getCommonDBID() {
   const date = new Date();
 
-  return parseInt(String(date.getMinutes()) + String(date.getSeconds()) + String(date.getUTCMilliseconds()));
+  return parseInt(String(date.getTime()).slice(-7) + String(date.getMinutes()));
 }
 
-function stringBody(req) {
+function commitToDB(req) {
   const commonDbID = getCommonDBID();
   const uni_ID = uniqueID();
+
+  console.log(req.body.date);
 
   db.models.user.create({
     dbID: commonDbID,
@@ -71,7 +73,7 @@ function stringBody(req) {
     dbID: commonDbID,
     status: 'Pending',
     statusDate: new Date(),
-    date: new Date(),
+    date: req.body.date,
     details: req.body.detail,
     accountCode: req.body.accountCode,
     invoice: 99999,
@@ -90,22 +92,9 @@ function stringBody(req) {
     times: req.body.time,
   });
 
-  // CODE TO RUN A PYTHON SCRIPT
-
-  // PythonShell.defaultOptions = { scriptPath: '/Users/sankait/Desktop' };
-  // const pyshell = new PythonShell('dem.py');
-  //
-  // pyshell.on('message', function (message) {
-  //   // received a message sent from the Python script (a simple "print" statement)
-  //   console.log(message);
-  // });
-  //
-  // pyshell.end(function (err) {
-  //   if (err) throw err;
-  //   console.log('finished');
-  // });
+  // Un comment to run the PDF saving python script
+  //saveToPDF(req);
 }
-
 
 exports.request_post = function(req, res, next) {
 
@@ -163,7 +152,7 @@ exports.request_post = function(req, res, next) {
   req.filter('time').escape();
   req.filter('time').trim();
 
-  stringBody(req);
+  commitToDB(req);
 
   res.redirect('/');
 };
