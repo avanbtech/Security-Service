@@ -1,8 +1,9 @@
 import db from '../core/db';
 import saveToPDF from '../PyScripts/saveToPDF';
+import request from 'request';
 
-var NUM = "0000";
-var YEAR = "00";
+var NUM = '0000';
+var YEAR = '00';
 
 function uniqueID() {
   var d = new Date();
@@ -11,9 +12,9 @@ function uniqueID() {
   var oldYear = parseInt(YEAR);
   abbrevYear = parseInt(abbrevYear);
 
-  if(oldYear < abbrevYear) {
+  if (oldYear < abbrevYear) {
     YEAR = abbrevYear.toString();
-    NUM = "0000";
+    NUM = '0000';
   }
 
   return String(abbrevYear) + '-' + IncNum();
@@ -22,14 +23,14 @@ function uniqueID() {
 function IncNum() {
   var int_num = parseInt(NUM);
 
-  if(int_num !== null && int_num < 10000) {
+  if (int_num !== null && int_num < 10000) {
     int_num += 1;
   }
 
   NUM = String(int_num);
 
-  while(NUM.length < 4) {
-    NUM = "0" + NUM;
+  while (NUM.length < 4) {
+    NUM = '0' + NUM;
   }
 
   return NUM;
@@ -51,6 +52,29 @@ function getCommonDBID() {
   return parseInt(String(date.getTime()).slice(-7) + String(date.getMinutes()));
 }
 
+function makeReq() {
+
+  const query = `{\"query\":\"{user{dbID}}\"}`;
+
+  var options = {
+    method: 'post',
+    body: query, // Javascript object
+    json: false, // Use,If you are sending JSON data
+    url: 'http://localhost:3001/graphql',
+    headers: {
+      'Content-type': 'application/json',
+    },
+  };
+
+  request(options, (err, res, body) => {
+    if (err) {
+      console.log('Error :', err);
+      return;
+    }
+    console.log(' Body :', body);
+  });
+}
+
 function commitToDB(req) {
   const commonDbID = getCommonDBID();
   const uni_ID = uniqueID();
@@ -68,9 +92,20 @@ function commitToDB(req) {
     licensed: req.body.licensed,      // make mandatory
   });
 
+  db.models.event.create({
+    dbID: commonDbID,
+    nameOfEvent: req.body.nameOfEvent,      // UNABLE TO GET THE NAME OF EVENT
+    location: req.body.location,
+    numberOfattendees: req.body.numberOfAttendees, // UNABLE TO RETRIEVE NUM FROM FORM USING TEMP NUMBER
+    eventDates: [req.body.eventDate],   // TODO: CONFIRM DATES ARE JOINED BY ';'
+    times: req.body.time,
+  });
+
   db.models.request.create({
     accessID: uni_ID,
     dbID: commonDbID,
+    eventDbID: commonDbID,
+    userDbID: commonDbID,
     status: 'Pending',
     statusDate: new Date(),
     date: req.body.date,
@@ -83,22 +118,13 @@ function commitToDB(req) {
     authorizedPhone: 7782415848,
   });
 
-  db.models.event.create({
-    dbID: commonDbID,
-    nameOfEvent: req.body.nameOfEvent,      // UNABLE TO GET THE NAME OF EVENT
-    location: req.body.location,
-    numberOfattendees: req.body.numberOfAttendees, //UNABLE TO RETRIEVE NUM FROM FORM USING TEMP NUMBER
-    eventDates: [req.body.eventDate],   //TODO: CONFIRM DATES ARE JOINED BY ';'
-    times: req.body.time,
-  });
+  makeReq();
 
   // Un comment to run the PDF saving python script
-  //saveToPDF(req);
+  // saveToPDF(req);
 }
 
-exports.request_post = function(req, res, next) {
-
-
+exports.request_post = function (req, res, next) {
   req.checkBody('date', 'date name must be specified').notEmpty();
   req.checkBody('department', 'department must be specified').notEmpty();
   req.checkBody('requestedBy', 'requestedBy name must be specified').notEmpty();
@@ -154,7 +180,7 @@ exports.request_post = function(req, res, next) {
 
   commitToDB(req);
 
+
   res.redirect('/');
 };
-
 

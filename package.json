@@ -38,6 +38,7 @@
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "react-routing": "0.0.7",
+    "request": "^2.83.0",
     "semantic-ui-css": "^2.2.12",
     "semantic-ui-react": "^0.74.2",
     "sequelize": "^4.13.0",
