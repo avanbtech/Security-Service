@@ -37,7 +37,7 @@ const Event = new GraphQLObjectType({
       eventDates: {
         type: new GraphQLList(GraphQLString),
         resolve(event) {
-          var dates = event.eventDates.split(';');
+          const dates = event.eventDates.split(';');
           return dates;
         },
       },
