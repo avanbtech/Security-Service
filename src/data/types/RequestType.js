@@ -5,7 +5,8 @@ import {
 } from 'graphql';
 
 import GraphQLDate from 'graphql-date';
-
+import User from './UserType';
+import Event from './EventType';
 
 const Request  = new GraphQLObjectType({
   name: 'Request',
@@ -21,7 +22,7 @@ const Request  = new GraphQLObjectType({
       dbID: {
         type: GraphQLInt,
         resolve(request) {
-          return request.id;
+          return request.dbID;
         },
       },
       status: {
@@ -82,6 +83,18 @@ const Request  = new GraphQLObjectType({
         type: GraphQLString,
         resolve(request) {
           return request.authorizedPhone;
+        },
+      },
+      user: {
+        type: User,
+        resolve(request) {
+          return request.getUser();
+        },
+      },
+      event: {
+        type: Event,
+        resolve(request) {
+          return request.getEvent();
         },
       },
     };

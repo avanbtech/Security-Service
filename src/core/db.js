@@ -138,6 +138,10 @@ const Event = Conn.define('event', {
   },
 });
 
+Request.belongsTo(Event);
+Request.belongsTo(User);
+
+
 //FOR DEPLOYING
 //Conn.sync({ force: false});
 

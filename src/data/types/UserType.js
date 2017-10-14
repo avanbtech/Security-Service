@@ -4,6 +4,8 @@ import {
   GraphQLInt,
 } from 'graphql';
 
+import Request from './RequestType';
+
 const UserType = new GraphQLObjectType({
   name: 'User',
   description: 'The person making a request',
@@ -57,8 +59,14 @@ const UserType = new GraphQLObjectType({
           return request.licensed;
         },
       },
+      // request: {
+      //   type: Request,
+      //   resolve(user) {
+      //     return user.getRequest();
+      //   },
+      // },
     };
-  }
+  },
 });
 
 export default UserType;

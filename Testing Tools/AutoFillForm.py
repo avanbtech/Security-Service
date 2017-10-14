@@ -21,7 +21,7 @@ fake = Faker()
 # FUTURE DATE IN FORMAT YYYY-MM-DD
 def getFutureDateStr():
     today = datetime.datetime.now()
-    diff = datetime.timedelta(days = randint(1,10))
+    diff = datetime.timedelta(days = randint(2,10))
     future = today + diff
 
     return future.strftime("%Y-%m-%d")
@@ -37,7 +37,10 @@ def getFakePhn():
 # FAKE RANDOM TIME IN FORMAT HH:MM
 def getRandTime():
     hr = randint(1, 24)
-    min = randint(0, 60)
+    if(hr == 24):
+        min = 0
+    else:
+        min = randint(0, 59)
 
     return str(hr).zfill(2) + ":" + str(min).zfill(2)
 
@@ -56,7 +59,7 @@ def getSFUID():
 def main():
     if os.name == 'nt':
         driver = webdriver.Chrome("./chromedriver.exe")
-    elif os.name == 'mac':
+    else:
         driver = webdriver.Chrome("./chromedriver")
 
 
