@@ -1,4 +1,5 @@
 import db from '../core/db';
+import saveToPDF from '../PyScripts/saveToPDF';
 
 var NUM = "0000";
 var YEAR = "00";
@@ -15,7 +16,7 @@ function uniqueID() {
     NUM = "0000";
   }
 
-  return abbrevYear.toString() + "-" + IncNum();
+  return String(abbrevYear) + '-' + IncNum();
 }
 
 function IncNum() {
@@ -35,45 +36,65 @@ function IncNum() {
 }
 
 function getCurrDate() {
-  var today = new Date();
+  const today = new Date();
 
-  var year = today.getFullYear();
-  var month = today.getMonth();
-  var day = today.getDay();
+  const year = today.getFullYear();
+  const month = today.getMonth();
+  const day = today.getDay();
 
   return year + '-' + month + '-' + day;
 }
 
-function stringBody(req) {
+function getCommonDBID() {
+  const date = new Date();
 
-  db.models.form.create({
+  return parseInt(String(date.getTime()).slice(-7) + String(date.getMinutes()));
+}
 
-    id: uniqueID(),
-    status: 'Processing',
-    statusDate: getCurrDate(),
+function commitToDB(req) {
+  const commonDbID = getCommonDBID();
+  const uni_ID = uniqueID();
+
+  console.log(req.body.date);
+
+  db.models.user.create({
+    dbID: commonDbID,
     sfuBCID: req.body.id,
     department: 'INSERT DEPARTMENT HERE',    // NO WAY TO GET THE DEPT
-    date: getCurrDate(),
     requestBy: req.body.requestBy,
     phone: req.body.phone,
     fax: req.body.fax,
     email: req.body.email,
-    nameOfEvent: req.body.nameOfEvent,      // UNABLE TO GET THE NAME OF EVENT
     licensed: req.body.licensed,      // make mandatory
-    location: req.body.location,
-    numberOfattendees: 10000,         //UNABLE TO RETRIEVE NUM FROM FORM USING TEMP NUMBER
-    eventDates: [req.body.eventDate],
-    times: req.body.time,
+  });
+
+  db.models.request.create({
+    accessID: uni_ID,
+    dbID: commonDbID,
+    status: 'Pending',
+    statusDate: new Date(),
+    date: req.body.date,
     details: req.body.detail,
     accountCode: req.body.accountCode,
     invoice: 99999,
-    authorizedBy: 'Insert Person here',
-    authorizedID: '42342fkfdsf',
-    authorizedDate: new Date(2012, 2,2,0,0,0,0),
-    authorizedPhone: 7782415848
+    authorizedBy: req.body.authorizedBy,
+    authorizedID: req.body.authorizedID,
+    authorizedDate: req.body.authorizedDate,
+    authorizedPhone: 7782415848,
   });
-}
 
+  db.models.event.create({
+    dbID: commonDbID,
+    nameOfEvent: req.body.nameOfEvent,      // UNABLE TO GET THE NAME OF EVENT
+    location: req.body.location,
+    numberOfattendees: req.body.numberOfAttendees, //UNABLE TO RETRIEVE NUM FROM FORM USING TEMP NUMBER
+    eventDates: [req.body.eventDate],   //TODO: CONFIRM DATES ARE JOINED BY ';'
+    times: req.body.time,
+  });
+
+  // Un comment to run the PDF saving python script
+  //saveToPDF(req);
+}
 
 exports.request_post = function(req, res, next) {
 
@@ -131,7 +152,7 @@ exports.request_post = function(req, res, next) {
   req.filter('time').escape();
   req.filter('time').trim();
 
-  stringBody(req);
+  commitToDB(req);
 
   res.redirect('/');
 };
