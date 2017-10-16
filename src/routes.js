@@ -9,9 +9,9 @@ import ErrorPage from './components/ErrorPage';
 const routes = [
   require('./routes/home'),
   require('./routes/contact'),
-  require('./routes/login'),
-  require('./routes/register'),
   require('./routes/customer'),
+  require('./routes/status'),
+  require('./routes/statusform'),
 ];
 
 const router = new Router(on => {

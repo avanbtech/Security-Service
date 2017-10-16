@@ -1,0 +1,19 @@
+Auto-filler for SFU SRS form
+Group Gamma
+
+Dependencies:
+# python: 3.xx version
+# Google Chrome
+# chromedriver.exe file (in the same folder as AutoFillForm.py)
+# faker: pip3 install Faker
+# selenium: pip3 install selenium
+
+Instructions:
+# run with command: python3 AutoFillForm.py
+
+Notes:
+# If you want to use firefox replace (driver = webdriver.Chrome("./chromedriver"))
+  to (driver = webdriver.Firefox())
+# Intentional error in the end to keep the browser window open.
+  The program executes correctly :)
+# This script skips the radio buttons for license and department dropdown menu.

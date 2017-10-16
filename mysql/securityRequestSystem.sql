@@ -33,7 +33,7 @@ CREATE TABLE `requestinformation` (
   `phone` int(11) NOT NULL,
   `fax` int(11) NOT NULL,
   `email` varchar(45) NOT NULL,
-  `nameOfevent` varchar(45) NOT NULL,
+  `nameOfEvent` varchar(45) NOT NULL,
   `licensed` tinyint(4) NOT NULL,
   `location` varchar(45) NOT NULL,
   `numberOfattendees` int(11) NOT NULL,
