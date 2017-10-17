@@ -1,0 +1,50 @@
+@import '../../components/variables.scss';
+
+.root {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.container {
+  margin: 0 auto;
+  padding: 0 0 40px;
+  max-width: $max-content-width;
+}
+
+.news {
+  padding: 0;
+}
+
+.newsItem {
+  list-style-type: none;
+  padding-bottom: 6px;
+}
+
+.newsTitle {
+  font-size: 1.125em;
+}
+
+.newsTitle, .newsDesc {
+  display: block;
+}
+
+.link {
+  text-decoration: none;
+}
+
+table.service_request_table {
+  width: 100%;
+}
+
+table.service_request_table th {
+  border-bottom: 2px solid black;
+  padding-bottom: 10px;
+  text-align: left;
+}
+
+table.service_request_table td {
+  width: (100/x)%;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid gray;
+}
