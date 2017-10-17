@@ -5,7 +5,7 @@ import s from './ServiceView.scss';
 function OneServiceRequest({serviceRequest}) {
 
   return (
-    <div>
+    <div className={s.service_request_row}>
       <h4>{serviceRequest.requestBy}</h4>
       <p>{serviceRequest.date}</p>
     </div>
