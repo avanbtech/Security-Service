@@ -4,22 +4,6 @@ import s from './ServiceView.scss';
 import OneServiceRequest from './OneServiceRequest';
 
 function ServiceView({serviceRequests}) {
-
-  /*
-  var rows = [];
-  rows.push(<OneServiceRequest serviceRequest={
-    {
-      requestBy: 'John',
-      date: '2017-10-12'
-    }
-  }/>);
-  rows.push(<OneServiceRequest serviceRequest={
-    {
-      requestBy: 'Mary',
-      date: '2016-08-12'
-    }
-  }/>);
-  */
   var rows = [];
   for(var i = 0; i < serviceRequests.length; i++) {
     rows.push(<OneServiceRequest serviceRequest={
@@ -30,7 +14,17 @@ function ServiceView({serviceRequests}) {
     <div className={s.root}>
       <div className={s.container}>
         <h1 className={s.title}>Service View</h1>
-        <div>{rows}</div>
+        <table className={s.service_request_table}>
+          <tr>
+            <th>Request ID</th>
+            <th>Date</th>
+            <th>Requested By</th>
+            <th>SFU ID</th>
+            <th>Location</th>
+            <th>Event Date</th>
+          </tr>
+          {rows}
+        </table>
       </div>
     </div>
   );
