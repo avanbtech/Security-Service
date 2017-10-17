@@ -13,6 +13,7 @@ function Main({ className }) {
 
       {/*To be moved depending where this will be used*/}
       <li><Link className={s.link} to="/Status">Check Security Requests</Link></li>
+      <li><Link className={s.link} to="/ServiceView">Service View</Link></li>
 
       </ul>
     </div>

@@ -12,6 +12,7 @@ const routes = [
   require('./routes/customer'),
   require('./routes/status'),
   require('./routes/statusform'),
+  require('./routes/service_view'),
 ];
 
 const router = new Router(on => {

@@ -186,3 +186,6 @@ exports.request_post = function (req, res, next) {
   res.redirect('/');
 };
 
+exports.request_view = function () {
+  console.log('abcd');
+};
