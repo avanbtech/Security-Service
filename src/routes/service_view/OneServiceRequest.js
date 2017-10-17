@@ -5,10 +5,14 @@ import s from './ServiceView.scss';
 function OneServiceRequest({serviceRequest}) {
 
   return (
-    <div className={s.service_request_row}>
-      <h4>{serviceRequest.requestBy}</h4>
-      <p>{serviceRequest.date}</p>
-    </div>
+    <tr>
+      <td><a href={'/ServiceView/' + serviceRequest.requestId}>{serviceRequest.requestId}</a></td>
+      <td>{serviceRequest.date}</td>
+      <td>{serviceRequest.requestBy}</td>
+      <td>{serviceRequest.sfu_id}</td>
+      <td>{serviceRequest.location}</td>
+      <td>{serviceRequest.event_date}</td>
+    </tr>
   );
 }
 
