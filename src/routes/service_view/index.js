@@ -8,7 +8,7 @@ export const action = async (state) => {
   const { data } = await response.json();
   state.context.onSetTitle('Service View');
 
-  // These data must be extracted from database
+  // TODO: Replace following statement to retrieve data from database and store them in rows
   var rows = [
     {
       requestId: '1',
