@@ -84,11 +84,19 @@ class FormExampleSubcomponentControl extends Component {
       errors.requestByError = "";
     }
 
-    if (!this.validateDate(this.state.date)){
+    /*if (!this.validateDate(this.state.date)){
       isError = true;
       errors.dateError = "Date should be in YYYY-MM-DD format";
     }
     else{
+      errors.dateError = "";
+    }*/
+
+    if ((Date.parse(this.state.date) - Date.parse(new Date())) < 0 ||  this.state.date.length == 0 ){
+      isError = true;
+      errors.dateError = "This field cannot be empty";
+    }
+    else {
       errors.dateError = "";
     }
 
@@ -156,10 +164,18 @@ class FormExampleSubcomponentControl extends Component {
       errors.numberOfAttendeesError = '';
     }
 
-    if(!this.validateDate(this.state.eventDate))
+    /*if(!this.validateDate(this.state.eventDate))
     {
       isError = true;
       errors.eventDateError = "Date should be in YYYY-MM-DD format";
+    }
+    else {
+      errors.eventDateError = "";
+    }*/
+
+    if ((Date.parse(this.state.eventDate) - Date.parse(new Date())) < 0 ||  this.state.eventDate.length == 0 ){
+      isError = true;
+      errors.eventDateError = "This field cannot be empty";
     }
     else {
       errors.eventDateError = "";
@@ -184,12 +200,20 @@ class FormExampleSubcomponentControl extends Component {
       errors.accountCodeError = '';
     }
 
-    if (!this.validateDate(this.state.authorizedDate)){
+    /*if (!this.validateDate(this.state.authorizedDate)){
       isError = true;
       errors.authorizedDateError = "Date should be in YYYY-MM-DD format";
     }
     else{
         errors.authorizedDateError = "";
+    }*/
+
+    if ((Date.parse(this.state.authorizedDate) - Date.parse(new Date())) < 0 ||  this.state.authorizedDate.length == 0 ){
+      isError = true;
+      errors.authorizedDateError = "This field cannot be empty";
+    }
+    else {
+      errors.authorizedDateError = "";
     }
 
     if (this.state.authorizedBy.replace(/\s/g, "").length == 0 ){
@@ -262,6 +286,24 @@ class FormExampleSubcomponentControl extends Component {
     this.setState({department: {value}.value});
   }
 
+  handleChangedate = (event, date) => {
+    this.setState({
+      date: date,
+    });
+  }
+
+  handleChangeEvent = (event, date) => {
+    this.setState({
+      eventDate: date,
+    });
+  }
+
+  handleChangeAuthorizeDate = (event, date) => {
+    this.setState({
+      authorizedDate: date,
+    });
+  }
+
   FormExampleSuccess = () => (
 	  <Form success>
 	    <Form.Input label='Email' placeholder='joe@schmoe.com' />
@@ -285,12 +327,12 @@ class FormExampleSubcomponentControl extends Component {
 	        	<Form.Group widths='equal'>
 	        		<Form.Field required>
 	        			<label> Date </label>
-	          			<TextField
+	          			<DatePicker
                     fullWidth={true}
                     name='date'
                     value={this.state.date}
                     placeholder='YYYY-MM-DD'
-                    onChange = {e => this.change(e)}
+                    onChange = {this.handleChangedate}
                     errorText={this.state.dateError}/>
 	          		</Form.Field>
 
@@ -577,11 +619,12 @@ class FormExampleSubcomponentControl extends Component {
 	        	<Form.Group widths='equal'>
 	        		<Form.Field required>
 		          		<label> Event Date </label>
-	          			<TextField
+	          			<DatePicker
                     fullWidth={true}
                     name='eventDate'
                     placeholder='YYYY-MM-DD'
-                    onChange = {e => this.change(e)}
+                    value={this.state.eventDate}
+                    onChange={this.handleChangeEvent}
                     errorText={this.state.eventDateError} />
 	          		</Form.Field>
 	          		<Form.Field required>
@@ -632,11 +675,12 @@ class FormExampleSubcomponentControl extends Component {
 	          		</Form.Field>
 					<Form.Field required>
 		          		<label> Date </label>
-	        			<TextField
+	        			<DatePicker
                   fullWidth={true}
                   name='authorizedDate'
                   placeholder='Date'
-                  onChange = {e => this.change(e)}
+                  value={this.state.authorizedDate}
+                  onChange = {this.handleChangeAuthorizeDate}
                   errorText={this.state.authorizedDateError} />
 	        		</Form.Field>
 	        	</Form.Group>
