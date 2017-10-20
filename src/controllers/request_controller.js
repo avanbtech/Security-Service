@@ -62,7 +62,11 @@ function commitToDB(req) {
   db.models.user.create({
     dbID: commonDbID,
     sfuBCID: req.body.id,
+<<<<<<<<< Temporary merge branch 1
+    department: 'INSERT DEPARTMENT HERE',    //TODO: NO WAY TO GET THE DEPT, GET FIXED
+=========
     department: 'INSERT DEPARTMENT HERE',    // TODO: NO WAY TO GET THE DEPT, ADD IT
+>>>>>>>>> Temporary merge branch 2
     requestBy: req.body.requestBy,
     phone: req.body.phone,
     fax: req.body.fax,
@@ -96,8 +100,14 @@ function commitToDB(req) {
     authorizedPhone: 7782415848,
   });
 
+<<<<<<<<< Temporary merge branch 1
+  // Un comment to make a query to the DB
+  // makeReq();
+
+=========
+>>>>>>>>> Temporary merge branch 2
   // Un comment to run the PDF saving python script
-  // saveToPDF(uni_ID);
+  // saveToPDF(req);
 }
 
 exports.request_post = function (req, res, next) {
