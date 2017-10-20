@@ -52,6 +52,28 @@ function getCommonDBID() {
   return parseInt(String(date.getTime()).slice(-7) + String(date.getMinutes()));
 }
 
+function makeReq() {
+
+  const query = `{\"query\":\"{user{dbID}}\"}`;
+
+  var options = {
+    method: 'post',
+    body: query, // Javascript object
+    json: false, // Use,If you are sending JSON data
+    url: 'http://localhost:3001/graphql',
+    headers: {
+      'Content-type': 'application/json',
+    },
+  };
+
+  request(options, (err, res, body) => {
+    if (err) {
+      console.log('Error :', err);
+      return;
+    }
+    console.log(' Body :', body);
+  });
+}
 
 function commitToDB(req) {
   const commonDbID = getCommonDBID();
@@ -62,19 +84,19 @@ function commitToDB(req) {
   db.models.user.create({
     dbID: commonDbID,
     sfuBCID: req.body.id,
-    department: 'INSERT DEPARTMENT HERE',    // TODO: NO WAY TO GET THE DEPT, ADD IT
+    department: 'INSERT DEPARTMENT HERE',    // NO WAY TO GET THE DEPT
     requestBy: req.body.requestBy,
     phone: req.body.phone,
     fax: req.body.fax,
     email: req.body.email,
-    licensed: req.body.licensed,
+    licensed: req.body.licensed,      // make mandatory
   });
 
   db.models.event.create({
     dbID: commonDbID,
-    nameOfEvent: req.body.nameOfEvent,
+    nameOfEvent: req.body.nameOfEvent,      // UNABLE TO GET THE NAME OF EVENT
     location: req.body.location,
-    numberOfattendees: req.body.numberOfAttendees,
+    numberOfattendees: req.body.numberOfAttendees, // UNABLE TO RETRIEVE NUM FROM FORM USING TEMP NUMBER
     eventDates: [req.body.eventDate],   // TODO: CONFIRM DATES ARE JOINED BY ';'
     times: req.body.time,
   });
@@ -96,8 +118,10 @@ function commitToDB(req) {
     authorizedPhone: 7782415848,
   });
 
+  makeReq();
+
   // Un comment to run the PDF saving python script
-  // saveToPDF(uni_ID);
+  // saveToPDF(req);
 }
 
 exports.request_post = function (req, res, next) {
