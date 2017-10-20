@@ -53,30 +53,6 @@ function getCommonDBID() {
 }
 
 
-// DEMO FUNCTION FOR MAKING A POST REQUEST TO GRAPHQL SERVER
-function makeReq() {
-
-  const query = `{\"query\":\"{user{dbID}}\"}`;
-
-  var options = {
-    method: 'post',
-    body: query, // Javascript object
-    json: false, // Use,If you are sending JSON data
-    url: 'http://localhost:3001/graphql',
-    headers: {
-      'Content-type': 'application/json',
-    },
-  };
-
-  request(options, (err, res, body) => {
-    if (err) {
-      console.log('Error :', err);
-      return;
-    }
-    console.log(' Body :', body);
-  });
-}
-
 function commitToDB(req) {
   const commonDbID = getCommonDBID();
   const uni_ID = uniqueID();
@@ -86,7 +62,7 @@ function commitToDB(req) {
   db.models.user.create({
     dbID: commonDbID,
     sfuBCID: req.body.id,
-    department: 'INSERT DEPARTMENT HERE',    //TODO: NO WAY TO GET THE DEPT, GET FIXED
+    department: 'INSERT DEPARTMENT HERE',    // TODO: NO WAY TO GET THE DEPT, ADD IT
     requestBy: req.body.requestBy,
     phone: req.body.phone,
     fax: req.body.fax,
@@ -117,14 +93,11 @@ function commitToDB(req) {
     authorizedBy: req.body.authorizedBy,
     authorizedID: req.body.authorizedID,
     authorizedDate: req.body.authorizedDate,
-    authorizedPhone: req.body.authorizedPhone,
+    authorizedPhone: 7782415848,
   });
 
-  // Un comment to make a query to the DB
-  // makeReq();
-
   // Un comment to run the PDF saving python script
-  // saveToPDF(req);
+  // saveToPDF(uni_ID);
 }
 
 exports.request_post = function (req, res, next) {
@@ -182,6 +155,7 @@ exports.request_post = function (req, res, next) {
   req.filter('time').trim();
 
   commitToDB(req);
+
 
   res.redirect('/');
 };
