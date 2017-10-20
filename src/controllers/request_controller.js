@@ -94,9 +94,9 @@ function commitToDB(req) {
 
   db.models.event.create({
     dbID: commonDbID,
-    nameOfEvent: req.body.nameOfEvent,      // UNABLE TO GET THE NAME OF EVENT
+    nameOfEvent: req.body.nameOfEvent,
     location: req.body.location,
-    numberOfattendees: req.body.numberOfAttendees, // UNABLE TO RETRIEVE NUM FROM FORM USING TEMP NUMBER
+    numberOfattendees: req.body.numberOfAttendees,
     eventDates: [req.body.eventDate],   // TODO: CONFIRM DATES ARE JOINED BY ';'
     times: req.body.time,
   });
@@ -118,10 +118,8 @@ function commitToDB(req) {
     authorizedPhone: 7782415848,
   });
 
-  makeReq();
-
   // Un comment to run the PDF saving python script
-  // saveToPDF(req);
+  // saveToPDF(uni_ID);
 }
 
 exports.request_post = function (req, res, next) {
