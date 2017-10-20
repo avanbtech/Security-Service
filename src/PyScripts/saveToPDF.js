@@ -1,35 +1,30 @@
-
 import PythonShell from 'python-shell';
 
-function saveToPDF(reqID) {
+function saveToPDF(req) {
+  // Grab all the data from the form in a string
+  const jsonData = JSON.stringify(req.body);
 
   // CODE TO RUN A PYTHON SCRIPT
   // Setup options for script
   const options = {
     mode: 'text',
 
-    // TODO: REPLACE THIS PATH WITH ACTUAL SERVER'S PYTHON 3.XX PATH
     // Path to python3 on the machine
     pythonPath: '/Library/Frameworks/Python.framework/Versions/3.6/Resources/Python.app/Contents/MacOS/Python',
     pythonOptions: ['-u'],
 
-    // TODO: REPLACE THIS PATH WITH SCRIPT FOLDER IN PROJECT DIRECTORY
     // Path to the scripts
-    scriptPath: '/Users/sankait/Projects/CMPT373-Gamma/src/PyScripts',
+    scriptPath: '/Users/sankait/Desktop',
 
     // Pass the data in a comma-delimited array here (in python it is 1 indexed array)
-    args: [reqID],
+    args: [jsonData],
   };
 
   // @Args: script to run, options (set above), callback function
-  PythonShell.run('pdfwriter.py', options, function (err, res) {
-    if (err) {
-      console.log(err);
-    } else {
-      // Print statements in the script are returned as an array of strings (i.e res)
-      console.log(res);
-    }
-
+  PythonShell.run('1.py', options, function (err, res) {
+    if (err) throw err;
+    // Print statements in the script are returned as an array of strings (i.e res)
+    console.log("FIN");
   });
 }
 
