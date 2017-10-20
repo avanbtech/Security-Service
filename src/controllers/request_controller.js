@@ -90,6 +90,12 @@ function commitToDB(req) {
     authorizedDate: req.body.authorizedDate,
     authorizedPhone: req.body.authorizedPhone,
   });
+
+  // Un comment to make a query to the DB
+  // makeReq();
+
+  // Un comment to run the PDF saving python script
+  // saveToPDF(uni_ID);
 }
 
 exports.request_post = function (req, res, next) {
