@@ -14,14 +14,14 @@ function saveToPDF(req) {
     pythonOptions: ['-u'],
 
     // Path to the scripts
-    scriptPath: '/Users/sankait/Desktop',
+    scriptPath: '/Users/sankait/Projects/CMPT373-Gamma/src/PyScripts',
 
     // Pass the data in a comma-delimited array here (in python it is 1 indexed array)
     args: [jsonData],
   };
 
   // @Args: script to run, options (set above), callback function
-  PythonShell.run('1.py', options, function (err, res) {
+  PythonShell.run('pdfWriter.py', options, function (err, res) {
     if (err) throw err;
     // Print statements in the script are returned as an array of strings (i.e res)
     console.log("FIN");
