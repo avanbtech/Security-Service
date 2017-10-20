@@ -52,28 +52,6 @@ function getCommonDBID() {
   return parseInt(String(date.getTime()).slice(-7) + String(date.getMinutes()));
 }
 
-function makeReq() {
-
-  const query = `{\"query\":\"{user{dbID}}\"}`;
-
-  var options = {
-    method: 'post',
-    body: query, // Javascript object
-    json: false, // Use,If you are sending JSON data
-    url: 'http://localhost:3001/graphql',
-    headers: {
-      'Content-type': 'application/json',
-    },
-  };
-
-  request(options, (err, res, body) => {
-    if (err) {
-      console.log('Error :', err);
-      return;
-    }
-    console.log(' Body :', body);
-  });
-}
 
 function commitToDB(req) {
   const commonDbID = getCommonDBID();
@@ -84,12 +62,12 @@ function commitToDB(req) {
   db.models.user.create({
     dbID: commonDbID,
     sfuBCID: req.body.id,
-    department: 'INSERT DEPARTMENT HERE',    // NO WAY TO GET THE DEPT
+    department: 'INSERT DEPARTMENT HERE',    // TODO: NO WAY TO GET THE DEPT, ADD IT
     requestBy: req.body.requestBy,
     phone: req.body.phone,
     fax: req.body.fax,
     email: req.body.email,
-    licensed: req.body.licensed,      // make mandatory
+    licensed: req.body.licensed,
   });
 
   db.models.event.create({
