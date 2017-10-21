@@ -2,7 +2,6 @@ import db from '../core/db';
 import saveToPDF from '../PyScripts/saveToPDF';
 
 
-
 var NUM = '0000';
 var YEAR = '00';
 
