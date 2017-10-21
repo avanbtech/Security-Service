@@ -8,8 +8,7 @@ export const action = async (state) => {
   const response = await fetch('/graphql?query={news{title,link,contentSnippet}}');
   const { data } = await response.json();
   state.context.onSetTitle('Service View');
-
-  // TODO: Replace following statement to retrieve data from database and store them in rows
+  
   let res = null;
 
   await axios.post('http://localhost:3001/graphql', {
