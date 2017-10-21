@@ -1,0 +1,16 @@
+1. set up localhost email server: 
+https://gist.github.com/raelgc/6031306
+
+2. set up SMTP:
+http://smallbusiness.chron.com/create-smtp-server-computer-51563.html
+
+3. paperCut email:
+http://www.techyard.net/setup-smtp-server-on-localhost/
+
+4. react autoemailing plug-in:
+https://www.npmjs.com/package/react-email-autocomplete
+https://www.npmjs.com/package/react-html-email
+https://github.com/msudgh/react-email-autocomplete
+
+5. example mailbox:
+https://tryolabs.com/blog/2015/04/07/react-examples-mailbox/
