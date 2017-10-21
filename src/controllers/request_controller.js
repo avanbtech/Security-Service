@@ -1,6 +1,7 @@
 import db from '../core/db';
 import saveToPDF from '../PyScripts/saveToPDF';
-import request from 'request';
+
+
 
 var NUM = '0000';
 var YEAR = '00';
@@ -80,8 +81,6 @@ function makeReq() {
 function commitToDB(req) {
   const commonDbID = getCommonDBID();
   const uni_ID = uniqueID();
-
-  console.log(req.body.date);
 
   db.models.user.create({
     dbID: commonDbID,
