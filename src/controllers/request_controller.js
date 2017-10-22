@@ -1,5 +1,21 @@
 import db from '../core/db';
 import exportMethod from '../PyScripts/childProcPy'
+import nodemailer from 'nodemailer';
+import xoauth2 from 'xoauth2';
+
+let transporter = nodemailer.createTransport({
+  service: 'gmail',
+  secure: false,
+  port: 25,
+  auth: {
+      user: 'cmpt373gammafrom@gmail.com',
+      pass: 'Cmpt373gamma'
+  },
+  tls:{
+    rejectUnauthorized:false
+  }
+});
+
 
 var NUM = '0000';
 var YEAR = '00';
@@ -98,6 +114,22 @@ function commitToDB(req) {
   // saveToPDF(uni_ID);
 }
 
+function sendemailToUser(req) {
+  let mailOptions = {
+    from: 'cmpt373gammafrom@gmail.com',
+    to: req.body.email,
+    subject: 'Now we receive your request',
+    text: 'We have received your request, we will quickly give you feedback once it gets processed',
+  };
+  transporter.sendMail(mailOptions, (error, info)=>{
+     if(error){
+        console.log(error);
+    }
+    console.log("sent");
+    console.log(info);
+   });
+}
+
 exports.request_post = function (req, res, next) {
   req.checkBody('date', 'date name must be specified').notEmpty();
   req.checkBody('department', 'department must be specified').notEmpty();
@@ -153,6 +185,7 @@ exports.request_post = function (req, res, next) {
   req.filter('time').trim();
 
   commitToDB(req);
+  sendemailToUser(req);
 
   res.redirect('/');
 };
