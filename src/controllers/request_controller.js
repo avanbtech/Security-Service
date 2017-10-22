@@ -128,9 +128,9 @@ function sendemailToUser(req) {
     console.log("sent");
     console.log(info);
    });
-}
+};
 
-exports.request_post = function (req, res, next) {
+function checkNotEmpty(req) {
   req.checkBody('date', 'date name must be specified').notEmpty();
   req.checkBody('department', 'department must be specified').notEmpty();
   req.checkBody('requestedBy', 'requestedBy name must be specified').notEmpty();
@@ -148,7 +148,9 @@ exports.request_post = function (req, res, next) {
   req.checkBody('id', 'id name must be specified').notEmpty();
   req.checkBody('numberOfAttendees', 'numberOfAttendees name must be specified').notEmpty();
   req.checkBody('time', 'time name must be specified').notEmpty();
+};
 
+function filterInput(req) {
   req.filter('date').escape();
   req.filter('date').trim();
   req.filter('department').escape();
@@ -183,6 +185,11 @@ exports.request_post = function (req, res, next) {
   req.filter('numberOfAttendees').trim();
   req.filter('time').escape();
   req.filter('time').trim();
+};
+
+exports.request_post = function (req, res, next) {
+  checkNotEmpty(req);
+  filterInput(req);
 
   commitToDB(req);
   sendemailToUser(req);
