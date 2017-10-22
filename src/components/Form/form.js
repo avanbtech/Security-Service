@@ -182,15 +182,21 @@ class FormExampleSubcomponentControl extends Component {
       errors.eventDateError = "";
     }
 
-    var eventTime = /^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]/;
+    /*var eventTime = /^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]/;
     if (!this.state.time.match(eventTime) || this.state.time.replace(/\s/g, "").length == 0){
       isError = true;
       errors.timeError = "Time should be in HH:MM format";
     }
     else{
       errors.timeError = "";
+    }*/
+    if (this.state.time.length == 0){
+      isError = true;
+      errors.timeError = "Time should be in HH:MM format";
     }
-
+    else{
+      errors.timeError = "";
+    }
     var accountCode1 = /^\d{4}-\d{2}-\d{4}-\d{5}$/;
     var accountCode2 = /^\d{4}-\d{2}-?\d{8}$/;
     if (!this.state.accountCode.match(accountCode1) && !this.state.accountCode.match(accountCode2)){
