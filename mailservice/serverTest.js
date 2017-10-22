@@ -12,7 +12,6 @@ nodemailer.createTestAccount((err, account) => {
         port: 2525,
         secure: false, // true for 465, false for other ports
         auth: {
-            type: 'LOGIN',
             user: 'testuser',
             pass: 'testpass',
         }
@@ -21,7 +20,7 @@ nodemailer.createTestAccount((err, account) => {
     // setup email data with unicode symbols
     let mailOptions = {
         from: 'junrutao@gmail.com', // sender address
-        to: 'junrut@sfu.ca', // list of receivers
+        to: 'xiruihuang0716@gmail.com', // list of receivers
         subject: 'Hello ✔', // Subject line
         text: 'Hello world?', // plain text body
         html: '<b>Hello world?</b>' // html body
