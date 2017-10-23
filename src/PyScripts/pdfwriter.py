@@ -22,9 +22,12 @@ reqNum = "\"" + sys.argv[1] + "\""
 requestString = '{request(accessID: ' + reqNum + '){date details accountCode authorizedBy authorizedID authorizedDate authorizedPhone user { department requestBy sfuBCID phone fax email licensed } event { nameOfEvent location numberOfattendees eventDates }}}'
 r = requests.post('http://localhost:3001/graphql', data = {'query': requestString})
 
-print(r.status_code)
 
-req = json.loads(r.text)['data']['request'][0]
+
+if(len(json.loads(r.text)['data']['request']) >= 1):
+    req = json.loads(r.text)['data']['request'][0]
+else:
+    sys.exit(0)
 
 # GETTING X COORDINATE: SAME X AS IN GIMP
 # GETTING Y COORDINATE: LENGTH OF IMAGE IN GIMP - Y COORDINATE OF DESIRED LOCATION IN GIMP
@@ -61,6 +64,7 @@ can.save()
 packet.seek(0)
 new_pdf = PdfFileReader(packet)
 # read your existing PDF
+# TODO: REPLACE THIS PATH WITH SCRIPT FOLDER IN PROJECT DIRECTORY
 existing_pdf = PdfFileReader(open("/Users/sankait/Projects/CMPT373-Gamma/src/PyScripts/baseFrom.pdf", "rb"))
 output = PdfFileWriter()
 # add the "watermark" (which is the new pdf) on the existing page
@@ -70,6 +74,7 @@ output.addPage(page)
 
 
 # finally, write "output" to a real file
+# TODO: REPLACE THIS PATH WITH SCRIPT FOLDER IN PROJECT DIRECTORY
 outputPath = "/Users/sankait/Projects/CMPT373-Gamma/src/PyScripts/ExportedPDFs/" + reqNum + "_destination.pdf"
 outputStream = open(outputPath, "wb")
 output.write(outputStream)

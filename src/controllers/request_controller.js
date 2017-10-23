@@ -1,7 +1,6 @@
 import db from '../core/db';
 import saveToPDF from '../PyScripts/saveToPDF';
 
-
 var NUM = '0000';
 var YEAR = '00';
 
@@ -52,7 +51,6 @@ function getCommonDBID() {
   return parseInt(String(date.getTime()).slice(-7) + String(date.getMinutes()));
 }
 
-
 function commitToDB(req) {
   const commonDbID = getCommonDBID();
   const uni_ID = uniqueID();
@@ -91,11 +89,8 @@ function commitToDB(req) {
     authorizedBy: req.body.authorizedBy,
     authorizedID: req.body.authorizedID,
     authorizedDate: req.body.authorizedDate,
-    authorizedPhone: 7782415848,
+    authorizedPhone: req.body.authorizedPhone,
   });
-
-  // Un comment to make a query to the DB
-  // makeReq();
 
   // Un comment to run the PDF saving python script
   // saveToPDF(uni_ID);

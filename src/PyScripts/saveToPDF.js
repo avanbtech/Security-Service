@@ -8,8 +8,8 @@ function saveToPDF(reqID) {
     mode: 'text',
 
     // TODO: REPLACE THIS PATH WITH ACTUAL SERVER'S PYTHON 3.XX PATH
-    // Path to python3 on the machine
-    pythonPath: '/Library/Frameworks/Python.framework/Versions/3.6/Resources/Python.app/Contents/MacOS/Python',
+    // Path to python3 on the machine (USE which python3 TO FIND OUT THAT PATH)
+    pythonPath: '/Library/Frameworks/Python.framework/Versions/3.6/bin/python3',
     pythonOptions: ['-u'],
 
     // TODO: REPLACE THIS PATH WITH SCRIPT FOLDER IN PROJECT DIRECTORY
@@ -23,7 +23,8 @@ function saveToPDF(reqID) {
   // @Args: script to run, options (set above), callback function
   PythonShell.run('pdfwriter.py', options, function (err, res) {
     if (err) {
-      console.log(err);
+      // TODO: ERRORS SUPRESSED ON PURPOSE
+      // console.log(err);
     } else {
       // Print statements in the script are returned as an array of strings (i.e res)
       console.log(res);
