@@ -1,6 +1,5 @@
 import db from '../core/db';
 import saveToPDF from '../PyScripts/saveToPDF';
-import request from 'request';
 
 var NUM = '0000';
 var YEAR = '00';
@@ -52,29 +51,6 @@ function getCommonDBID() {
   return parseInt(String(date.getTime()).slice(-7) + String(date.getMinutes()));
 }
 
-function makeReq() {
-
-  const query = `{\"query\":\"{user{dbID}}\"}`;
-
-  var options = {
-    method: 'post',
-    body: query, // Javascript object
-    json: false, // Use,If you are sending JSON data
-    url: 'http://localhost:3001/graphql',
-    headers: {
-      'Content-type': 'application/json',
-    },
-  };
-
-  request(options, (err, res, body) => {
-    if (err) {
-      console.log('Error :', err);
-      return;
-    }
-    console.log(' Body :', body);
-  });
-}
-
 function commitToDB(req) {
   const commonDbID = getCommonDBID();
   const uni_ID = uniqueID();
@@ -115,13 +91,11 @@ function commitToDB(req) {
     authorizedBy: req.body.authorizedBy,
     authorizedID: req.body.authorizedID,
     authorizedDate: req.body.authorizedDate,
-    authorizedPhone: 7782415848,
+    authorizedPhone: req.body.authorizedPhone,
   });
 
-  makeReq();
-
   // Un comment to run the PDF saving python script
-  // saveToPDF(req);
+   saveToPDF(req);
 }
 
 exports.request_post = function (req, res, next) {

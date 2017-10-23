@@ -8,7 +8,7 @@ function saveToPDF(reqID) {
     mode: 'text',
 
     // TODO: REPLACE THIS PATH WITH ACTUAL SERVER'S PYTHON 3.XX PATH
-    // Path to python3 on the machine (USE which python3 TO FIND OUT   THAT PATH)
+    // Path to python3 on the machine (USE which python3 TO FIND OUT THAT PATH)
     pythonPath: '/Library/Frameworks/Python.framework/Versions/3.6/bin/python3',
     pythonOptions: ['-u'],
 
@@ -24,7 +24,7 @@ function saveToPDF(reqID) {
   PythonShell.run('pdfwriter.py', options, function (err, res) {
     if (err) {
       // TODO: ERRORS SUPRESSED ON PURPOSE
-      // console.log(err);
+       console.log(err);
     } else {
       // Print statements in the script are returned as an array of strings (i.e res)
       console.log(res);
