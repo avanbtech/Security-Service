@@ -4,7 +4,7 @@ import Sequelize from 'sequelize';
 const Conn = new Sequelize(
   'demodb',
   'root',
-  'laroiya@1996',
+  'hooh392',
   {
     dialect: 'mysql',
     host: 'localhost',
