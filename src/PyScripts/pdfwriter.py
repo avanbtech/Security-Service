@@ -4,7 +4,7 @@ from PyPDF2 import PdfFileWriter, PdfFileReader
 from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import letter
 from reportlab.lib.units import cm
-import io, requests
+import io, requests, os
 import sys
 import json
 
@@ -68,6 +68,10 @@ output.addPage(page)
 
 # finally, write "output" to a real file
 # TODO: REPLACE THIS PATH WITH SCRIPT FOLDER IN PROJECT DIRECTORY
+
+if not (os.path.exists("ExportedPDFs/")):
+    os.makedirs("ExportedPDFs/")
+
 outputPath = "ExportedPDFs/" + sys.argv[1] + "_destination.pdf"
 outputStream = open(outputPath, "wb")
 output.write(outputStream)

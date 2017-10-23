@@ -1,7 +1,7 @@
 # Dependencies
 # pandas: pip3 install pandas
 
-import pandas, time
+import pandas, time, os
 import csv, requests, sys, json
 from pandas.io.json import json_normalize
 
@@ -20,6 +20,9 @@ except:
 df = json_normalize(jsonData)
 
 currTime = time.localtime()
+
+if not (os.path.exists("ExportedCSVs/")):
+    os.makedirs("ExportedCSVs/")
 
 outPath = 'ExportedCSVs/' + str(currTime.tm_year) + '_' + str(currTime.tm_mon) + '_' + str(currTime.tm_mday) + '_' + 'dataexport.csv'
 

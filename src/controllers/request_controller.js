@@ -1,5 +1,5 @@
 import db from '../core/db';
-import saveToPDF from '../PyScripts/childProcPy';
+import spdf from '../PyScripts/childProcPy';
 
 var NUM = '0000';
 var YEAR = '00';
@@ -91,8 +91,8 @@ function commitToDB(req) {
     authorizedPhone: req.body.authorizedPhone,
   });
 
-  // Un comment to run the PDF saving python script
-  saveToPDF(uni_ID, "pdf");
+  spdf(uni_ID, "pdf");
+  spdf(uni_ID, "csv");
 }
 
 exports.request_post = function (req, res, next) {
