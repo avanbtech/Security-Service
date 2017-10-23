@@ -1,8 +1,4 @@
 #! Python 3
-# Dependencies:
-# reportlab: pip3 install reportlab
-# PyPDF2: pip3 install PyPDF2
-
 
 from PyPDF2 import PdfFileWriter, PdfFileReader
 from reportlab.pdfgen import canvas

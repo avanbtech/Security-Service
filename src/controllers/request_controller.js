@@ -152,7 +152,6 @@ exports.request_post = function (req, res, next) {
 
   commitToDB(req);
 
-
   res.redirect('/');
 };
 
