@@ -14,11 +14,6 @@ Instructions to setup the python shell and scripts:
      (use command which python3 on your machine to find out this path)
 
   4. Replace scriptPath in the same file to PyScripts folder on your machine.
-     Copy the same path in the following files:
-     - pdfwriter.py (scroll all the way to bottom and modify two paths, marked
-       with TODO tags)
-       (append '/baseFrom.pdf' to end of the first one)
-       (append '/ExportedPDFs/' to end of the second one)
 
   5. Run npm install if you haven't done it in a while to install all the new
      node packages.

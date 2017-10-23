@@ -24,6 +24,10 @@ function exportDataTo(reqID, type) {
   scriptExec.on('close', (code) => {
     console.log("Process quit with code : " + code);
   });
+
+  scriptExec.stderr.on('data', (data) => {
+    console.log(`stderr: ${data}`);
+  });
 }
 
 export default (exportDataTo);
