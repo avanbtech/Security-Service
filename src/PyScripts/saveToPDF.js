@@ -24,7 +24,7 @@ function saveToPDF(reqID) {
   PythonShell.run('pdfwriter.py', options, function (err, res) {
     if (err) {
       // TODO: ERRORS SUPRESSED ON PURPOSE
-       console.log(err);
+      // console.log(err);
     } else {
       // Print statements in the script are returned as an array of strings (i.e res)
       console.log(res);

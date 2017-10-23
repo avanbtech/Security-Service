@@ -95,7 +95,7 @@ function commitToDB(req) {
   });
 
   // Un comment to run the PDF saving python script
-   saveToPDF(req);
+  // saveToPDF(uni_ID);
 }
 
 exports.request_post = function (req, res, next) {

@@ -23,7 +23,11 @@ requestString = '{request(accessID: ' + reqNum + '){date details accountCode aut
 r = requests.post('http://localhost:3001/graphql', data = {'query': requestString})
 
 
-req = json.loads(r.text)['data']['request'][0]
+
+if(len(json.loads(r.text)['data']['request']) >= 1):
+    req = json.loads(r.text)['data']['request'][0]
+else:
+    sys.exit(0)
 
 # GETTING X COORDINATE: SAME X AS IN GIMP
 # GETTING Y COORDINATE: LENGTH OF IMAGE IN GIMP - Y COORDINATE OF DESIRED LOCATION IN GIMP
