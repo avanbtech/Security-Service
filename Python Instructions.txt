@@ -10,7 +10,7 @@ Instructions to setup the python shell and scripts:
       - pip3 install selenium
       - pip3 install Faker
 
-  3. Go to src/PyScripts/saveToPDF.js and replace the python3 executable path
+  3. Go to src/PyScripts/pyoptions.js and replace the python3 executable path
      (use command which python3 on your machine to find out this path)
 
   4. Replace scriptPath in the same file to PyScripts folder on your machine.

@@ -1,5 +1,5 @@
 import db from '../core/db';
-import saveToPDF from '../PyScripts/saveToPDF';
+// import saveToPDF from '../PyScripts/childProcPy';
 
 var NUM = '0000';
 var YEAR = '00';
@@ -31,7 +31,6 @@ function IncNum() {
   while (NUM.length < 4) {
     NUM = '0' + NUM;
   }
-
   return NUM;
 }
 
@@ -93,7 +92,7 @@ function commitToDB(req) {
   });
 
   // Un comment to run the PDF saving python script
-  // saveToPDF(uni_ID);
+  // saveToPDF(uni_ID, "pdf");
 }
 
 exports.request_post = function (req, res, next) {

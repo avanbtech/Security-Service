@@ -1,6 +1,5 @@
 import Sequelize from 'sequelize';
 
-
 // Add your configuration for DB
 const Conn = new Sequelize(
   'demodb',
