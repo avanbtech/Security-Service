@@ -24,7 +24,7 @@ class checkStatus extends Component {
                 </Form.Field>
             </Form.Group>
             <IconButton 
-              tooltip="SVG Icon"
+              tooltip="Search"
               href="http://localhost:3001/StatusForm">
               <ActionHome />
             </IconButton>
