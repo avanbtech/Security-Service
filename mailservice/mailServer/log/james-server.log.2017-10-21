@@ -1,0 +1,434 @@
+INFO  18:14:37,562 | org.apache.james.container.spring.context.JamesServerApplicationContext | Refreshing org.apache.james.container.spring.context.JamesServerApplicationContext@59494225: startup date [Sat Oct 21 18:14:37 PDT 2017]; root of context hierarchy
+INFO  18:14:39,335 | org.apache.james.container.spring.context.JamesServerApplicationContext | Bean 'logprovider' of type [class org.apache.james.container.spring.lifecycle.LogProviderImpl] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+INFO  18:14:39,580 | james.mailrepositorystore | JamesMailStore init...
+INFO  18:14:39,587 | james.mailrepositorystore | Registering Repository instance of class org.apache.james.mailrepository.file.FileMailRepository to handle file protocol requests
+INFO  18:14:39,588 | james.mailrepositorystore | Registering Repository instance of class org.apache.james.mailrepository.jdbc.JDBCMailRepository to handle db protocol requests
+INFO  18:14:39,588 | james.mailrepositorystore | Registering Repository instance of class org.apache.james.mailrepository.jdbc.JDBCMailRepository to handle dbfile protocol requests
+INFO  18:14:39,589 | james.mailrepositorystore | Registering Repository instance of class org.apache.james.mailrepository.file.MBoxMailRepository to handle mbox protocol requests
+INFO  18:14:39,665 | james.dnsservice | Autodiscovery is enabled - trying to discover your system's DNS Servers
+INFO  18:14:39,671 | james.dnsservice | Adding autodiscovered server 192.168.1.254
+INFO  18:14:39,671 | james.dnsservice | Adding autodiscovered server 75.153.171.122
+INFO  18:14:39,671 | james.dnsservice | Adding autodiscovered search path telus.
+INFO  18:14:39,672 | james.dnsservice | DNS Server is: 192.168.1.254
+INFO  18:14:39,672 | james.dnsservice | DNS Server is: 75.153.171.122
+INFO  18:14:39,678 | james.dnsservice | Registered cache, resolver and search paths as DNSJava defaults
+INFO  18:14:47,345 | james.domainlist | Set autodetect to: true
+INFO  18:14:47,345 | james.domainlist | Set autodetectIP to: true
+ERROR 18:14:47,653 | org.apache.activemq.broker.BrokerService | Memory Usage for the Broker (1024 mb) is more than the maximum available for the JVM: 455 mb - resetting to 70% of maximum available: 318 mb
+INFO  18:14:47,670 | org.apache.james.queue.activemq.EmbeddedActiveMQ | Started embedded activeMq
+WARN  18:14:47,955 | james.mailetcontext | The specified postmaster address ( postmaster@localhost ) is not a local address.  This is not necessarily a problem, but it does mean that emails addressed to the postmaster will be routed to another server.  For some configurations this may cause problems.
+INFO  18:14:48,016 | james.mailprocessor | Matcher All instantiated.
+INFO  18:14:48,029 | james.mailprocessor | Mailet PostmasterAlias instantiated.
+INFO  18:14:48,032 | james.mailprocessor | Matcher RelayLimit=30 instantiated.
+INFO  18:14:48,035 | james.mailprocessor | Mailet Null instantiated.
+INFO  18:14:48,038 | james.mailprocessor | Matcher HasMailAttribute=spamChecked instantiated.
+INFO  18:14:48,041 | james.mailprocessor | Mailet ToProcessor instantiated.
+INFO  18:14:48,041 | james.mailprocessor | Matcher All instantiated.
+INFO  18:14:48,049 | james.mailprocessor | Mailet SetMailAttribute instantiated.
+INFO  18:14:48,051 | james.mailprocessor | Matcher SMTPAuthSuccessful instantiated.
+INFO  18:14:48,052 | james.mailprocessor | Mailet ToProcessor instantiated.
+INFO  18:14:48,052 | james.mailprocessor | Matcher All instantiated.
+INFO  18:14:48,052 | james.mailprocessor | Mailet ToProcessor instantiated.
+INFO  18:14:48,234 | james.mailprocessor | Matcher All instantiated.
+INFO  18:14:48,248 | james.mailrepositorystore | Init org.apache.james.repository.file.FilePersistentObjectRepository Store
+INFO  18:14:48,253 | james.mailrepositorystore | org.apache.james.repository.file.FilePersistentObjectRepository opened in ..\var\mail\error
+INFO  18:14:48,254 | james.mailrepositorystore | Init org.apache.james.repository.file.FilePersistentStreamRepository Store
+INFO  18:14:48,254 | james.mailrepositorystore | org.apache.james.repository.file.FilePersistentStreamRepository opened in ..\var\mail\error
+INFO  18:14:48,256 | james.mailrepositorystore | Init org.apache.james.repository.file.FilePersistentObjectRepository Store
+INFO  18:14:48,256 | james.mailrepositorystore | org.apache.james.repository.file.FilePersistentObjectRepository opened in ..\var\mail\error
+INFO  18:14:48,256 | james.mailrepositorystore | Init org.apache.james.repository.file.FilePersistentStreamRepository Store
+INFO  18:14:48,256 | james.mailrepositorystore | org.apache.james.repository.file.FilePersistentStreamRepository opened in ..\var\mail\error
+INFO  18:14:48,258 | james.mailrepositorystore | added repository: file://var/mail/error/->org.apache.james.mailrepository.file.FileMailRepository
+INFO  18:14:48,258 | james.mailprocessor | Mailet ToRepository instantiated.
+INFO  18:14:48,276 | james.mailprocessor | Matcher SMTPAuthSuccessful instantiated.
+INFO  18:14:48,279 | james.mailprocessor | Mailet SetMimeHeader instantiated.
+INFO  18:14:48,279 | james.mailprocessor | Matcher HasMailAttribute=org.apache.james.SMIMECheckSignature instantiated.
+INFO  18:14:48,280 | james.mailprocessor | Mailet SetMimeHeader instantiated.
+INFO  18:14:48,280 | james.mailprocessor | Matcher All instantiated.
+INFO  18:14:48,292 | james.mailprocessor | Mailet RecipientRewriteTable instantiated.
+INFO  18:14:48,294 | james.mailprocessor | Matcher SenderIsLocal instantiated.
+INFO  18:14:48,363 | james.mailprocessor | Mailet ToSenderFolder instantiated.
+INFO  18:14:48,366 | james.mailprocessor | Matcher RecipientIsLocal instantiated.
+INFO  18:14:48,386 | james.mailprocessor | Mailet Sieve instantiated.
+INFO  18:14:48,386 | james.mailprocessor | Matcher RecipientIsLocal instantiated.
+INFO  18:14:48,389 | james.mailprocessor | Mailet AddDeliveredToHeader instantiated.
+INFO  18:14:48,389 | james.mailprocessor | Matcher RecipientIsLocal instantiated.
+INFO  18:14:48,394 | james.mailprocessor | Mailet LocalDelivery instantiated.
+INFO  18:14:48,397 | james.mailprocessor | Matcher HostIsLocal instantiated.
+INFO  18:14:48,397 | james.mailprocessor | Mailet ToProcessor instantiated.
+INFO  18:14:48,422 | james.mailetcontext | Authorized addresses: [127.0.0.1/255.255.255.255]
+INFO  18:14:48,422 | james.mailprocessor | Matcher RemoteAddrNotInNetwork=127.0.0.1 instantiated.
+INFO  18:14:48,424 | james.mailprocessor | Mailet ToProcessor instantiated.
+INFO  18:14:48,424 | james.mailprocessor | Matcher All instantiated.
+WARN  18:14:48,433 | org.apache.james.transport.mailets.remoteDelivery.DelaysAndMaxRetry | maxRetries is larger than total number of attempts specified. Increasing last delayTime with 22 attempts 
+WARN  18:14:48,433 | org.apache.james.transport.mailets.remoteDelivery.DelaysAndMaxRetry | Delay of 500000 msecs is now attempted: 1 times
+INFO  18:14:48,469 | james.mailprocessor | Mailet RemoteDelivery instantiated.
+INFO  18:14:48,548 | james.mailprocessor | Matcher All instantiated.
+INFO  18:14:48,552 | james.mailprocessor | Mailet MetricsMailet instantiated.
+INFO  18:14:48,552 | james.mailprocessor | Matcher All instantiated.
+INFO  18:14:48,559 | james.mailprocessor | Mailet Bounce instantiated.
+INFO  18:14:48,559 | james.mailprocessor | Matcher All instantiated.
+INFO  18:14:48,561 | james.mailrepositorystore | Init org.apache.james.repository.file.FilePersistentObjectRepository Store
+INFO  18:14:48,562 | james.mailrepositorystore | org.apache.james.repository.file.FilePersistentObjectRepository opened in ..\var\mail\over-quota-error
+INFO  18:14:48,563 | james.mailrepositorystore | Init org.apache.james.repository.file.FilePersistentStreamRepository Store
+INFO  18:14:48,563 | james.mailrepositorystore | org.apache.james.repository.file.FilePersistentStreamRepository opened in ..\var\mail\over-quota-error
+INFO  18:14:48,563 | james.mailrepositorystore | Init org.apache.james.repository.file.FilePersistentObjectRepository Store
+INFO  18:14:48,563 | james.mailrepositorystore | org.apache.james.repository.file.FilePersistentObjectRepository opened in ..\var\mail\over-quota-error
+INFO  18:14:48,564 | james.mailrepositorystore | Init org.apache.james.repository.file.FilePersistentStreamRepository Store
+INFO  18:14:48,564 | james.mailrepositorystore | org.apache.james.repository.file.FilePersistentStreamRepository opened in ..\var\mail\over-quota-error
+INFO  18:14:48,565 | james.mailrepositorystore | added repository: file://var/mail/over-quota-error/->org.apache.james.mailrepository.file.FileMailRepository
+INFO  18:14:48,565 | james.mailprocessor | Mailet ToRepository instantiated.
+INFO  18:14:48,590 | james.mailprocessor | Matcher All instantiated.
+INFO  18:14:48,591 | james.mailrepositorystore | Init org.apache.james.repository.file.FilePersistentObjectRepository Store
+INFO  18:14:48,593 | james.mailrepositorystore | org.apache.james.repository.file.FilePersistentObjectRepository opened in ..\var\mail\spam
+INFO  18:14:48,593 | james.mailrepositorystore | Init org.apache.james.repository.file.FilePersistentStreamRepository Store
+INFO  18:14:48,593 | james.mailrepositorystore | org.apache.james.repository.file.FilePersistentStreamRepository opened in ..\var\mail\spam
+INFO  18:14:48,594 | james.mailrepositorystore | Init org.apache.james.repository.file.FilePersistentObjectRepository Store
+INFO  18:14:48,594 | james.mailrepositorystore | org.apache.james.repository.file.FilePersistentObjectRepository opened in ..\var\mail\spam
+INFO  18:14:48,594 | james.mailrepositorystore | Init org.apache.james.repository.file.FilePersistentStreamRepository Store
+INFO  18:14:48,594 | james.mailrepositorystore | org.apache.james.repository.file.FilePersistentStreamRepository opened in ..\var\mail\spam
+INFO  18:14:48,595 | james.mailrepositorystore | added repository: file://var/mail/spam/->org.apache.james.mailrepository.file.FileMailRepository
+INFO  18:14:48,595 | james.mailprocessor | Mailet ToRepository instantiated.
+INFO  18:14:48,607 | james.mailprocessor | Matcher All instantiated.
+INFO  18:14:48,609 | james.mailprocessor | Mailet SetMailAttribute instantiated.
+INFO  18:14:48,609 | james.mailprocessor | Matcher SMTPAuthSuccessful instantiated.
+INFO  18:14:48,610 | james.mailprocessor | Mailet Bounce instantiated.
+INFO  18:14:48,610 | james.mailprocessor | Matcher All instantiated.
+INFO  18:14:48,610 | james.mailprocessor | Mailet Null instantiated.
+INFO  18:14:48,643 | james.mailprocessor | Matcher All instantiated.
+INFO  18:14:48,644 | james.mailrepositorystore | Init org.apache.james.repository.file.FilePersistentObjectRepository Store
+INFO  18:14:48,648 | james.mailrepositorystore | org.apache.james.repository.file.FilePersistentObjectRepository opened in ..\var\mail\address-error
+INFO  18:14:48,648 | james.mailrepositorystore | Init org.apache.james.repository.file.FilePersistentStreamRepository Store
+INFO  18:14:48,648 | james.mailrepositorystore | org.apache.james.repository.file.FilePersistentStreamRepository opened in ..\var\mail\address-error
+INFO  18:14:48,649 | james.mailrepositorystore | Init org.apache.james.repository.file.FilePersistentObjectRepository Store
+INFO  18:14:48,649 | james.mailrepositorystore | org.apache.james.repository.file.FilePersistentObjectRepository opened in ..\var\mail\address-error
+INFO  18:14:48,649 | james.mailrepositorystore | Init org.apache.james.repository.file.FilePersistentStreamRepository Store
+INFO  18:14:48,649 | james.mailrepositorystore | org.apache.james.repository.file.FilePersistentStreamRepository opened in ..\var\mail\address-error
+INFO  18:14:48,650 | james.mailrepositorystore | added repository: file://var/mail/address-error/->org.apache.james.mailrepository.file.FileMailRepository
+INFO  18:14:48,650 | james.mailprocessor | Mailet ToRepository instantiated.
+INFO  18:14:48,664 | james.mailprocessor | Matcher All instantiated.
+INFO  18:14:48,665 | james.mailrepositorystore | Init org.apache.james.repository.file.FilePersistentObjectRepository Store
+INFO  18:14:48,666 | james.mailrepositorystore | org.apache.james.repository.file.FilePersistentObjectRepository opened in ..\var\mail\relay-denied
+INFO  18:14:48,666 | james.mailrepositorystore | Init org.apache.james.repository.file.FilePersistentStreamRepository Store
+INFO  18:14:48,667 | james.mailrepositorystore | org.apache.james.repository.file.FilePersistentStreamRepository opened in ..\var\mail\relay-denied
+INFO  18:14:48,667 | james.mailrepositorystore | Init org.apache.james.repository.file.FilePersistentObjectRepository Store
+INFO  18:14:48,667 | james.mailrepositorystore | org.apache.james.repository.file.FilePersistentObjectRepository opened in ..\var\mail\relay-denied
+INFO  18:14:48,667 | james.mailrepositorystore | Init org.apache.james.repository.file.FilePersistentStreamRepository Store
+INFO  18:14:48,668 | james.mailrepositorystore | org.apache.james.repository.file.FilePersistentStreamRepository opened in ..\var\mail\relay-denied
+INFO  18:14:48,668 | james.mailrepositorystore | added repository: file://var/mail/relay-denied/->org.apache.james.mailrepository.file.FileMailRepository
+INFO  18:14:48,668 | james.mailprocessor | Mailet ToRepository instantiated.
+INFO  18:14:48,678 | james.mailprocessor | Matcher All instantiated.
+INFO  18:14:48,689 | james.mailprocessor | Mailet DSNBounce instantiated.
+INFO  18:14:48,702 | james.mailspooler | org.apache.james.mailetcontainer.impl.JamesMailSpooler init...
+INFO  18:14:48,702 | james.mailspooler | org.apache.james.mailetcontainer.impl.JamesMailSpooler uses 20 Thread(s)
+INFO  18:14:48,705 | james.mailspooler | Run org.apache.james.mailetcontainer.impl.JamesMailSpooler: dequeuer-1
+INFO  18:14:48,705 | james.mailspooler | Run org.apache.james.mailetcontainer.impl.JamesMailSpooler: dequeuer-2
+INFO  18:14:48,705 | james.mailspooler | Queue=MailQueue:spool
+INFO  18:14:48,705 | james.mailspooler | Queue=MailQueue:spool
+INFO  18:14:48,718 | james.fetchmail | FetchMail Disabled
+INFO  18:14:48,735 | james.smtpserver | SMTP Service bound to: 0.0.0.0:25
+INFO  18:14:48,735 | james.smtpserver | SMTP Service is running on: Daniel
+INFO  18:14:48,736 | james.smtpserver | SMTP Service handler hello name is: Daniel
+INFO  18:14:48,737 | james.smtpserver | SMTP Service handler connection timeout is: 360
+INFO  18:14:48,737 | james.smtpserver | SMTP Service connection backlog is: 200
+INFO  18:14:48,737 | james.smtpserver | This SMTP server does not require authentication.
+INFO  18:14:48,737 | james.smtpserver | No maximum message size is enforced for this server.
+INFO  18:14:48,903 | james.smtpserver | Init SMTP Service done
+INFO  18:14:48,909 | james.lmtpserver | LMTP Service disabled by configuration
+INFO  18:14:48,913 | james.pop3server | POP3 Service bound to: 0.0.0.0:110
+INFO  18:14:48,914 | james.pop3server | POP3 Service is running on: Daniel
+INFO  18:14:48,914 | james.pop3server | POP3 Service handler hello name is: Daniel
+INFO  18:14:48,914 | james.pop3server | POP3 Service handler connection timeout is: 1200
+INFO  18:14:48,914 | james.pop3server | POP3 Service connection backlog is: 200
+INFO  18:14:48,973 | james.pop3server | Init POP3 Service done
+INFO  18:14:49,156 | james.imapserver | IMAP Service bound to: 0.0.0.0:143
+INFO  18:14:49,156 | james.imapserver | IMAP Service is running on: Daniel
+INFO  18:14:49,157 | james.imapserver | IMAP Service handler hello name is: Daniel
+INFO  18:14:49,157 | james.imapserver | IMAP Service handler connection timeout is: 300
+INFO  18:14:49,157 | james.imapserver | IMAP Service connection backlog is: 200
+INFO  18:14:49,175 | james.imapserver | Init IMAP Service done
+INFO  18:14:50,517 | org.apache.james.app.spring.JamesAppSpringMain | Apache James Server is successfully started in 13045 milliseconds.
+INFO  18:18:49,914 | james.smtpserver | Id='1249928836' User='' Connection established from 127.0.0.1
+INFO  18:20:20,298 | james.smtpserver | Id='254911512' User='' Connection established from 0:0:0:0:0:0:0:1
+INFO  20:16:58,974 | james.smtpserver | Id='254911512' User='' Connection closed for 0:0:0:0:0:0:0:1
+INFO  20:16:58,978 | james.smtpserver | Id='254911512' User='' Connection closed for 0:0:0:0:0:0:0:1
+INFO  20:16:58,978 | james.smtpserver | Id='1249928836' User='' Connection closed for 127.0.0.1
+ERROR 20:16:58,978 | james.smtpserver | Id='254911512' User='' Unable to process request
+java.nio.channels.ClosedChannelException
+	at org.jboss.netty.handler.stream.ChunkedWriteHandler.discard(ChunkedWriteHandler.java:168)
+	at org.jboss.netty.handler.stream.ChunkedWriteHandler.flush(ChunkedWriteHandler.java:192)
+	at org.jboss.netty.handler.stream.ChunkedWriteHandler.handleDownstream(ChunkedWriteHandler.java:121)
+	at org.jboss.netty.channel.DefaultChannelPipeline.sendDownstream(DefaultChannelPipeline.java:591)
+	at org.jboss.netty.channel.DefaultChannelPipeline$DefaultChannelHandlerContext.sendDownstream(DefaultChannelPipeline.java:784)
+	at org.jboss.netty.handler.execution.ExecutionHandler.handleDownstream(ExecutionHandler.java:176)
+	at org.jboss.netty.channel.DefaultChannelPipeline.sendDownstream(DefaultChannelPipeline.java:591)
+	at org.jboss.netty.channel.DefaultChannelPipeline.sendDownstream(DefaultChannelPipeline.java:582)
+	at org.jboss.netty.channel.Channels.write(Channels.java:704)
+	at org.jboss.netty.channel.Channels.write(Channels.java:671)
+	at org.jboss.netty.channel.AbstractChannel.write(AbstractChannel.java:347)
+	at org.apache.james.protocols.netty.NettyProtocolTransport.writeToClient(NettyProtocolTransport.java:116)
+	at org.apache.james.protocols.api.AbstractProtocolTransport.writeResponseToClient(AbstractProtocolTransport.java:150)
+	at org.apache.james.protocols.api.AbstractProtocolTransport.writeResponse(AbstractProtocolTransport.java:67)
+	at org.apache.james.protocols.netty.BasicChannelUpstreamHandler.channelConnected(BasicChannelUpstreamHandler.java:104)
+	at org.apache.james.smtpserver.netty.SMTPChannelUpstreamHandler.channelConnected(SMTPChannelUpstreamHandler.java:55)
+	at org.jboss.netty.channel.SimpleChannelUpstreamHandler.handleUpstream(SimpleChannelUpstreamHandler.java:100)
+	at org.jboss.netty.channel.DefaultChannelPipeline.sendUpstream(DefaultChannelPipeline.java:564)
+	at org.jboss.netty.channel.DefaultChannelPipeline$DefaultChannelHandlerContext.sendUpstream(DefaultChannelPipeline.java:791)
+	at org.jboss.netty.channel.SimpleChannelUpstreamHandler.channelConnected(SimpleChannelUpstreamHandler.java:191)
+	at org.jboss.netty.channel.SimpleChannelUpstreamHandler.handleUpstream(SimpleChannelUpstreamHandler.java:100)
+	at org.jboss.netty.channel.DefaultChannelPipeline.sendUpstream(DefaultChannelPipeline.java:564)
+	at org.jboss.netty.channel.DefaultChannelPipeline$DefaultChannelHandlerContext.sendUpstream(DefaultChannelPipeline.java:791)
+	at org.jboss.netty.handler.execution.ChannelUpstreamEventRunnable.doRun(ChannelUpstreamEventRunnable.java:43)
+	at org.jboss.netty.handler.execution.ChannelEventRunnable.run(ChannelEventRunnable.java:67)
+	at org.jboss.netty.handler.execution.OrderedMemoryAwareThreadPoolExecutor$ChildExecutor.run(OrderedMemoryAwareThreadPoolExecutor.java:314)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+ERROR 20:16:58,978 | james.smtpserver | Id='1249928836' User='' Unable to process request
+java.nio.channels.ClosedChannelException
+	at org.jboss.netty.handler.stream.ChunkedWriteHandler.discard(ChunkedWriteHandler.java:168)
+	at org.jboss.netty.handler.stream.ChunkedWriteHandler.flush(ChunkedWriteHandler.java:192)
+	at org.jboss.netty.handler.stream.ChunkedWriteHandler.handleDownstream(ChunkedWriteHandler.java:121)
+	at org.jboss.netty.channel.DefaultChannelPipeline.sendDownstream(DefaultChannelPipeline.java:591)
+	at org.jboss.netty.channel.DefaultChannelPipeline$DefaultChannelHandlerContext.sendDownstream(DefaultChannelPipeline.java:784)
+	at org.jboss.netty.handler.execution.ExecutionHandler.handleDownstream(ExecutionHandler.java:176)
+	at org.jboss.netty.channel.DefaultChannelPipeline.sendDownstream(DefaultChannelPipeline.java:591)
+	at org.jboss.netty.channel.DefaultChannelPipeline.sendDownstream(DefaultChannelPipeline.java:582)
+	at org.jboss.netty.channel.Channels.write(Channels.java:704)
+	at org.jboss.netty.channel.Channels.write(Channels.java:671)
+	at org.jboss.netty.channel.AbstractChannel.write(AbstractChannel.java:347)
+	at org.apache.james.protocols.netty.NettyProtocolTransport.writeToClient(NettyProtocolTransport.java:116)
+	at org.apache.james.protocols.api.AbstractProtocolTransport.writeResponseToClient(AbstractProtocolTransport.java:150)
+	at org.apache.james.protocols.api.AbstractProtocolTransport.writeResponse(AbstractProtocolTransport.java:67)
+	at org.apache.james.protocols.netty.BasicChannelUpstreamHandler.channelConnected(BasicChannelUpstreamHandler.java:104)
+	at org.apache.james.smtpserver.netty.SMTPChannelUpstreamHandler.channelConnected(SMTPChannelUpstreamHandler.java:55)
+	at org.jboss.netty.channel.SimpleChannelUpstreamHandler.handleUpstream(SimpleChannelUpstreamHandler.java:100)
+	at org.jboss.netty.channel.DefaultChannelPipeline.sendUpstream(DefaultChannelPipeline.java:564)
+	at org.jboss.netty.channel.DefaultChannelPipeline$DefaultChannelHandlerContext.sendUpstream(DefaultChannelPipeline.java:791)
+	at org.jboss.netty.channel.SimpleChannelUpstreamHandler.channelConnected(SimpleChannelUpstreamHandler.java:191)
+	at org.jboss.netty.channel.SimpleChannelUpstreamHandler.handleUpstream(SimpleChannelUpstreamHandler.java:100)
+	at org.jboss.netty.channel.DefaultChannelPipeline.sendUpstream(DefaultChannelPipeline.java:564)
+	at org.jboss.netty.channel.DefaultChannelPipeline$DefaultChannelHandlerContext.sendUpstream(DefaultChannelPipeline.java:791)
+	at org.jboss.netty.handler.execution.ChannelUpstreamEventRunnable.doRun(ChannelUpstreamEventRunnable.java:43)
+	at org.jboss.netty.handler.execution.ChannelEventRunnable.run(ChannelEventRunnable.java:67)
+	at org.jboss.netty.handler.execution.OrderedMemoryAwareThreadPoolExecutor$ChildExecutor.run(OrderedMemoryAwareThreadPoolExecutor.java:314)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+INFO  20:16:58,979 | james.smtpserver | Id='1249928836' User='' Connection closed for 127.0.0.1
+ERROR 20:16:58,987 | james.smtpserver | Id='1249928836' User='' Unable to process request
+java.nio.channels.ClosedChannelException
+	at org.jboss.netty.handler.stream.ChunkedWriteHandler.discard(ChunkedWriteHandler.java:168)
+	at org.jboss.netty.handler.stream.ChunkedWriteHandler.flush(ChunkedWriteHandler.java:192)
+	at org.jboss.netty.handler.stream.ChunkedWriteHandler.handleDownstream(ChunkedWriteHandler.java:121)
+	at org.jboss.netty.channel.DefaultChannelPipeline.sendDownstream(DefaultChannelPipeline.java:591)
+	at org.jboss.netty.channel.DefaultChannelPipeline$DefaultChannelHandlerContext.sendDownstream(DefaultChannelPipeline.java:784)
+	at org.jboss.netty.handler.execution.ExecutionHandler.handleDownstream(ExecutionHandler.java:176)
+	at org.jboss.netty.channel.DefaultChannelPipeline.sendDownstream(DefaultChannelPipeline.java:591)
+	at org.jboss.netty.channel.DefaultChannelPipeline.sendDownstream(DefaultChannelPipeline.java:582)
+	at org.jboss.netty.channel.Channels.write(Channels.java:704)
+	at org.jboss.netty.channel.Channels.write(Channels.java:671)
+	at org.jboss.netty.channel.AbstractChannel.write(AbstractChannel.java:347)
+	at org.apache.james.protocols.netty.NettyProtocolTransport.writeToClient(NettyProtocolTransport.java:116)
+	at org.apache.james.protocols.api.AbstractProtocolTransport.writeResponseToClient(AbstractProtocolTransport.java:150)
+	at org.apache.james.protocols.api.AbstractProtocolTransport.writeResponse(AbstractProtocolTransport.java:67)
+	at org.apache.james.protocols.netty.BasicChannelUpstreamHandler.messageReceived(BasicChannelUpstreamHandler.java:157)
+	at org.apache.james.smtpserver.netty.SMTPChannelUpstreamHandler.messageReceived(SMTPChannelUpstreamHandler.java:61)
+	at org.jboss.netty.channel.SimpleChannelUpstreamHandler.handleUpstream(SimpleChannelUpstreamHandler.java:70)
+	at org.jboss.netty.channel.DefaultChannelPipeline.sendUpstream(DefaultChannelPipeline.java:564)
+	at org.jboss.netty.channel.DefaultChannelPipeline$DefaultChannelHandlerContext.sendUpstream(DefaultChannelPipeline.java:791)
+	at org.jboss.netty.channel.SimpleChannelUpstreamHandler.messageReceived(SimpleChannelUpstreamHandler.java:124)
+	at org.jboss.netty.channel.SimpleChannelUpstreamHandler.handleUpstream(SimpleChannelUpstreamHandler.java:70)
+	at org.jboss.netty.channel.DefaultChannelPipeline.sendUpstream(DefaultChannelPipeline.java:564)
+	at org.jboss.netty.channel.DefaultChannelPipeline$DefaultChannelHandlerContext.sendUpstream(DefaultChannelPipeline.java:791)
+	at org.jboss.netty.handler.execution.ChannelUpstreamEventRunnable.doRun(ChannelUpstreamEventRunnable.java:43)
+	at org.jboss.netty.handler.execution.ChannelEventRunnable.run(ChannelEventRunnable.java:67)
+	at org.jboss.netty.handler.execution.OrderedMemoryAwareThreadPoolExecutor$ChildExecutor.run(OrderedMemoryAwareThreadPoolExecutor.java:314)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+ERROR 20:16:58,989 | james.smtpserver | Id='1249928836' User='' Unable to process request
+java.nio.channels.ClosedChannelException
+	at org.jboss.netty.handler.stream.ChunkedWriteHandler.discard(ChunkedWriteHandler.java:168)
+	at org.jboss.netty.handler.stream.ChunkedWriteHandler.flush(ChunkedWriteHandler.java:192)
+	at org.jboss.netty.handler.stream.ChunkedWriteHandler.handleDownstream(ChunkedWriteHandler.java:121)
+	at org.jboss.netty.channel.DefaultChannelPipeline.sendDownstream(DefaultChannelPipeline.java:591)
+	at org.jboss.netty.channel.DefaultChannelPipeline$DefaultChannelHandlerContext.sendDownstream(DefaultChannelPipeline.java:784)
+	at org.jboss.netty.handler.execution.ExecutionHandler.handleDownstream(ExecutionHandler.java:176)
+	at org.jboss.netty.channel.DefaultChannelPipeline.sendDownstream(DefaultChannelPipeline.java:591)
+	at org.jboss.netty.channel.DefaultChannelPipeline.sendDownstream(DefaultChannelPipeline.java:582)
+	at org.jboss.netty.channel.Channels.write(Channels.java:704)
+	at org.jboss.netty.channel.Channels.write(Channels.java:671)
+	at org.jboss.netty.channel.AbstractChannel.write(AbstractChannel.java:347)
+	at org.apache.james.protocols.netty.NettyProtocolTransport.writeToClient(NettyProtocolTransport.java:116)
+	at org.apache.james.protocols.api.AbstractProtocolTransport.writeResponseToClient(AbstractProtocolTransport.java:150)
+	at org.apache.james.protocols.api.AbstractProtocolTransport.writeResponse(AbstractProtocolTransport.java:67)
+	at org.apache.james.protocols.netty.BasicChannelUpstreamHandler.messageReceived(BasicChannelUpstreamHandler.java:157)
+	at org.apache.james.smtpserver.netty.SMTPChannelUpstreamHandler.messageReceived(SMTPChannelUpstreamHandler.java:61)
+	at org.jboss.netty.channel.SimpleChannelUpstreamHandler.handleUpstream(SimpleChannelUpstreamHandler.java:70)
+	at org.jboss.netty.channel.DefaultChannelPipeline.sendUpstream(DefaultChannelPipeline.java:564)
+	at org.jboss.netty.channel.DefaultChannelPipeline$DefaultChannelHandlerContext.sendUpstream(DefaultChannelPipeline.java:791)
+	at org.jboss.netty.channel.SimpleChannelUpstreamHandler.messageReceived(SimpleChannelUpstreamHandler.java:124)
+	at org.jboss.netty.channel.SimpleChannelUpstreamHandler.handleUpstream(SimpleChannelUpstreamHandler.java:70)
+	at org.jboss.netty.channel.DefaultChannelPipeline.sendUpstream(DefaultChannelPipeline.java:564)
+	at org.jboss.netty.channel.DefaultChannelPipeline$DefaultChannelHandlerContext.sendUpstream(DefaultChannelPipeline.java:791)
+	at org.jboss.netty.handler.execution.ChannelUpstreamEventRunnable.doRun(ChannelUpstreamEventRunnable.java:43)
+	at org.jboss.netty.handler.execution.ChannelEventRunnable.run(ChannelEventRunnable.java:67)
+	at org.jboss.netty.handler.execution.OrderedMemoryAwareThreadPoolExecutor$ChildExecutor.run(OrderedMemoryAwareThreadPoolExecutor.java:314)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+ERROR 20:16:58,994 | james.smtpserver | Id='1249928836' User='' Unable to process request
+java.nio.channels.ClosedChannelException
+	at org.jboss.netty.handler.stream.ChunkedWriteHandler.discard(ChunkedWriteHandler.java:168)
+	at org.jboss.netty.handler.stream.ChunkedWriteHandler.flush(ChunkedWriteHandler.java:192)
+	at org.jboss.netty.handler.stream.ChunkedWriteHandler.handleDownstream(ChunkedWriteHandler.java:121)
+	at org.jboss.netty.channel.DefaultChannelPipeline.sendDownstream(DefaultChannelPipeline.java:591)
+	at org.jboss.netty.channel.DefaultChannelPipeline$DefaultChannelHandlerContext.sendDownstream(DefaultChannelPipeline.java:784)
+	at org.jboss.netty.handler.execution.ExecutionHandler.handleDownstream(ExecutionHandler.java:176)
+	at org.jboss.netty.channel.DefaultChannelPipeline.sendDownstream(DefaultChannelPipeline.java:591)
+	at org.jboss.netty.channel.DefaultChannelPipeline.sendDownstream(DefaultChannelPipeline.java:582)
+	at org.jboss.netty.channel.Channels.write(Channels.java:704)
+	at org.jboss.netty.channel.Channels.write(Channels.java:671)
+	at org.jboss.netty.channel.AbstractChannel.write(AbstractChannel.java:347)
+	at org.apache.james.protocols.netty.NettyProtocolTransport.writeToClient(NettyProtocolTransport.java:116)
+	at org.apache.james.protocols.api.AbstractProtocolTransport.writeResponseToClient(AbstractProtocolTransport.java:150)
+	at org.apache.james.protocols.api.AbstractProtocolTransport.writeResponse(AbstractProtocolTransport.java:67)
+	at org.apache.james.protocols.netty.BasicChannelUpstreamHandler.messageReceived(BasicChannelUpstreamHandler.java:157)
+	at org.apache.james.smtpserver.netty.SMTPChannelUpstreamHandler.messageReceived(SMTPChannelUpstreamHandler.java:61)
+	at org.jboss.netty.channel.SimpleChannelUpstreamHandler.handleUpstream(SimpleChannelUpstreamHandler.java:70)
+	at org.jboss.netty.channel.DefaultChannelPipeline.sendUpstream(DefaultChannelPipeline.java:564)
+	at org.jboss.netty.channel.DefaultChannelPipeline$DefaultChannelHandlerContext.sendUpstream(DefaultChannelPipeline.java:791)
+	at org.jboss.netty.channel.SimpleChannelUpstreamHandler.messageReceived(SimpleChannelUpstreamHandler.java:124)
+	at org.jboss.netty.channel.SimpleChannelUpstreamHandler.handleUpstream(SimpleChannelUpstreamHandler.java:70)
+	at org.jboss.netty.channel.DefaultChannelPipeline.sendUpstream(DefaultChannelPipeline.java:564)
+	at org.jboss.netty.channel.DefaultChannelPipeline$DefaultChannelHandlerContext.sendUpstream(DefaultChannelPipeline.java:791)
+	at org.jboss.netty.handler.execution.ChannelUpstreamEventRunnable.doRun(ChannelUpstreamEventRunnable.java:43)
+	at org.jboss.netty.handler.execution.ChannelEventRunnable.run(ChannelEventRunnable.java:67)
+	at org.jboss.netty.handler.execution.OrderedMemoryAwareThreadPoolExecutor$ChildExecutor.run(OrderedMemoryAwareThreadPoolExecutor.java:314)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+INFO  20:16:59,675 | org.apache.james.container.spring.context.JamesServerApplicationContext | Closing org.apache.james.container.spring.context.JamesServerApplicationContext@59494225: startup date [Sat Oct 21 18:14:37 PDT 2017]; root of context hierarchy
+INFO  20:16:59,738 | james.imapserver | Dispose IMAP Service
+INFO  20:16:59,750 | james.imapserver | Dispose IMAP Service done
+INFO  20:16:59,751 | james.pop3server | Dispose POP3 Service
+INFO  20:16:59,760 | james.pop3server | Dispose POP3 Service done
+INFO  20:16:59,760 | james.lmtpserver | Dispose LMTP Service
+INFO  20:16:59,760 | james.lmtpserver | Dispose LMTP Service done
+INFO  20:16:59,760 | james.smtpserver | Dispose SMTP Service
+INFO  20:16:59,769 | james.smtpserver | Dispose SMTP Service done
+INFO  20:16:59,770 | james.mailspooler | org.apache.james.mailetcontainer.impl.JamesMailSpooler dispose...
+INFO  20:16:59,770 | james.mailspooler | org.apache.james.mailetcontainer.impl.JamesMailSpooler thread shutdown completed.
+INFO  20:16:59,775 | james.mailspooler | Stop org.apache.james.mailetcontainer.impl.JamesMailSpooler : dequeuer-2
+INFO  20:16:59,775 | james.mailspooler | Stop org.apache.james.mailetcontainer.impl.JamesMailSpooler : dequeuer-1
+ERROR 20:16:59,778 | org.apache.james.queue.jms.JMSMailQueue | Error while rolling session back
+javax.jms.IllegalStateException: The Session is closed
+	at org.apache.activemq.ActiveMQSession.checkClosed(ActiveMQSession.java:767)
+	at org.apache.activemq.ActiveMQSession.rollback(ActiveMQSession.java:588)
+	at org.apache.james.queue.jms.JMSMailQueue.rollback(JMSMailQueue.java:113)
+	at org.apache.james.queue.jms.JMSMailQueue.deQueue(JMSMailQueue.java:193)
+	at org.apache.james.transport.mailets.remoteDelivery.DeliveryRunnable.runStep(DeliveryRunnable.java:101)
+	at org.apache.james.transport.mailets.remoteDelivery.DeliveryRunnable.run(DeliveryRunnable.java:87)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+ERROR 20:16:59,781 | org.apache.james.queue.jms.JMSMailQueue | Error while rolling session back
+javax.jms.IllegalStateException: The Session is closed
+	at org.apache.activemq.ActiveMQSession.checkClosed(ActiveMQSession.java:767)
+	at org.apache.activemq.ActiveMQSession.rollback(ActiveMQSession.java:588)
+	at org.apache.james.queue.jms.JMSMailQueue.rollback(JMSMailQueue.java:113)
+	at org.apache.james.queue.jms.JMSMailQueue.deQueue(JMSMailQueue.java:193)
+	at org.apache.james.transport.mailets.remoteDelivery.DeliveryRunnable.runStep(DeliveryRunnable.java:101)
+	at org.apache.james.transport.mailets.remoteDelivery.DeliveryRunnable.run(DeliveryRunnable.java:87)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+ERROR 20:16:59,778 | org.apache.james.queue.jms.JMSMailQueue | Error while rolling session back
+javax.jms.IllegalStateException: The Session is closed
+	at org.apache.activemq.ActiveMQSession.checkClosed(ActiveMQSession.java:767)
+	at org.apache.activemq.ActiveMQSession.rollback(ActiveMQSession.java:588)
+	at org.apache.james.queue.jms.JMSMailQueue.rollback(JMSMailQueue.java:113)
+	at org.apache.james.queue.jms.JMSMailQueue.deQueue(JMSMailQueue.java:193)
+	at org.apache.james.transport.mailets.remoteDelivery.DeliveryRunnable.runStep(DeliveryRunnable.java:101)
+	at org.apache.james.transport.mailets.remoteDelivery.DeliveryRunnable.run(DeliveryRunnable.java:87)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+ERROR 20:16:59,778 | org.apache.james.queue.jms.JMSMailQueue | Error while rolling session back
+javax.jms.IllegalStateException: The Session is closed
+	at org.apache.activemq.ActiveMQSession.checkClosed(ActiveMQSession.java:767)
+	at org.apache.activemq.ActiveMQSession.rollback(ActiveMQSession.java:588)
+	at org.apache.james.queue.jms.JMSMailQueue.rollback(JMSMailQueue.java:113)
+	at org.apache.james.queue.jms.JMSMailQueue.deQueue(JMSMailQueue.java:193)
+	at org.apache.james.transport.mailets.remoteDelivery.DeliveryRunnable.runStep(DeliveryRunnable.java:101)
+	at org.apache.james.transport.mailets.remoteDelivery.DeliveryRunnable.run(DeliveryRunnable.java:87)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+ERROR 20:16:59,778 | org.apache.james.queue.jms.JMSMailQueue | Error while rolling session back
+javax.jms.IllegalStateException: The Session is closed
+	at org.apache.activemq.ActiveMQSession.checkClosed(ActiveMQSession.java:767)
+	at org.apache.activemq.ActiveMQSession.rollback(ActiveMQSession.java:588)
+	at org.apache.james.queue.jms.JMSMailQueue.rollback(JMSMailQueue.java:113)
+	at org.apache.james.queue.jms.JMSMailQueue.deQueue(JMSMailQueue.java:193)
+	at org.apache.james.transport.mailets.remoteDelivery.DeliveryRunnable.runStep(DeliveryRunnable.java:101)
+	at org.apache.james.transport.mailets.remoteDelivery.DeliveryRunnable.run(DeliveryRunnable.java:87)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+ERROR 20:16:59,778 | org.apache.james.queue.jms.JMSMailQueue | Error while rolling session back
+javax.jms.IllegalStateException: The Session is closed
+	at org.apache.activemq.ActiveMQSession.checkClosed(ActiveMQSession.java:767)
+	at org.apache.activemq.ActiveMQSession.rollback(ActiveMQSession.java:588)
+	at org.apache.james.queue.jms.JMSMailQueue.rollback(JMSMailQueue.java:113)
+	at org.apache.james.queue.jms.JMSMailQueue.deQueue(JMSMailQueue.java:193)
+	at org.apache.james.transport.mailets.remoteDelivery.DeliveryRunnable.runStep(DeliveryRunnable.java:101)
+	at org.apache.james.transport.mailets.remoteDelivery.DeliveryRunnable.run(DeliveryRunnable.java:87)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+ERROR 20:16:59,778 | org.apache.james.queue.jms.JMSMailQueue | Error while rolling session back
+javax.jms.IllegalStateException: The Session is closed
+	at org.apache.activemq.ActiveMQSession.checkClosed(ActiveMQSession.java:767)
+	at org.apache.activemq.ActiveMQSession.rollback(ActiveMQSession.java:588)
+	at org.apache.james.queue.jms.JMSMailQueue.rollback(JMSMailQueue.java:113)
+	at org.apache.james.queue.jms.JMSMailQueue.deQueue(JMSMailQueue.java:193)
+	at org.apache.james.transport.mailets.remoteDelivery.DeliveryRunnable.runStep(DeliveryRunnable.java:101)
+	at org.apache.james.transport.mailets.remoteDelivery.DeliveryRunnable.run(DeliveryRunnable.java:87)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+ERROR 20:16:59,778 | org.apache.james.queue.jms.JMSMailQueue | Error while rolling session back
+javax.jms.IllegalStateException: The Session is closed
+	at org.apache.activemq.ActiveMQSession.checkClosed(ActiveMQSession.java:767)
+	at org.apache.activemq.ActiveMQSession.rollback(ActiveMQSession.java:588)
+	at org.apache.james.queue.jms.JMSMailQueue.rollback(JMSMailQueue.java:113)
+	at org.apache.james.queue.jms.JMSMailQueue.deQueue(JMSMailQueue.java:193)
+	at org.apache.james.transport.mailets.remoteDelivery.DeliveryRunnable.runStep(DeliveryRunnable.java:101)
+	at org.apache.james.transport.mailets.remoteDelivery.DeliveryRunnable.run(DeliveryRunnable.java:87)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+ERROR 20:16:59,778 | org.apache.james.queue.jms.JMSMailQueue | Error while rolling session back
+javax.jms.IllegalStateException: The Session is closed
+	at org.apache.activemq.ActiveMQSession.checkClosed(ActiveMQSession.java:767)
+	at org.apache.activemq.ActiveMQSession.rollback(ActiveMQSession.java:588)
+	at org.apache.james.queue.jms.JMSMailQueue.rollback(JMSMailQueue.java:113)
+	at org.apache.james.queue.jms.JMSMailQueue.deQueue(JMSMailQueue.java:193)
+	at org.apache.james.transport.mailets.remoteDelivery.DeliveryRunnable.runStep(DeliveryRunnable.java:101)
+	at org.apache.james.transport.mailets.remoteDelivery.DeliveryRunnable.run(DeliveryRunnable.java:87)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+ERROR 20:16:59,778 | org.apache.james.queue.jms.JMSMailQueue | Error while rolling session back
+javax.jms.IllegalStateException: The Session is closed
+	at org.apache.activemq.ActiveMQSession.checkClosed(ActiveMQSession.java:767)
+	at org.apache.activemq.ActiveMQSession.rollback(ActiveMQSession.java:588)
+	at org.apache.james.queue.jms.JMSMailQueue.rollback(JMSMailQueue.java:113)
+	at org.apache.james.queue.jms.JMSMailQueue.deQueue(JMSMailQueue.java:193)
+	at org.apache.james.transport.mailets.remoteDelivery.DeliveryRunnable.runStep(DeliveryRunnable.java:101)
+	at org.apache.james.transport.mailets.remoteDelivery.DeliveryRunnable.run(DeliveryRunnable.java:87)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
