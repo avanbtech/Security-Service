@@ -15,6 +15,8 @@ import assets from './assets';
 import { port, auth, analytics } from './config';
 
 var expressValidator = require('express-validator');
+var forceSSL = require('express-force-ssl');
+//var httpsRedirect = require('express-https-redirect');
 
 const server = global.server = express();
 
@@ -33,6 +35,15 @@ server.use(cookieParser());
 server.use(bodyParser.urlencoded({ extended: true }));
 server.use(bodyParser.json());
 server.use(expressValidator());
+server.use(forceSSL);
+server.set('forceSSLOptions', {
+  enable301Redirects: true,
+  trustXFPHeader: false,
+  httpsPort: 3005,
+  sslRequiredMessage: 'SSL Required.'
+});
+
+//server.use('/', httpsRedirect());
 
 //
 // Authentication
@@ -152,7 +163,7 @@ An optional company name []:SFU */}
 const TLSPort = 3005;
 
 var fs = require('fs');
-var app = require('express')();
+var http = require('http');
 var https = require('https');
 
 //Set the options for creating the server, includes the TLS key and certification
@@ -161,10 +172,10 @@ var options = {
     cert : fs.readFileSync('server.crt')
 };
 
-app.get('/', function (req, res) {
-   res.send('Hello World!');
-});
 
+http.createServer(server).listen(port, () => {
+  console.log(`The http server is running at http://localhost:${port}/`);
+});
 //Creates the HTTPS/TLS server on TLSPort
 https.createServer(options, server).listen(TLSPort, () => {
      console.log('The HTTPS/TLS server is running on port ' + TLSPort);
@@ -173,7 +184,6 @@ https.createServer(options, server).listen(TLSPort, () => {
 //
 // Launch the server
 // -----------------------------------------------------------------------------
-server.listen(port, () => {
-  /* eslint-disable no-console */
-  console.log(`The server is running at http://localhost:${port}/`);
-});
+//server.listen(port, () => {
+ //console.log(`The server is running at http://localhost:${port}/`);
+//});
