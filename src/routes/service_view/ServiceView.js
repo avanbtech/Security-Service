@@ -12,6 +12,9 @@ function ServiceView({serviceRequests}) {
   }
   return (
     <div className={s.root}>
+      <div className={s.filter_container}>
+        <FilterForm />
+      </div>
       <div className={s.container}>
         <h1 className={s.title}>Service View</h1>
         <table className={s.service_request_table}>
