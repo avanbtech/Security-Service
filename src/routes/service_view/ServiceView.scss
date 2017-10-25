@@ -6,14 +6,6 @@
   overflow: auto;
 }
 
-.filter_container {
-    width: 200px;
-    margin-right: 10px;
-    float: left;
-    margin-bottom: 20px;
-    margin-top: 20px;
-}
-
 .container {
   margin: 0 auto;
   padding: 0 0 40px;
@@ -22,22 +14,18 @@
 }
 
 .filter {
-    margin-top: 20px;
-    margin-bottom: 20px;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 .filter_title {
-    line-height: 5px;
-    margin: 5px;
-    padding: 5px;
+  line-height: 5px;
+  margin: 5px;
+  padding: 5px;
 }
 
 .filter_options {
-    margin-left: 15px;
-}
-
-.button_container {
-    margin-left: 15px;
+  margin-left: 15px;
 }
 
 .news {
