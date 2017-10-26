@@ -32,6 +32,10 @@
   text-decoration: none;
 }
 
+.title {
+  font-weight: lighter;
+}
+
 table.service_request_table {
   width: 100%;
 }
@@ -40,6 +44,7 @@ table.service_request_table th {
   border-bottom: 2px solid black;
   padding-bottom: 10px;
   text-align: left;
+  font-weight: lighter;
 }
 
 table.service_request_table td {
