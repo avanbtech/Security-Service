@@ -15,7 +15,7 @@ import assets from './assets';
 import { port, auth, analytics } from './config';
 
 var expressValidator = require('express-validator');
-var forceSSL = require('express-force-ssl');
+//var forceSSL = require('express-force-ssl');
 //var httpsRedirect = require('express-https-redirect');
 
 const server = global.server = express();
@@ -35,13 +35,13 @@ server.use(cookieParser());
 server.use(bodyParser.urlencoded({ extended: true }));
 server.use(bodyParser.json());
 server.use(expressValidator());
-server.use(forceSSL);
-server.set('forceSSLOptions', {
-  enable301Redirects: true,
-  trustXFPHeader: false,
-  httpsPort: 3005,
-  sslRequiredMessage: 'SSL Required.'
-});
+//server.use(forceSSL);
+//server.set('forceSSLOptions', {
+//  enable301Redirects: true,
+//  trustXFPHeader: false,
+//  httpsPort: 3005,
+//  sslRequiredMessage: 'SSL Required.'
+//});
 
 //server.use('/', httpsRedirect());
 
@@ -160,6 +160,7 @@ An optional company name []:SFU */}
 
 // To be completed. Need to make it work for server and client side handshakes, and have client generate a certificate as necessary.
 
+const HttpPort = 3004;
 const TLSPort = 3005;
 
 var fs = require('fs');
@@ -172,8 +173,7 @@ var options = {
     cert : fs.readFileSync('server.crt')
 };
 
-
-http.createServer(server).listen(port, () => {
+http.createServer(server).listen(HttpPort, () => {
   console.log(`The http server is running at http://localhost:${port}/`);
 });
 //Creates the HTTPS/TLS server on TLSPort
@@ -184,6 +184,6 @@ https.createServer(options, server).listen(TLSPort, () => {
 //
 // Launch the server
 // -----------------------------------------------------------------------------
-//server.listen(port, () => {
- //console.log(`The server is running at http://localhost:${port}/`);
-//});
+server.listen(port, () => {
+ console.log(`The browsersync server is running at http://localhost:${port}/`);
+});
