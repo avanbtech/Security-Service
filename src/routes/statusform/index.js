@@ -1,5 +1,6 @@
 import React from 'react';
-import StatusForm from './statusform';
+
+import StatusForm from './StatusForm';
 
 export const path = '/StatusForm';
 export const action = async (state) => {
