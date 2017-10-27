@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
-import { Button, 	Form, Message } from 'semantic-ui-react'
+import { Button,  Form, Message } from 'semantic-ui-react'
 import TextField from "material-ui/TextField"
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import DatePicker from 'material-ui/DatePicker';
+import TimePicker from 'material-ui/TimePicker';
 import DropDownMenu from 'material-ui/DropDownMenu';
 import MenuItem from 'material-ui/MenuItem';
 import SelectField from 'material-ui/SelectField';
@@ -19,52 +20,52 @@ class FormExampleSubcomponentControl extends Component {
   state = {
     date:'',
     dateError:'',
-		department:'',
+    department:'',
     requestBy:'',
     requestByError:'',
-		id:'',
+    id:'',
     idError:'',
-		phone:'',
+    phone:'',
     phoneError:'',
-		fax:'',
+    fax:'',
     faxError:'',
-		email:'',
+    email:'',
     emailError:'',
-		nameOfEvent:'',
+    nameOfEvent:'',
     nameOfEventError:'',
-		location:'',
+    location:'',
     locationError:'',
-		numberOfAttendees:'',
+    numberOfAttendees:'',
     numberOfAttendeesError:'',
-		eventDate:'',
+    eventDate:'',
     eventDateError:'',
-		time:'',
+    time:'',
     timeError:'',
-		detail:'',
+    detail:'',
     accountCode:'',
     accountCodeError:'',
-		authorizedBy:'',
+    authorizedBy:'',
     authorizedByError:'',
-		authorizedID:'',
+    authorizedID:'',
     authorizedIDError:'',
-		authorizedDate:'',
+    authorizedDate:'',
     authorizedDateError:'',
-		authorizedSignature:'',
+    authorizedSignature:'',
     authorizedSignatureError:'',
-		authorizedPhone:'',
+    authorizedPhone:'',
     authorizedPhoneError:'',
     licensed:'',
     licensedError:''
-	}
+  }
 
 
-	change = e =>{
-		this.setState({
-			[e.target.name]: e.target.value
-		});
-	}
+  change = e =>{
+    this.setState({
+      [e.target.name]: e.target.value
+    });
+  }
 
-	validateDate = (inputDate) => {
+  validateDate = (inputDate) => {
     var requestDate = /([20]\d{2}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))/;
     if (!inputDate.match(requestDate) || Date.parse(inputDate) - Date.parse(new Date()) < 0){
       return false;
@@ -72,7 +73,7 @@ class FormExampleSubcomponentControl extends Component {
     return true;
   }
 
-	validate = () => {
+  validate = () => {
     let isError = false;
     const errors = {};
 
@@ -84,11 +85,19 @@ class FormExampleSubcomponentControl extends Component {
       errors.requestByError = "";
     }
 
-    if (!this.validateDate(this.state.date)){
+    /*if (!this.validateDate(this.state.date)){
       isError = true;
       errors.dateError = "Date should be in YYYY-MM-DD format";
     }
     else{
+      errors.dateError = "";
+    }*/
+
+    if ((Date.parse(this.state.date) - Date.parse(new Date())) < 0 ||  this.state.date.length == 0 ){
+      isError = true;
+      errors.dateError = "This field cannot be empty";
+    }
+    else {
       errors.dateError = "";
     }
 
@@ -156,24 +165,38 @@ class FormExampleSubcomponentControl extends Component {
       errors.numberOfAttendeesError = '';
     }
 
-    if(!this.validateDate(this.state.eventDate))
+    /*if(!this.validateDate(this.state.eventDate))
     {
       isError = true;
       errors.eventDateError = "Date should be in YYYY-MM-DD format";
     }
     else {
       errors.eventDateError = "";
+    }*/
+
+    if ((Date.parse(this.state.eventDate) - Date.parse(new Date())) < 0 ||  this.state.eventDate.length == 0 ){
+      isError = true;
+      errors.eventDateError = "This field cannot be empty";
+    }
+    else {
+      errors.eventDateError = "";
     }
 
-    var eventTime = /^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]/;
+    /*var eventTime = /^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]/;
     if (!this.state.time.match(eventTime) || this.state.time.replace(/\s/g, "").length == 0){
       isError = true;
       errors.timeError = "Time should be in HH:MM format";
     }
     else{
       errors.timeError = "";
+    }*/
+    if (this.state.time.length == 0){
+      isError = true;
+      errors.timeError = "Time should be in HH:MM format";
     }
-
+    else{
+      errors.timeError = "";
+    }
     var accountCode1 = /^\d{4}-\d{2}-\d{4}-\d{5}$/;
     var accountCode2 = /^\d{4}-\d{2}-?\d{8}$/;
     if (!this.state.accountCode.match(accountCode1) && !this.state.accountCode.match(accountCode2)){
@@ -184,12 +207,20 @@ class FormExampleSubcomponentControl extends Component {
       errors.accountCodeError = '';
     }
 
-    if (!this.validateDate(this.state.authorizedDate)){
+    /*if (!this.validateDate(this.state.authorizedDate)){
       isError = true;
       errors.authorizedDateError = "Date should be in YYYY-MM-DD format";
     }
     else{
         errors.authorizedDateError = "";
+    }*/
+
+    if ((Date.parse(this.state.authorizedDate) - Date.parse(new Date())) < 0 ||  this.state.authorizedDate.length == 0 ){
+      isError = true;
+      errors.authorizedDateError = "This field cannot be empty";
+    }
+    else {
+      errors.authorizedDateError = "";
     }
 
     if (this.state.authorizedBy.replace(/\s/g, "").length == 0 ){
@@ -240,63 +271,85 @@ class FormExampleSubcomponentControl extends Component {
     return isError;
   };
 
-	onSubmit = e =>{
+  onSubmit = e =>{
     const error = this.validate();
     if (error){
       e.preventDefault();
     }
-	};
+  };
 
 
-	handleChange = (e, { value }) => this.setState({ value })
+  handleChange = (e, { value }) => this.setState({ value })
 
 
   handleChangeMenu = (event, index, value) => this.setState({value});
 
 
   handleLicensedChecked = (e, {value}) => {
-	  this.setState({licensed: { value }.value});
+    this.setState({licensed: { value }.value});
   }
 
   handleDepartmentChange = (e, {value}) => {
     this.setState({department: {value}.value});
   }
 
+  handleChangedate = (event, date) => {
+    this.setState({
+      date: date,
+    });
+  }
+
+  handleChangeEvent = (event, date) => {
+    this.setState({
+      eventDate: date,
+    });
+  }
+
+  handleChangeAuthorizeDate = (event, date) => {
+    this.setState({
+      authorizedDate: date,
+    });
+  }
+
+  handleChangeTimePicker24 = (event, date) => {
+    this.setState({time: date});
+  };
+
   FormExampleSuccess = () => (
-	  <Form success>
-	    <Form.Input label='Email' placeholder='joe@schmoe.com' />
-	    <Message
-	      success
-	      header='Form Completed'
-	      content="You're all signed up for the newsletter"
-	    />
-	    <Button>Submit</Button>
-	  </Form>
-	)
+    <Form success>
+      <Form.Input label='Email' placeholder='joe@schmoe.com' />
+      <Message
+        success
+        header='Form Completed'
+        content="You're all signed up for the newsletter"
+      />
+      <Button>Submit</Button>
+    </Form>
+  )
 
 
-  	render() {
-	   	const { value } = this.state
-	    return (
+    render() {
+      const { value } = this.state
+      return (
         <MuiThemeProvider>
-	      	<Form action="/customer"
+          <Form action="/customer"
                 method="post">
-	      		<h2> Request Information </h2>
-	        	<Form.Group widths='equal'>
-	        		<Form.Field required>
-	        			<label> Date </label>
-	          			<TextField
+            <h2> Request Information </h2>
+            <Form.Group widths='equal'>
+              <Form.Field required>
+                <label> Date </label>
+                  <DatePicker
                     fullWidth={true}
                     name='date'
                     value={this.state.date}
                     placeholder='YYYY-MM-DD'
-                    onChange = {e => this.change(e)}
+                    onChange = {this.handleChangedate}
                     errorText={this.state.dateError}/>
-	          		</Form.Field>
+                </Form.Field>
 
-	          		<Form.Field required>
-	        			  <label> Department </label>
-	          			<SelectField 
+                <Form.Field required>
+                  <label> Department </label>
+                  <SelectField 
                     maxHeight={300} 
                     value={this.state.value} 
                     onChange={this.handleChangeMenu}
@@ -471,42 +524,42 @@ class FormExampleSubcomponentControl extends Component {
                     <MenuItem key={167} primaryText={'WOMEN"S CENTRE'} value={'WOMEN"S CENTRE' } />
                   </SelectField>
 
-	          		</Form.Field>
-	        	</Form.Group>
-	        	<Form.Group widths='equal'>
-	        		<Form.Field required>
-	        			<label> Request By </label>
-	          			<TextField
+                </Form.Field>
+            </Form.Group>
+            <Form.Group widths='equal'>
+              <Form.Field required>
+                <label> Request By </label>
+                  <TextField
                     fullWidth={true}
                     name='requestBy'
                     placeholder='Request By'
                     onChange = {e => this.change(e)}
                     value = {this.state.requestBy}
                     errorText={this.state.requestByError}/>
-	          		</Form.Field>
-	          		<Form.Field required>
-	        			<label> SFU ID or BCDL </label>
-	          			<TextField
+                </Form.Field>
+                <Form.Field required>
+                <label> SFU ID or BCDL </label>
+                  <TextField
                     fullWidth = {true}
                     name = "id"
                     placeholder = 'SFU ID or BCDL'
                     onChange = {e => this.change(e)}
                     errorText={this.state.idError} />
-	          		</Form.Field>
-	        	</Form.Group>
-	        	<Form.Group widths='equal'>
-	        		<Form.Field required>
-	        			<label> Phone </label>
-	          			<TextField
+                </Form.Field>
+            </Form.Group>
+            <Form.Group widths='equal'>
+              <Form.Field required>
+                <label> Phone </label>
+                  <TextField
                     fullWidth={true}
                     name='phone'
                     placeholder='XXX-XXX-XXXX'
                     onChange = {e => this.change(e)}
                     errorText={this.state.phoneError} />
-	          		</Form.Field>
+                </Form.Field>
               <Form.Field>
               <label> Fax </label>
-	          		<TextField
+                <TextField
                   fullWidth={true}
                   name='fax'
                   label='Fax'
@@ -514,166 +567,169 @@ class FormExampleSubcomponentControl extends Component {
                   onChange = {e => this.change(e)}
                   errorText={this.state.faxError} />
               </Form.Field>
-	          		<Form.Field required>
-	        			<label> Email </label>
-	          			<TextField
+                <Form.Field required>
+                <label> Email </label>
+                  <TextField
                     fullWidth={true}
                     name='email'
                     placeholder='Email'
                     onChange = {e => this.change(e)}
                     errorText={this.state.emailError} />
-	          		</Form.Field>
-	        	</Form.Group>
-	        	<Form.Field required>
-	        		<label>  Type/Name of Event </label>
-	        		<TextField
+                </Form.Field>
+            </Form.Group>
+            <Form.Field required>
+              <label>  Type/Name of Event </label>
+              <TextField
                 fullWidth={true}
                 name='nameOfEvent'
                 placeholder='Type/Name of Event'
                 onChange = {e => this.change(e)}
                 value={this.state.nameOfEvent}
                 errorText={this.state.nameOfEventError} />
-	        	</Form.Field>
-	        	<Form.Field required>
-	        		<Form.Group inline>
-	        		{/* "value" in data package represent the state of this part */}
-		          		<label> Licensed </label>
-		          		<Form.Radio
+            </Form.Field>
+            <Form.Field required>
+              <Form.Group inline>
+              {/* "value" in data package represent the state of this part */}
+                  <label> Licensed </label>
+                  <Form.Radio
                     name='licensed'
                     label='Yes'
                     value='yes'
                     checked={this.state.licensed === 'yes'}
                     onChange={this.handleLicensedChecked} />
-		          		<Form.Radio
+                  <Form.Radio
                     name='licensed'
                     label='No'
                     value='no'
                     checked={this.state.licensed === 'no'}
                     onChange={this.handleLicensedChecked} />
                   <label style={{color:'red'}}>{this.state.licensedError}</label>
-		       		</Form.Group>
-		       	</Form.Field>
-	        	<Form.Group widths='equal'>
-	        		<Form.Field required>
-		          		<label> Location of Event </label>
-	          			<TextField
+              </Form.Group>
+            </Form.Field>
+            <Form.Group widths='equal'>
+              <Form.Field required>
+                  <label> Location of Event </label>
+                  <TextField
                     fullWidth={true}
                     name='location'
                     placeholder='Location of Event'
                     onChange = {e => this.change(e)}
                     errorText={this.state.locationError} />
-	          		</Form.Field>
-	          		<Form.Field required>
-		          		<label> # of Attendees </label>
-	          			<TextField
+                </Form.Field>
+                <Form.Field required>
+                  <label> # of Attendees </label>
+                  <TextField
                     fullWidth={true}
                     name='numberOfAttendees'
                     placeholder='# of Attendees'
                     onChange = {e => this.change(e)}
                     value={this.state.numberOfAttendees}
                     errorText={this.state.numberOfAttendeesError} />
-	          		</Form.Field>
-	        	</Form.Group>
-	        	<Form.Group widths='equal'>
-	        		<Form.Field required>
-		          		<label> Event Date </label>
-	          			<TextField
+                </Form.Field>
+            </Form.Group>
+            <Form.Group widths='equal'>
+              <Form.Field required>
+                  <label> Event Date </label>
+                  <DatePicker
                     fullWidth={true}
                     name='eventDate'
                     placeholder='YYYY-MM-DD'
-                    onChange = {e => this.change(e)}
+                    value={this.state.eventDate}
+                    onChange={this.handleChangeEvent}
                     errorText={this.state.eventDateError} />
-	          		</Form.Field>
-	          		<Form.Field required>
-		          		<label> Time(s) </label>
-	          			<TextField
+                </Form.Field>
+                <Form.Field required>
+                  <label> Time(s) </label>
+                  <TimePicker
+                    format="24hr"
                     fullWidth={true}
                     name='time'
                     placeholder='HH:MM'
-                    onChange = {e => this.change(e)}
+                    onChange={this.handleChangeTimePicker24}
                     errorText={this.state.timeError} />
-	          		</Form.Field>
-	        	</Form.Group>
-	        	<Form.TextArea
+                </Form.Field>
+            </Form.Group>
+            <Form.TextArea
               name='detail'
               label='Details'
               placeholder='Details of request(Please submit with photo of area and floor if applicable)'
               onChange = {e => this.change(e)} />
-	        	<h2> Payment Detail </h2>
-	        	<Form.Field required>
-		          	<label> Account Code </label>
-	        		<TextField
+            <h2> Payment Detail </h2>
+            <Form.Field required>
+                <label> Account Code </label>
+              <TextField
                 fullWidth={true}
                 name='accountCode'
                 placeholder='OOOO-FF-DDDD-PPPPP or OOOO-FF-JJJJJJJJ'
                 onChange = {e => this.change(e)}
                 errorText={this.state.accountCodeError} />
-	        	</Form.Field>
-	        	<Form.Checkbox label='Please Invoice' /> {/* "did not intergrated into data package yet */}
-	        	<h2> Authorization Detail </h2>
-	        	<Form.Group widths='equal'>
-	        		<Form.Field required>
-		          		<label> Authorized By </label>
-	          			<TextField
+            </Form.Field>
+            <Form.Checkbox label='Please Invoice' /> {/* "did not intergrated into data package yet */}
+            <h2> Authorization Detail </h2>
+            <Form.Group widths='equal'>
+              <Form.Field required>
+                  <label> Authorized By </label>
+                  <TextField
                     fullWidth={true}
                     name='authorizedBy'
                     placeholder='Authorized By'
                     onChange = {e => this.change(e)}
                     errorText={this.state.authorizedByError} />
-	          		</Form.Field>
-	          		<Form.Field required>
-		          		<label> SFU ID/BCDL </label>
-	          			<TextField
+                </Form.Field>
+                <Form.Field required>
+                  <label> SFU ID/BCDL </label>
+                  <TextField
                     fullWidth={true}
                     name='authorizedID'
                     placeholder='SFU ID/BCDL'
                     onChange = {e => this.change(e)}
                     errorText={this.state.authorizedIDError} />
-	          		</Form.Field>
-					<Form.Field required>
-		          		<label> Date </label>
-	        			<TextField
+                </Form.Field>
+          <Form.Field required>
+                  <label> Date </label>
+                <DatePicker
                   fullWidth={true}
                   name='authorizedDate'
                   placeholder='Date'
-                  onChange = {e => this.change(e)}
+                  value={this.state.authorizedDate}
+                  onChange = {this.handleChangeAuthorizeDate}
                   errorText={this.state.authorizedDateError} />
-	        		</Form.Field>
-	        	</Form.Group>
-	        	<Form.Group widths='equal'>
-	        		<Form.Field required>
-		          		<label> Signature </label>
-	          			<TextField
+              </Form.Field>
+            </Form.Group>
+            <Form.Group widths='equal'>
+              <Form.Field required>
+                  <label> Signature </label>
+                  <TextField
                     fullWidth={true}
                     name='authorizedSignature'
                     placeholder='Signature'
                     onChange = {e => this.change(e)}
                     errorText={this.state.authorizedSignatureError} />
-	          		</Form.Field>
-	          		<Form.Field required>
-		          		<label> Phone </label>
-	          			<TextField
+                </Form.Field>
+                <Form.Field required>
+                  <label> Phone </label>
+                  <TextField
                     fullWidth={true}
                     name='authorizedPhone'
                     placeholder='XXX-XXX-XXXX'
                     onChange = {e => this.change(e)}
                     errorText={this.state.authorizedPhoneError} />
-	          		</Form.Field>
-	        	</Form.Group>
+                </Form.Field>
+            </Form.Group>
 
-	        	<br></br>
-	        	<Form.Field required>
-	        		<Form.Group inline>
-	        			<Form.Checkbox />
-		          		<label> I agree to the Terms and Conditions </label>
-	        			{/* "did not intergrated into data package yet */}
-	        		</Form.Group>
-	        	</Form.Field>
-	        	<Form.Button onClick = {e => this.onSubmit(e)} onChange = {this.FormExampleSuccess}>Submit</Form.Button>
-	      	</Form>
+            <br></br>
+            <Form.Field required>
+              <Form.Group inline>
+                <Form.Checkbox />
+                  <label> I agree to the Terms and Conditions </label>
+                {/* "did not intergrated into data package yet */}
+              </Form.Group>
+            </Form.Field>
+            <Form.Button onClick = {e => this.onSubmit(e)} onChange = {this.FormExampleSuccess}>Submit</Form.Button>
+          </Form>
         </MuiThemeProvider>
-    	)
-  	}
+      )
+    }
 }
 
 export default FormExampleSubcomponentControl
