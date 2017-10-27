@@ -9,10 +9,50 @@ import ActionHome from 'material-ui/svg-icons/action/find-in-page';
 
 class checkStatus extends Component {
 
+  state = {
+    referenceID: '',
+    referenceIDError:''
+  }
+
+  validate = () => {
+    let isError = false;
+    const errors = {};
+
+    var validId = /^\d{2,}-\d{4}$/;
+    if(this.state.referenceID.replace(/\s/g, "").length == 0 || !this.state.referenceID.match(validId)){
+      isError = true;
+      errors.referenceIDError = "Reference ID should be provided";
+    }
+    else {
+      errors.referenceIDError = "";
+    }
+
+    this.setState({
+        ...this.state,
+        ...errors
+    });
+    return isError;
+  }
+
+  handleChange = (event) => {
+    this.setState({
+      referenceID: event.target.value,
+    });
+  };
+
+  onSubmit = e =>{
+    const error = this.validate();
+    if (error){
+      e.preventDefault();
+    }
+  };
+
+
   render() {
+      const { value } = this.state
       return (
         <MuiThemeProvider>
-          <Form action="/customer"
+          <Form action="/status"
                 method="post">
             <Form.Group widths='equal'>
                 <Form.Field required>
@@ -20,12 +60,16 @@ class checkStatus extends Component {
                   <TextField
                     name='referenceID'
                     placeholder='Reference ID'
+                    onChange={this.handleChange}
+                    errorText={this.state.referenceIDError}
                   />
                 </Form.Field>
             </Form.Group>
             <IconButton 
               tooltip="Search"
-              href="http://localhost:3001/StatusForm">
+              onClick = {e => this.onSubmit(e)}
+              href="/StatusForm">
+              Search
               <ActionHome />
             </IconButton>
           </Form>
