@@ -19,12 +19,12 @@ var expressValidator = require('express-validator');
 const HttpPort = 3000;
 const TLSPort = 3005;
 
-//function requireHTTPS(req, res, next) {
-  //  if (!req.secure) {
-    //    return res.redirect('https://' + req.get('host') + req.url);
-  //  }
-  //  next();
-//}
+function requireHTTPS(req, res, next) {
+  if (!req.secure) {
+      return res.redirect('https://' + req.get('host') + req.url);
+  }
+    next();
+}
 
 
 
@@ -45,7 +45,12 @@ server.use(cookieParser());
 server.use(bodyParser.urlencoded({ extended: true }));
 server.use(bodyParser.json());
 server.use(expressValidator());
+//server.get("*", function (req, res, next) {
+    //res.redirect('https://' + req.get('host') + req.url);
+    //res.redirect("https://" + req.headers.host + req.path);
+//});
 
+//server.use(requireHTTPS);
 
 
 //
