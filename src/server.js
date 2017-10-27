@@ -173,17 +173,22 @@ var options = {
     cert : fs.readFileSync('server.crt')
 };
 
-http.createServer(server).listen(HttpPort, () => {
-  console.log(`The http server is running at http://localhost:${port}/`);
-});
+//http.createServer(server).listen(HttpPort, () => {
+//  console.log(`The http server is running at http://localhost:${port}/`);
+//});
 //Creates the HTTPS/TLS server on TLSPort
-https.createServer(options, server).listen(TLSPort, () => {
-     console.log('The HTTPS/TLS server is running on port ' + TLSPort);
-});
+//https.createServer(options, server).listen(TLSPort, () => {
+    // console.log('The HTTPS/TLS server is running on port ' + TLSPort);
+//});
 
 //
 // Launch the server
 // -----------------------------------------------------------------------------
 server.listen(port, () => {
- console.log(`The browsersync server is running at http://localhost:${port}/`);
+console.log(`The browsersync server is running at http://localhost:${port}/`);
 });
+
+//Test server to check end to end health
+const app = require('express')();
+app.get('/health-check', (req, res) => res.sendStatus(200));
+app.listen(8080);
