@@ -65,8 +65,27 @@ async function getReqForServiceView() {
   return res;
 }
 
+async function getReqForStatusView() {
+  let res = null;
+
+  await axios.post('http://localhost:3001/graphql', {
+    query: '{request{accessID status statusDate}',
+  })
+    .then(function (response) {
+      if(response['data']['data']['request']) {
+        res = response.data['data']['request'];
+      }
+    })
+    .catch(function (error) {
+      console.log(error.data);
+    });
+
+  return res;
+}
+
 module.exports = {
   getReqByID,
   getUserByReqID,
   getReqForServiceView,
+  getReqForStatusView,
 };
