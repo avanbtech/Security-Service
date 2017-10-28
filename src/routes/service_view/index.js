@@ -1,7 +1,7 @@
 import React from 'react';
 import ServiceView from './ServiceView';
 import fetch from '../../core/fetch';
-import axios from 'axios';
+import dbMethods from '../../core/dbFetchMethods';
 
 export const path = '/ServiceView';
 export const action = async (state) => {
@@ -9,19 +9,7 @@ export const action = async (state) => {
   const { data } = await response.json();
   state.context.onSetTitle('Service View');
 
-  let res = null;
-
-  await axios.post('http://localhost:3001/graphql', {
-    query: '{request{accessID user{requestBy sfuBCID} date event{eventDates location}}}',
-  })
-    .then(function (response) {
-      if(response['data']['data']['request']) {
-        res = response.data['data']['request'];
-      }
-    })
-    .catch(function (error) {
-      console.log(error.data);
-    });
+  let res = await dbMethods.getReqForServiceView();
 
   let rows = [];
 

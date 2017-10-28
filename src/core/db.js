@@ -7,10 +7,9 @@ const Conn = new Sequelize(
   'laroiya@1996',
   {
     dialect: 'mysql',
-    host: 'localhost',
+    host: 'localhost', //'142.58.21.62',
   }
 );
-
 
 //DB TABLE DEFINITIONS
 const User = Conn.define('user', {

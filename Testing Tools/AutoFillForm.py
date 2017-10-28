@@ -65,9 +65,6 @@ def main():
 
     driver.get("localhost:3001/Customer")
 
-    date = driver.find_element_by_name("date");
-    date.send_keys(getFutureDateStr())
-
     requestBy = driver.find_element_by_name("requestBy")
     requestBy.send_keys(fake.name())
 
@@ -92,12 +89,6 @@ def main():
     numAtt = driver.find_element_by_name("numberOfAttendees")
     numAtt.send_keys(randint(100, 999))
 
-    eventDate = driver.find_element_by_name("eventDate")
-    eventDate.send_keys(getFutureDateStr())
-
-    time = driver.find_element_by_name("time")
-    time.send_keys(getRandTime())
-
     detail = driver.find_element_by_name("detail")
     detail.send_keys(fake.sentence(nb_words=6, variable_nb_words=True, ext_word_list=None))
 
@@ -110,8 +101,8 @@ def main():
     authorizedID = driver.find_element_by_name("authorizedID")
     authorizedID.send_keys(getSFUID())
 
-    authorizedDate = driver.find_element_by_name("authorizedDate")
-    authorizedDate.send_keys(getFutureDateStr())
+    # authorizedDate = driver.find_element_by_name("authorizedDate")
+    # authorizedDate.send_keys(getFutureDateStr())
 
     authorizedSignature = driver.find_element_by_name("authorizedSignature")
     authorizedSignature.send_keys(fake.name())

@@ -1,0 +1,7 @@
+// Demo: How to update a field using sequelize
+db.models.user.update(
+    {requestBy : 'Sankait'},
+    {where: {phone: '778-241-7856'}},
+  ).then(() => {
+    console.log("\n\n\nFinished Chaning name\n\n\n");
+  });
