@@ -43,6 +43,7 @@
 
 .req_detail_table {
   width:100%;
+  margin-left:50px;
 }
 .req_detail_table tr {
   border: none;
@@ -52,4 +53,10 @@
 .req_detail_table td {
   width:50%;
   border: none;
+}
+
+.action_container {
+  float: left;
+  overflow:hidden;
+  padding-right: 50px;
 }

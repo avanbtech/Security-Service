@@ -88,34 +88,35 @@ class RequestApproval extends Component {
     render() {
       const { value } = this.state;
       return (
-          <table style={{width:"100%"}}>
-            <tbody>
-            <tr>
-              <td>Date: {this.props.requestInfo.date}</td>
-              <td>Department: {this.props.requestInfo.user.department}</td>
-            </tr>
-            <tr>
-              <td>Requested By: {this.props.requestInfo.user.requestBy}</td>
-              <td>SFU ID: {this.props.requestInfo.user.sfuBCID}</td>
-            </tr>
-            <tr>
-              <td>Type/Name of Event: {this.props.requestInfo.event.nameOfEvent}</td>
-              <td>Licensed: {this.props.requestInfo.user.licensed}</td>
-            </tr>
-            <tr>
-              <td>Location of Event: {this.props.requestInfo.event.location}</td>
-              <td># of Attendees: {this.props.requestInfo.event.numberOfAttendees}</td>
-            </tr>
-            <tr>
-              <td>Event Date: {this.props.requestInfo.event.eventDates}</td>
-              <td></td>
-            </tr>
-            <tr>
-              <td>Authorized By: {this.props.requestInfo.authorizedBy}</td>
-              <td>Phone: {this.props.requestInfo.authorizedPhone}</td>
-            </tr>
-            </tbody>
-          </table>
+        <table style={{width:"100%"}}>
+          <tbody>
+          <tr>
+            <td>Date: {this.props.requestInfo.date}</td>
+            <td>Department: {this.props.requestInfo.user.department}</td>
+          </tr>
+          <tr>
+            <td>Requested By: {this.props.requestInfo.user.requestBy}</td>
+            <td>SFU ID: {this.props.requestInfo.user.sfuBCID}</td>
+          </tr>
+          <tr>
+            <td>Type/Name of Event: {this.props.requestInfo.event.nameOfEvent}</td>
+            <td>Licensed: {this.props.requestInfo.user.licensed}</td>
+          </tr>
+          <tr>
+            <td>Location of Event: {this.props.requestInfo.event.location}</td>
+            <td># of Attendees: {this.props.requestInfo.event.numberOfAttendees}</td>
+          </tr>
+          <tr>
+            <td>Event Date: {this.props.requestInfo.event.eventDates}</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>Authorized By: {this.props.requestInfo.authorizedBy}</td>
+            <td>Phone: {this.props.requestInfo.authorizedPhone}</td>
+          </tr>
+          </tbody>
+        </table>
+
       )
     }
 }
