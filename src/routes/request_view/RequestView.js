@@ -1,9 +1,21 @@
 import React, { PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import s from './RequestView.scss';
+import NotFound from './NotFound';
+import RequestApprovalForm from './RequestApprovalForm';
 
 function ServiceView({request}) {
-  return (<p>Hello</p>);
+  console.log('Request: ' + request);
+  if(request.length > 0) {
+    return (
+      <div className={s.root}>
+        <RequestApprovalForm requestInfo={request[0]} />
+      </div>
+    );
+  }
+  else {
+    return (<NotFound />);
+  }
   /*
   var rows = [];
   for(var i = 0; i < request.length; i++) {

@@ -11,7 +11,7 @@ export const action = async (state) => {
 
   let res = await dbMethods.getReqByID(state.params.id);
   let rows = [];
-
+/*
   if(res !== null) {
     for(let x = 0; x < res.length; x++) {
       rows.push({
@@ -24,6 +24,8 @@ export const action = async (state) => {
       });
     }
   }
-
-  return <RequestView request={rows}/>;
+*/
+  console.log('res');
+  console.log(res);
+  return <RequestView request={res}/>;
 };
