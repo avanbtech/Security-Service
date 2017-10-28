@@ -96,9 +96,52 @@ class RequestApprovalForm extends Component {
                 <p>Date: {this.props.requestInfo.date}</p>
               </Form.Field>
               <Form.Field>
-                <p>Date: {this.props.requestInfo.date}</p>
+                <p>Department: {this.props.requestInfo.user.department}</p>
               </Form.Field>
             </Form.Group>
+
+            <Form.Group width='equal'>
+              <Form.Field>
+                <p>Requested By: {this.props.requestInfo.user.requestBy}</p>
+              </Form.Field>
+              <Form.Field>
+                <p>SFU ID: {this.props.requestInfo.user.sfuBCID}</p>
+              </Form.Field>
+            </Form.Group>
+
+            <Form.Group width='equal'>
+              <Form.Field>
+                <p>Type/Name of Event: {this.props.requestInfo.event.nameOfEvent}</p>
+              </Form.Field>
+              <Form.Field>
+                <p>Licensed: {this.props.requestInfo.user.licensed}</p>
+              </Form.Field>
+            </Form.Group>
+
+            <Form.Group width='equal'>
+              <Form.Field>
+                <p>Location of Event: {this.props.requestInfo.event.location}</p>
+              </Form.Field>
+              <Form.Field>
+                <p># of Attendees: {this.props.requestInfo.event.numberOfAttendees}</p>
+              </Form.Field>
+            </Form.Group>
+
+            <Form.Group width='equal'>
+              <Form.Field>
+                <p>Event Date: {this.props.requestInfo.event.eventDates}</p>
+              </Form.Field>
+            </Form.Group>
+
+            <Form.Group width='equal'>
+              <Form.Field>
+                <p>Authorized By: {this.props.requestInfo.authorizedBy}</p>
+              </Form.Field>
+              <Form.Field>
+                <p>Phone: {this.props.requestInfo.authorizedPhone}</p>
+              </Form.Field>
+            </Form.Group>
+
             <Form.Button onClick = {e => this.onSubmit(e)} onChange = {this.FormExampleSuccess}>Submit</Form.Button>
           </Form>
         </MuiThemeProvider>
