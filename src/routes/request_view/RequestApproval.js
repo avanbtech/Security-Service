@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import { Button,  Form, Message } from 'semantic-ui-react'
 import TextField from "material-ui/TextField"
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
@@ -88,7 +89,7 @@ class RequestApproval extends Component {
     render() {
       const { value } = this.state;
       return (
-          <table style={{width:"100%"}}>
+          <table className={s.req_detail_table}>
             <tbody>
             <tr>
               <td>Date: {this.props.requestInfo.date}</td>
@@ -120,4 +121,4 @@ class RequestApproval extends Component {
     }
 }
 
-export default RequestApproval
+export default withStyles(RequestApproval, s);
