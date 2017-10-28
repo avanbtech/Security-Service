@@ -27,5 +27,8 @@ export const action = async (state) => {
 */
   console.log('res');
   console.log(res);
-  return <RequestView request={res}/>;
+  return <RequestView
+            request={res}
+            requestID={state.params.id}
+  />;
 };

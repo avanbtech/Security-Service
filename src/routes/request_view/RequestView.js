@@ -4,12 +4,15 @@ import s from './RequestView.scss';
 import NotFound from './NotFound';
 import RequestApproval from './RequestApproval';
 
-function ServiceView({request}) {
+function ServiceView({request, requestID}) {
   console.log('Request: ' + request);
   if(request.length > 0) {
     return (
       <div className={s.root}>
-        <RequestApproval requestInfo={request[0]} />
+        <RequestApproval
+          requestInfo={request[0]}
+          requestID={requestID}
+        />
       </div>
     );
   }
