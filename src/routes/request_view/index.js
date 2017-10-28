@@ -9,9 +9,7 @@ export const action = async (state) => {
   const { data } = await response.json();
   state.context.onSetTitle('Request View');
 
-  console.lod(`Request ID: ` + state.conext.params.id);
-  let res = await dbMethods.getUserByReqID(state.conext.params.id);
-
+  let res = await dbMethods.getReqByID(state.params.id);
   let rows = [];
 
   if(res !== null) {

@@ -3,6 +3,7 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import s from './RequestView.scss';
 
 function ServiceView({request}) {
+  return (<p>Hello</p>);
   /*
   var rows = [];
   for(var i = 0; i < request.length; i++) {
@@ -10,7 +11,6 @@ function ServiceView({request}) {
       request[i]
     }/>);
   }
-  */
   return (
     <div className={s.root}>
       <div className={s.container}>
@@ -29,6 +29,7 @@ function ServiceView({request}) {
       </div>
     </div>
   );
+  */
 }
 
 export default withStyles(ServiceView, s);
