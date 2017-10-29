@@ -18,6 +18,7 @@ class RequestApprovalForm extends Component {
     supervisor:'',
     supervisorError:'',
     distribution:'Security Finance',
+    distributionList:'Security Finance',
     distributionError:'',
     guardRegularRate:'',
     guardRegularRateError:'',
@@ -55,8 +56,12 @@ class RequestApprovalForm extends Component {
     });
   }
 
-  handleChangeDistribution = (e, {value}) => {
-    this.setState({distribution: {value}.value});
+  handleChangeDistribution = (event, index, value) => {
+    console.log(value);
+    console.log(this.state.distributionList);
+    console.log(this.state.distribution);
+    this.setState({distributionList: value});
+    this.setState({distribution: value});
   }
 
   handleChangeGuardTotal = e => {
@@ -93,7 +98,7 @@ class RequestApprovalForm extends Component {
       errors.supervisorError = "";
     }
 
-    if(this.state.distribution.replace('/\s/g','').length == 0){
+    if(this.state.distributionList.replace('/\s/g','').length == 0){
       isError = true;
       errors.distributionError = "This field cannot be empty";
     }
@@ -232,7 +237,8 @@ class RequestApprovalForm extends Component {
             <label> Distribution </label>
             <SelectField
               maxHeight={300}
-              value={this.state.distribution}
+              name='distributionList'
+              value={this.state.distributionList}
               onChange={this.handleChangeDistribution}
               style={styles.customWidth}
               autoWidth={true}
@@ -244,6 +250,7 @@ class RequestApprovalForm extends Component {
               <MenuItem key={5} primaryText={'Concord Rep'} value={'Concord Rep' } />
               <MenuItem key={6} primaryText={'Other'} value={'Other' } />
             </SelectField>
+            <Form.Input type="hidden" name="distribution" value={this.state.distribution} />
           </Form.Field>
         </Form.Group>
         <Form.Group widths='equal'>
