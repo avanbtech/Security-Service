@@ -88,35 +88,184 @@ class RequestApprovalForm extends Component {
     render() {
       const { value } = this.state;
       return (
-        <table style={{width:"100%"}}>
-          <tbody>
-          <tr>
-            <td>Date: {this.props.requestInfo.date}</td>
-            <td>Department: {this.props.requestInfo.user.department}</td>
-          </tr>
-          <tr>
-            <td>Requested By: {this.props.requestInfo.user.requestBy}</td>
-            <td>SFU ID: {this.props.requestInfo.user.sfuBCID}</td>
-          </tr>
-          <tr>
-            <td>Type/Name of Event: {this.props.requestInfo.event.nameOfEvent}</td>
-            <td>Licensed: {this.props.requestInfo.user.licensed}</td>
-          </tr>
-          <tr>
-            <td>Location of Event: {this.props.requestInfo.event.location}</td>
-            <td># of Attendees: {this.props.requestInfo.event.numberOfAttendees}</td>
-          </tr>
-          <tr>
-            <td>Event Date: {this.props.requestInfo.event.eventDates}</td>
-            <td></td>
-          </tr>
-          <tr>
-            <td>Authorized By: {this.props.requestInfo.authorizedBy}</td>
-            <td>Phone: {this.props.requestInfo.authorizedPhone}</td>
-          </tr>
-          </tbody>
-        </table>
+        <MuiThemeProvider>
+          <Form action="ServiceView/approve" method="post">
+            <Form.Group widths='equal'>
+              <Form.Field required>
+                <label> Receiving Security Supervisor </label>
+                <TextField
+                  fullWidth={true}
+                  name='supervisor'
+                  placeholder='Receiving Security Supervisor'
+                  onChange = {e => this.change(e)}
+                  value = {this.state.supervisor}
+                  errorText={this.state.supervisorError}/>
+              </Form.Field>
+              <Form.Field required>
+                <label> Distribution </label>
+                <SelectField
+                  maxHeight={300}
+                  value={this.state.value}
+                  onChange={this.handleChangeDistribution}
+                  style={styles.customWidth}
+                  autoWidth={true}
+                >
+                  <MenuItem key={1} primaryText={'Security Finance'} value={'Security Finance' } />
+                  <MenuItem key={2} primaryText={'Security - Supervisor'} value={'Security - Supervisor' } />
+                  <MenuItem key={3} primaryText={'Dispatch'} value={'Dispatch' } />
+                  <MenuItem key={4} primaryText={'SOC Supervisor'} value={'SOC Supervisor' } />
+                  <MenuItem key={5} primaryText={'Concord Rep'} value={'Concord Rep' } />
+                  <MenuItem key={6} primaryText={'Other'} value={'Other' } />
+                </SelectField>
+              </Form.Field>
+            </Form.Group>
+            <Form.Group widths='equal'>
+              <Form.Field required>
+                <label> Guard regular rate </label>
+                <TextField
+                  fullWidth={true}
+                  name='guard_regular_rate'
+                  placeholder='Rate'
+                  onChange = {e => this.change(e)}
+                  value = {this.state.guardRegularRate}
+                  errorText={this.state.guardRegularRateError}/>
+              </Form.Field>
+              <Form.Field required>
+                <label> # Regular hours </label>
+                <TextField
+                  fullWidth={true}
+                  name='guard_regular_hours'
+                  placeholder='Regular Hours'
+                  onChange = {e => this.change(e)}
+                  value = {this.state.guardRegularRate}
+                  errorText={this.state.guardRegularRateError}/>
+              </Form.Field>
+              <Form.Field required>
+                <label> Guard overtime rate </label>
+                <TextField
+                  fullWidth={true}
+                  name='guard_ot_rate'
+                  placeholder='OT Rate'
+                  onChange = {e => this.change(e)}
+                  value = {this.state.guardOTRate}
+                  errorText={this.state.guardOTRateError}/>
+              </Form.Field>
+              <Form.Field required>
+                <label> # Overtime hours </label>
+                <TextField
+                  fullWidth={true}
+                  name='guard_ot_hours'
+                  placeholder='Overtime Hours'
+                  onChange = {e => this.change(e)}
+                  value = {this.state.guardOTHours}
+                  errorText={this.state.guardOTHoursError}/>
+              </Form.Field>
+            </Form.Group>
+            <Form.Group widths='equal'>
+              <Form.Field required>
+                <label> SCSP regular rate </label>
+                <TextField
+                  fullWidth={true}
+                  name='scsp_regular_rate'
+                  placeholder='Rate'
+                  onChange = {e => this.change(e)}
+                  value = {this.state.scspRegularRate}
+                  errorText={this.state.scspRegularRateError}/>
+              </Form.Field>
+              <Form.Field required>
+                <label> # Regular hours </label>
+                <TextField
+                  fullWidth={true}
+                  name='scsp_regular_hours'
+                  placeholder='Regular Hours'
+                  onChange = {e => this.change(e)}
+                  value = {this.state.scspRegularRate}
+                  errorText={this.state.scspRegularRateError}/>
+              </Form.Field>
+              <Form.Field required>
+                <label> SCSP overtime rate </label>
+                <TextField
+                  fullWidth={true}
+                  name='scsp_ot_rate'
+                  placeholder='OT Rate'
+                  onChange = {e => this.change(e)}
+                  value = {this.state.scspOTRate}
+                  errorText={this.state.scspOTRateError}/>
+              </Form.Field>
+              <Form.Field required>
+                <label> # Overtime hours </label>
+                <TextField
+                  fullWidth={true}
+                  name='scsp_ot_hours'
+                  placeholder='Overtime Hours'
+                  onChange = {e => this.change(e)}
+                  value = {this.state.scspOTHours}
+                  errorText={this.state.scspOTHoursError}/>
+              </Form.Field>
+            </Form.Group>
+            <Form.Group widths='equal'>
+              <Form.Field required>
+                <label> Total billable for guard </label>
+                <TextField
+                  fullWidth={true}
+                  name='total_guard_billable'
+                  placeholder='Total billable'
+                  onChange = {e => this.change(e)}
+                  value = {this.state.totalGuardBillable}
+                  errorText={this.state.totalGuardBillableError}/>
+              </Form.Field>
+              <Form.Field required>
+                <label> Total billable for SCSP </label>
+                <TextField
+                  fullWidth={true}
+                  name='total_scsp_billable'
+                  placeholder='Regular Hours'
+                  onChange = {e => this.change(e)}
+                  value = {this.state.totalSCSPBillable}
+                  errorText={this.state.totalSCSPBillableError}/>
+              </Form.Field>
+              <Form.Field required>
+                <label> Grand total: 0 </label>
+              </Form.Field>
+            </Form.Group>
 
+            <Form.Group widths='equal'>
+              <Form.Field required>
+                <label> Prepared By </label>
+                <TextField
+                  fullWidth={true}
+                  name='preparedBy'
+                  placeholder='Prepared By'
+                  onChange = {e => this.change(e)}
+                  value = {this.state.preparedBy}
+                  errorText={this.state.preparedByError} />
+              </Form.Field>
+              <Form.Field required>
+                <label> Signature </label>
+                <TextField
+                  fullWidth={true}
+                  name='signature'
+                  placeholder='Signature'
+                  onChange = {e => this.change(e)}
+                  value = {this.state.signature}
+                  errorText={this.state.signatureError} />
+              </Form.Field>
+            </Form.Group>
+            <Form.Group widths='equal'>
+              <Form.Field required>
+                <label> Remarks </label>
+                <TextField
+                  fullWidth={true}
+                  name='remarks'
+                  placeholder=''
+                  onChange = {e => this.change(e)}
+                  value = {this.state.remarks}
+                   />
+              </Form.Field>
+            </Form.Group>
+            <Form.Button onClick = {e => this.onSubmit(e)} onChange = {this.FormExampleSuccess}>Submit</Form.Button>
+          </Form>
+        </MuiThemeProvider>
       )
     }
 }

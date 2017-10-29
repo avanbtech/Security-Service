@@ -7,29 +7,22 @@ function ApprovalPrompt(input) {
   console.log(JSON.stringify(input.requestID));
   return (
     <div>
-      <table className={s.req_detail_table}>
-        <tr>
-          <td>
-            <div className={s.action_container}>
-              <form action={"/ServiceView/" + input.requestID} method="get">
-                <input name='approved'
-                       type='hidden'
-                       value="yes" />
-                <input type='submit' value='Approve' />
-              </form>
-            </div>
-            <div className={s.action_container}>
-              <form action="/ServiceView/reject" method="post">
-                <input name='requestID'
-                       type='hidden'
-                       value={input.requestID} />
-                <input type='submit' value='Reject' />
-              </form>
-            </div>
-          </td>
-          <td></td>
-        </tr>
-      </table>
+        <div className={s.action_container}>
+          <form action={"/ServiceView/" + input.requestID} method="get">
+            <input name='approved'
+                   type='hidden'
+                   value="yes" />
+            <input type='submit' value='Approve' />
+          </form>
+        </div>
+        <div className={s.action_container}>
+          <form action="/ServiceView/reject" method="post">
+            <input name='requestID'
+                   type='hidden'
+                   value={input.requestID} />
+            <input type='submit' value='Reject' />
+          </form>
+        </div>
     </div>
   );
 }

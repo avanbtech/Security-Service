@@ -9,6 +9,9 @@ function ServiceView({request, requestID, approved}) {
   if(request.length > 0) {
     return (
       <div className={s.root}>
+        <link rel="stylesheet"
+              href="//cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.12/semantic.min.css"
+        />
         <RequestApproval
           requestInfo={request[0]}
           requestID={requestID}
