@@ -13,7 +13,10 @@ import Link from '../Link';
 
 
 const style = {
-  margin: 12,
+ margin: 12,
+ height : 50 ,
+ labelAlign: 'right',
+  
 };
 
 const RaisedButtonExampleSimple = () => (
@@ -26,7 +29,7 @@ const RaisedButtonExampleSimple = () => (
         <Link className={s.link} to="/Status">
           <RaisedButton label="Check Request Page" style={style} fullWidth={true}/>
         </Link>
-        <Link className={s.link} to="//ServiceView">
+        <Link className={s.link} to="/ServiceView">
           <RaisedButton label="Service View" style={style} fullWidth={true}/>
         </Link>
       </div>
