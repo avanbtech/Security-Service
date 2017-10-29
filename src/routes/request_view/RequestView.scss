@@ -48,3 +48,23 @@ table.request_request_table td {
   padding-bottom: 10px;
   border-bottom: 1px solid gray;
 }
+
+.req_detail_table {
+  width:100%;
+  margin-left:50px;
+}
+.req_detail_table tr {
+  border: none;
+  line-height: 40px;
+}
+
+.req_detail_table td {
+  width:50%;
+  border: none;
+}
+
+.action_container {
+  float: left;
+  overflow:hidden;
+  padding-right: 50px;
+}

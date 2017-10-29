@@ -9,6 +9,11 @@ export const action = async (state) => {
   const { data } = await response.json();
   state.context.onSetTitle('Request View');
 
+  let approved = false;
+  if(state.params.approved === undefined){
+    approved = true;
+  }
+
   let res = await dbMethods.getReqByID(state.params.id);
   let rows = [];
 /*
@@ -27,8 +32,10 @@ export const action = async (state) => {
 */
   console.log('res');
   console.log(res);
+
   return <RequestView
             request={res}
             requestID={state.params.id}
+            approved={approved}
   />;
 };

@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
-import s from './form.scss';
-import Form from 'semantic-ui-react'
+import s from './RequestView.scss';
+import ApprovalPrompt from './ApprovalPrompt';
+import RequestApprovalForm from './RequestApprovalForm';
 
 const styles = {
   customWidth: {
@@ -54,30 +55,13 @@ class RequestApproval extends Component {
               <td>Authorized By: {this.props.requestInfo.authorizedBy}</td>
               <td>Phone: {this.props.requestInfo.authorizedPhone}</td>
             </tr>
-            <tr>
-              <td>
-                <div className={s.action_container}>
-                  <form action="/ServiceView/approve" method="post">
-                    <input name='requestID'
-                           type='hidden'
-                           value={this.props.requestID} />
-                    <input type='submit' value='Approve' />
-                  </form>
-                </div>
-                <div className={s.action_container}>
-                  <form action="/ServiceView/reject" method="post">
-                    <input name='requestID'
-                           type='hidden'
-                           value={this.props.requestID} />
-                    <input type='submit' value='Reject' />
-                  </form>
-                </div>
-              </td>
-              <td></td>
-            </tr>
             </tbody>
           </table>
         </div>
+        {
+          this.props.approved ?
+          <ApprovalPrompt requestID={this.props.requestID} /> : <RequestApprovalForm requestID={this.props.requestID}/>
+        }
     </div>
     )
   }

@@ -4,7 +4,7 @@ import s from './RequestView.scss';
 import NotFound from './NotFound';
 import RequestApproval from './RequestApproval';
 
-function ServiceView({request, requestID}) {
+function ServiceView({request, requestID, approved}) {
   console.log('Request: ' + request);
   if(request.length > 0) {
     return (
@@ -12,6 +12,7 @@ function ServiceView({request, requestID}) {
         <RequestApproval
           requestInfo={request[0]}
           requestID={requestID}
+          approved={approved}
         />
       </div>
     );

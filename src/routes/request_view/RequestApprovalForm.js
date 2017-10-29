@@ -17,7 +17,7 @@ const styles = {
 
 
 
-class RequestApproval extends Component {
+class RequestApprovalForm extends Component {
   state = {
     supervisor:'',
     supervisorError:'',
@@ -121,4 +121,4 @@ class RequestApproval extends Component {
     }
 }
 
-export default RequestApproval
+export default RequestApprovalForm
