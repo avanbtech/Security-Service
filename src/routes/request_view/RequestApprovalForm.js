@@ -214,7 +214,7 @@ class RequestApprovalForm extends Component {
     render() {
       const { value } = this.state;
       return (
-          <Form action="ServiceView/approve" method="post">
+          <Form action="/ServiceView/approve" method="post">
             <br/>
             <h4>Please fill out following form</h4>
             <Form.Group widths='equal'>
@@ -393,6 +393,7 @@ class RequestApprovalForm extends Component {
                    />
               </Form.Field>
             </Form.Group>
+            <input type='hidden' name='requestID' value={this.props.requestID}/>
             <Form.Button
               onClick = {e => this.onSubmit(e)}
               onChange = {this.FormExampleSuccess}>Submit</Form.Button>

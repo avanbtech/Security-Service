@@ -199,20 +199,23 @@ function commitToDB(req) {
 }
 
 exports.request_approve = function (req, res, next) {
-  req.filter('id').escape();
-  req.filter('id').trim();
+  req.filter('requestID').escape();
+  req.filter('requestID').trim();
 
-
+  db.models.request.update(
+    {status : 'Accepted'},
+    {where: {accessID: req.body.requestID}},
+  ).then(() => {
+    res.redirect('/ServiceView');
+  });
 };
 
 exports.request_reject = function (req, res, next) {
-  req.filter('id').escape();
-  req.filter('id').trim();
-
-  console.log('ID: ' + req.body.requestID);
+  req.filter('requestID').escape();
+  req.filter('requestID').trim();
 
   db.models.request.update(
-    {status : 'Reject'},
+    {status : 'Rejected'},
     {where: {accessID: req.body.requestID}},
   ).then(() => {
     res.redirect('/ServiceView');
