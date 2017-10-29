@@ -3,8 +3,6 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import s from './RequestView.scss';
 
 function ApprovalPrompt(input) {
-  console.log("ApprovalPrompt");
-  console.log(JSON.stringify(input.requestID));
   return (
     <div>
         <div className={s.action_container}>

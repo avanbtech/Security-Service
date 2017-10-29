@@ -61,6 +61,118 @@ class RequestApprovalForm extends Component {
     let isError = false;
     const errors = {};
 
+    if(this.state.supervisor.replace('/\s/g','').length == 0){
+      isError = true;
+      errors.supervisorError = "This field cannot be empty";
+    }
+    else {
+      errors.supervisorError = "";
+    }
+
+    if(this.state.distribution.replace('/\s/g','').length == 0){
+      isError = true;
+      errors.distributionError = "This field cannot be empty";
+    }
+    else {
+      errors.distributionError = "";
+    }
+
+    if (isNaN(this.state.guardRegularRate) || this.state.guardRegularRate.replace(/\s/g, "").length == 0){
+      isError = true;
+      errors.guardRegularRateError = 'Guard regular rate should be numeric';
+    }
+    else {
+      errors.guardRegularRateError = '';
+    }
+
+    if (isNaN(this.state.guardRegularHours) || this.state.guardRegularHours.replace(/\s/g, "").length == 0){
+      isError = true;
+      errors.guardRegularHoursError = 'Guard regular hours should be numeric';
+    }
+    else {
+      errors.guardRegularHoursError = '';
+    }
+
+    if (isNaN(this.state.guardOTRate) || this.state.guardOTRate.replace(/\s/g, "").length == 0){
+      isError = true;
+      errors.guardOTRateError = 'Guard overtime rate should be numeric';
+    }
+    else {
+      errors.guardOTRateError = '';
+    }
+
+    if (isNaN(this.state.guardOTHours) || this.state.guardOTHours.replace(/\s/g, "").length == 0){
+      isError = true;
+      errors.guardOTHoursError = 'Guard overtime hours should be numeric';
+    }
+    else {
+      errors.guardOTHoursError = '';
+    }
+
+    if (isNaN(this.state.scspRegularRate) || this.state.scspRegularRate.replace(/\s/g, "").length == 0){
+      isError = true;
+      errors.scspRegularRateError = 'SCSP regular rate should be numeric';
+    }
+    else {
+      errors.scspRegularRateError = '';
+    }
+
+    if (isNaN(this.state.scspRegularHours) || this.state.scspRegularHours.replace(/\s/g, "").length == 0){
+      isError = true;
+      errors.scspRegularHoursError = 'SCSP regular hours should be numeric';
+    }
+    else {
+      errors.scspRegularHoursError = '';
+    }
+
+    if (isNaN(this.state.scspOTRate) || this.state.scspOTRate.replace(/\s/g, "").length == 0){
+      isError = true;
+      errors.scspOTRateError = 'SCSP overtime rate should be numeric';
+    }
+    else {
+      errors.scspOTRateError = '';
+    }
+
+    if (isNaN(this.state.scspOTHours) || this.state.scspOTHours.replace(/\s/g, "").length == 0){
+      isError = true;
+      errors.scspOTHoursError = 'SCSP overtime hours should be numeric';
+    }
+    else {
+      errors.scspOTHoursError = '';
+    }
+
+    if (isNaN(this.state.totalGuardBillable) || this.state.totalGuardBillable.replace(/\s/g, "").length == 0){
+      isError = true;
+      errors.totalGuardBillableError = 'Total guard billable should be numeric';
+    }
+    else {
+      errors.totalGuardBillableError = '';
+    }
+
+    if (isNaN(this.state.totalSCSPBillable) || this.state.totalSCSPBillable.replace(/\s/g, "").length == 0){
+      isError = true;
+      errors.totalSCSPBillableError = 'Total guard billable should be numeric';
+    }
+    else {
+      errors.totalSCSPBillableError = '';
+    }
+
+    if(this.state.preparedBy.replace('/\s/g','').length == 0){
+      isError = true;
+      errors.preparedByError = "This field cannot be empty";
+    }
+    else {
+      errors.preparedByError = "";
+    }
+
+    if(this.state.signature.replace('/\s/g','').length == 0){
+      isError = true;
+      errors.signatureError = "This field cannot be empty";
+    }
+    else {
+      errors.signatureError = "";
+    }
+
     this.setState({
         ...this.state,
         ...errors
@@ -75,13 +187,11 @@ class RequestApprovalForm extends Component {
     }
   };
 
-
   handleChange = (e, { value }) => this.setState({ value })
-
 
   handleChangeMenu = (event, index, value) => this.setState({value});
 
-  handleDistibutionChange = (e, {value}) => {
+  handleChangeDistribution = (e, {value}) => {
     this.setState({distribution: {value}.value});
   }
 
@@ -228,9 +338,7 @@ class RequestApprovalForm extends Component {
               </Form.Field>
               <Form.Field required>
                 <label> Grand total: </label>
-                <Form.Input
-                  value={this.state.grandTotal}
-                />
+                <p>0</p>
               </Form.Field>
             </Form.Group>
 
@@ -257,7 +365,7 @@ class RequestApprovalForm extends Component {
               </Form.Field>
             </Form.Group>
             <Form.Group widths='equal'>
-              <Form.Field required>
+              <Form.Field>
                 <label> Remarks </label>
                 <TextField
                   fullWidth={true}
