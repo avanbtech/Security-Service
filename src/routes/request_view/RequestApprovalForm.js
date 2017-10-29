@@ -4,6 +4,7 @@ import TextField from "material-ui/TextField"
 
 import MenuItem from 'material-ui/MenuItem';
 import SelectField from 'material-ui/SelectField';
+import OfficerAssignment from './OfficerAssignment';
 
 const styles = {
   customWidth: {
@@ -406,13 +407,13 @@ class RequestApprovalForm extends Component {
               placeholder=''
               onChange = {e => this.change(e)}
               value = {this.state.remarks}
-               />
+            />
           </Form.Field>
         </Form.Group>
+        <OfficerAssignment/>
         <input type='hidden' name='requestID' value={this.props.requestID}/>
         <Form.Button
-          onClick = {e => this.onSubmit(e)}
-          onChange = {this.FormExampleSuccess}>Submit</Form.Button>
+          onClick = {e => this.onSubmit(e)}>Submit</Form.Button>
       </Form>
     )
   }
