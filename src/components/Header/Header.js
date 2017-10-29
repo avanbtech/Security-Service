@@ -15,7 +15,7 @@ function Header() {
         </Link>
         <div className={s.banner}>
           <h1 className={s.bannerTitle}>Security Request System</h1>
-          <p className={s.bannerDesc}>Some startup page</p>
+          <p className={s.bannerDesc}>Simon Fraser University</p>
         </div>
       </div>
     </div>

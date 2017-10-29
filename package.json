@@ -23,6 +23,7 @@
     "graphiql": "0.10.0",
     "graphql": "0.10.0",
     "graphql-date": "^1.0.3",
+    "grommet": "^2.0.0-alpha.3",
     "history": "2.0.1",
     "isomorphic-style-loader": "0.0.12",
     "jade": "1.11.0",
