@@ -16,6 +16,7 @@ const homeImage = {
 
 function Home() {
   return (
+<<<<<<< 5aff6323e1f694aa8a740cea36c64f04e737dbc1
   	<div className="home" style={ homeImage }>
 	    <div className={s.root}>
 	      <div className={s.container}>
@@ -23,6 +24,13 @@ function Home() {
 	        <Main className={s.main} />
 	      </div>
 	    </div>
+=======
+    <div className={s.root}>
+      <div className={s.container}>
+        <h1 className={s.title}></h1>
+        <Main className={s.main} />
+      </div>
+>>>>>>> change the main part css
     </div>
   );
 }

@@ -14,16 +14,21 @@ import Link from '../Link';
 
 
 const style = {
+<<<<<<< 5aff6323e1f694aa8a740cea36c64f04e737dbc1
  margin: 12,
  height : 50 ,
  labelAlign: 'right',
   
+=======
+  margin: 12,
+>>>>>>> change the main part css
 };
 
 const RaisedButtonExampleSimple = () => (
   <div>
     <MuiThemeProvider>
       <div>
+<<<<<<< 5aff6323e1f694aa8a740cea36c64f04e737dbc1
         <br />
         <br />
         <Link className={s.link} to="/Customer">
@@ -52,6 +57,16 @@ const RaisedButtonExampleSimple = () => (
             labelStyle ={{color: '#FFEBEE'}}
             hoverColor = '#F44336'
           />
+=======
+        <Link className={s.link} to="/Customer">
+          <RaisedButton label="Fill in Request Page" style={style} fullWidth={true}/>
+        </Link>
+        <Link className={s.link} to="/Status">
+          <RaisedButton label="Check Request Page" style={style} fullWidth={true}/>
+        </Link>
+        <Link className={s.link} to="//ServiceView">
+          <RaisedButton label="Service View" style={style} fullWidth={true}/>
+>>>>>>> change the main part css
         </Link>
       </div>
     </MuiThemeProvider>
