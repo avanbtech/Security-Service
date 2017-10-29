@@ -3,6 +3,7 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import s from './RequestView.scss';
 
 function ApprovalPrompt(input) {
+  console.log("ApprovalPrompt");
   console.log(JSON.stringify(input.requestID));
   return (
     <div>
@@ -10,10 +11,10 @@ function ApprovalPrompt(input) {
         <tr>
           <td>
             <div className={s.action_container}>
-              <form action={"/ServiceView/" + input.requestID + "?approved=yes"} method="get">
-                <input name='requestID'
+              <form action={"/ServiceView/" + input.requestID} method="get">
+                <input name='approved'
                        type='hidden'
-                       value={input.requestID} />
+                       value="yes" />
                 <input type='submit' value='Approve' />
               </form>
             </div>

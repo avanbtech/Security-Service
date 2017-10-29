@@ -25,6 +25,8 @@ class RequestApproval extends Component {
   }
 
   render() {
+    console.log('requestinfo: ');
+    console.log(JSON.stringify(this.props.requestInfo));
     const { value } = this.state;
     return (
       <div>
@@ -60,7 +62,12 @@ class RequestApproval extends Component {
         </div>
         {
           this.props.approved ?
-          <ApprovalPrompt requestID={this.props.requestID} /> : <RequestApprovalForm requestID={this.props.requestID}/>
+            <RequestApprovalForm
+              requestID={this.props.requestID}/>
+              :
+            <ApprovalPrompt
+              requestInfo={this.props.requestInfo}
+              requestID={this.props.requestID} />
         }
     </div>
     )

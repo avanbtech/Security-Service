@@ -10,7 +10,10 @@ export const action = async (state) => {
   state.context.onSetTitle('Request View');
 
   let approved = false;
-  if(state.params.approved === undefined){
+  console.log('state:');
+  console.log(JSON.stringify(state));
+  if('approved' in state.query && state.query.approved == 'yes'){
+    console.log('An approve req');
     approved = true;
   }
 
