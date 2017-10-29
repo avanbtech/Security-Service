@@ -6,12 +6,12 @@ import Main from '../../components/Main';
 
 
 import homebackground from '../../../test.jpg';
-import homebackground1 from '../../../test1.jpg';
+
 const homeImage = {
     backgroundSize: '100% 100%', //记得这里100%
-    backgroundImage: 'url(' + homebackground + ')',
+    background: `url(${ homeImage })`,
     //或者下面这种也行
-    backgroundImage0: 'url(' + homebackground1 + ')'
+    backgroundImage: 'url(' + homebackground + ')'
 }
 
 function Home() {
@@ -19,7 +19,7 @@ function Home() {
   	<div className="home" style={ homeImage }>
 	    <div className={s.root}>
 	      <div className={s.container}>
-	        <h1 className={s.title}></h1>
+	        
 	        <Main className={s.main} />
 	      </div>
 	    </div>
