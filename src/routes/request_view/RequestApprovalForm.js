@@ -1,13 +1,9 @@
 import React, { Component } from 'react'
 import { Button,  Form, Message } from 'semantic-ui-react'
 import TextField from "material-ui/TextField"
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
-import DatePicker from 'material-ui/DatePicker';
-import TimePicker from 'material-ui/TimePicker';
-import DropDownMenu from 'material-ui/DropDownMenu';
+
 import MenuItem from 'material-ui/MenuItem';
 import SelectField from 'material-ui/SelectField';
-import s from './form.scss';
 
 const styles = {
   customWidth: {
@@ -21,7 +17,7 @@ class RequestApprovalForm extends Component {
   state = {
     supervisor:'',
     supervisorError:'',
-    distribution:'',
+    distribution:'Security Finance',
     distributionError:'',
     guardRegularRate:'',
     guardRegularRateError:'',
@@ -39,22 +35,50 @@ class RequestApprovalForm extends Component {
     scspOTRateError:'',
     scspOTHours:'',
     scspOTHoursError:'',
-    totalGuardBillable:'',
+    totalGuardBillable:'0',
     totalGuardBillableError:'',
-    totalSCSPBillable:'',
+    totalSCSPBillable:'0',
     totalSCSPBillableError:'',
+    grandTotal:'0',
     preparedBy:'',
     preparedByError:'',
     signature:'',
     signatureError:'',
-    remarks:''
+    remarks:'',
+    grr:'',
+    grrError:''
   }
-
 
   change = e =>{
     this.setState({
       [e.target.name]: e.target.value
     });
+  }
+
+  handleChangeDistribution = (e, {value}) => {
+    this.setState({distribution: {value}.value});
+  }
+
+  handleChangeGuardTotal = e => {
+    this.change(e);
+    this.state.grandTotal = '0';
+    if(!isNaN(e.target.value) && !isNaN(this.state.totalSCSPBillable)) {
+      let total = parseFloat(e.target.value) + parseFloat(this.state.totalSCSPBillable);
+      if(!isNaN(total)){
+        this.state.grandTotal = '0';
+      }
+    }
+  }
+
+  handleChangeSCSPTotal = e => {
+    this.change(e);
+    if(!isNaN(e.target.value) && !isNaN(this.state.totalGuardBillable)) {
+      let total = parseFloat(e.target.value) + parseFloat(this.state.totalGuardBillable);
+      this.state.grandTotal = '' + total;
+    }
+    else {
+      this.state.grandTotal = '0';
+    }
   }
 
   validate = () => {
@@ -187,18 +211,9 @@ class RequestApprovalForm extends Component {
     }
   };
 
-  handleChange = (e, { value }) => this.setState({ value })
-
-  handleChangeMenu = (event, index, value) => this.setState({value});
-
-  handleChangeDistribution = (e, {value}) => {
-    this.setState({distribution: {value}.value});
-  }
-
     render() {
       const { value } = this.state;
       return (
-        <MuiThemeProvider>
           <Form action="ServiceView/approve" method="post">
             <br/>
             <h4>Please fill out following form</h4>
@@ -217,7 +232,7 @@ class RequestApprovalForm extends Component {
                 <label> Distribution </label>
                 <SelectField
                   maxHeight={300}
-                  value={this.state.value}
+                  value={this.state.distribution}
                   onChange={this.handleChangeDistribution}
                   style={styles.customWidth}
                   autoWidth={true}
@@ -236,27 +251,27 @@ class RequestApprovalForm extends Component {
                 <label> Guard regular rate </label>
                 <TextField
                   fullWidth={true}
-                  name='guard_regular_rate'
+                  name='guardRegularRate'
                   placeholder='Rate'
-                  onChange = {e => this.change(e)}
-                  value = {this.state.guardRegularRate}
+                  onChange={e => this.change(e)}
+                  value={this.state.guardRegularRate}
                   errorText={this.state.guardRegularRateError}/>
               </Form.Field>
               <Form.Field required>
                 <label> # Regular hours </label>
                 <TextField
                   fullWidth={true}
-                  name='guard_regular_hours'
+                  name='guardRegularHours'
                   placeholder='Regular Hours'
                   onChange = {e => this.change(e)}
-                  value = {this.state.guardRegularRate}
-                  errorText={this.state.guardRegularRateError}/>
+                  value = {this.state.guardRegularHours}
+                  errorText={this.state.guardRegularHoursError}/>
               </Form.Field>
               <Form.Field required>
                 <label> Guard overtime rate </label>
                 <TextField
                   fullWidth={true}
-                  name='guard_ot_rate'
+                  name='guardOTRate'
                   placeholder='OT Rate'
                   onChange = {e => this.change(e)}
                   value = {this.state.guardOTRate}
@@ -266,7 +281,7 @@ class RequestApprovalForm extends Component {
                 <label> # Overtime hours </label>
                 <TextField
                   fullWidth={true}
-                  name='guard_ot_hours'
+                  name='guardOTHours'
                   placeholder='Overtime Hours'
                   onChange = {e => this.change(e)}
                   value = {this.state.guardOTHours}
@@ -278,7 +293,7 @@ class RequestApprovalForm extends Component {
                 <label> SCSP regular rate </label>
                 <TextField
                   fullWidth={true}
-                  name='scsp_regular_rate'
+                  name='scspRegularRate'
                   placeholder='Rate'
                   onChange = {e => this.change(e)}
                   value = {this.state.scspRegularRate}
@@ -288,17 +303,17 @@ class RequestApprovalForm extends Component {
                 <label> # Regular hours </label>
                 <TextField
                   fullWidth={true}
-                  name='scsp_regular_hours'
+                  name='scspRegularHours'
                   placeholder='Regular Hours'
                   onChange = {e => this.change(e)}
-                  value = {this.state.scspRegularRate}
-                  errorText={this.state.scspRegularRateError}/>
+                  value = {this.state.scspRegularHours}
+                  errorText={this.state.scspRegularHoursError}/>
               </Form.Field>
               <Form.Field required>
                 <label> SCSP overtime rate </label>
                 <TextField
                   fullWidth={true}
-                  name='scsp_ot_rate'
+                  name='scspOTRate'
                   placeholder='OT Rate'
                   onChange = {e => this.change(e)}
                   value = {this.state.scspOTRate}
@@ -308,7 +323,7 @@ class RequestApprovalForm extends Component {
                 <label> # Overtime hours </label>
                 <TextField
                   fullWidth={true}
-                  name='scsp_ot_hours'
+                  name='scspOTHours'
                   placeholder='Overtime Hours'
                   onChange = {e => this.change(e)}
                   value = {this.state.scspOTHours}
@@ -320,9 +335,9 @@ class RequestApprovalForm extends Component {
                 <label> Total billable for guard </label>
                 <TextField
                   fullWidth={true}
-                  name='total_guard_billable'
+                  name='totalGuardBillable'
                   placeholder='Total billable'
-                  onChange = {e => this.change(e)}
+                  onChange = {e => this.handleChangeGuardTotal(e)}
                   value = {this.state.totalGuardBillable}
                   errorText={this.state.totalGuardBillableError}/>
               </Form.Field>
@@ -330,18 +345,20 @@ class RequestApprovalForm extends Component {
                 <label> Total billable for SCSP </label>
                 <TextField
                   fullWidth={true}
-                  name='total_scsp_billable'
+                  name='totalSCSPBillable'
                   placeholder='Regular Hours'
-                  onChange = {e => this.change(e)}
+                  onChange = {e => this.handleChangeSCSPTotal(e)}
                   value = {this.state.totalSCSPBillable}
                   errorText={this.state.totalSCSPBillableError}/>
               </Form.Field>
-              <Form.Field required>
+              <Form.Field>
                 <label> Grand total: </label>
-                <p>0</p>
+                <TextField
+                  fullWidth={true}
+                  disabled={true}
+                  value = {this.state.grandTotal}/>
               </Form.Field>
             </Form.Group>
-
             <Form.Group widths='equal'>
               <Form.Field required>
                 <label> Prepared By </label>
@@ -376,9 +393,10 @@ class RequestApprovalForm extends Component {
                    />
               </Form.Field>
             </Form.Group>
-            <Form.Button onClick = {e => this.onSubmit(e)} onChange = {this.FormExampleSuccess}>Submit</Form.Button>
+            <Form.Button
+              onClick = {e => this.onSubmit(e)}
+              onChange = {this.FormExampleSuccess}>Submit</Form.Button>
           </Form>
-        </MuiThemeProvider>
       )
     }
 }
