@@ -5,7 +5,6 @@ import NotFound from './NotFound';
 import RequestApproval from './RequestApproval';
 
 function ServiceView({request, requestID, approved}) {
-  console.log('Request: ' + request);
   if(request.length > 0) {
     return (
       <div className={s.root}>
@@ -23,32 +22,6 @@ function ServiceView({request, requestID, approved}) {
   else {
     return (<NotFound />);
   }
-  /*
-  var rows = [];
-  for(var i = 0; i < request.length; i++) {
-    rows.push(<OneServiceRequest serviceRequest={
-      request[i]
-    }/>);
-  }
-  return (
-    <div className={s.root}>
-      <div className={s.container}>
-        <h1 className={s.title}>Service View</h1>
-        <table className={s.service_request_table}>
-          <tr>
-            <th>Request ID</th>
-            <th>Date</th>
-            <th>Requested By</th>
-            <th>SFU ID</th>
-            <th>Location</th>
-            <th>Event Date</th>
-          </tr>
-          {rows}
-        </table>
-      </div>
-    </div>
-  );
-  */
 }
 
 export default withStyles(ServiceView, s);

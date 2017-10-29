@@ -90,6 +90,8 @@ class RequestApprovalForm extends Component {
       return (
         <MuiThemeProvider>
           <Form action="ServiceView/approve" method="post">
+            <br/>
+            <h4>Please fill out following form</h4>
             <Form.Group widths='equal'>
               <Form.Field required>
                 <label> Receiving Security Supervisor </label>
@@ -225,7 +227,10 @@ class RequestApprovalForm extends Component {
                   errorText={this.state.totalSCSPBillableError}/>
               </Form.Field>
               <Form.Field required>
-                <label> Grand total: 0 </label>
+                <label> Grand total: </label>
+                <Form.Input
+                  value={this.state.grandTotal}
+                />
               </Form.Field>
             </Form.Group>
 

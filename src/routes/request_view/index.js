@@ -10,10 +10,7 @@ export const action = async (state) => {
   state.context.onSetTitle('Request View');
 
   let approved = false;
-  console.log('state:');
-  console.log(JSON.stringify(state));
   if('approved' in state.query && state.query.approved == 'yes'){
-    console.log('An approve req');
     approved = true;
   }
 
@@ -33,9 +30,6 @@ export const action = async (state) => {
     }
   }
 */
-  console.log('res');
-  console.log(res);
-
   return <RequestView
             request={res}
             requestID={state.params.id}

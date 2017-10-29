@@ -28,7 +28,8 @@ class RequestApproval extends Component {
     const { value } = this.state;
     return (
       <div>
-        <div>
+        <div className={s.page}>
+          <h4>Request Details</h4>
           <table className={s.req_detail_table}>
             <tbody>
             <tr>
