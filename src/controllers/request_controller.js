@@ -154,3 +154,67 @@ exports.request_post = function (req, res, next) {
 exports.request_view = function () {
   console.log('abcd');
 };
+
+
+function commitToDB(req) {
+  const commonDbID = getCommonDBID();
+  const uni_ID = uniqueID();
+
+  db.models.user.create({
+    dbID: commonDbID,
+    sfuBCID: req.body.id,
+    department: 'INSERT DEPARTMENT HERE',    // TODO: NO WAY TO GET THE DEPT, ADD IT
+    requestBy: req.body.requestBy,
+    phone: req.body.phone,
+    fax: req.body.fax,
+    email: req.body.email,
+    licensed: req.body.licensed,
+  });
+
+  db.models.event.create({
+    dbID: commonDbID,
+    nameOfEvent: req.body.nameOfEvent,
+    location: req.body.location,
+    numberOfattendees: req.body.numberOfAttendees,
+    eventDates: [req.body.eventDate],   // TODO: CONFIRM DATES ARE JOINED BY ';'
+    times: req.body.time,
+  });
+
+  db.models.request.create({
+    accessID: uni_ID,
+    dbID: commonDbID,
+    eventDbID: commonDbID,
+    userDbID: commonDbID,
+    status: 'Pending',
+    statusDate: new Date(),
+    date: req.body.date,
+    details: req.body.detail,
+    accountCode: req.body.accountCode,
+    invoice: 99999,
+    authorizedBy: req.body.authorizedBy,
+    authorizedID: req.body.authorizedID,
+    authorizedDate: req.body.authorizedDate,
+    authorizedPhone: req.body.authorizedPhone,
+  });
+}
+
+exports.request_approve = function (req, res, next) {
+  req.filter('id').escape();
+  req.filter('id').trim();
+
+
+};
+
+exports.request_reject = function (req, res, next) {
+  req.filter('id').escape();
+  req.filter('id').trim();
+
+  console.log('ID: ' + req.body.requestID);
+
+  db.models.request.update(
+    {status : 'Reject'},
+    {where: {accessID: req.body.requestID}},
+  ).then(() => {
+    res.redirect('/ServiceView');
+  });
+};

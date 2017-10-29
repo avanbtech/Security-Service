@@ -51,7 +51,7 @@ async function getReqForServiceView() {
   let res = null;
 
   await axios.post('http://localhost:3001/graphql', {
-    query: '{request{accessID user{requestBy sfuBCID} date event{eventDates location}}}',
+    query: '{request{accessID user{requestBy sfuBCID} date status event{eventDates location}}}',
   })
     .then(function (response) {
       if(response['data']['data']['request']) {

@@ -18,6 +18,7 @@ function ServiceView({serviceRequests}) {
           <tr>
             <th>Request ID</th>
             <th>Date</th>
+            <th>Status</th>
             <th>Requested By</th>
             <th>SFU ID</th>
             <th>Location</th>

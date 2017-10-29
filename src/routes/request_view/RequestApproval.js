@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import s from './form.scss';
+import Form from 'semantic-ui-react'
 
 const styles = {
   customWidth: {
@@ -56,10 +57,20 @@ class RequestApproval extends Component {
             <tr>
               <td>
                 <div className={s.action_container}>
-                  <p><a href={"ServiceView/approve/" + this.props.requestID}>Approve</a></p>
+                  <form action="/ServiceView/approve" method="post">
+                    <input name='requestID'
+                           type='hidden'
+                           value={this.props.requestID} />
+                    <input type='submit' value='Approve' />
+                  </form>
                 </div>
                 <div className={s.action_container}>
-                  <p><a href={"ServiceView/reject/" + this.props.requestID}>Reject</a></p>
+                  <form action="/ServiceView/reject" method="post">
+                    <input name='requestID'
+                           type='hidden'
+                           value={this.props.requestID} />
+                    <input type='submit' value='Reject' />
+                  </form>
                 </div>
               </td>
               <td></td>
