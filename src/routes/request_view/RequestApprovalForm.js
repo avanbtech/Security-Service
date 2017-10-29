@@ -18,6 +18,7 @@ class RequestApprovalForm extends Component {
     supervisor:'',
     supervisorError:'',
     distribution:'Security Finance',
+    distributionOther:'',
     distributionList:'Security Finance',
     distributionError:'',
     guardRegularRate:'',
@@ -57,9 +58,6 @@ class RequestApprovalForm extends Component {
   }
 
   handleChangeDistribution = (event, index, value) => {
-    console.log(value);
-    console.log(this.state.distributionList);
-    console.log(this.state.distribution);
     this.setState({distributionList: value});
     this.setState({distribution: value});
   }
@@ -250,6 +248,17 @@ class RequestApprovalForm extends Component {
               <MenuItem key={5} primaryText={'Concord Rep'} value={'Concord Rep' } />
               <MenuItem key={6} primaryText={'Other'} value={'Other' } />
             </SelectField>
+            <Form.Field>
+              <label> Please specify distribution if Other is selected: </label>
+              <TextField
+                fullWidth={true}
+                name='distributionOther'
+                placeholder=''
+                onChange = {e => this.change(e)}
+                disabled={this.state.distribution !== 'Other'}
+                value = {this.state.distributionOther}
+                errorText={this.state.distributionOtherError}/>
+            </Form.Field>
             <Form.Input type="hidden" name="distribution" value={this.state.distribution} />
           </Form.Field>
         </Form.Group>

@@ -230,6 +230,8 @@ exports.request_approve = function (req, res, next) {
   req.filter('supervisor').trim();
   req.filter('distribution').escape();
   req.filter('distribution').trim();
+  req.filter('distributionOther').escape();
+  req.filter('distributionOther').trim();
   req.filter('guardRegularRate').escape();
   req.filter('guardRegularRate').trim();
   req.filter('guardRegularHours').escape();
