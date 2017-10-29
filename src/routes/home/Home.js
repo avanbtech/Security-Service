@@ -8,7 +8,7 @@ function Home() {
   return (
     <div className={s.root}>
       <div className={s.container}>
-        <h1 className={s.title}>Security Request System</h1>
+        <h1 className={s.title}></h1>
         <Main className={s.main} />
       </div>
     </div>
