@@ -7,7 +7,6 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 
 function ServiceView({request, requestID, approved}) {
   if(request.length > 0) {
-    console.log(request);
     return (
       <MuiThemeProvider>
         <div className={s.root}>
