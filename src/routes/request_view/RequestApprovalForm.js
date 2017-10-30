@@ -5,6 +5,7 @@ import TextField from "material-ui/TextField"
 import MenuItem from 'material-ui/MenuItem';
 import SelectField from 'material-ui/SelectField';
 import OfficerAssignment from './OfficerAssignment';
+import s from './RequestView.scss'
 
 const styles = {
   customWidth: {
@@ -444,13 +445,17 @@ class RequestApprovalForm extends Component {
               <OfficerAssignment/>
           ))
         }
-        <Form.Button
-          onClick = {e => this.addGuard(e)}>Add Guard</Form.Button>
+        <div className={s.action_container}>
+          <Form.Button
+            onClick = {e => this.addGuard(e)}>Add Guard</Form.Button>
+        </div>
         <input type='hidden' name='requestID' value={this.props.requestID}/>
         {
           this.state.guardForms.length > 0 &&
-          <Form.Button
-            onClick = {e => this.removeGuard(e)}>Remove Guard</Form.Button>
+          <div className={s.action_container}>
+            <Form.Button
+              onClick = {e => this.removeGuard(e)}>Remove Guard</Form.Button>
+          </div>
         }
         <Form.Button
           onClick = {e => this.onSubmit(e)}>Submit</Form.Button>

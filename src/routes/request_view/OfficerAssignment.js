@@ -80,7 +80,6 @@ class OfficerAssignment extends Component {
     return isError;
   };
   render() {
-    console.log('OfficeAssign');
     const { value } = this.state;
     return (
       <div className={s.officer}>
