@@ -15,6 +15,7 @@ const styles = {
 
 
 class RequestApprovalForm extends Component {
+
   state = {
     supervisor:'',
     supervisorError:'',
@@ -48,9 +49,45 @@ class RequestApprovalForm extends Component {
     signature:'',
     signatureError:'',
     remarks:'',
-    grr:'',
-    grrError:''
+    guardForms:[{
+      id:0}]
   }
+
+  removeGuard = (e, guardID) => {
+    console.log('remove called');
+    const newGuardList = this.state.guardForms;
+    const itemIndex = this.state.guardForms.indexOf({id:guardID});
+    if(itemIndex > -1){
+      console.log('Item found');
+      newGuardList.splice(itemIndex, 1);
+    }
+  };
+
+  addGuard = e => {
+    const newGuardList = this.state.guardForms;
+    let index = 0;
+    console.log('Before: ');
+    console.log(this.state.guardForms);
+    this.state.guardForms.map((item) => {
+      item.id = index;
+      index++;
+    });
+    console.log('After: ');
+    console.log(this.state.guardForms);
+    index = this.state.guardForms.length;
+    newGuardList.push({id:index});
+    this.setState({
+      guardForms: newGuardList
+    });
+    e.preventDefault();
+  }
+
+  onSubmit = e =>{
+    const error = this.validate();
+    if (error){
+      e.preventDefault();
+    }
+  };
 
   change = e =>{
     this.setState({
@@ -206,13 +243,6 @@ class RequestApprovalForm extends Component {
         ...errors
     });
     return isError;
-  };
-
-  onSubmit = e =>{
-    const error = this.validate();
-    if (error){
-      e.preventDefault();
-    }
   };
 
   render() {
@@ -410,7 +440,15 @@ class RequestApprovalForm extends Component {
             />
           </Form.Field>
         </Form.Group>
-        <OfficerAssignment/>
+        {
+          this.state.guardForms.map((item) => (
+            <OfficerAssignment/>
+            <Form.Button
+              onClick = {e => this.removeGuard(e, item.id)}>Remove Guard</Form.Button>
+          ))
+        }
+        <Form.Button
+          onClick = {e => this.addGuard(e)}>Add Guard</Form.Button>
         <input type='hidden' name='requestID' value={this.props.requestID}/>
         <Form.Button
           onClick = {e => this.onSubmit(e)}>Submit</Form.Button>
