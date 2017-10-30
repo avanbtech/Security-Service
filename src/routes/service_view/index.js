@@ -18,6 +18,7 @@ export const action = async (state) => {
       requestId: res[x]['accessID'],
       requestBy: res[x]['user']['requestBy'],
       date: res[x]['date'].split("T")[0],
+      status: res[x]['status'],
       sfu_id: res[x]['user']['sfuBCID'],
       location: res[x]['event']['location'],
       event_date: res[x]['event']['eventDates'],

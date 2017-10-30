@@ -87,7 +87,7 @@ server.get('*', async (req, res, next) => {
 
 // Handle POST requests
 var request = require('./routes/request');
-server.use('/customer', request);
+server.use('/', request);
 
 //
 // Error handling

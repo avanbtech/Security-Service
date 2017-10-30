@@ -154,3 +154,121 @@ exports.request_post = function (req, res, next) {
 exports.request_view = function () {
   console.log('abcd');
 };
+
+
+function commitToDB(req) {
+  const commonDbID = getCommonDBID();
+  const uni_ID = uniqueID();
+
+  db.models.user.create({
+    dbID: commonDbID,
+    sfuBCID: req.body.id,
+    department: 'INSERT DEPARTMENT HERE',    // TODO: NO WAY TO GET THE DEPT, ADD IT
+    requestBy: req.body.requestBy,
+    phone: req.body.phone,
+    fax: req.body.fax,
+    email: req.body.email,
+    licensed: req.body.licensed,
+  });
+
+  db.models.event.create({
+    dbID: commonDbID,
+    nameOfEvent: req.body.nameOfEvent,
+    location: req.body.location,
+    numberOfattendees: req.body.numberOfAttendees,
+    eventDates: [req.body.eventDate],   // TODO: CONFIRM DATES ARE JOINED BY ';'
+    times: req.body.time,
+  });
+
+  db.models.request.create({
+    accessID: uni_ID,
+    dbID: commonDbID,
+    eventDbID: commonDbID,
+    userDbID: commonDbID,
+    status: 'Pending',
+    statusDate: new Date(),
+    date: req.body.date,
+    details: req.body.detail,
+    accountCode: req.body.accountCode,
+    invoice: 99999,
+    authorizedBy: req.body.authorizedBy,
+    authorizedID: req.body.authorizedID,
+    authorizedDate: req.body.authorizedDate,
+    authorizedPhone: req.body.authorizedPhone,
+  });
+}
+
+function commitApproveToDB(req) {
+  //TODO: approval details should be saved to database
+
+  // updating request status
+  db.models.request.update(
+    {status : 'Accepted'},
+    {where: {accessID: req.body.requestID}},
+  );
+}
+
+exports.request_approve = function (req, res, next) {
+  req.filter('requestID').escape();
+  req.filter('requestID').trim();
+
+  req.checkBody('supervisor', 'Supervisor must be specified').notEmpty();
+  req.checkBody('distribution', 'Distribution must be specified').notEmpty();
+  req.checkBody('guardRegularRate', 'Guard regular rate must be specified').notEmpty();
+  req.checkBody('guardRegularHours', 'Guard regular hours must be specified').notEmpty();
+  req.checkBody('guardOTRate', 'Guard overtime rate must be specified').notEmpty();
+  req.checkBody('guardOTHours', 'Guard overtime hours must be specified');
+  req.checkBody('scspRegularRate', 'SCSP regular rate must be specified').notEmpty();
+  req.checkBody('scspRegularHours', 'SCSP regular hours must be specified').notEmpty();
+  req.checkBody('scspOTRate', 'SCSP overtime rate must be specified').notEmpty();
+  req.checkBody('scspOTHours', 'SCSP overtime hours must be specified');
+  req.checkBody('totalGuardBillable', 'Total guard billable must be specified').notEmpty();
+  req.checkBody('totalSCSPBillable', 'Total SCSP billable must be specified').notEmpty();
+  req.checkBody('preparedBy', 'PreparedBy field must be specified').notEmpty();
+  req.checkBody('signature', 'No signature is provided').notEmpty();
+  req.filter('supervisor').escape();
+  req.filter('supervisor').trim();
+  req.filter('distribution').escape();
+  req.filter('distribution').trim();
+  req.filter('distributionOther').escape();
+  req.filter('distributionOther').trim();
+  req.filter('guardRegularRate').escape();
+  req.filter('guardRegularRate').trim();
+  req.filter('guardRegularHours').escape();
+  req.filter('guardRegularHours').trim();
+  req.filter('guardOTRate').escape();
+  req.filter('guardOTRate').trim();
+  req.filter('guardOTHours').escape();
+  req.filter('guardOTHours').trim();
+  req.filter('scspRegularRate').escape();
+  req.filter('scspRegularRate').trim();
+  req.filter('scspRegularHours').escape();
+  req.filter('scspRegularHours').trim();
+  req.filter('scspOTRate').escape();
+  req.filter('scspOTRate').trim();
+  req.filter('scspOTHours').escape();
+  req.filter('scspOTHours').trim();
+  req.filter('totalGuardBillable').escape();
+  req.filter('totalGuardBillable').trim();
+  req.filter('totalSCSPBillable').escape();
+  req.filter('totalSCSPBillable').trim();
+  req.filter('preparedBy').escape();
+  req.filter('preparedBy').trim();
+  req.filter('signature').escape();
+  req.filter('signature').trim();
+
+  commitApproveToDB(req);
+  res.redirect('/ServiceView');
+};
+
+exports.request_reject = function (req, res, next) {
+  req.filter('requestID').escape();
+  req.filter('requestID').trim();
+
+  db.models.request.update(
+    {status : 'Rejected'},
+    {where: {accessID: req.body.requestID}},
+  ).then(() => {
+    res.redirect('/ServiceView');
+  });
+};
