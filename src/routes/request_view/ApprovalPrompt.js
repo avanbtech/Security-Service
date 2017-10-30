@@ -4,6 +4,9 @@ import s from './RequestView.scss';
 import { Button,  Form, Message } from 'semantic-ui-react'
 
 function ApprovalPrompt(input) {
+  var approveLabel = input.status == "Accepted" ? "Update" : "Approve";
+
+  var rejected = input.status == "Rejected";
   return (
     <div>
         <div className={s.action_container}>
@@ -11,17 +14,20 @@ function ApprovalPrompt(input) {
             <input name='approved'
                    type='hidden'
                    value="yes" />
-            <Form.Button type='submit'>Approve</Form.Button>
+            <Form.Button type='submit'>{approveLabel}</Form.Button>
           </Form>
         </div>
+      {
+        !rejected &&
         <div className={s.action_container}>
           <Form action="/ServiceView/reject" method="post">
             <input name='requestID'
                    type='hidden'
-                   value={input.requestID} />
+                   value={input.requestID}/>
             <Form.Button type='submit'>Reject</Form.Button>
           </Form>
         </div>
+      }
     </div>
   );
 }
