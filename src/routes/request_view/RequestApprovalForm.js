@@ -53,28 +53,27 @@ class RequestApprovalForm extends Component {
       id:0}]
   }
 
-  removeGuard = (e, guardID) => {
-    console.log('remove called');
+  removeGuard = (e) => {
+    e.preventDefault();
     const newGuardList = this.state.guardForms;
-    const itemIndex = this.state.guardForms.indexOf({id:guardID});
-    if(itemIndex > -1){
-      console.log('Item found');
-      newGuardList.splice(itemIndex, 1);
+    const guardID = newGuardList.length - 1;
+    if(guardID > -1 && guardID < newGuardList.length){
+      newGuardList.splice(guardID, 1);
+      let index = 0;
+      newGuardList.map((item) => {
+        item.id = index;
+        index++;
+      });
+      this.setState({
+        guardForms: newGuardList
+      });
     }
+
   };
 
   addGuard = e => {
     const newGuardList = this.state.guardForms;
-    let index = 0;
-    console.log('Before: ');
-    console.log(this.state.guardForms);
-    this.state.guardForms.map((item) => {
-      item.id = index;
-      index++;
-    });
-    console.log('After: ');
-    console.log(this.state.guardForms);
-    index = this.state.guardForms.length;
+    let index = this.state.guardForms.length;
     newGuardList.push({id:index});
     this.setState({
       guardForms: newGuardList
@@ -442,14 +441,17 @@ class RequestApprovalForm extends Component {
         </Form.Group>
         {
           this.state.guardForms.map((item) => (
-            <OfficerAssignment/>
-            <Form.Button
-              onClick = {e => this.removeGuard(e, item.id)}>Remove Guard</Form.Button>
+              <OfficerAssignment/>
           ))
         }
         <Form.Button
           onClick = {e => this.addGuard(e)}>Add Guard</Form.Button>
         <input type='hidden' name='requestID' value={this.props.requestID}/>
+        {
+          this.state.guardForms.length > 0 &&
+          <Form.Button
+            onClick = {e => this.removeGuard(e)}>Remove Guard</Form.Button>
+        }
         <Form.Button
           onClick = {e => this.onSubmit(e)}>Submit</Form.Button>
       </Form>
