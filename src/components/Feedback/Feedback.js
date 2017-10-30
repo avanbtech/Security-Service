@@ -8,13 +8,13 @@ function Feedback() {
       <div className={s.container}>
         <a
           className={s.link}
-          href=""
-        >To be done</a>
+          href="http://www.sfu.ca/srs/security.html"
+        >SFU Security</a>
         <span className={s.spacer}>|</span>
         <a
           className={s.link}
-          href=""
-        >To be done</a>
+          href="https://csil-git1.cs.surrey.sfu.ca/sankaitk/CMPT373-Gamma"
+        >GitLab</a>
       </div>
     </div>
   );
