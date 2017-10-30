@@ -60,7 +60,7 @@ class BottomNavigationExampleSimple extends Component {
 		          <BottomNavigationItem
 		            label="@CMPT373-GAMMA"
 		            icon={nearbyIcon}
-		            
+		            style ={{ left: 9}}
 		          />
 		        </BottomNavigation>
       		</Paper>
