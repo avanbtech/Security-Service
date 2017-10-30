@@ -8,7 +8,8 @@ import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import AppBar from 'material-ui/AppBar';
- import Footer from 'grommet/components/Footer';
+import FlatButton from 'material-ui/FlatButton';
+
 
 const recentsIcon = <FontIcon className="material-icons">restore</FontIcon>;
 const favoritesIcon = <FontIcon className="material-icons">favorite</FontIcon>;
@@ -27,23 +28,14 @@ class BottomNavigationExampleSimple extends Component {
 	     	<Paper zDepth={1}>
 		        <BottomNavigation selectedIndex={this.state.selectedIndex}>
 		          <BottomNavigationItem
-		            label="Recents"
-		            icon={recentsIcon}
-		            onClick={() => this.select(0)}
-		          />
-		          <BottomNavigationItem
-		            label="Favorites"
-		            icon={favoritesIcon}
-		            onClick={() => this.select(1)}
-		          />
-		          <BottomNavigationItem
-		            label="Nearby"
+		            label="@CMPT373-GAMMA"
 		            icon={nearbyIcon}
-		            onClick={() => this.select(2)}
+		            
 		          />
 		        </BottomNavigation>
       		</Paper>
-	    </MuiThemeProvider>
+	    </MuiThemeProvider> 
+
     );
   }
 }
