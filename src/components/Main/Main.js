@@ -27,13 +27,31 @@ const RaisedButtonExampleSimple = () => (
         <br />
         <br />
         <Link className={s.link} to="/Customer">
-          <RaisedButton label="Fill in Request Page" style={style} fullWidth={true} backgroundColor='#B71C1C' labelStyle ={{color: '#FFEBEE'}}/>
+          <FlatButton 
+            label="Fill in Request Page" 
+            style={style} fullWidth={true} 
+            backgroundColor='#B71C1C' 
+            labelStyle ={{color: '#FFEBEE'}}
+            hoverColor = '#F44336'
+          />
         </Link>
         <Link className={s.link} to="/Status">
-          <RaisedButton label="Check Request Page" style={style} fullWidth={true} backgroundColor='#B71C1C' labelStyle ={{color: '#FFEBEE'}}/>
+          <FlatButton 
+            label="Check Request Page" 
+            style={style} fullWidth={true} 
+            backgroundColor='#B71C1C' 
+            labelStyle ={{color: '#FFEBEE'}}
+            hoverColor = '#F44336'
+          />
         </Link>
         <Link className={s.link} to="/ServiceView">
-          <RaisedButton label="Service View" style={style} fullWidth={true} backgroundColor='#B71C1C' labelStyle ={{color: '#FFEBEE'}}/>
+          <FlatButton 
+            label="Service View" 
+            style={style} fullWidth={true} 
+            backgroundColor='#B71C1C' 
+            labelStyle ={{color: '#FFEBEE'}}
+            hoverColor = '#F44336'
+          />
         </Link>
       </div>
     </MuiThemeProvider>
