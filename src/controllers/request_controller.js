@@ -57,7 +57,7 @@ function commitToDB(req) {
   db.models.user.create({
     dbID: commonDbID,
     sfuBCID: req.body.id,
-    department: 'INSERT DEPARTMENT HERE',    // TODO: NO WAY TO GET THE DEPT, ADD IT
+    department: req.body.department,    // TODO: NO WAY TO GET THE DEPT, ADD IT
     requestBy: req.body.requestBy,
     phone: req.body.phone,
     fax: req.body.fax,
@@ -163,7 +163,7 @@ function commitToDB(req) {
   db.models.user.create({
     dbID: commonDbID,
     sfuBCID: req.body.id,
-    department: 'INSERT DEPARTMENT HERE',    // TODO: NO WAY TO GET THE DEPT, ADD IT
+    department: req.body.department,    // TODO: NO WAY TO GET THE DEPT, ADD IT
     requestBy: req.body.requestBy,
     phone: req.body.phone,
     fax: req.body.fax,
