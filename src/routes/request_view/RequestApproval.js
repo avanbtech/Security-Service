@@ -55,6 +55,10 @@ class RequestApproval extends Component {
             <td>Authorized By: {this.props.requestInfo.authorizedBy}</td>
             <td>Phone: {this.props.requestInfo.authorizedPhone}</td>
           </tr>
+          <tr>
+            <td className={s.bold}>Current status: {this.props.requestInfo.status}</td>
+            <td></td>
+          </tr>
         </tbody>
       </table>
       {

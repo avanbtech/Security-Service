@@ -7,7 +7,7 @@ async function getReqByID(reqID) {
 
   const reqNum = '\"' + reqID + '\"';
 
-  const dbQuery = '{request(accessID: ' + reqNum + '){date details accountCode authorizedBy authorizedID authorizedDate authorizedPhone user { department requestBy sfuBCID phone fax email licensed } event { nameOfEvent location numberOfattendees eventDates }}}';
+  const dbQuery = '{request(accessID: ' + reqNum + '){date status details accountCode authorizedBy authorizedID authorizedDate authorizedPhone user { department requestBy sfuBCID phone fax email licensed } event { nameOfEvent location numberOfattendees eventDates }}}';
 
   await axios.post('http://localhost:3001/graphql', {
     query: dbQuery,
