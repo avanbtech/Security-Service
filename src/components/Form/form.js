@@ -20,6 +20,7 @@ class FormExampleSubcomponentControl extends Component {
   state = {
     date:'',
     dateError:'',
+    departmentList:'',
     department:'',
     requestBy:'',
     requestByError:'',
@@ -289,8 +290,9 @@ class FormExampleSubcomponentControl extends Component {
     this.setState({licensed: { value }.value});
   }
 
-  handleDepartmentChange = (e, {value}) => {
-    this.setState({department: {value}.value});
+  handleDepartmentChange = (event, index, value) => {
+    this.setState({departmentList: value});
+    this.setState({department: value});
   }
 
   handleChangedate = (event, date) => {
@@ -349,10 +351,10 @@ class FormExampleSubcomponentControl extends Component {
 
                 <Form.Field required>
                   <label> Department </label>
-                  <SelectField 
-                    maxHeight={300} 
-                    value={this.state.value} 
-                    onChange={this.handleChangeMenu}
+                  <SelectField
+                    maxHeight={300}
+                    value={this.state.departmentList}
+                    onChange={this.handleDepartmentChange}
                     style={styles.customWidth}
                     autoWidth={true}
                   >
@@ -523,8 +525,8 @@ class FormExampleSubcomponentControl extends Component {
                     <MenuItem key={166} primaryText={'WILDLIFE ECOLOGY (CWE), CENTRE FOR'} value={'WILDLIFE ECOLOGY (CWE), CENTRE FOR' } />
                     <MenuItem key={167} primaryText={'WOMEN"S CENTRE'} value={'WOMEN"S CENTRE' } />
                   </SelectField>
-
                 </Form.Field>
+                <Form.Input type="hidden" name="department" value={this.state.department} />
             </Form.Group>
             <Form.Group widths='equal'>
               <Form.Field required>
