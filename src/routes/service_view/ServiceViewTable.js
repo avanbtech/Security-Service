@@ -41,15 +41,16 @@ export default class ServiceViewTable extends Component {
     })
   }
 
+/*TODO: Object properties not mapping correctly - need to fix*/
   render() {
     const { column, data, direction } = this.state
 	    return (
 	      <Table sortable celled fixed>
 	        <Table.Header>
 	          <Table.Row>
-	            <Table.HeaderCell sorted={column === 'requestId' ? direction : null} onClick={this.handleSort('requestId')}>
+	            <Table.HeaderCell sorted={column === 'requestId' ? direction : null} onClick={this.handleSort('requestId')}>  
 	              Request ID
-	            </Table.HeaderCell>
+	            </Table.HeaderCell>																																																	
 	            <Table.HeaderCell sorted={column === 'date' ? direction : null} onClick={this.handleSort('date')}>
 	              Date
 	            </Table.HeaderCell>
@@ -68,12 +69,13 @@ export default class ServiceViewTable extends Component {
 	            <Table.HeaderCell sorted={column === 'event_date' ? direction : null} onClick={this.handleSort('event_date')}>
 	              Event Date
 	            </Table.HeaderCell>
-	          </Table.Row>
+	          </Table.Row> 
 	        </Table.Header>
 	        <Table.Body>
-            {this.state.data}
+            {this.state.data} 
 	        </Table.Body>
 	      </Table>
 	    )
 	}
 }
+
