@@ -52,16 +52,16 @@ export const action = async (state) => {
 
   for (let x = 0; x < res.length; x++) {
     const location = res[x]['event']['location'];
-    console.log('Location: ' +location);
     const locationValid = (includeBurnaby && location === 'Burnaby') ||
       (includeSurrey && location === 'Surrey') ||
       (includeVancouver && location === 'Vancouver');
-    console.log('Valid location: ' + locationValid);
     if (!locationValid) {
       continue;
     }
     const requestDateStr = res[x]['date'].split("T")[0];
     console.log('Date: ' + requestDateStr);
+    console.log('Start Date: ' + startDateFilter);
+    console.log('End Date: ' + endDateFilter);
     const requestDate = Date.parse(requestDateStr);
     const validDate = (!hasStartDate || requestDate >= startDateFilter) &&
       (!hasEndDate || requestDate <= endDateFilter);

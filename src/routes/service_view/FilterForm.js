@@ -8,6 +8,9 @@ import DatePicker from 'material-ui/DatePicker';
 
 
 function FilterForm({filterObject}) {
+  const start_date = filterObject.start_date === '' ? "From" :  filterObject.start_date;
+  const end_date = filterObject.end_date === '' ? "To" :  filterObject.end_date;
+
   return (
     <MuiThemeProvider>
             <Form action="/ServiceView" method="GET">
@@ -15,19 +18,17 @@ function FilterForm({filterObject}) {
                     <h4 className={s.filter_title}>Request Date</h4>
                     <div className={s.filter_options}>
                             <DatePicker
-                                hintText="From"
+                                hintText={start_date}
                                 container="inline"
-                                name="from_date"
-                                defaultDate={filterObject.start_date}
+                                name="start_date"
                                 textFieldStyle={{
                                     width: '100%',
                                 }}
                             />
                             <DatePicker
-                                hintText="To"
+                                hintText={end_date}
                                 container="inline"
-                                name="to_date"
-                                defaultDate={filterObject.end_date}
+                                name="end_date"
                                 textFieldStyle={{
                                     width: '100%',
                                 }}
