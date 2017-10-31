@@ -1,5 +1,5 @@
 import db from '../core/db';
-import meth from '../PyScripts/childProcPy';
+import exportMethod from '../PyScripts/childProcPy'
 
 var NUM = '0000';
 var YEAR = '00';
@@ -237,5 +237,11 @@ exports.check_status = function (req, res, next) {
   req.filter('referenceID').escape();
   req.filter('referenceID').trim();
   console.log(req.body.referenceID);
+
+  // TODO: FOR DEMO ONLY. REMOVE THE EXPORT METHODS.
+  // Export data
+  exportMethod("111", "csv");
+  exportMethod(req.body.referenceID, "pdf");
+
   res.redirect('/StatusForm');
 }
