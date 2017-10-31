@@ -5,6 +5,8 @@ import {
   GraphQLList,
 } from 'graphql';
 
+import requestType from './RequestType';
+
 const Event = new GraphQLObjectType({
   name: 'Event',
   description: 'An event in a request',
@@ -47,6 +49,12 @@ const Event = new GraphQLObjectType({
           return event.times;
         },
       },
+      request: {
+        type: requestType,
+        resolve(event) {
+          return event.getRequest()
+        }
+      }
     };
   },
 });

@@ -4,7 +4,7 @@ import Sequelize from 'sequelize';
 const Conn = new Sequelize(
   'demodb',
   'root',
-  'laroiya@1996',
+  'YOUR PASSWORD HERE',
   {
     dialect: 'mysql',
     host: 'localhost', //VM IP ADDRESS: '142.58.21.62',
@@ -136,9 +136,11 @@ const Event = Conn.define('event', {
   },
 });
 
+Event.hasOne(Request);
+User.hasOne(Request);
+
 Request.belongsTo(Event);
 Request.belongsTo(User);
-
 
 //FOR DEPLOYING
 //Conn.sync({ force: false});
