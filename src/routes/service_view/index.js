@@ -16,12 +16,6 @@ export const action = async (state) => {
   includeBurnaby = includeBurnaby || includeAll;
   includeSurrey = includeSurrey || includeAll;
   includeVancouver = includeVancouver || includeAll;
-  console.log({
-    'All: ': includeAll,
-    'Surrey: ': includeSurrey,
-    'Burnaby: ': includeBurnaby,
-    'Vancouver: ': includeVancouver
-  });
 
   const hasStartDate = 'start_date' in state.query;
   let startDateFilter = '';
@@ -39,38 +33,23 @@ export const action = async (state) => {
     endDateFilter = Date.parse(endDateFilterStr);
   }
 
-  console.log({
-    'hasStart':hasStartDate,
-    'hasEnd': hasEndDate,
-    'startDate': startDateFilter,
-    'endDate':endDateFilter
-  });
-
   let res = await dbMethods.getReqForServiceView();
 
   let rows = [];
 
   for (let x = 0; x < res.length; x++) {
+    const requestDateStr = res[x]['date'].split("T")[0];
+    const requestDate = Date.parse(requestDateStr);
+    const validDate = (!hasStartDate || requestDate >= startDateFilter) &&
+      (!hasEndDate || requestDate <= endDateFilter);
+    if (!validDate) {
+      continue;
+    }
     const location = res[x]['event']['location'];
     const locationValid = (includeBurnaby && location === 'Burnaby') ||
       (includeSurrey && location === 'Surrey') ||
       (includeVancouver && location === 'Vancouver');
     if (!locationValid) {
-      continue;
-    }
-    const requestDateStr = res[x]['date'].split("T")[0];
-    console.log('Date: ' + requestDateStr);
-    console.log('Start Date: ' + startDateFilter);
-    console.log('End Date: ' + endDateFilter);
-    const requestDate = Date.parse(requestDateStr);
-    const validDate = (!hasStartDate || requestDate >= startDateFilter) &&
-      (!hasEndDate || requestDate <= endDateFilter);
-    console.log({
-      'First: ': (!hasStartDate || requestDate >= startDateFilter),
-      'Second: ': (!hasEndDate || requestDate <= endDateFilter),
-      'valid: ': validDate
-    });
-    if (!validDate) {
       continue;
     }
     rows.push({
