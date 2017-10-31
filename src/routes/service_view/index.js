@@ -36,7 +36,5 @@ export const action = async (state) => {
     });
   }
 
-
-  console.log('INDEX');
   return <ServiceViewReq serviceRequests={rows}/>;
 };

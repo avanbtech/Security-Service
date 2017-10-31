@@ -5,8 +5,6 @@ import OneServiceRequest from './OneServiceRequest';
 import ServiceViewTable from './ServiceViewTable';
 
 function ServiceViewReq({serviceRequests}) {
-  console.log(serviceRequests);
-  console.log('::::ServiceViewReq::::');
   return (
     <div className={s.root}>
       <div className={s.container}>
