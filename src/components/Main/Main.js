@@ -12,6 +12,7 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import s from './Main.scss';
 import Link from '../Link';
 
+<<<<<<< HEAD
 
 const style = {
 
@@ -19,13 +20,20 @@ const style = {
  height : 50 ,
  labelAlign: 'right',
 
+=======
+
+const style = {
+ margin: 12,
+ height : 50 ,
+ labelAlign: 'right',
+  
+>>>>>>> 317e552b4b2bebe84417d2dee9b7031445499a2e
 };
 
 const RaisedButtonExampleSimple = () => (
   <div>
     <MuiThemeProvider>
       <div>
-
         <br />
         <br />
         <Link className={s.link} to="/Customer">
@@ -55,6 +63,17 @@ const RaisedButtonExampleSimple = () => (
             hoverColor = '#F44336'
           />
         </Link>
+        <Link className={s.link} to="/CSV">
+          <FlatButton 
+              label="explore as csv" 
+              style={style} fullWidth={true} 
+              backgroundColor='#B71C1C' 
+              labelStyle ={{color: '#FFEBEE'}}
+              hoverColor = '#F44336'
+              //onclick here
+            />
+          </Link>
+
       </div>
     </MuiThemeProvider>
   </div>
