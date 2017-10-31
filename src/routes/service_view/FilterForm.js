@@ -37,11 +37,11 @@ function FilterForm({filterObject}) {
                 <div className={s.filter}>
                     <h4 className={s.filter_title}>Location</h4>
                     <div className={s.filter_options}>
-                        <Form.Checkbox checked={filterObject.includeBurnaby}
+                        <Form.Checkbox defaultChecked={filterObject.includeBurnaby}
                           name = "include_burnaby" label='Burnaby' value="yes"/>
-                        <Form.Checkbox checked={filterObject.includeSurrey}
+                        <Form.Checkbox defaultChecked={filterObject.includeSurrey}
                           name = "include_surrey" label='Surrey' value="yes"/>
-                        <Form.Checkbox checked={filterObject.includeVancouver}
+                        <Form.Checkbox defaultChecked={filterObject.includeVancouver}
                           name = "include_vancouver" label='Vancouver' value="yes"/>
                     </div>
                 </div>
