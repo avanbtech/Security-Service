@@ -4,13 +4,16 @@ import Sequelize from 'sequelize';
 const Conn = new Sequelize(
   'demodb',
   'root',
+<<<<<<< HEAD
   'hooh392',
+=======
+  'YOUR PASSWORD HERE',
+>>>>>>> 2f1657a138dbd2f2b057f91a8117b80ba091236f
   {
     dialect: 'mysql',
-    host: 'localhost',
+    host: 'localhost', //VM IP ADDRESS: '142.58.21.62',
   }
 );
-
 
 //DB TABLE DEFINITIONS
 const User = Conn.define('user', {
@@ -137,9 +140,11 @@ const Event = Conn.define('event', {
   },
 });
 
+Event.hasOne(Request);
+User.hasOne(Request);
+
 Request.belongsTo(Event);
 Request.belongsTo(User);
-
 
 //FOR DEPLOYING
 //Conn.sync({ force: false});
