@@ -17,4 +17,4 @@ function OneServiceRequest({serviceRequest}) {
   );
 }
 
-export default withStyles(OneServiceRequest, s);
+export default withStyles(OneServiceRequest);
