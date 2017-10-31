@@ -228,4 +228,14 @@ exports.request_reject = function (req, res, next) {
   ).then(() => {
     res.redirect('/ServiceView');
   });
+
+
 };
+
+exports.check_status = function (req, res, next) {
+  req.checkBody('referenceID', 'Reference ID must be specified').notEmpty();
+  req.filter('referenceID').escape();
+  req.filter('referenceID').trim();
+  console.log(req.body.referenceID);
+  res.redirect('/StatusForm');
+}
