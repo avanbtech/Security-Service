@@ -41,22 +41,7 @@ export default class ServiceViewTable extends Component {
     })
   }
 
- //  ServiceView ({serviceRequests}) {
-	//   for(var i = 0; i < serviceRequests.length; i++) {
-	//     ROWS.push(<OneServiceRequest serviceRequest={
-	//       serviceRequests[i]
-	//     }/>);
-	//   }
-
-	//   this.setState({
-	//   	data: ROWS,
-	//   })
-
-	//   return
-	// }
-
   render() {
-  	// this.ServiceView()
     const { column, data, direction } = this.state
 	    return (
 	      <Table sortable celled fixed>
@@ -89,12 +74,3 @@ export default class ServiceViewTable extends Component {
 	    )
 	}
 }
-
-/*
-<Table.Cell>{requestId}</Table.Cell>
-<Table.Cell>{date}</Table.Cell>
-<Table.Cell>{requestBy}</Table.Cell>
-<Table.Cell>{sfu_id}</Table.Cell>
-<Table.Cell>{location}</Table.Cell>
-<Table.Cell>{event_date}</Table.Cell>
-export default ServiceViewTable */

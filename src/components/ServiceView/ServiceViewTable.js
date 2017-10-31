@@ -31,35 +31,16 @@ export default class ServiceViewTable extends Component {
     })
   }
 
- //  ServiceView ({serviceRequests}) {
-	//   for(var i = 0; i < serviceRequests.length; i++) {
-	//     ROWS.push(<OneServiceRequest serviceRequest={
-	//       serviceRequests[i]
-	//     }/>);
-	//   }
-
-	//   this.setState({
-	//   	data: ROWS,
-	//   })
-
-	//   return
-	// }
-
   render() {
-  	// this.ServiceView()
     const { column, data, direction } = this.state
     var serviceRequests = this.props.serviceRequests;
-    console.log('****** TABLE ******');
-    console.log(serviceRequests);
-    // ServiceView({serviceRequests}) {
-		  // var rows = [];
-    var ROWS = [];
+    var rows = [];
 		  for(var i = 0; i < serviceRequests.length; i++) {
-		    ROWS.push(<OneServiceRequest serviceRequest={
+		    rows.push(<OneServiceRequest serviceRequest={
 		      serviceRequests[i]
 		    }/>);
 		    this.setState({
-		      data: ROWS,
+		      data: rows,
    		 	})
 		  }
 	    return (
@@ -87,18 +68,9 @@ export default class ServiceViewTable extends Component {
 	          </Table.Row>
 	        </Table.Header>
 	        <Table.Body>
-            {ROWS}
+            {rows}
 	        </Table.Body>
 	      </Table>
 	    )
 	}
 }
-
-/*
-<Table.Cell>{requestId}</Table.Cell>
-<Table.Cell>{date}</Table.Cell>
-<Table.Cell>{requestBy}</Table.Cell>
-<Table.Cell>{sfu_id}</Table.Cell>
-<Table.Cell>{location}</Table.Cell>
-<Table.Cell>{event_date}</Table.Cell>
-export default ServiceViewTable */
