@@ -1,6 +1,5 @@
 import db from '../core/db';
-import meth from '../core/dbFetchMethods';
-
+import exportMethod from '../PyScripts/childProcPy'
 var NUM = '0000';
 var YEAR = '00';
 
@@ -34,16 +33,6 @@ function IncNum() {
   return NUM;
 }
 
-function getCurrDate() {
-  const today = new Date();
-
-  const year = today.getFullYear();
-  const month = today.getMonth();
-  const day = today.getDay();
-
-  return year + '-' + month + '-' + day;
-}
-
 function getCommonDBID() {
   const date = new Date();
 
@@ -57,7 +46,7 @@ function commitToDB(req) {
   db.models.user.create({
     dbID: commonDbID,
     sfuBCID: req.body.id,
-    department: 'INSERT DEPARTMENT HERE',    // TODO: NO WAY TO GET THE DEPT, ADD IT
+    department: req.body.department,    // TODO: NO WAY TO GET THE DEPT, ADD IT
     requestBy: req.body.requestBy,
     phone: req.body.phone,
     fax: req.body.fax,
@@ -155,49 +144,6 @@ exports.request_view = function () {
   console.log('abcd');
 };
 
-
-function commitToDB(req) {
-  const commonDbID = getCommonDBID();
-  const uni_ID = uniqueID();
-
-  db.models.user.create({
-    dbID: commonDbID,
-    sfuBCID: req.body.id,
-    department: 'INSERT DEPARTMENT HERE',    // TODO: NO WAY TO GET THE DEPT, ADD IT
-    requestBy: req.body.requestBy,
-    phone: req.body.phone,
-    fax: req.body.fax,
-    email: req.body.email,
-    licensed: req.body.licensed,
-  });
-
-  db.models.event.create({
-    dbID: commonDbID,
-    nameOfEvent: req.body.nameOfEvent,
-    location: req.body.location,
-    numberOfattendees: req.body.numberOfAttendees,
-    eventDates: [req.body.eventDate],   // TODO: CONFIRM DATES ARE JOINED BY ';'
-    times: req.body.time,
-  });
-
-  db.models.request.create({
-    accessID: uni_ID,
-    dbID: commonDbID,
-    eventDbID: commonDbID,
-    userDbID: commonDbID,
-    status: 'Pending',
-    statusDate: new Date(),
-    date: req.body.date,
-    details: req.body.detail,
-    accountCode: req.body.accountCode,
-    invoice: 99999,
-    authorizedBy: req.body.authorizedBy,
-    authorizedID: req.body.authorizedID,
-    authorizedDate: req.body.authorizedDate,
-    authorizedPhone: req.body.authorizedPhone,
-  });
-}
-
 function commitApproveToDB(req) {
   //TODO: approval details should be saved to database
 
@@ -271,8 +217,6 @@ exports.request_reject = function (req, res, next) {
   ).then(() => {
     res.redirect('/ServiceView');
   });
-
-
 };
 
 exports.check_status = function (req, res, next) {
@@ -280,5 +224,11 @@ exports.check_status = function (req, res, next) {
   req.filter('referenceID').escape();
   req.filter('referenceID').trim();
   console.log(req.body.referenceID);
+
+  // Export data to PDF for the current request
+  // and all the db data to CSV
+  exportMethod(req.body.referenceID, "pdf");
+  exportMethod("11", "csv");
+
   res.redirect('/StatusForm');
-}
+};
