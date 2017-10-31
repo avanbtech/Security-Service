@@ -24,36 +24,7 @@ class BottomNavigationExampleSimple extends Component {
 
   render() {
     return (
-<<<<<<< 240381146371c18d34e2a02de9c6b968adc233d9
-	   
 
-		<Footer justify='between'>
-		  <Title>
-		    <s />
-		     Title
-		  </Title>
-		  <Box direction='row'
-		    align='center'
-		    pad={{"between": "medium"}}>
-		    <Paragraph margin='none'>
-		      © 2016 Grommet Labs
-		    </Paragraph>
-		    <Menu direction='row'
-		      size='small'
-		      dropAlign={{"right": "right"}}>
-		      <Anchor href='#'>
-		        Support
-		      </Anchor>
-		      <Anchor href='#'>
-		        Contact
-		      </Anchor>
-		      <Anchor href='#'>
-		        About
-		      </Anchor>
-		    </Menu>
-		  </Box>
-		</Footer>
-=======
 	    <MuiThemeProvider> 
 	     	<Paper zDepth={1}>
 		        <BottomNavigation selectedIndex={this.state.selectedIndex}>
@@ -66,7 +37,6 @@ class BottomNavigationExampleSimple extends Component {
       		</Paper>
 	    </MuiThemeProvider> 
 
->>>>>>> adjust main page
     );
   }
 }

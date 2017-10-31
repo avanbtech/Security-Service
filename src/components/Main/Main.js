@@ -14,28 +14,18 @@ import Link from '../Link';
 
 
 const style = {
-<<<<<<< 02971620e8a1fc650757ce1ad5de67d72f968d6a
-<<<<<<< 5aff6323e1f694aa8a740cea36c64f04e737dbc1
-=======
->>>>>>> little design of main page
+
  margin: 12,
  height : 50 ,
  labelAlign: 'right',
-  
-<<<<<<< 02971620e8a1fc650757ce1ad5de67d72f968d6a
-=======
-  margin: 12,
->>>>>>> change the main part css
-=======
->>>>>>> little design of main page
+
 };
 
 const RaisedButtonExampleSimple = () => (
   <div>
     <MuiThemeProvider>
       <div>
-<<<<<<< 09ff345ed40aac4f6244c79b5e39e5427685949a
-<<<<<<< 5aff6323e1f694aa8a740cea36c64f04e737dbc1
+
         <br />
         <br />
         <Link className={s.link} to="/Customer">
@@ -64,34 +54,7 @@ const RaisedButtonExampleSimple = () => (
             labelStyle ={{color: '#FFEBEE'}}
             hoverColor = '#F44336'
           />
-=======
-=======
-        <br />
-        <br />
->>>>>>> add background and afjust button
-        <Link className={s.link} to="/Customer">
-          <RaisedButton label="Fill in Request Page" style={style} fullWidth={true} backgroundColor='#B71C1C' labelStyle ={{color: '#FFEBEE'}}/>
         </Link>
-        <Link className={s.link} to="/Status">
-          <RaisedButton label="Check Request Page" style={style} fullWidth={true} backgroundColor='#B71C1C' labelStyle ={{color: '#FFEBEE'}}/>
-        </Link>
-        <Link className={s.link} to="/ServiceView">
-<<<<<<< 09ff345ed40aac4f6244c79b5e39e5427685949a
-          <RaisedButton label="Service View" style={style} fullWidth={true}/>
->>>>>>> change the main part css
-=======
-          <RaisedButton label="Service View" style={style} fullWidth={true} backgroundColor='#B71C1C' labelStyle ={{color: '#FFEBEE'}}/>
->>>>>>> add background and afjust button
-        </Link>
-        <FlatButton 
-            label="explore as csv" 
-            style={style} fullWidth={true} 
-            backgroundColor='#B71C1C' 
-            labelStyle ={{color: '#FFEBEE'}}
-            hoverColor = '#F44336'
-            //onclick here
-            
-          />
       </div>
     </MuiThemeProvider>
   </div>
