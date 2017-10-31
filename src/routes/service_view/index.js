@@ -24,15 +24,19 @@ export const action = async (state) => {
   });
 
   const hasStartDate = 'start_date' in state.query;
-  let startDateFilter;
+  let startDateFilter = '';
+  let startDateFilterStr = '';
   if (hasStartDate) {
-    startDateFilter = Date.parse(state.query.start_date);
+    startDateFilterStr = state.query.start_date;
+    startDateFilter = Date.parse(startDateFilterStr);
   }
 
   const hasEndDate = 'end_date' in state.query;
-  let endDateFilter;
+  let endDateFilter = '';
+  let endDateFilterStr = '';
   if (hasEndDate) {
-    endDateFilter = Date.parse(state.query.end_date);
+    endDateFilterStr = state.query.end_date;
+    endDateFilter = Date.parse(endDateFilterStr);
   }
 
   console.log({
@@ -80,5 +84,15 @@ export const action = async (state) => {
     });
   }
 
-  return <ServiceView serviceRequests={rows}/>;
+  const filterObject = {
+    'includeBurnaby':includeBurnaby,
+    'includeSurrey':includeSurrey,
+    'includeVancouver':includeVancouver,
+    'start_date':startDateFilterStr,
+    'end_date':endDateFilterStr
+  };
+  return <ServiceView
+    serviceRequests={rows}
+    filterObject={filterObject}
+  />;
 };

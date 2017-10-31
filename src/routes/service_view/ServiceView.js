@@ -8,7 +8,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import DatePicker from 'material-ui/DatePicker';
 
 
-function ServiceView({serviceRequests}) {
+function ServiceView({serviceRequests, filterObject}) {
   var rows = [];
   for(var i = 0; i < serviceRequests.length; i++) {
     rows.push(<OneServiceRequest serviceRequest={
@@ -17,10 +17,12 @@ function ServiceView({serviceRequests}) {
   }
   return (
     <div className={s.root}>
-      <div className={s.filter_container}>
-        <FilterForm />
-      </div>
-      <div className={s.container}>
+        <div className={s.filter_container}>
+            <FilterForm
+              filterObject={filterObject}
+            />
+        </div>
+        <div className={s.container}>
         <h1 className={s.title}>Service View</h1>
         <table className={s.service_request_table}>
           <tbody>

@@ -7,37 +7,42 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import DatePicker from 'material-ui/DatePicker';
 
 
-function FilterForm() {
+function FilterForm({filterObject}) {
   return (
     <MuiThemeProvider>
             <Form action="/ServiceView" method="GET">
                 <div className={s.filter}>
                     <h4 className={s.filter_title}>Request Date</h4>
                     <div className={s.filter_options}>
-                            <DatePicker 
-                                hintText="From" 
+                            <DatePicker
+                                hintText="From"
                                 container="inline"
                                 name="from_date"
+                                defaultDate={filterObject.start_date}
                                 textFieldStyle={{
                                     width: '100%',
-                                }} 
+                                }}
                             />
-                            <DatePicker 
-                                hintText="To" 
-                                container="inline" 
+                            <DatePicker
+                                hintText="To"
+                                container="inline"
                                 name="to_date"
+                                defaultDate={filterObject.end_date}
                                 textFieldStyle={{
                                     width: '100%',
-                                }} 
+                                }}
                             />
                     </div>
                 </div>
                 <div className={s.filter}>
                     <h4 className={s.filter_title}>Location</h4>
                     <div className={s.filter_options}>
-                        <Form.Checkbox name = "include_burnaby" label='Burnaby' value="yes"/>
-                        <Form.Checkbox name = "include_surrey" label='Surrey' value="yes"/>
-                        <Form.Checkbox name = "include_vancouver" label='Vancouver' value="yes"/>
+                        <Form.Checkbox checked={filterObject.includeBurnaby}
+                          name = "include_burnaby" label='Burnaby' value="yes"/>
+                        <Form.Checkbox checked={filterObject.includeSurrey}
+                          name = "include_surrey" label='Surrey' value="yes"/>
+                        <Form.Checkbox checked={filterObject.includeVancouver}
+                          name = "include_vancouver" label='Vancouver' value="yes"/>
                     </div>
                 </div>
                 <div className={s.button_container}>
