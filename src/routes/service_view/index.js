@@ -5,54 +5,6 @@ import dbMethods from '../../core/dbFetchMethods';
 
 export const path = '/ServiceView';
 
-var sort_field = '';
-
-function compareRows(a, b) {
-  if(sort_field === 'requestId'){
-    if (a.requestId < b.requestId)
-      return -1;
-    if (a.requestId > b.requestId)
-      return 1;
-  }
-  else if(sort_field === 'requestBy'){
-    if (a.requestBy < b.requestBy)
-      return -1;
-    if (a.requestBy > b.requestBy)
-      return 1;
-  }
-  else if(sort_field === 'date'){
-    if (a.date < b.date)
-      return -1;
-    if (a.date > b.date)
-      return 1;
-  }
-  else if(sort_field === 'status'){
-    if (a.status < b.status)
-      return -1;
-    if (a.status > b.status)
-      return 1;
-  }
-  else if(sort_field === 'sfu_id'){
-    if (a.sfu_id < b.sfu_id)
-      return -1;
-    if (a.sfu_id > b.sfu_id)
-      return 1;
-  }
-  else if(sort_field === 'location'){
-    if (a.location < b.location)
-      return -1;
-    if (a.location > b.location)
-      return 1;
-  }
-  else if(sort_field === 'event_date'){
-    if (a.event_date < b.event_date)
-      return -1;
-    if (a.event_date > b.event_date)
-      return 1;
-  }
-  return 0;
-}
-
 export const action = async (state) => {
   const response = await fetch('/graphql?query={news{title,link,contentSnippet}}');
   const { data } = await response.json();
@@ -111,8 +63,6 @@ export const action = async (state) => {
       event_date: res[x]['event']['eventDates'],
     });
   }
-
-  rows.sort(compareRows);
 
   const filterObject = {
     'includeBurnaby':includeBurnaby,
