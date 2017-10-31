@@ -71,7 +71,7 @@ export const action = async (state) => {
     'start_date':startDateFilterStr,
     'end_date':endDateFilterStr
   };
-  return <ServiceView
+  return <ServiceViewReq
     serviceRequests={rows}
     filterObject={filterObject}
   />;
