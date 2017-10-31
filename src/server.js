@@ -16,9 +16,6 @@ import { port, auth, analytics } from './config';
 
 var expressValidator = require('express-validator');
 
-const HttpPort = 3000;
-const TLSPort = 3005;
-
 function requireHTTPS(req, res, next) {
   if (!req.secure) {
       return res.redirect('https://' + req.get('host') + req.url);
@@ -128,10 +125,13 @@ var options = {
     cert : fs.readFileSync('server.crt')
 };
 
+const HttpPort = 3000;
+const TLSPort = 3005;
+
 http.createServer(server).listen(HttpPort, () => {
   console.log(`The http server is running at http://localhost:${port}/`);
 });
 
-//https.createServer(options, server).listen(TLSPort, () => {
-    // console.log('The HTTPS/TLS server is running on port ' + TLSPort);
-//});
+https.createServer(options, server).listen(TLSPort, () => {
+    console.log('The HTTPS/TLS server is running on port ' + TLSPort);
+});

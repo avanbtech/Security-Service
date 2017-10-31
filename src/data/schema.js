@@ -6,7 +6,7 @@ import {
   GraphQLSchema,
 } from 'graphql';
 
-import Db from '../core/db';
+import Db from '../core/db.js';
 import Event from './types/EventType';
 import User from './types/UserType';
 import Request from './types/RequestType';
