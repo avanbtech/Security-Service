@@ -8,6 +8,7 @@ import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import AppBar from 'material-ui/AppBar';
+ import Footer from 'grommet/components/Footer';
 
 const recentsIcon = <FontIcon className="material-icons">restore</FontIcon>;
 const favoritesIcon = <FontIcon className="material-icons">favorite</FontIcon>;
@@ -22,27 +23,34 @@ class BottomNavigationExampleSimple extends Component {
 
   render() {
     return (
-	    <MuiThemeProvider> 
-	     	<Paper zDepth={1}>
-		        <BottomNavigation selectedIndex={this.state.selectedIndex}>
-		          <BottomNavigationItem
-		            label="Recents"
-		            icon={recentsIcon}
-		            onClick={() => this.select(0)}
-		          />
-		          <BottomNavigationItem
-		            label="Favorites"
-		            icon={favoritesIcon}
-		            onClick={() => this.select(1)}
-		          />
-		          <BottomNavigationItem
-		            label="Nearby"
-		            icon={nearbyIcon}
-		            onClick={() => this.select(2)}
-		          />
-		        </BottomNavigation>
-      		</Paper>
-	    </MuiThemeProvider> 
+	   
+
+		<Footer justify='between'>
+		  <Title>
+		    <s />
+		     Title
+		  </Title>
+		  <Box direction='row'
+		    align='center'
+		    pad={{"between": "medium"}}>
+		    <Paragraph margin='none'>
+		      © 2016 Grommet Labs
+		    </Paragraph>
+		    <Menu direction='row'
+		      size='small'
+		      dropAlign={{"right": "right"}}>
+		      <Anchor href='#'>
+		        Support
+		      </Anchor>
+		      <Anchor href='#'>
+		        Contact
+		      </Anchor>
+		      <Anchor href='#'>
+		        About
+		      </Anchor>
+		    </Menu>
+		  </Box>
+		</Footer>
     );
   }
 }

@@ -34,6 +34,7 @@ const RaisedButtonExampleSimple = () => (
   <div>
     <MuiThemeProvider>
       <div>
+<<<<<<< 09ff345ed40aac4f6244c79b5e39e5427685949a
 <<<<<<< 5aff6323e1f694aa8a740cea36c64f04e737dbc1
         <br />
         <br />
@@ -64,15 +65,23 @@ const RaisedButtonExampleSimple = () => (
             hoverColor = '#F44336'
           />
 =======
+=======
+        <br />
+        <br />
+>>>>>>> add background and afjust button
         <Link className={s.link} to="/Customer">
-          <RaisedButton label="Fill in Request Page" style={style} fullWidth={true}/>
+          <RaisedButton label="Fill in Request Page" style={style} fullWidth={true} backgroundColor='#B71C1C' labelStyle ={{color: '#FFEBEE'}}/>
         </Link>
         <Link className={s.link} to="/Status">
-          <RaisedButton label="Check Request Page" style={style} fullWidth={true}/>
+          <RaisedButton label="Check Request Page" style={style} fullWidth={true} backgroundColor='#B71C1C' labelStyle ={{color: '#FFEBEE'}}/>
         </Link>
         <Link className={s.link} to="/ServiceView">
+<<<<<<< 09ff345ed40aac4f6244c79b5e39e5427685949a
           <RaisedButton label="Service View" style={style} fullWidth={true}/>
 >>>>>>> change the main part css
+=======
+          <RaisedButton label="Service View" style={style} fullWidth={true} backgroundColor='#B71C1C' labelStyle ={{color: '#FFEBEE'}}/>
+>>>>>>> add background and afjust button
         </Link>
       </div>
     </MuiThemeProvider>

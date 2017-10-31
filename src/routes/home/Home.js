@@ -6,6 +6,7 @@ import Main from '../../components/Main';
 
 
 import homebackground from '../../../test.jpg';
+<<<<<<< 09ff345ed40aac4f6244c79b5e39e5427685949a
 <<<<<<< 02971620e8a1fc650757ce1ad5de67d72f968d6a
 
 const homeImage = {
@@ -15,12 +16,19 @@ const homeImage = {
     backgroundImage: 'url(' + homebackground + ')'
 =======
 import homebackground1 from '../../../test1.jpg';
+=======
+
+>>>>>>> add background and afjust button
 const homeImage = {
     backgroundSize: '100% 100%', //记得这里100%
-    backgroundImage: 'url(' + homebackground + ')',
+    background: `url(${ homeImage })`,
     //或者下面这种也行
+<<<<<<< 09ff345ed40aac4f6244c79b5e39e5427685949a
     backgroundImage0: 'url(' + homebackground1 + ')'
 >>>>>>> little design of main page
+=======
+    backgroundImage: 'url(' + homebackground + ')'
+>>>>>>> add background and afjust button
 }
 
 function Home() {
@@ -45,7 +53,7 @@ function Home() {
   	<div className="home" style={ homeImage }>
 	    <div className={s.root}>
 	      <div className={s.container}>
-	        <h1 className={s.title}></h1>
+	        
 	        <Main className={s.main} />
 	      </div>
 	    </div>
