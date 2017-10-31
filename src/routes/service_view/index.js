@@ -64,9 +64,6 @@ export const action = async (state) => {
     });
   }
 
-<<<<<<< HEAD
-  return <ServiceViewReq serviceRequests={rows}/>;
-=======
   const filterObject = {
     'includeBurnaby':includeBurnaby,
     'includeSurrey':includeSurrey,
@@ -78,5 +75,4 @@ export const action = async (state) => {
     serviceRequests={rows}
     filterObject={filterObject}
   />;
->>>>>>> f688d71032b972918d23fa391eb228df293bd12f
 };

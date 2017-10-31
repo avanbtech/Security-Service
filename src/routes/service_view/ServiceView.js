@@ -9,7 +9,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import DatePicker from 'material-ui/DatePicker';
 
 
-function ServiceView({serviceRequests, filterObject}) {
+function ServiceViewReq({serviceRequests, filterObject}) {
   var rows = [];
   for(var i = 0; i < serviceRequests.length; i++) {
     rows.push(<OneServiceRequest serviceRequest={
