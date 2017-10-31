@@ -1,5 +1,5 @@
 import db from '../core/db';
-import meth from '../core/dbFetchMethods';
+import meth from '../PyScripts/childProcPy';
 
 var NUM = '0000';
 var YEAR = '00';
@@ -154,49 +154,6 @@ exports.request_post = function (req, res, next) {
 exports.request_view = function () {
   console.log('abcd');
 };
-
-
-function commitToDB(req) {
-  const commonDbID = getCommonDBID();
-  const uni_ID = uniqueID();
-
-  db.models.user.create({
-    dbID: commonDbID,
-    sfuBCID: req.body.id,
-    department: req.body.department,    // TODO: NO WAY TO GET THE DEPT, ADD IT
-    requestBy: req.body.requestBy,
-    phone: req.body.phone,
-    fax: req.body.fax,
-    email: req.body.email,
-    licensed: req.body.licensed,
-  });
-
-  db.models.event.create({
-    dbID: commonDbID,
-    nameOfEvent: req.body.nameOfEvent,
-    location: req.body.location,
-    numberOfattendees: req.body.numberOfAttendees,
-    eventDates: [req.body.eventDate],   // TODO: CONFIRM DATES ARE JOINED BY ';'
-    times: req.body.time,
-  });
-
-  db.models.request.create({
-    accessID: uni_ID,
-    dbID: commonDbID,
-    eventDbID: commonDbID,
-    userDbID: commonDbID,
-    status: 'Pending',
-    statusDate: new Date(),
-    date: req.body.date,
-    details: req.body.detail,
-    accountCode: req.body.accountCode,
-    invoice: 99999,
-    authorizedBy: req.body.authorizedBy,
-    authorizedID: req.body.authorizedID,
-    authorizedDate: req.body.authorizedDate,
-    authorizedPhone: req.body.authorizedPhone,
-  });
-}
 
 function commitApproveToDB(req) {
   //TODO: approval details should be saved to database
