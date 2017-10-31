@@ -2,9 +2,11 @@ import React, { PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import s from './ServiceView.scss';
 import OneServiceRequest from './OneServiceRequest';
-import ServiceView from '../../components/ServiceView';
+import ServiceViewTable from './ServiceViewTable';
 
 function ServiceViewReq({serviceRequests}) {
+  console.log(serviceRequests);
+  console.log('::::ServiceViewReq::::');
   return (
     <div className={s.root}>
       <div className={s.container}>
@@ -12,7 +14,7 @@ function ServiceViewReq({serviceRequests}) {
          <link rel="stylesheet"
           href="//cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.12/semantic.min.css"
           />
-          <ServiceView />
+          <ServiceViewTable serviceRequests={serviceRequests} />
       </div>
     </div>
   );

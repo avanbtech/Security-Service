@@ -1,5 +1,5 @@
 import React from 'react';
-import ServiceView from './ServiceView';
+import ServiceViewReq from './ServiceView';
 import fetch from '../../core/fetch';
 import axios from 'axios';
 
@@ -36,5 +36,7 @@ export const action = async (state) => {
     });
   }
 
-  return <ServiceView serviceRequests={rows}/>;
+
+  console.log('INDEX');
+  return <ServiceViewReq serviceRequests={rows}/>;
 };

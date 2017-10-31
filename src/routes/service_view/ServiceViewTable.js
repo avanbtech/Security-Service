@@ -1,15 +1,25 @@
 import React, { PropTypes, Component } from 'react';
 import { Table } from 'semantic-ui-react'
 import _ from 'lodash'
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
-import OneServiceRequest from '../../routes/service_view/OneServiceRequest';
+import OneServiceRequest from './OneServiceRequest';
 
 export default class ServiceViewTable extends Component {
 
-	state = {
-    column: null,
-    data: null,
-    direction: null,
+  constructor(props) {
+    super(props);
+
+    const serviceRequests = props.serviceRequests;
+    const ROWS = [];
+    for (let i = 0; i < serviceRequests.length; i++) {
+      ROWS.push(<OneServiceRequest serviceRequest={
+        serviceRequests[i]
+      } />);
+    }
+    this.state = {
+      column: null,
+      data: ROWS,
+      direction: null,
+    };
   }
 
   handleSort = clickedColumn => () => {
@@ -48,20 +58,6 @@ export default class ServiceViewTable extends Component {
   render() {
   	// this.ServiceView()
     const { column, data, direction } = this.state
-    var serviceRequests = this.props.serviceRequests;
-    console.log('****** TABLE ******');
-    console.log(serviceRequests);
-    // ServiceView({serviceRequests}) {
-		  // var rows = [];
-    var ROWS = [];
-		  for(var i = 0; i < serviceRequests.length; i++) {
-		    ROWS.push(<OneServiceRequest serviceRequest={
-		      serviceRequests[i]
-		    }/>);
-		    this.setState({
-		      data: ROWS,
-   		 	})
-		  }
 	    return (
 	      <Table sortable celled fixed>
 	        <Table.Header>
@@ -87,7 +83,7 @@ export default class ServiceViewTable extends Component {
 	          </Table.Row>
 	        </Table.Header>
 	        <Table.Body>
-            {ROWS}
+            {this.state.data}
 	        </Table.Body>
 	      </Table>
 	    )
