@@ -240,8 +240,13 @@ exports.check_status = function (req, res, next) {
 
   // TODO: FOR DEMO ONLY. REMOVE THE EXPORT METHODS.
   // Export data
-  exportMethod("111", "csv");
-  exportMethod(req.body.referenceID, "pdf");
+  // exportMethod("111", "csv");
+  // exportMethod(req.body.referenceID, "pdf");
+
+ db.query("SELECT * FROM `requests` JOIN `events` WHERE requests.accessID = \"17-0001\" AND events.location = \"Burnaby\"", { type: db.QueryTypes.SELECT})
+    .then(requests => {
+      console.log(requests);
+    });
 
   res.redirect('/StatusForm');
-}
+};
