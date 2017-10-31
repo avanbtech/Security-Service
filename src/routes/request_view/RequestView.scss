@@ -3,42 +3,12 @@
 .root {
   padding-left: 20px;
   padding-right: 20px;
-  overflow: auto;
-}
-
-.filter_container {
-    width: 200px;
-    margin-right: 10px;
-    float: left;
-    margin-bottom: 20px;
-    margin-top: 20px;
 }
 
 .container {
   margin: 0 auto;
   padding: 0 0 40px;
   max-width: $max-content-width;
-  margin-left: 220px;
-}
-
-.filter {
-  margin-top: 20px;
-  margin-bottom: 20px;
-}
-
-.filter_title {
-  line-height: 5px;
-
-  margin: 5px;
-  padding: 5px;
-}
-
-.filter_options {
-  margin-left: 15px;
-}
-
-.button_container {
-  margin-left: 15px;
 }
 
 .news {
@@ -62,24 +32,51 @@
   text-decoration: none;
 }
 
-.title {
-  font-weight: lighter;
+.bold {
+  font-weight: 400;
 }
 
-table.service_request_table {
+table.request_request_table {
   width: 100%;
 }
 
-table.service_request_table th {
+table.request_request_table th {
   border-bottom: 2px solid black;
   padding-bottom: 10px;
   text-align: left;
-  font-weight: lighter;
 }
 
-table.service_request_table td {
+table.request_request_table td {
   width: (100/x)%;
   padding-top: 10px;
   padding-bottom: 10px;
   border-bottom: 1px solid gray;
+}
+
+.page {
+  margin: 50px;
+}
+
+.req_detail_table {
+  width:100%;
+}
+.req_detail_table tr {
+  border: none;
+  line-height: 40px;
+}
+
+.req_detail_table td {
+  width:50%;
+  border: none;
+}
+
+.action_container {
+  float: left;
+  overflow:hidden;
+  padding-right: 50px;
+  margin-bottom: 50px;
+}
+
+.officer {
+  margin-top: 50px;
 }

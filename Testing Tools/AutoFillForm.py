@@ -10,6 +10,10 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from random import randint
+import time
+
+from selenium.webdriver.common.action_chains import ActionChains
+from selenium.webdriver.common.keys import Keys
 
 import os
 import datetime
@@ -56,6 +60,12 @@ def getAccCode():
 def getSFUID():
     return str(randint(300000000, 399999999))
 
+def selectDate(driver):
+    actions = ActionChains(driver)
+    actions.send_keys(Keys.ARROW_RIGHT)
+    actions.send_keys(Keys.RETURN)
+    actions.perform()
+
 def main():
     if os.name == 'nt':
         driver = webdriver.Chrome("./chromedriver.exe")
@@ -65,8 +75,9 @@ def main():
 
     driver.get("localhost:3001/Customer")
 
-    date = driver.find_element_by_name("date");
-    date.send_keys(getFutureDateStr())
+    date = driver.find_element_by_name("date")
+    date.click()
+    selectDate(driver)
 
     requestBy = driver.find_element_by_name("requestBy")
     requestBy.send_keys(fake.name())
@@ -86,6 +97,7 @@ def main():
     nameOfEvent = driver.find_element_by_name("nameOfEvent")
     nameOfEvent.send_keys(fake.catch_phrase())
 
+
     location = driver.find_element_by_name("location")
     location.send_keys(fake.city())
 
@@ -93,10 +105,17 @@ def main():
     numAtt.send_keys(randint(100, 999))
 
     eventDate = driver.find_element_by_name("eventDate")
-    eventDate.send_keys(getFutureDateStr())
+    eventDate.click()
+    selectDate(driver)
 
-    time = driver.find_element_by_name("time")
-    time.send_keys(getRandTime())
+    time.sleep(0.5)
+
+    eventTime = driver.find_element_by_name("time")
+    actions = ActionChains(driver)
+    actions.move_to_element(eventTime)
+    actions.click()
+    actions.send_keys(Keys.RETURN)
+    actions.perform()
 
     detail = driver.find_element_by_name("detail")
     detail.send_keys(fake.sentence(nb_words=6, variable_nb_words=True, ext_word_list=None))
@@ -111,7 +130,8 @@ def main():
     authorizedID.send_keys(getSFUID())
 
     authorizedDate = driver.find_element_by_name("authorizedDate")
-    authorizedDate.send_keys(getFutureDateStr())
+    authorizedDate.click()
+    selectDate(driver)
 
     authorizedSignature = driver.find_element_by_name("authorizedSignature")
     authorizedSignature.send_keys(fake.name())
