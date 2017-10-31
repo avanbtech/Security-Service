@@ -13,7 +13,7 @@ import s from './Main.scss';
 import Link from '../Link';
 
 
-const style = {
+
 
 
 
