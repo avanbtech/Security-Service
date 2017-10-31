@@ -9,15 +9,15 @@ export default class ServiceViewTable extends Component {
     super(props);
 
     const serviceRequests = props.serviceRequests;
-    const ROWS = [];
+    const rows = [];
     for (let i = 0; i < serviceRequests.length; i++) {
-      ROWS.push(<OneServiceRequest serviceRequest={
+      rows.push(<OneServiceRequest serviceRequest={
         serviceRequests[i]
       } />);
     }
     this.state = {
       column: null,
-      data: ROWS,
+      data: rows,
       direction: null,
     };
   }
@@ -52,6 +52,9 @@ export default class ServiceViewTable extends Component {
 	            </Table.HeaderCell>
 	            <Table.HeaderCell sorted={column === 'date' ? direction : null} onClick={this.handleSort('date')}>
 	              Date
+	            </Table.HeaderCell>
+	             <Table.HeaderCell sorted={column === 'status' ? direction : null} onClick={this.handleSort('status')}>
+	              Status
 	            </Table.HeaderCell>
 	            <Table.HeaderCell sorted={column === 'requestBy' ? direction : null} onClick={this.handleSort('requestBy')}>
 	              Request By
