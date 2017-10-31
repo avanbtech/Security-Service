@@ -12,22 +12,16 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import s from './Main.scss';
 import Link from '../Link';
 
-<<<<<<< HEAD
 
 const style = {
 
- margin: 12,
- height : 50 ,
- labelAlign: 'right',
 
-=======
 
 const style = {
  margin: 12,
  height : 50 ,
  labelAlign: 'right',
-  
->>>>>>> 317e552b4b2bebe84417d2dee9b7031445499a2e
+
 };
 
 const RaisedButtonExampleSimple = () => (
