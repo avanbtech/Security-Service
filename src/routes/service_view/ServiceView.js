@@ -18,17 +18,17 @@ function ServiceViewReq({serviceRequests, filterObject}) {
   }
   return (
     <div className={s.root}>
-        <div className={s.filter_container}>
-            <FilterForm
-              filterObject={filterObject}
-            />
-        </div>
-        <div className={s.container}>
+      <div className={s.filter_container}>
+        <FilterForm
+          filterObject={filterObject}
+        />
+      </div>
+      <div className={s.container}>
         <h1 className={s.title}>Service View</h1>
          <link rel="stylesheet"
           href="//cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.12/semantic.min.css"
-          />
-          <ServiceViewTable serviceRequests={serviceRequests} />
+        />
+        <ServiceViewTable serviceRequests={serviceRequests} />
       </div>
     </div>
   );
