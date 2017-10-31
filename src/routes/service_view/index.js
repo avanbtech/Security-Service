@@ -16,6 +16,12 @@ export const action = async (state) => {
   includeBurnaby = includeBurnaby || includeAll;
   includeSurrey = includeSurrey || includeAll;
   includeVancouver = includeVancouver || includeAll;
+  console.log({
+    'All: ': includeAll,
+    'Surrey: ': includeSurrey,
+    'Burnaby: ': includeBurnaby,
+    'Vancouver: ': includeVancouver
+  });
 
   const hasStartDate = 'start_date' in state.query;
   let startDateFilter;
@@ -44,8 +50,9 @@ export const action = async (state) => {
     const location = res[x]['event']['location'];
     console.log('Location: ' +location);
     const locationValid = (includeBurnaby && location === 'Burnaby') ||
-      (includeSurrey && location === 'Surre') ||
+      (includeSurrey && location === 'Surrey') ||
       (includeVancouver && location === 'Vancouver');
+    console.log('Valid location: ' + locationValid);
     if (!locationValid) {
       continue;
     }
@@ -54,6 +61,11 @@ export const action = async (state) => {
     const requestDate = Date.parse(requestDateStr);
     const validDate = (!hasStartDate || requestDate >= startDateFilter) &&
       (!hasEndDate || requestDate <= endDateFilter);
+    console.log({
+      'First: ': (!hasStartDate || requestDate >= startDateFilter),
+      'Second: ': (!hasEndDate || requestDate <= endDateFilter),
+      'valid: ': validDate
+    });
     if (!validDate) {
       continue;
     }
