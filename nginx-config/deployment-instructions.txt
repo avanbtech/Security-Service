@@ -1,0 +1,102 @@
+--- VM IS ALREADY CONFIGURED AND RUNNING, NO NEED TO DO THIS AGAIN ---
+
+As of the current time, node and npm packages are not installed globally, so you will not be able to do node commands within the vm.
+Server configuration is done on cwzhang, my account. Ask me (Alex) if you need anything regarding VM deployment for the time being.
+
+In summary, website is deployed at cmpt373-1177g.cmpt.sfu.ca using nginx to reverse proxy http and https requests to the correct ports.
+
+#####YOU WILL GET A SECURITY ERROR WHEN CONNECTING TO THE WEBSITE BECAUSE THE CERTIFICATE IS SELF SIGNED, CERTBOT REFUSES TO AUTHENTICATE POSSIBLY BECAUSE WE ARE
+HOSTING IT UNDER THE SFU DOMAIN#####
+
+Useful commands:
+
+ - sudo su - goes into root mode
+ - sudo service restart nginx - necessary to load nginx changes
+ - sudo cp default /etc/nginx/sites-available (when you are in the nginx-config directory) - updates nginx configuration to what we have in this folder
+
+--Commands down here will be updated later. Currently when trying to run server on vm permanently we have trouble shutting it down--
+ - sudo nano nohup.out (in /project dir) - Checks all terminal prompts from starting the server
+ - nohup npm start & - starts the server process in the background, so even when you exit the vm it will still be running.
+ - ps -A (Check pid processes)
+
+
+Step to step instructions to replicate deployment on a fresh machine:
+
+1) SSH into VM with Putty: cmpt373-1177g.cmpt.sfu.ca:22
+-- Enter your SFU username, and password in the prompt.
+
+Troubleshooting: Are you using putty? If you try to SSH into it directly, you will automatically enter as user root.
+
+2) Clone project into folder (Set up git and ssh keys, then clone)
+
+3) Install node and npm using linuxbrew (not globally done by default) - http://blog.teamtreehouse.com/install-node-js-npm-linux
+-Instructions on this website will redirect you to homebrew main page because outdated package.
+
+4) Install necessary npm dependencies in source folder (~/project)
+npm install
+npm install semantic-ui-react --save
+npm install semantic-ui-css --save
+
+5) Setup database
+sudo apt-get update
+sudo apt-get install mysql-server
+mysql_secure_installation
+
+-Go through mysql_secure_installation dialogues. You can say no for most things, but remember to set a password you remember in 'install mysql-server'
+
+If there is root password issue: https://askubuntu.com/questions/766900/mysql-doesnt-ask-for-root-password-when-installing
+
+Create a database:
+
+'Run mysql -u root -p'
+'create database demodb;'
+
+6) Install python 3: sudo apt-get install python3-pip
+
+Check your python directory: which python3
+Change src/PyScripts/pyoptions.js - replace executable path with the result of 'which python3' (/usr/bin/python3 on our vm)
+
+Replace scriptPath in the same file to PyScripts folder on your machine (/home/cwzhang/project/src/PyScripts in vm case)
+
+7) Install python dependencies
+
+- pip3 install PyPDF2
+- pip3 install reportlab
+- pip3 install requests
+- pip3 install pandas
+- pip3 install selenium
+- pip3 install Faker
+
+Use sudo if necessary for pandas.
+
+8) Install Nginx
+
+sudo -s
+nginx=stable # use nginx=development for latest development version
+apt-get software-properties-common maybe necessary
+add-apt-repository ppa:nginx/$nginx
+apt-get update
+apt-get install nginx
+
+9) Copy default nginx file over (cd to nginx-config dir): sudo cp default /etc/nginx/sites-available
+
+sudo service nginx restart - everytime you make changes
+
+
+-- Certbot not working --
+Problems:
+1) Doesn't identify python packages properly on VM
+2) Cannot successfully authenticate using SFU domain on different VM
+
+-- Attempted to solve using different clients, same issue. Seems like SFU problem?
+
+10) Install certbot
+$ sudo apt-get update
+$ sudo apt-get install software-properties-common
+$ sudo add-apt-repository ppa:certbot/certbot
+$ sudo apt-get update
+$ sudo apt-get install python-certbot-nginx
+
+11) Start server permanently: nohup npm start &
+
+12) Visit the website to make sure things are working: cmpt373-1177g.cmpt.sfu.ca
