@@ -7,6 +7,7 @@ export default class OneServiceRequest extends Component {
       <Table.Row>
         <Table.Cell><a href={'/ServiceView/' + this.props.serviceRequest.requestId}>{this.props.serviceRequest.requestId}</a></Table.Cell>
         <Table.Cell>{this.props.serviceRequest.date}</Table.Cell>
+        <Table.Cell>{this.props.serviceRequest.status}</Table.Cell>
         <Table.Cell>{this.props.serviceRequest.requestBy}</Table.Cell>
         <Table.Cell>{this.props.serviceRequest.sfu_id}</Table.Cell>
         <Table.Cell>{this.props.serviceRequest.location}</Table.Cell>
