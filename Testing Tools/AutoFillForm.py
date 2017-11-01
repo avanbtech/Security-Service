@@ -30,6 +30,12 @@ def getFutureDateStr():
 
     return future.strftime("%Y-%m-%d")
 
+def getRandomLocation():
+    locations = ["Burnaby", "Surrey", "Vancouver"]
+    index = randint(0,2)
+
+    return locations[index]
+
 # FAKE PHONE NUMBER IN FORMAT DDD-DDD-DDDD
 def getFakePhn():
     one = randint(500, 778)
@@ -97,9 +103,8 @@ def main():
     nameOfEvent = driver.find_element_by_name("nameOfEvent")
     nameOfEvent.send_keys(fake.catch_phrase())
 
-
     location = driver.find_element_by_name("location")
-    location.send_keys(fake.city())
+    location.send_keys(getRandomLocation())
 
     numAtt = driver.find_element_by_name("numberOfAttendees")
     numAtt.send_keys(randint(100, 999))
