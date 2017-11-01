@@ -6,10 +6,10 @@ server {
  listen 80;
 
 # Replace with your server IP or domain name - cmpt373-1177g.cmpt.sfu.ca with 192.168.xx.xx everywhere
- server_name  192.168.83.132;
+ server_name  cmpt373-1177g.cmpt.sfu.ca;
 
 # Automatically redirects http requests to https
- return 301 https://192.168.83.132$request_uri;
+ return 301 https://cmpt373-1177g.cmpt.sfu.ca$request_uri;
 }
 
 server {
@@ -17,11 +17,11 @@ server {
 # Listens on default SSL/TLS Port
   listen       443 ssl;
 
-  server_name  192.168.83.132;
+  server_name  cmpt373-1177g.cmpt.sfu.ca;
 
 # Replace wth the directory you store the server certificate and key for ssl auth
-  ssl_certificate /home/cmpt433/Desktop/cmpt373/server.crt;
-  ssl_certificate_key /home/cmpt433/Desktop/cmpt373/server.key;
+  ssl_certificate /home/cwzhang/project/server.crt;
+  ssl_certificate_key /home/cwzhang/project/server.key;
 
   location / {
     proxy_pass http://localhost:3001;
