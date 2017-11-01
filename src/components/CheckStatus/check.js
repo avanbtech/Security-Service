@@ -52,8 +52,7 @@ class checkStatus extends Component {
       const { value } = this.state
       return (
         <MuiThemeProvider>
-          <Form action="/status"
-                method="post">
+          <Form action="/StatusFrom">
             <Form.Group widths='equal'>
                 <Form.Field required>
                   <label> Check Status </label>

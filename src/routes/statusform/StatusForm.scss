@@ -40,3 +40,19 @@
 .link:hover {
   color: rgba(255, 255, 255, 1);
 }
+table.status_request_table {
+  width: 100%;
+}
+
+table.status_request_table th {
+  border-bottom: 2px solid black;
+  padding-bottom: 10px;
+  text-align: left;
+}
+
+table.status_request_table td {
+  width: (100/x)%;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid gray;
+}
