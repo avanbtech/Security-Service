@@ -5,8 +5,16 @@ import Link from '../../components/Link';
 import StatusTable from '../../components/StatusTable';
 import Main from '../../components/Main';
 import FlatButton from 'material-ui/FlatButton';
+import StatusRequest from './StatusRequest';
 
-function Status({ title }) {
+function Status({ request }) {
+  var row;
+  if(request.exists == true){
+    row =(<StatusRequest statusRequest={request}/>);
+  } else {
+    row = ( <th>Could Not Find Request by ID</th>);
+  }
+  
   return (
     <div className={s.root}>
       <div className={s.container}>
@@ -14,13 +22,11 @@ function Status({ title }) {
         <link rel="stylesheet"
         href="//cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.12/semantic.min.css"
         />
-        <StatusTable />
+        {row}
       </div>
 
     </div>
   );
 }
-
-Status.propTypes = { title: PropTypes.string.isRequired };
 
 export default withStyles(Status, s);
