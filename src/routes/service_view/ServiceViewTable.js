@@ -1,6 +1,5 @@
 import React, { PropTypes, Component } from 'react';
 import { Table } from 'semantic-ui-react'
-import _ from 'lodash'
 import OneServiceRequest from './OneServiceRequest';
 
 export default class ServiceViewTable extends Component {
@@ -27,8 +26,6 @@ export default class ServiceViewTable extends Component {
   sortData(fieldName) {
     return function (a,b) {
       if(!fieldName in a.props.serviceRequest){
-        console.log('Field ' + fieldName + ' not found in object');
-        console.log(a.props.serviceRequest);
         return -1;
       }
       return (a.props.serviceRequest[fieldName] < b.props.serviceRequest[fieldName]) ?
@@ -38,36 +35,23 @@ export default class ServiceViewTable extends Component {
   }
 
   handleSort = clickedColumn => () => {
-    const { column, data, direction } = this.state
+    const { column, data, direction } = this.state;
 
     if (column !== clickedColumn) {
-      console.log('Sorting by ' + clickedColumn);
-     /*
-      const newData = _.sortBy(this.state.data, [function (item) {
-        console.log('Item state: item.states[column]');
-        return item.state[column];
-      }]);
-      */
       const newData = data.sort(this.sortData(clickedColumn));
-      console.log('New data: ');
-      console.log(newData);
       this.setState({
         column: clickedColumn,
         data: newData,
         direction: 'ascending',
-      })
+      });
       return;
     }
-
-    console.log('Data: ');
-    console.log(data);
     this.setState({
       data: data.reverse(),
       direction: direction === 'ascending' ? 'descending' : 'ascending',
     })
   }
 
-/*TODO: Object properties not mapping correctly - need to fix*/
   render() {
     const { column, data, direction } = this.state
 	    return (
