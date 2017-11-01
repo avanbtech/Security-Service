@@ -1,0 +1,10 @@
+INFO  21:17:48,703 | james.smtpserver | SMTP Service bound to: 0.0.0.0:25
+INFO  21:17:48,704 | james.smtpserver | SMTP Service is running on: Daniel
+INFO  21:17:48,706 | james.smtpserver | SMTP Service handler hello name is: Daniel
+INFO  21:17:48,708 | james.smtpserver | SMTP Service handler connection timeout is: 360
+INFO  21:17:48,708 | james.smtpserver | SMTP Service connection backlog is: 200
+INFO  21:17:48,708 | james.smtpserver | This SMTP server does not require authentication.
+INFO  21:17:48,709 | james.smtpserver | No maximum message size is enforced for this server.
+INFO  21:17:48,885 | james.smtpserver | Init SMTP Service done
+INFO  21:23:35,483 | james.smtpserver | Dispose SMTP Service
+INFO  21:23:35,491 | james.smtpserver | Dispose SMTP Service done

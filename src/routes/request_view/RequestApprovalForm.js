@@ -450,6 +450,7 @@ class RequestApprovalForm extends Component {
             onClick = {e => this.addGuard(e)}>Add Guard</Form.Button>
         </div>
         <input type='hidden' name='requestID' value={this.props.requestID}/>
+        <input type='hidden' name='email' value={this.props.email}/>
         {
           this.state.guardForms.length > 0 &&
           <div className={s.action_container}>

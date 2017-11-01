@@ -14,6 +14,9 @@ function ApprovalPrompt(input) {
             <input name='approved'
                    type='hidden'
                    value="yes" />
+            <input name='email'
+                   type='hidden'
+                   value={input.email} />
             <Form.Button type='submit'>{approveLabel}</Form.Button>
           </Form>
         </div>
@@ -24,6 +27,9 @@ function ApprovalPrompt(input) {
             <input name='requestID'
                    type='hidden'
                    value={input.requestID}/>
+                   <input name='email'
+                          type='hidden'
+                          value={input.email}/>
             <Form.Button type='submit'>Reject</Form.Button>
           </Form>
         </div>
