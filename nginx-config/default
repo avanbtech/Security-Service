@@ -1,0 +1,34 @@
+# Used in /etc/nginx/sites-available
+
+server {
+
+# Listens on default HTTP Port
+ listen 80;
+
+# Replace with your server IP or domain name - cmpt373-1177g.cmpt.sfu.ca with 192.168.xx.xx everywhere
+ server_name  192.168.83.132;
+
+# Automatically redirects http requests to https
+ return 301 https://192.168.83.132$request_uri;
+}
+
+server {
+
+# Listens on default SSL/TLS Port
+  listen       443 ssl;
+
+  server_name  192.168.83.132;
+
+# Replace wth the directory you store the server certificate and key for ssl auth
+  ssl_certificate /home/cmpt433/Desktop/cmpt373/server.crt;
+  ssl_certificate_key /home/cmpt433/Desktop/cmpt373/server.key;
+
+  location / {
+    proxy_pass http://localhost:3001;
+    proxy_http_version 1.1;
+    proxy_set_header Upgrade $http_upgrade;
+    proxy_set_header Connection 'upgrade';
+    proxy_set_header Host $host;
+    proxy_cache_bypass $http_upgrade;
+  }
+}
