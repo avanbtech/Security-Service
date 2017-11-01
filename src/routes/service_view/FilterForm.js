@@ -11,6 +11,13 @@ function addDays(date, days) {
   return result;
 }
 
+function addYear(date, addYear) {
+  var year = date.getFullYear();
+  var month = date.getMonth();
+  var day = date.getDate();
+  return new Date(year + addYear, month, day)
+}
+
 class FilterForm extends Component {
 
   constructor(props) {
@@ -20,11 +27,17 @@ class FilterForm extends Component {
     if (props.filterObject.start_date !== '') {
       start_date = addDays(new Date(props.filterObject.start_date), 1);
     }
+    else {
+      start_date = addYear(start_date, -1);
+    }
     start_date.setFullYear(start_date.getFullYear());
     start_date.setHours(0, 0, 0, 0);
     let end_date = new Date();
     if (props.filterObject.end_date !== '') {
       end_date = addDays(new Date(props.filterObject.end_date), 1);
+    }
+    else {
+      end_date = addYear(end_date, 1);
     }
 
     end_date.setFullYear(end_date.getFullYear());
