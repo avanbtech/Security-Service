@@ -5,5 +5,5 @@ export const path = '/CSV';
 export const action = async (state) => {
   const title = 'CSV';
   state.context.onSetTitle(title);
-  return <Customer title={title} />;
+  return <CSV title={title} />;
 };

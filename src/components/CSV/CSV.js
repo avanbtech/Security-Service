@@ -1,6 +1,4 @@
-import React from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
-import s from './Header.scss';
 import Link from '../Link';
 import Navigation from '../Navigation';
 import RaisedButton from 'material-ui/RaisedButton';
@@ -11,28 +9,78 @@ import ActionAndroid from 'material-ui/svg-icons/action/android';
 import FlatButton from 'material-ui/FlatButton';
 import FontIcon from 'material-ui/FontIcon';
 import cx from 'classnames';
-import withStyles from 'isomorphic-style-loader/lib/withStyles';
+import TextField from "material-ui/TextField"
+
+import React, { Component } from 'react'
+import { Button,  Form, Icon } from 'semantic-ui-react'
 
 
-class CSVControl extends Component {
+class checkStatus extends Component {
 
-	render(){
-		return(
-			<MuiThemeProvider> 
-		     	<Paper zDepth={1}>
-			        <Link className={s.link} to="/Customer">
-			          <FlatButton 
-			            label="Fill in Request Page" 
-			            style={style} fullWidth={true} 
-			            backgroundColor='#B71C1C' 
-			            labelStyle ={{color: '#FFEBEE'}}
-			            hoverColor = '#F44336'
-			          />
-			        </Link>
-	      		</Paper>
-		    </MuiThemeProvider
-		);
-	}
+  state = {
+    referenceID: '',
+    referenceIDError:''
+  }
+
+  validate = () => {
+    let isError = false;
+    const errors = {};
+
+    var validId = /^\d{2,}-\d{4}$/;
+    if(this.state.referenceID.replace(/\s/g, "").length == 0 || !this.state.referenceID.match(validId)){
+      isError = true;
+      errors.referenceIDError = "Reference ID should be provided";
+    }
+    else {
+      errors.referenceIDError = "";
+    }
+
+    this.setState({
+      ...this.state,
+      ...errors
+    });
+    return isError;
+  }
+
+  handleChange = (event) => {
+    this.setState({
+      referenceID: event.target.value,
+    });
+  };
+
+  onSubmit = e =>{
+    const error = false;
+    if (error){
+      e.preventDefault();
+    }
+  };
+
+
+  render() {
+    const { value } = this.state
+    return (
+      <MuiThemeProvider>
+        <Form action="/CSV"
+              method="post">
+          <h2>Export Request</h2>
+          <Form.Group widths='equal'>
+            <TextField
+              name='referenceID'
+              placeholder='Request Reference ID'
+              onChange={this.handleChange}
+              errorText={this.state.referenceIDError}
+            />
+            <Form.Button onClick = {e => this.onSubmit(e)} animated >
+              <Button.Content visible>Export Data</Button.Content>
+              <Button.Content hidden>
+                <Icon name='search' />
+              </Button.Content>
+            </Form.Button>
+          </Form.Group>
+        </Form>
+      </MuiThemeProvider>
+    )
+  }
 }
 
-export default CSVControl;
+export default checkStatus
