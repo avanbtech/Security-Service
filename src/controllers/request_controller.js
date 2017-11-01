@@ -130,6 +130,38 @@ function sendemailToUser(req) {
    });
 };
 
+function sendemailToUserWithRejection(req) {
+  let mailOptions = {
+    from: 'cmpt373gammafrom@gmail.com',
+    to: req.body.email,
+    subject: 'We reject your request',
+    text: 'We have rejected your request since your request does not meet requirements',
+  };
+  transporter.sendMail(mailOptions, (error, info)=>{
+     if(error){
+        console.log(error);
+    }
+    console.log("sent");
+    console.log(info);
+   });
+};
+
+function sendemailToUserWithApproval(req) {
+  let mailOptions = {
+    from: 'cmpt373gammafrom@gmail.com',
+    to: req.body.email,
+    subject: 'We approve your request',
+    text: 'We have approved your request, your request will quickly proceed to next step',
+  };
+  transporter.sendMail(mailOptions, (error, info)=>{
+     if(error){
+        console.log(error);
+    }
+    console.log("sent");
+    console.log(info);
+   });
+};
+
 function checkNotEmpty(req) {
   req.checkBody('date', 'date name must be specified').notEmpty();
   req.checkBody('department', 'department must be specified').notEmpty();
@@ -260,13 +292,17 @@ exports.request_approve = function (req, res, next) {
   req.filter('signature').escape();
   req.filter('signature').trim();
 
+
   commitApproveToDB(req);
+  sendemailToUserWithApproval(req);
   res.redirect('/ServiceView');
 };
 
 exports.request_reject = function (req, res, next) {
   req.filter('requestID').escape();
   req.filter('requestID').trim();
+
+  sendemailToUserWithRejection(req);
 
   db.models.request.update(
     {status : 'Rejected'},
