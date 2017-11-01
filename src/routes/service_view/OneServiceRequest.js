@@ -8,6 +8,7 @@ function OneServiceRequest({serviceRequest}) {
     <tr>
       <td><a href={'/ServiceView/' + serviceRequest.requestId}>{serviceRequest.requestId}</a></td>
       <td>{serviceRequest.date}</td>
+      <td>{serviceRequest.status}</td>
       <td>{serviceRequest.requestBy}</td>
       <td>{serviceRequest.sfu_id}</td>
       <td>{serviceRequest.location}</td>

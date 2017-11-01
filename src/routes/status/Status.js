@@ -1,31 +1,26 @@
 import React, { PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
-
-{/*Imports the scss page used to style this page*/}
 import s from './Status.scss';
-
-{/*Imports some components used in this page*/}
 import Link from '../../components/Link';
-import Form from '../../components/Form';
+import Check from '../../components/CheckStatus';
 import Main from '../../components/Main';
+import FlatButton from 'material-ui/FlatButton';
 
-{/*Status page to check the current status of a request that a user has submitted? URL: /status */}
-function Status({ title }) {
+function CheckStatus({ title }) {
   return (
     <div className={s.root}>
       <div className={s.container}>
-        <h1>{title}</h1>
-        <ul>
-        <li><p><Link className={s.link} to="/StatusForm">Check status of request</Link></p></li>
-        <input type="text" name="search" placeholder="Enter ID here..."/>
-        <input type="submit" value="Search" class= "btn btn-default"/>
-        </ul>
+        <h1 className={s.title}>Check Request Status</h1>
+        <link rel="stylesheet"
+        href="//cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.12/semantic.min.css"
+        />
+        <Check />
       </div>
 
     </div>
   );
 }
 
-Status.propTypes = { title: PropTypes.string.isRequired };
+CheckStatus.propTypes = { title: PropTypes.string.isRequired };
 
-export default withStyles(Status, s);
+export default withStyles(CheckStatus, s);

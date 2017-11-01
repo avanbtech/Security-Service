@@ -59,12 +59,12 @@ const UserType = new GraphQLObjectType({
           return request.licensed;
         },
       },
-      // request: {
-      //   type: Request,
-      //   resolve(user) {
-      //     return user.getRequest();
-      //   },
-      // },
+      request: {
+        type: Request,
+        resolve(user) {
+          return user.getRequest();
+        },
+      },
     };
   },
 });

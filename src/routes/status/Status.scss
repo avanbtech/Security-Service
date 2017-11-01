@@ -10,3 +10,33 @@
   padding: 20px 0;
   max-width: $max-content-width;
 }
+
+.text {
+  color: rgba(255, 255, 255, .5);
+}
+
+.textMuted {
+  composes: text;
+  color: rgba(255, 255, 255, .3);
+}
+
+.spacer {
+  color: rgba(255, 255, 255, .3);
+}
+
+.text,
+.link {
+  padding: 2px 5px;
+  font-size: 1em;
+}
+
+.link,
+.link:active,
+.link:visited {
+  color: rgba(255, 255, 255, .6);
+  text-decoration: none;
+}
+
+.link:hover {
+  color: rgba(255, 255, 255, 1);
+}
