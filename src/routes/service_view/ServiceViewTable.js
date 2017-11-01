@@ -1,12 +1,13 @@
 import React, { PropTypes, Component } from 'react';
 import { Table } from 'semantic-ui-react'
-import _ from 'lodash'
 import OneServiceRequest from './OneServiceRequest';
 
 export default class ServiceViewTable extends Component {
 
   constructor(props) {
     super(props);
+
+    this.sortData = this.sortData.bind(this);
 
     const serviceRequests = props.serviceRequests;
     const rows = [];
@@ -22,35 +23,44 @@ export default class ServiceViewTable extends Component {
     };
   }
 
+  sortData(fieldName) {
+    return function (a,b) {
+      if(!fieldName in a.props.serviceRequest){
+        return -1;
+      }
+      return (a.props.serviceRequest[fieldName] < b.props.serviceRequest[fieldName]) ?
+        -1 :
+        (a.props.serviceRequest[fieldName] > b.props.serviceRequest[fieldName]) ? 1 : 0;
+    }
+  }
+
   handleSort = clickedColumn => () => {
-    const { column, data, direction } = this.state
+    const { column, data, direction } = this.state;
 
     if (column !== clickedColumn) {
+      const newData = data.sort(this.sortData(clickedColumn));
       this.setState({
         column: clickedColumn,
-        data: _.sortBy(data, [clickedColumn]),
+        data: newData,
         direction: 'ascending',
-      })
-
-      return
+      });
+      return;
     }
-
     this.setState({
       data: data.reverse(),
       direction: direction === 'ascending' ? 'descending' : 'ascending',
     })
   }
 
-/*TODO: Object properties not mapping correctly - need to fix*/
   render() {
     const { column, data, direction } = this.state
 	    return (
 	      <Table sortable celled fixed>
 	        <Table.Header>
 	          <Table.Row>
-	            <Table.HeaderCell sorted={column === 'requestId' ? direction : null} onClick={this.handleSort('requestId')}>  
+	            <Table.HeaderCell sorted={column === 'requestId' ? direction : null} onClick={this.handleSort('requestId')}>
 	              Request ID
-	            </Table.HeaderCell>																																																	
+	            </Table.HeaderCell>
 	            <Table.HeaderCell sorted={column === 'date' ? direction : null} onClick={this.handleSort('date')}>
 	              Date
 	            </Table.HeaderCell>
@@ -69,10 +79,10 @@ export default class ServiceViewTable extends Component {
 	            <Table.HeaderCell sorted={column === 'event_date' ? direction : null} onClick={this.handleSort('event_date')}>
 	              Event Date
 	            </Table.HeaderCell>
-	          </Table.Row> 
+	          </Table.Row>
 	        </Table.Header>
 	        <Table.Body>
-            {this.state.data} 
+            {this.state.data}
 	        </Table.Body>
 	      </Table>
 	    )
