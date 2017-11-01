@@ -1,15 +1,12 @@
 import React from 'react';
-import ServiceView from './ServiceView';
+import ServiceViewReq from './ServiceView';
 import fetch from '../../core/fetch';
 import dbMethods from '../../core/dbFetchMethods';
-
 export const path = '/ServiceView';
-
 export const action = async (state) => {
   const response = await fetch('/graphql?query={news{title,link,contentSnippet}}');
   const { data } = await response.json();
   state.context.onSetTitle('Service View');
-
   let includeBurnaby = 'include_burnaby' in state.query;
   let includeSurrey = 'include_surrey' in state.query;
   let includeVancouver = 'include_vancouver' in state.query;
@@ -17,7 +14,6 @@ export const action = async (state) => {
   includeBurnaby = includeBurnaby || includeAll;
   includeSurrey = includeSurrey || includeAll;
   includeVancouver = includeVancouver || includeAll;
-
   const hasStartDate = 'start_date' in state.query;
   let startDateFilter = '';
   let startDateFilterStr = '';
@@ -25,7 +21,6 @@ export const action = async (state) => {
     startDateFilterStr = state.query.start_date;
     startDateFilter = Date.parse(startDateFilterStr);
   }
-
   const hasEndDate = 'end_date' in state.query;
   let endDateFilter = '';
   let endDateFilterStr = '';
@@ -33,11 +28,8 @@ export const action = async (state) => {
     endDateFilterStr = state.query.end_date;
     endDateFilter = Date.parse(endDateFilterStr);
   }
-
   let res = await dbMethods.getReqForServiceView();
-
   let rows = [];
-
   for (let x = 0; x < res.length; x++) {
     const requestDateStr = res[x]['date'].split("T")[0];
     const requestDate = Date.parse(requestDateStr);
@@ -63,7 +55,6 @@ export const action = async (state) => {
       event_date: res[x]['event']['eventDates'],
     });
   }
-
   const filterObject = {
     'includeBurnaby':includeBurnaby,
     'includeSurrey':includeSurrey,
@@ -71,7 +62,7 @@ export const action = async (state) => {
     'start_date':startDateFilterStr,
     'end_date':endDateFilterStr
   };
-  return <ServiceView
+  return <ServiceViewReq
     serviceRequests={rows}
     filterObject={filterObject}
   />;

@@ -14,6 +14,7 @@ const routes = [
   require('./routes/statusform'),
   require('./routes/service_view'),
   require('./routes/request_view'),
+  require('./routes/CSV'),
 ];
 
 const router = new Router(on => {
