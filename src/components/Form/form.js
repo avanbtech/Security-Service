@@ -77,7 +77,9 @@ class FormExampleSubcomponentControl extends Component {
   validate = () => {
     let isError = false;
     const errors = {};
-
+    var todaysDate = new Date();
+    todaysDate.setHours(0,0,0,0);
+    
     if (this.state.requestBy.length < 3 ){
       isError = true;
       errors.requestByError = "Full name should be provided";
@@ -93,8 +95,7 @@ class FormExampleSubcomponentControl extends Component {
     else{
       errors.dateError = "";
     }*/
-
-    if ((Date.parse(this.state.date) - Date.parse(new Date())) < 0 ||  this.state.date.length == 0 ){
+    if ((Date.parse(this.state.date) - Date.parse(todaysDate)) <= 0 || (this.state.date.length == 0)){
       isError = true;
       errors.dateError = "This field cannot be empty";
     }
@@ -175,7 +176,7 @@ class FormExampleSubcomponentControl extends Component {
       errors.eventDateError = "";
     }*/
 
-    if ((Date.parse(this.state.eventDate) - Date.parse(new Date())) < 0 ||  this.state.eventDate.length == 0 ){
+    if ((Date.parse(this.state.eventDate) - Date.parse(todaysDate) <= 0) ||this.state.eventDate.length == 0){
       isError = true;
       errors.eventDateError = "This field cannot be empty";
     }
@@ -216,7 +217,7 @@ class FormExampleSubcomponentControl extends Component {
         errors.authorizedDateError = "";
     }*/
 
-    if ((Date.parse(this.state.authorizedDate) - Date.parse(new Date())) < 0 ||  this.state.authorizedDate.length == 0 ){
+    if ((Date.parse(this.state.authorizedDate) - Date.parse(todaysDate) <= 0)||this.state.authorizedDate.length == 0){
       isError = true;
       errors.authorizedDateError = "This field cannot be empty";
     }
