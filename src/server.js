@@ -114,3 +114,24 @@ server.listen(port, () => {
   /* eslint-disable no-console */
   console.log(`The server is running at http://localhost:${port}/`);
 });
+
+var fs = require('fs');
+var http = require('http');
+var https = require('https');
+
+//Set the options for creating the server, includes the TLS key and certification
+var options = {
+    key  : fs.readFileSync('server.key'),
+    cert : fs.readFileSync('server.crt')
+};
+
+const HttpPort = 3002;
+const TLSPort = 3005;
+
+http.createServer(server).listen(HttpPort, () => {
+  console.log(`The http server is running at http://localhost:${port}/`);
+});
+
+https.createServer(options, server).listen(TLSPort, () => {
+    console.log('The HTTPS/TLS server is running on port ' + TLSPort);
+});
