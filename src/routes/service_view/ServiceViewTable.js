@@ -8,6 +8,8 @@ export default class ServiceViewTable extends Component {
   constructor(props) {
     super(props);
 
+    this.sortData = this.sortData.bind(this);
+
     const serviceRequests = props.serviceRequests;
     const rows = [];
     for (let i = 0; i < serviceRequests.length; i++) {
@@ -22,19 +24,43 @@ export default class ServiceViewTable extends Component {
     };
   }
 
+  sortData(fieldName) {
+    return function (a,b) {
+      if(!fieldName in a.props.serviceRequest){
+        console.log('Field ' + fieldName + ' not found in object');
+        console.log(a.props.serviceRequest);
+        return -1;
+      }
+      return (a.props.serviceRequest[fieldName] < b.props.serviceRequest[fieldName]) ?
+        -1 :
+        (a.props.serviceRequest[fieldName] > b.props.serviceRequest[fieldName]) ? 1 : 0;
+    }
+  }
+
   handleSort = clickedColumn => () => {
     const { column, data, direction } = this.state
 
     if (column !== clickedColumn) {
+      console.log('Sorting by ' + clickedColumn);
+     /*
+      const newData = _.sortBy(this.state.data, [function (item) {
+        console.log('Item state: item.states[column]');
+        return item.state[column];
+      }]);
+      */
+      const newData = data.sort(this.sortData(clickedColumn));
+      console.log('New data: ');
+      console.log(newData);
       this.setState({
         column: clickedColumn,
-        data: _.sortBy(data, [clickedColumn]),
+        data: newData,
         direction: 'ascending',
       })
-
-      return
+      return;
     }
 
+    console.log('Data: ');
+    console.log(data);
     this.setState({
       data: data.reverse(),
       direction: direction === 'ascending' ? 'descending' : 'ascending',
@@ -48,9 +74,9 @@ export default class ServiceViewTable extends Component {
 	      <Table sortable celled fixed>
 	        <Table.Header>
 	          <Table.Row>
-	            <Table.HeaderCell sorted={column === 'requestId' ? direction : null} onClick={this.handleSort('requestId')}>  
+	            <Table.HeaderCell sorted={column === 'requestId' ? direction : null} onClick={this.handleSort('requestId')}>
 	              Request ID
-	            </Table.HeaderCell>																																																	
+	            </Table.HeaderCell>
 	            <Table.HeaderCell sorted={column === 'date' ? direction : null} onClick={this.handleSort('date')}>
 	              Date
 	            </Table.HeaderCell>
@@ -69,10 +95,10 @@ export default class ServiceViewTable extends Component {
 	            <Table.HeaderCell sorted={column === 'event_date' ? direction : null} onClick={this.handleSort('event_date')}>
 	              Event Date
 	            </Table.HeaderCell>
-	          </Table.Row> 
+	          </Table.Row>
 	        </Table.Header>
 	        <Table.Body>
-            {this.state.data} 
+            {this.state.data}
 	        </Table.Body>
 	      </Table>
 	    )
