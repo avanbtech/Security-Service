@@ -1,7 +1,7 @@
 import React from 'react';
-import StatusForm from './statusform';
+import StatusForm from './StatusForm';
 
-export const path = '/StatusForm';
+export const path = '/statusform';
 export const action = async (state) => {
   const title = 'Status form that displays current request status and information user entered';
   state.context.onSetTitle(title);
