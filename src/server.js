@@ -115,58 +115,6 @@ server.use((err, req, res, next) => { // eslint-disable-line no-unused-vars
   }));
 });
 
-var fs = require('fs');
-var http = require('http');
-var https = require('https');
-
-//Set the options for creating the server, includes the TLS key and certification
-var options = {
-    key  : fs.readFileSync('server.key'),
-    cert : fs.readFileSync('server.crt')
-};
-
-const HttpPort = 3000;
-const TLSPort = 3005;
-
-http.createServer(server).listen(HttpPort, () => {
-  console.log(`The http server is running at http://localhost:${port}/`);
-});
-
-https.createServer(options, server).listen(TLSPort, () => {
-    console.log('The HTTPS/TLS server is running on port ' + TLSPort);
-});
-
-var fs = require('fs');
-var http = require('http');
-var https = require('https');
-
-//Set the options for creating the server, includes the TLS key and certification
-var options = {
-    key  : fs.readFileSync('server.key'),
-    cert : fs.readFileSync('server.crt')
-};
-
-const HttpPort = 3002;
-const TLSPort = 3005;
-
-http.createServer(server).listen(HttpPort, () => {
-  console.log(`The http server is running at http://localhost:${port}/`);
-});
-
-https.createServer(options, server).listen(TLSPort, () => {
-    console.log('The HTTPS/TLS server is running on port ' + TLSPort);
-});
-
-var fs = require('fs');
-var http = require('http');
-var https = require('https');
-
-//Set the options for creating the server, includes the TLS key and certification
-var options = {
-    key  : fs.readFileSync('server.key'),
-    cert : fs.readFileSync('server.crt')
-};
-
 const HttpPort = 3002;
 const TLSPort = 3005;
 
