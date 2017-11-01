@@ -136,9 +136,11 @@ const Event = Conn.define('event', {
   },
 });
 
+Event.hasOne(Request);
+User.hasOne(Request);
+
 Request.belongsTo(Event);
 Request.belongsTo(User);
-
 
 //FOR DEPLOYING
 //Conn.sync({ force: false});

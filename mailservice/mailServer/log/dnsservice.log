@@ -1,0 +1,7 @@
+INFO  21:17:40,330 | james.dnsservice | Autodiscovery is enabled - trying to discover your system's DNS Servers
+INFO  21:17:40,337 | james.dnsservice | Adding autodiscovered server 192.168.1.254
+INFO  21:17:40,337 | james.dnsservice | Adding autodiscovered server 75.153.171.122
+INFO  21:17:40,337 | james.dnsservice | Adding autodiscovered search path telus.
+INFO  21:17:40,338 | james.dnsservice | DNS Server is: 192.168.1.254
+INFO  21:17:40,338 | james.dnsservice | DNS Server is: 75.153.171.122
+INFO  21:17:40,346 | james.dnsservice | Registered cache, resolver and search paths as DNSJava defaults

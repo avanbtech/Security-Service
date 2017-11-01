@@ -65,11 +65,14 @@ class RequestApproval extends Component {
         this.props.approved ?
           <RequestApprovalForm
             requestInfo={this.props.requestInfo}
-            requestID={this.props.requestID}/>
+            requestID={this.props.requestID}
+            email={this.props.requestInfo.user.email}
+          />
             :
           <ApprovalPrompt
             requestID={this.props.requestID}
-            status={this.props.requestInfo.status}s
+            status={this.props.requestInfo.status}
+            email={this.props.requestInfo.user.email}
           />
       }
     </div>

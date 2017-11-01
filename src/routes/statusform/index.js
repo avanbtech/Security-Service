@@ -1,12 +1,12 @@
 import React from 'react';
-import StatusForm from './statusform';
+import StatusForm from './StatusForm';
 
 import methods from '../../core/dbFetchMethods'
-export const path = '/StatusForm';
+export const path = '/StatusForm/:referenceID';
 export const action = async (state) => {
   const title = 'Status form that displays current request status and information user entered';
 
-  const res = await methods.getReqForStatusView("17-0001")
+  const res = await methods.getReqForStatusView(state.params.referenceID);
 
   let request;
   

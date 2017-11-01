@@ -1,27 +1,76 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import RaisedButton from 'material-ui/RaisedButton';
+import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import ActionAndroid from 'material-ui/svg-icons/action/android';
+import FlatButton from 'material-ui/FlatButton';
+import FontIcon from 'material-ui/FontIcon';
 import cx from 'classnames';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
+
 import s from './Main.scss';
 import Link from '../Link';
 
-function Main({ className }) {
-  return (
-    <div className={cx(s.root, className)} role="Main">
-    <ul>
 
-    <li><Link className={s.link} to="/Customer">Security Request Form</Link></li>
 
-      {/*To be moved depending where this will be used*/}
-      <li><Link className={s.link} to="/Status">Check Security Requests</Link></li>
-      <li><Link className={s.link} to="/ServiceView">Service View</Link></li>
 
-      </ul>
-    </div>
-  );
-}
 
-Main.propTypes = {
-  className: PropTypes.string,
+
+const style = {
+ margin: 12,
+ height : 50 ,
+ labelAlign: 'right',
+
 };
 
-export default withStyles(Main, s);
+const RaisedButtonExampleSimple = () => (
+  <div>
+    <MuiThemeProvider>
+      <div>
+        <br />
+        <br />
+        <Link className={s.link} to="/Customer">
+          <FlatButton
+            label="Fill in Request Page"
+            style={style} fullWidth={true}
+            backgroundColor='#B71C1C'
+            labelStyle ={{color: '#FFEBEE'}}
+            hoverColor = '#F44336'
+          />
+        </Link>
+        <Link className={s.link} to="/Status">
+          <FlatButton
+            label="Check Request Page"
+            style={style} fullWidth={true}
+            backgroundColor='#B71C1C'
+            labelStyle ={{color: '#FFEBEE'}}
+            hoverColor = '#F44336'
+          />
+        </Link>
+        <Link className={s.link} to="/ServiceView">
+          <FlatButton
+            label="Service View"
+            style={style} fullWidth={true}
+            backgroundColor='#B71C1C'
+            labelStyle ={{color: '#FFEBEE'}}
+            hoverColor = '#F44336'
+          />
+        </Link>
+        <Link className={s.link} to="/CSV">
+          <FlatButton
+              label="Export Data Demo"
+              style={style} fullWidth={true}
+              backgroundColor='#B71C1C'
+              labelStyle ={{color: '#FFEBEE'}}
+              hoverColor = '#F44336'
+              //onclick here
+            />
+          </Link>
+
+      </div>
+    </MuiThemeProvider>
+  </div>
+);
+
+export default RaisedButtonExampleSimple;
