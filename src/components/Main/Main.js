@@ -31,37 +31,37 @@ const RaisedButtonExampleSimple = () => (
         <br />
         <br />
         <Link className={s.link} to="/Customer">
-          <FlatButton 
-            label="Fill in Request Page" 
-            style={style} fullWidth={true} 
-            backgroundColor='#B71C1C' 
+          <FlatButton
+            label="Fill in Request Page"
+            style={style} fullWidth={true}
+            backgroundColor='#B71C1C'
             labelStyle ={{color: '#FFEBEE'}}
             hoverColor = '#F44336'
           />
         </Link>
         <Link className={s.link} to="/Status">
-          <FlatButton 
-            label="Check Request Page" 
-            style={style} fullWidth={true} 
-            backgroundColor='#B71C1C' 
+          <FlatButton
+            label="Check Request Page"
+            style={style} fullWidth={true}
+            backgroundColor='#B71C1C'
             labelStyle ={{color: '#FFEBEE'}}
             hoverColor = '#F44336'
           />
         </Link>
         <Link className={s.link} to="/ServiceView">
-          <FlatButton 
-            label="Service View" 
-            style={style} fullWidth={true} 
-            backgroundColor='#B71C1C' 
+          <FlatButton
+            label="Service View"
+            style={style} fullWidth={true}
+            backgroundColor='#B71C1C'
             labelStyle ={{color: '#FFEBEE'}}
             hoverColor = '#F44336'
           />
         </Link>
         <Link className={s.link} to="/CSV">
-          <FlatButton 
-              label="explore as csv" 
-              style={style} fullWidth={true} 
-              backgroundColor='#B71C1C' 
+          <FlatButton
+              label="Export Data Demo"
+              style={style} fullWidth={true}
+              backgroundColor='#B71C1C'
               labelStyle ={{color: '#FFEBEE'}}
               hoverColor = '#F44336'
               //onclick here

@@ -320,10 +320,16 @@ exports.check_status = function (req, res, next) {
   req.filter('referenceID').trim();
   console.log(req.body.referenceID);
 
+
+
+  res.redirect('/StatusForm');
+};
+
+exports.export_data = function (req, res, next) {
   // TODO: FOR DEMO ONLY. REMOVE THE EXPORT METHODS.
   // Export data
   exportMethod("111", "csv");
   exportMethod(req.body.referenceID, "pdf");
 
-  res.redirect('/StatusForm');
+  res.redirect('/');
 }
