@@ -11,7 +11,7 @@ function getPyOptions(reqID) {
 
     // TODO: REPLACE THIS PATH WITH SCRIPT FOLDER IN PROJECT DIRECTORY
     // Path to the scripts
-    scriptPath: '/home/cwzhang/project/src/PyScripts/pyoptions.js',
+    scriptPath: '/home/cwzhang/project/src/PyScripts/',
 
     // Pass the data in a comma-delimited array here (in python it is 1 indexed array)
     args: [reqID],
