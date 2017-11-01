@@ -1,5 +1,5 @@
 import React from 'react';
-import ServiceView from './ServiceView';
+import ServiceViewReq from './ServiceView';
 import fetch from '../../core/fetch';
 import dbMethods from '../../core/dbFetchMethods';
 
@@ -71,7 +71,7 @@ export const action = async (state) => {
     'start_date':startDateFilterStr,
     'end_date':endDateFilterStr
   };
-  return <ServiceView
+  return <ServiceViewReq
     serviceRequests={rows}
     filterObject={filterObject}
   />;
