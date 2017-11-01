@@ -1,3 +1,6 @@
+/* Express server handling file, server.js*/
+/* Read here for more information regarding the structure of this file: https://blog.risingstack.com/your-first-node-js-http-server/ */
+
 import 'babel-polyfill';
 import path from 'path';
 import express from 'express';
@@ -12,6 +15,15 @@ import assets from './assets';
 import { port, auth, analytics } from './config';
 
 var expressValidator = require('express-validator');
+
+function requireHTTPS(req, res, next) {
+  if (!req.secure) {
+      return res.redirect('https://' + req.get('host') + req.url);
+  }
+    next();
+}
+
+
 
 const server = global.server = express();
 
@@ -30,17 +42,13 @@ server.use(cookieParser());
 server.use(bodyParser.urlencoded({ extended: true }));
 server.use(bodyParser.json());
 server.use(expressValidator());
+//server.get("*", function (req, res, next) {
+    //res.redirect('https://' + req.get('host') + req.url);
+    //res.redirect("https://" + req.headers.host + req.path);
+//});
 
-//
-// Authentication
-// -----------------------------------------------------------------------------
-// server.use(expressJwt({
-//   secret: auth.jwt.secret,
-//   credentialsRequired: false,
-//   /* jscs:disable requireCamelCaseOrUpperCaseIdentifiers */
-//   getToken: req => req.cookies.id_token,
-//   /* jscs:enable requireCamelCaseOrUpperCaseIdentifiers */
-// }));
+//server.use(requireHTTPS);
+
 
 //
 // Register API middleware
@@ -107,10 +115,23 @@ server.use((err, req, res, next) => { // eslint-disable-line no-unused-vars
   }));
 });
 
-//
-// Launch the server
-// -----------------------------------------------------------------------------
-server.listen(port, () => {
-  /* eslint-disable no-console */
-  console.log(`The server is running at http://localhost:${port}/`);
+var fs = require('fs');
+var http = require('http');
+var https = require('https');
+
+//Set the options for creating the server, includes the TLS key and certification
+var options = {
+    key  : fs.readFileSync('server.key'),
+    cert : fs.readFileSync('server.crt')
+};
+
+const HttpPort = 3000;
+const TLSPort = 3005;
+
+http.createServer(server).listen(HttpPort, () => {
+  console.log(`The http server is running at http://localhost:${port}/`);
+});
+
+https.createServer(options, server).listen(TLSPort, () => {
+    console.log('The HTTPS/TLS server is running on port ' + TLSPort);
 });
