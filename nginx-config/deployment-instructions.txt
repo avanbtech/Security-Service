@@ -101,3 +101,10 @@ $ sudo apt-get install python-certbot-nginx
 11) Start server permanently: nohup npm start &
 
 12) Visit the website to make sure things are working: cmpt373-1177g.cmpt.sfu.ca
+
+
+Extra:
+
+Db.js password: hooh392
+pythonPath: '/usr/bin/python3',
+scriptPath: '/home/cwzhang/project/src/PyScripts/',
