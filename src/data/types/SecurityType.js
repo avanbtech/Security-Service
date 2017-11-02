@@ -2,6 +2,7 @@ import {
   GraphQLObjectType,
   GraphQLString,
   GraphQLFloat,
+  GraphQLInt,
 } from 'graphql';
 
 
@@ -10,6 +11,12 @@ const Security = new GraphQLObjectType({
   description: 'Event security group for an event',
   fields: () => {
     return {
+      dbID: {
+        type: GraphQLInt,
+        resolve(security) {
+          return security.dbID;
+        },
+      },
       accessID: {
         type: GraphQLString,
         resolve(security) {

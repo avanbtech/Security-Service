@@ -86,6 +86,7 @@ const Request  = new GraphQLObjectType({
           return request.authorizedPhone;
         },
       },
+
       user: {
         type: User,
         resolve(request) {

@@ -106,6 +106,9 @@ const SecurityArgs = {
   accessID: {
     type:  GraphQLString,
   },
+  dbID: {
+    type: GraphQLInt,
+  },
   supervisor: {
     type:  GraphQLString,
   },

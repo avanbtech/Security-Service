@@ -90,11 +90,31 @@ function commitToDB(req) {
     times: req.body.time,
   });
 
+  db.models.security.create({
+    accessID: uni_ID,
+    dbID: commonDbID,
+    supervisor: "none",
+    distribution: "none",
+    guardRegularRate: 0,
+    guardRegularHours: 0,
+    guardOTRate: 0,
+    guardOTHours: 0,
+    scspRegularRate: 0,
+    scspRegularHours: 0,
+    scspOTRate: 0,
+    scspOTHours: 0,
+    totalGuardBillable: 0,
+    totalSCSPBillable: 0,
+    preparedBy: "none",
+    remarks: "none",
+  });
+
   db.models.request.create({
     accessID: uni_ID,
     dbID: commonDbID,
     eventDbID: commonDbID,
     userDbID: commonDbID,
+    securityDbID: commonDbID,
     status: 'Pending',
     statusDate: new Date(),
     date: req.body.date,
@@ -236,10 +256,37 @@ exports.request_view = function () {
 function commitApproveToDB(req) {
   //TODO: approval details should be saved to database
 
+  console.log(req);
+
+  const newmobj = db.models.security.update({
+    supervisor: req.body.supervisor,
+    distribution: req.body.distribution,
+    guardRegularRate: req.body.guardRegularRate,
+    guardRegularHours: req.body.guardRegularHours,
+    guardOTRate: req.body.guardOTRate,
+    guardOTHours: req.body.guardOTHours,
+    scspRegularRate: req.body.scspRegularRate,
+    scspRegularHours: req.body.scspRegularHours,
+    scspOTRate: req.body.scspOTRate,
+    scspOTHours: req.body.scspOTHours,
+    totalGuardBillable: req.body.totalGuardBillable,
+    totalSCSPBillable: req.body.totalSCSPBillable,
+    preparedBy: req.body.preparedBy,
+    remarks: req.body.remarks,
+    },
+    {where: { accessID: req.body.requestID} },
+    );
+
+    console.log(newmobj);
+
+
+
   // updating request status
   db.models.request.update(
-    {status : 'Accepted'},
-    {where: {accessID: req.body.requestID}},
+    {
+      status : 'Accepted',
+    },
+    {where: { accessID: req.body.requestID} },
   );
 }
 exports.get_accessID = function (req, res, next) {

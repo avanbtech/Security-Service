@@ -140,6 +140,11 @@ const Security = Conn.define('security', {
   accessID: {
     type: Sequelize.STRING,
     allowNull: false,
+    unique: true,
+  },
+  dbID: {
+    type: Sequelize.INTEGER,
+    allowNull: false,
     primaryKey: true,
   },
   supervisor: {
