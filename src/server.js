@@ -115,6 +115,7 @@ server.listen(port, () => {
   console.log(`The server is running at http://localhost:${port}/`);
 });
 
+/*
 var fs = require('fs');
 var http = require('http');
 var https = require('https');
@@ -135,3 +136,4 @@ http.createServer(server).listen(HttpPort, () => {
 https.createServer(options, server).listen(TLSPort, () => {
     console.log('The HTTPS/TLS server is running on port ' + TLSPort);
 });
+*/

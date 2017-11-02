@@ -13,6 +13,7 @@ Useful commands:
  - sudo su - goes into root mode
  - sudo service restart nginx - necessary to load nginx changes
  - sudo cp default /etc/nginx/sites-available (when you are in the nginx-config directory) - updates nginx configuration to what we have in this folder
+- sudo nginx -t - checks if nginx is configured properly
 
 --Commands down here will be updated later. Currently when trying to run server on vm permanently we have trouble shutting it down--
  - sudo nano nohup.out (in /project dir) - Checks all terminal prompts from starting the server
@@ -100,3 +101,10 @@ $ sudo apt-get install python-certbot-nginx
 11) Start server permanently: nohup npm start &
 
 12) Visit the website to make sure things are working: cmpt373-1177g.cmpt.sfu.ca
+
+
+Extra:
+
+Db.js password: hooh392
+pythonPath: '/usr/bin/python3',
+scriptPath: '/home/cwzhang/project/src/PyScripts/',
