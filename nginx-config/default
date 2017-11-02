@@ -20,8 +20,8 @@ server {
   server_name  cmpt373-1177g.cmpt.sfu.ca;
 
 # Replace wth the directory you store the server certificate and key for ssl auth
-  ssl_certificate /home/cwzhang/project/server.crt;
-  ssl_certificate_key /home/cwzhang/project/server.key;
+  ssl_certificate /home/cwzhang/project/nginx-config/cert.pem;
+  ssl_certificate_key /home/cwzhang/project/nginx-config/privkey.pem;
 
   location / {
     proxy_pass http://localhost:3001;
@@ -32,6 +32,7 @@ server {
     proxy_cache_bypass $http_upgrade;
   }
 
+# Needed to sign SSH with CA
   location /.well-known/acme-challenge/V-jKuBWx0J0MSrjtWZeZLoEQJhS0m63godq0y7CBZ5k {
     alias /home/cwzhang/project/nginx-config/;
     index V-jKuBWx0J0MSrjtWZeZLoEQJhS0m63godq0y7CBZ5k;
