@@ -1,0 +1,3 @@
+- Nginx and TLS instructions can be found in /nginx-config directory
+- Python dependency related instructions can be found in /PyScripts
+- Remember to configure your MySQL database password at /src/core/db.js
