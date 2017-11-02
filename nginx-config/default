@@ -5,7 +5,7 @@ server {
 # Listens on default HTTP Port
  listen 80;
 
-# Replace with your server IP or domain name - cmpt373-1177g.cmpt.sfu.ca with 192.168.xx.xx everywhere
+# Replace with your server IP or domain name - cmpt373-1177g.cmpt.sfu.ca
  server_name  cmpt373-1177g.cmpt.sfu.ca;
 
 # Automatically redirects http requests to https
@@ -31,4 +31,12 @@ server {
     proxy_set_header Host $host;
     proxy_cache_bypass $http_upgrade;
   }
+
+  location /.well-known/acme-challenge/V-jKuBWx0J0MSrjtWZeZLoEQJhS0m63godq0y7CBZ5k {
+    alias /home/cwzhang/project/nginx-config/;
+    index V-jKuBWx0J0MSrjtWZeZLoEQJhS0m63godq0y7CBZ5k;
+  }
+
+
+
 }
