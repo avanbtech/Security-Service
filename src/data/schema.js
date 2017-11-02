@@ -4,16 +4,18 @@ import {
   GraphQLString,
   GraphQLList,
   GraphQLSchema,
+  GraphQLFloat,
 } from 'graphql';
 
 import Db from '../core/db';
 import Event from './types/EventType';
 import User from './types/UserType';
 import Request from './types/RequestType';
+import Security from "./types/SecurityType";
 
 //Input types
 
-var UserArgs = {
+const UserArgs = {
   dbID: {
     type: GraphQLInt,
   },
@@ -40,7 +42,7 @@ var UserArgs = {
   },
 };
 
-var RequestArgs = {
+const RequestArgs = {
   accessID: {
     type: GraphQLString,
   },
@@ -79,7 +81,7 @@ var RequestArgs = {
   },
 };
 
-var EventArgs = {
+const EventArgs = {
   dbID: {
     type: GraphQLInt,
   },
@@ -97,6 +99,54 @@ var EventArgs = {
   },
   times: {
     type: GraphQLString,
+  },
+};
+
+const SecurityArgs = {
+  accessID: {
+    type:  GraphQLString,
+  },
+  supervisor: {
+    type:  GraphQLString,
+  },
+  distribution: {
+    type:  GraphQLString,
+  },
+  guardRegularRate: {
+    type:  GraphQLFloat,
+  },
+  guardRegularHours: {
+    type:  GraphQLFloat,
+  },
+  guardOTRate: {
+    type:  GraphQLFloat,
+  },
+  guardOTHours: {
+    type:  GraphQLFloat,
+  },
+  scspRegularRate: {
+    type:  GraphQLFloat,
+  },
+  scspRegularHours: {
+    type:  GraphQLFloat,
+  },
+  scspOTRate: {
+    type:  GraphQLFloat,
+  },
+  scspOTHours: {
+    type:  GraphQLFloat,
+  },
+  totalGuardBillable: {
+    type:  GraphQLFloat,
+  },
+  totalSCSPBillable: {
+    type:  GraphQLFloat,
+  },
+  preparedBy: {
+    type:  GraphQLString,
+  },
+  remarks: {
+    type:  GraphQLString,
   },
 };
 
@@ -127,6 +177,14 @@ const Query = new GraphQLObjectType({
         args: EventArgs,
         resolve(root, args) {
           return Db.models.event.findAll({where: args});
+        },
+      },
+
+      security: {
+        type: new GraphQLList(Security),
+        args: SecurityArgs,
+        resolve(root, args) {
+          return Db.models.security.findAll({where: args});
         },
       },
     };

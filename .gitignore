@@ -6,3 +6,5 @@
 **/ExportedCSVs
 **/ExportedPDFs
 .gitignore
+npm-debug.log
+

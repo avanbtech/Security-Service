@@ -7,6 +7,7 @@ import {
 import GraphQLDate from 'graphql-date';
 import User from './UserType';
 import Event from './EventType';
+import Security from "./SecurityType";
 
 const Request  = new GraphQLObjectType({
   name: 'Request',
@@ -95,6 +96,12 @@ const Request  = new GraphQLObjectType({
         type: Event,
         resolve(request) {
           return request.getEvent();
+        },
+      },
+      security: {
+        type: Security,
+        resolve(request) {
+          return request.getSecurity();
         },
       },
     };

@@ -4,7 +4,7 @@ import Sequelize from 'sequelize';
 const Conn = new Sequelize(
   'demodb',
   'root',
-  'panda',
+  'YOUR PASSWORD HERE',
   {
     dialect: 'mysql',
     host: 'localhost', //VM IP ADDRESS: '142.58.21.62',
@@ -136,11 +136,77 @@ const Event = Conn.define('event', {
   },
 });
 
+const Security = Conn.define('security', {
+  accessID: {
+    type: Sequelize.STRING,
+    allowNull: false,
+    primaryKey: true,
+  },
+  supervisor: {
+    type: Sequelize.STRING,
+    allowNull: false,
+  },
+  distribution: {
+    type: Sequelize.STRING,
+    allowNull: false,
+  },
+  guardRegularRate: {
+    type: Sequelize.FLOAT.UNSIGNED,
+    allowNull: false,
+  },
+  guardRegularHours: {
+    type: Sequelize.FLOAT.UNSIGNED,
+    allowNull: false,
+  },
+  guardOTRate: {
+    type: Sequelize.FLOAT.UNSIGNED,
+    allowNull: false,
+  },
+  guardOTHours: {
+    type: Sequelize.FLOAT.UNSIGNED,
+    allowNull: false,
+  },
+  scspRegularRate: {
+    type: Sequelize.FLOAT.UNSIGNED,
+    allowNull: false,
+  },
+  scspRegularHours: {
+    type: Sequelize.FLOAT.UNSIGNED,
+    allowNull: false,
+  },
+  scspOTRate: {
+    type: Sequelize.FLOAT.UNSIGNED,
+    allowNull: false,
+  },
+  scspOTHours: {
+    type: Sequelize.FLOAT.UNSIGNED,
+    allowNull: false,
+  },
+  totalGuardBillable: {
+    type: Sequelize.FLOAT.UNSIGNED,
+    allowNull: false,
+  },
+  totalSCSPBillable: {
+    type: Sequelize.FLOAT.UNSIGNED,
+    allowNull: false,
+  },
+  preparedBy: {
+    type: Sequelize.STRING,
+    allowNull: false,
+  },
+  remarks: {
+    type: Sequelize.STRING,
+    allowNull: true,
+  },
+});
+
+
 Event.hasOne(Request);
 User.hasOne(Request);
 
 Request.belongsTo(Event);
 Request.belongsTo(User);
+Request.belongsTo(Security);
 
 //FOR DEPLOYING
 //Conn.sync({ force: false});
