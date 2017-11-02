@@ -126,12 +126,6 @@ function commitToDB(req) {
     authorizedDate: req.body.authorizedDate,
     authorizedPhone: req.body.authorizedPhone,
   });
-
-  // Un comment to make a query to the DB
-  // makeReq();
-
-  // Un comment to run the PDF saving python script
-  // saveToPDF(uni_ID);
 }
 
 function sendemailToUser(req) {
@@ -258,35 +252,31 @@ function commitApproveToDB(req) {
 
   console.log(req);
 
-  const newmobj = db.models.security.update({
-    supervisor: req.body.supervisor,
-    distribution: req.body.distribution,
-    guardRegularRate: req.body.guardRegularRate,
-    guardRegularHours: req.body.guardRegularHours,
-    guardOTRate: req.body.guardOTRate,
-    guardOTHours: req.body.guardOTHours,
-    scspRegularRate: req.body.scspRegularRate,
-    scspRegularHours: req.body.scspRegularHours,
-    scspOTRate: req.body.scspOTRate,
-    scspOTHours: req.body.scspOTHours,
-    totalGuardBillable: req.body.totalGuardBillable,
-    totalSCSPBillable: req.body.totalSCSPBillable,
-    preparedBy: req.body.preparedBy,
-    remarks: req.body.remarks,
+  db.models.security.update({
+      supervisor: req.body.supervisor,
+      distribution: req.body.distribution,
+      guardRegularRate: req.body.guardRegularRate,
+      guardRegularHours: req.body.guardRegularHours,
+      guardOTRate: req.body.guardOTRate,
+      guardOTHours: req.body.guardOTHours,
+      scspRegularRate: req.body.scspRegularRate,
+      scspRegularHours: req.body.scspRegularHours,
+      scspOTRate: req.body.scspOTRate,
+      scspOTHours: req.body.scspOTHours,
+      totalGuardBillable: req.body.totalGuardBillable,
+      totalSCSPBillable: req.body.totalSCSPBillable,
+      preparedBy: req.body.preparedBy,
+      remarks: req.body.remarks,
     },
-    {where: { accessID: req.body.requestID} },
+    { where: { accessID: req.body.requestID } },
     );
-
-    console.log(newmobj);
-
-
 
   // updating request status
   db.models.request.update(
     {
       status : 'Accepted',
     },
-    {where: { accessID: req.body.requestID} },
+    { where: { accessID: req.body.requestID } },
   );
 }
 exports.get_accessID = function (req, res, next) {
