@@ -242,7 +242,9 @@ function commitApproveToDB(req) {
     {where: {accessID: req.body.requestID}},
   );
 }
-
+exports.get_accessID = function (req, res, next) {
+  console.log(req);
+}
 exports.request_approve = function (req, res, next) {
   req.filter('requestID').escape();
   req.filter('requestID').trim();

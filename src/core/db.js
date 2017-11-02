@@ -4,7 +4,7 @@ import Sequelize from 'sequelize';
 const Conn = new Sequelize(
   'demodb',
   'root',
-  'hooh392',
+  'panda',
   {
     dialect: 'mysql',
     host: 'localhost', //VM IP ADDRESS: '142.58.21.62',
