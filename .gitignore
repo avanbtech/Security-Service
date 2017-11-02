@@ -6,3 +6,4 @@
 **/ExportedCSVs
 **/ExportedPDFs
 .gitignore
+nohup.out

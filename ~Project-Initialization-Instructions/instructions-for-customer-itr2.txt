@@ -1,0 +1,6 @@
+- You can access our website at http://cmpt373-1177g.cmpt.sfu.ca/
+
+- The Service View may lag and delay when trying to connect to it, one way to try to bypass this is clicking the link, and when it doesn't load refresh (F5) your page.
+- We are looking to solve this in the future.
+
+- If the website is not working, please contact our VM Admin (cwzhang@sfu.ca) as soon as possible, since it may have been terminated and not relaunched.
