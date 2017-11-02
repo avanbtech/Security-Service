@@ -12,10 +12,10 @@ Useful commands:
 - sudo cp default /etc/nginx/sites-available (when you are in the nginx-config directory) - updates nginx configuration to what we have in this folder
 - sudo nginx -t - checks if nginx is configured properly
 
---Commands down here will be updated later. Currently when trying to run server on vm permanently we have trouble shutting it down--
 - sudo nano nohup.out (in /project dir) - Checks all terminal prompts from starting the server
 - nohup npm start & - starts the server process in the background, so even when you exit the vm it will still be running.
 - ps -A (Check pid processes)
+- kill (pid) - ex: kill 1107 - Used to kill processes shown in ps -a. Kill npm and node processes until site goes down if you need to terminate.
 
 
 Step to step instructions to replicate deployment on a fresh machine:
@@ -92,6 +92,12 @@ Follow the rest of the instructions in /nginx-config/default comments on how to 
 
 12) Visit the website to make sure things are working: cmpt373-1177g.cmpt.sfu.ca
 
+13) To kill the server:
+- ps -a
+- kill npm and node threads until the site goes down.
+
+Server will not automatically relaunch itself on termination at this time.
+You can see the console logs in the root folder at file nohup.out
 
 Extra:
 
