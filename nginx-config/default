@@ -20,7 +20,7 @@ server {
   server_name  cmpt373-1177g.cmpt.sfu.ca;
 
 # Replace wth the directory you store the server certificate and key for ssl auth
-  ssl_certificate /home/cwzhang/project/nginx-config/cert.pem;
+  ssl_certificate /home/cwzhang/project/nginx-config/fullchain.pem;
   ssl_certificate_key /home/cwzhang/project/nginx-config/privkey.pem;
 
   location / {
