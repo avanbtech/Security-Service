@@ -6,4 +6,4 @@
 **/ExportedCSVs
 **/ExportedPDFs
 .gitignore
-nohup.out
+npm-debug.log

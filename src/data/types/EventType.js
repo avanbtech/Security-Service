@@ -52,9 +52,9 @@ const Event = new GraphQLObjectType({
       request: {
         type: requestType,
         resolve(event) {
-          return event.getRequest()
-        }
-      }
+          return event.getRequest();
+        },
+      },
     };
   },
 });
