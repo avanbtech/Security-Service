@@ -11,7 +11,8 @@ import Db from '../core/db';
 import Event from './types/EventType';
 import User from './types/UserType';
 import Request from './types/RequestType';
-import Security from "./types/SecurityType";
+import Security from './types/SecurityType';
+import Guard from './types/GuardType';
 
 //Input types
 
@@ -102,6 +103,33 @@ const EventArgs = {
   },
 };
 
+const GuardArgs = {
+  accessID: {
+    type: GraphQLString,
+  },
+  dispatchNumber: {
+    type: GraphQLInt,
+  },
+  location: {
+    type: GraphQLString,
+  },
+  startDate: {
+    type: GraphQLString,
+  },
+  endDate: {
+    type: GraphQLString,
+  },
+  telephone: {
+    type: GraphQLString,
+  },
+  guardname: {
+    type: GraphQLString,
+  },
+  remarks: {
+    type: GraphQLString,
+  },
+};
+
 const SecurityArgs = {
   accessID: {
     type:  GraphQLString,
@@ -188,6 +216,14 @@ const Query = new GraphQLObjectType({
         args: SecurityArgs,
         resolve(root, args) {
           return Db.models.security.findAll({where: args});
+        },
+      },
+
+      guard: {
+        type: new GraphQLList(Guard),
+        args: GuardArgs,
+        resolve(root, args) {
+          return Db.models.guard.findAll({where: args});
         },
       },
     };

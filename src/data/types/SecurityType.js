@@ -3,12 +3,14 @@ import {
   GraphQLString,
   GraphQLFloat,
   GraphQLInt,
+  GraphQLList,
 } from 'graphql';
 
+import Guard from './GuardType';
 
 const Security = new GraphQLObjectType({
   name: 'Security',
-  description: 'Event security group for an event',
+  description: 'Security group for an event',
   fields: () => {
     return {
       dbID: {
@@ -105,6 +107,12 @@ const Security = new GraphQLObjectType({
         type: GraphQLString,
         resolve(security) {
           return security.remarks;
+        },
+      },
+      guards: {
+        type: new GraphQLList(Guard),
+        resolve(security) {
+          return security.getGuards();
         },
       },
     };

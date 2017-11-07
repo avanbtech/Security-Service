@@ -136,11 +136,49 @@ const Event = Conn.define('event', {
   },
 });
 
+const Guard = Conn.define('guard', {
+  accessID: {
+    type: Sequelize.STRING,
+    allowNull: false,
+  },
+  dispatchNumber: {
+    type: Sequelize.INTEGER,
+    allowNull: false,
+    unique: true,
+    primaryKey: true,
+  },
+  location: {
+    type: Sequelize.STRING,
+    allowNull: false,
+  },
+  startDate: {
+    type: Sequelize.DATE,
+    allowNull: false,
+  },
+  endDate: {
+    type: Sequelize.DATE,
+    allowNull: false,
+  },
+  guardname: {
+    type: Sequelize.STRING,
+    allowNull: false,
+  },
+  telephone: {
+    type: Sequelize.STRING,
+    allowNull: false,
+  },
+  remarks: {
+    type: Sequelize.STRING,
+    allowNull: true,
+  },
+});
+
 const Security = Conn.define('security', {
   accessID: {
     type: Sequelize.STRING,
     allowNull: false,
     unique: true,
+    primaryKey: true,
   },
   dbID: {
     type: Sequelize.INTEGER,
@@ -212,6 +250,7 @@ User.hasOne(Request);
 Request.belongsTo(Event);
 Request.belongsTo(User);
 Request.belongsTo(Security);
+Security.hasMany(Guard, {foreignKey: "accessID", sourceKey: "accessID"});
 
 //FOR DEPLOYING
 //Conn.sync({ force: false});

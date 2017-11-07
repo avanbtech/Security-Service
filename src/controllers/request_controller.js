@@ -66,14 +66,14 @@ function getCommonDBID() {
   return parseInt(String(date.getTime()).slice(-7) + String(date.getMinutes()));
 }
 
-function commitToDB(req) {
+function commitRequestToDB(req) {
   const commonDbID = getCommonDBID();
   const uni_ID = uniqueID();
 
   db.models.user.create({
     dbID: commonDbID,
     sfuBCID: req.body.id,
-    department: req.body.department,    // TODO: NO WAY TO GET THE DEPT, ADD IT
+    department: req.body.department,
     requestBy: req.body.requestBy,
     phone: req.body.phone,
     fax: req.body.fax,
@@ -142,7 +142,7 @@ function sendemailToUser(req) {
     console.log("sent");
     console.log(info);
    });
-};
+}
 
 function sendemailToUserWithRejection(req) {
   let mailOptions = {
@@ -158,7 +158,7 @@ function sendemailToUserWithRejection(req) {
     console.log("sent");
     console.log(info);
    });
-};
+}
 
 function sendemailToUserWithApproval(req) {
   let mailOptions = {
@@ -174,7 +174,7 @@ function sendemailToUserWithApproval(req) {
     console.log("sent");
     console.log(info);
    });
-};
+}
 
 function checkNotEmpty(req) {
   req.checkBody('date', 'date name must be specified').notEmpty();
@@ -194,7 +194,7 @@ function checkNotEmpty(req) {
   req.checkBody('id', 'id name must be specified').notEmpty();
   req.checkBody('numberOfAttendees', 'numberOfAttendees name must be specified').notEmpty();
   req.checkBody('time', 'time name must be specified').notEmpty();
-};
+}
 
 function filterInput(req) {
   req.filter('date').escape();
@@ -231,13 +231,13 @@ function filterInput(req) {
   req.filter('numberOfAttendees').trim();
   req.filter('time').escape();
   req.filter('time').trim();
-};
+}
 
 exports.request_post = function (req, res, next) {
   checkNotEmpty(req);
   filterInput(req);
 
-  commitToDB(req);
+  commitRequestToDB(req);
   sendemailToUser(req);
 
   res.redirect('/');
@@ -247,11 +247,42 @@ exports.request_view = function () {
   console.log('abcd');
 };
 
+function createGuards(req) {
+  let x;
+  const allGuards = [];
+
+  if(req.body.dispatchNumber instanceof Array) {
+    for (x = 0; x < req.body.dispatchNumber.length; x++) {
+      allGuards.push({
+        dispatchNumber: req.body.dispatchNumber[x],
+        location: req.body.location[x],
+        startDate: req.body.startDate[x],
+        endDate: req.body.startDate[x],
+        guardname: req.body.name[x],
+        telephone: req.body.phone[x],
+        accessID: req.body.requestID,
+        remarks: req.body.remarks[x + 1],
+      });
+    }
+  } else {
+    allGuards.push({
+      dispatchNumber: req.body.dispatchNumber,
+      location: req.body.location,
+      startDate: req.body.startDate,
+      endDate: req.body.startDate,
+      guardname: req.body.name,
+      telephone: req.body.phone,
+      accessID: req.body.requestID,
+      remarks: req.body.remarks[1],
+    });
+  }
+
+  return allGuards;
+}
+
 function commitApproveToDB(req) {
-  //TODO: approval details should be saved to database
 
-  console.log(req);
-
+  // Update the security group details
   db.models.security.update({
       supervisor: req.body.supervisor,
       distribution: req.body.distribution,
@@ -266,10 +297,25 @@ function commitApproveToDB(req) {
       totalGuardBillable: req.body.totalGuardBillable,
       totalSCSPBillable: req.body.totalSCSPBillable,
       preparedBy: req.body.preparedBy,
-      remarks: req.body.remarks,
+      remarks: req.body.remarks[0],
     },
     { where: { accessID: req.body.requestID } },
     );
+
+  // Clear all the previous guards from a security group
+  db.models.guard.destroy({
+    where: {
+      accessID: req.body.requestID
+    },
+  });
+
+  // Update the guards for the security group
+  let allGuards = createGuards(req);
+
+  let x;
+  for (x in allGuards) {
+    db.models.guard.upsert(allGuards[x]);
+  }
 
   // updating request status
   db.models.request.update(
@@ -279,9 +325,11 @@ function commitApproveToDB(req) {
     { where: { accessID: req.body.requestID } },
   );
 }
+
 exports.get_accessID = function (req, res, next) {
   console.log(req);
-}
+};
+
 exports.request_approve = function (req, res, next) {
   req.filter('requestID').escape();
   req.filter('requestID').trim();
@@ -371,4 +419,4 @@ exports.export_data = function (req, res, next) {
   exportMethod(req.body.referenceID, "pdf");
 
   res.redirect('/');
-}
+};
