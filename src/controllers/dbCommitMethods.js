@@ -97,7 +97,7 @@ function commitRequestToDB(req) {
     dbID: commonDbID,
     eventDbID: commonDbID,
     userDbID: commonDbID,
-    securityDbID: commonDbID,
+    securityAccessID: uni_ID,
     status: 'Pending',
     statusDate: new Date(),
     date: req.body.date,
@@ -114,6 +114,8 @@ function commitRequestToDB(req) {
 function createGuards(req) {
   let x;
   const allGuards = [];
+
+  // TODO: ADD ERROR CHECKING WHEN NO GUARD IS ADDED TO THE REQUEST
 
   if(req.body.dispatchNumber instanceof Array) {
     for (x = 0; x < req.body.dispatchNumber.length; x++) {

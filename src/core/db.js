@@ -247,9 +247,10 @@ const Security = Conn.define('security', {
 Event.hasOne(Request);
 User.hasOne(Request);
 
+Request.belongsTo(Security);
 Request.belongsTo(Event);
 Request.belongsTo(User);
-Request.belongsTo(Security);
+
 Security.hasMany(Guard, {foreignKey: "accessID", sourceKey: "accessID"});
 
 //FOR DEPLOYING
