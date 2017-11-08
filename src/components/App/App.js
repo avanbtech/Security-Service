@@ -50,6 +50,12 @@ class App extends Component {
       <div>
         <Header />
         {this.props.children}
+        <div className={s.footer}>
+         <div className={s.footerContent}>
+            <Feedback />
+            <Footer />
+          </div>
+        </div>
       </div>
     ) : this.props.children;
   }
