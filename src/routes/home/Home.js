@@ -8,23 +8,18 @@ import Main from '../../components/Main';
 import homebackground from '../../../test.jpg';
 
 
-const homeImage = {
-    backgroundSize: '100% 100%', //记得这里100%
-    background: `url(${ homeImage })`,
-    //或者下面这种也行
-    backgroundImage: 'url(' + homebackground + ')'
 
-}
 
 function Home() {
   return (
 
-  	<div className="home" style={ homeImage }>
+  	<div className="home">
 	    <div className={s.root}>
-	      <div className={s.container}>
-	        
-	        <Main className={s.main} />
-	      </div>
+          <div className={s.blur}>
+          </div>
+        <div className={s.container}>
+          <Main className={s.main} />
+        </div>
 	    </div>
     </div>
   );
