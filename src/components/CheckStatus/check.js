@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Button,  Form, Message } from 'semantic-ui-react'
+import { Button,  Form, Message, Icon } from 'semantic-ui-react'
 import TextField from "material-ui/TextField"
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import FlatButton from 'material-ui/FlatButton';
@@ -57,14 +57,12 @@ class checkStatus extends Component {
                   />
                 </Form.Field>
             </Form.Group>
-            <IconButton 
-              tooltip="Search"
-              onClick = {e => this.onSubmit(e)}
-              href={"/StatusForm/"+ this.state.referenceID}
-              method="post">
-              Search
-              <ActionHome />
-            </IconButton>
+            <Form.Button onClick = {e => this.onSubmit(e)} animated >
+              <Button.Content visible>Search</Button.Content>
+              <Button.Content hidden>
+                <Icon name='search' />
+              </Button.Content>
+            </Form.Button>
           </Form>
         </MuiThemeProvider>
       )

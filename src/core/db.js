@@ -136,11 +136,122 @@ const Event = Conn.define('event', {
   },
 });
 
+const Guard = Conn.define('guard', {
+  accessID: {
+    type: Sequelize.STRING,
+    allowNull: false,
+  },
+  dispatchNumber: {
+    type: Sequelize.INTEGER,
+    allowNull: false,
+    unique: true,
+    primaryKey: true,
+  },
+  location: {
+    type: Sequelize.STRING,
+    allowNull: false,
+  },
+  startDate: {
+    type: Sequelize.DATE,
+    allowNull: false,
+  },
+  endDate: {
+    type: Sequelize.DATE,
+    allowNull: false,
+  },
+  guardname: {
+    type: Sequelize.STRING,
+    allowNull: false,
+  },
+  telephone: {
+    type: Sequelize.STRING,
+    allowNull: false,
+  },
+  remarks: {
+    type: Sequelize.STRING,
+    allowNull: true,
+  },
+});
+
+const Security = Conn.define('security', {
+  accessID: {
+    type: Sequelize.STRING,
+    allowNull: false,
+    unique: true,
+    primaryKey: true,
+  },
+  dbID: {
+    type: Sequelize.INTEGER,
+    allowNull: false,
+    primaryKey: true,
+  },
+  supervisor: {
+    type: Sequelize.STRING,
+    allowNull: false,
+  },
+  distribution: {
+    type: Sequelize.STRING,
+    allowNull: false,
+  },
+  guardRegularRate: {
+    type: Sequelize.FLOAT.UNSIGNED,
+    allowNull: false,
+  },
+  guardRegularHours: {
+    type: Sequelize.FLOAT.UNSIGNED,
+    allowNull: false,
+  },
+  guardOTRate: {
+    type: Sequelize.FLOAT.UNSIGNED,
+    allowNull: false,
+  },
+  guardOTHours: {
+    type: Sequelize.FLOAT.UNSIGNED,
+    allowNull: false,
+  },
+  scspRegularRate: {
+    type: Sequelize.FLOAT.UNSIGNED,
+    allowNull: false,
+  },
+  scspRegularHours: {
+    type: Sequelize.FLOAT.UNSIGNED,
+    allowNull: false,
+  },
+  scspOTRate: {
+    type: Sequelize.FLOAT.UNSIGNED,
+    allowNull: false,
+  },
+  scspOTHours: {
+    type: Sequelize.FLOAT.UNSIGNED,
+    allowNull: false,
+  },
+  totalGuardBillable: {
+    type: Sequelize.FLOAT.UNSIGNED,
+    allowNull: false,
+  },
+  totalSCSPBillable: {
+    type: Sequelize.FLOAT.UNSIGNED,
+    allowNull: false,
+  },
+  preparedBy: {
+    type: Sequelize.STRING,
+    allowNull: false,
+  },
+  remarks: {
+    type: Sequelize.STRING,
+    allowNull: true,
+  },
+});
+
+
 Event.hasOne(Request);
 User.hasOne(Request);
 
+Request.belongsTo(Security);
 Request.belongsTo(Event);
 Request.belongsTo(User);
+
+Security.hasMany(Guard, {foreignKey: "accessID", sourceKey: "accessID"});
 
 //FOR DEPLOYING
 //Conn.sync({ force: false});

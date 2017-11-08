@@ -1,23 +1,24 @@
---- VM IS ALREADY CONFIGURED AND RUNNING, NO NEED TO DO THIS AGAIN ---
+--- VM IS ALREADY CONFIGURED AND DEPLOYED, NO NEED TO DO THIS AGAIN ---
 
 As of the current time, node and npm packages are not installed globally, so you will not be able to do node commands within the vm.
 Server configuration is done on cwzhang, my account. Ask me (Alex) if you need anything regarding VM deployment for the time being.
 
-In summary, website is deployed at cmpt373-1177g.cmpt.sfu.ca using nginx to reverse proxy http and https requests to the correct ports.
+Server will run permamently with the current nohup command, but all stdout messages are redirected to the void. I also can't find the process to kill to stop the website
+at the moment. To be done. Will probably use tmux or screen in iteration 3.
 
-#####YOU WILL GET A SECURITY ERROR WHEN CONNECTING TO THE WEBSITE BECAUSE THE CERTIFICATE IS SELF SIGNED, CERTBOT REFUSES TO AUTHENTICATE POSSIBLY BECAUSE WE ARE
-HOSTING IT UNDER THE SFU DOMAIN#####
+In summary, website is deployed at cmpt373-1177g.cmpt.sfu.ca using nginx to reverse proxy http and https requests to the correct ports.
 
 Useful commands:
 
- - sudo su - goes into root mode
- - sudo service restart nginx - necessary to load nginx changes
- - sudo cp default /etc/nginx/sites-available (when you are in the nginx-config directory) - updates nginx configuration to what we have in this folder
+- sudo su - goes into root mode
+- sudo service restart nginx - necessary to load nginx changes
+- sudo cp default /etc/nginx/sites-available (when you are in the nginx-config directory) - updates nginx configuration to what we have in this folder
+- sudo nginx -t - checks if nginx is configured properly
 
---Commands down here will be updated later. Currently when trying to run server on vm permanently we have trouble shutting it down--
- - sudo nano nohup.out (in /project dir) - Checks all terminal prompts from starting the server
- - nohup npm start & - starts the server process in the background, so even when you exit the vm it will still be running.
- - ps -A (Check pid processes)
+- sudo nano nohup.out (in /project dir) - Checks all terminal prompts from starting the server
+- nohup npm start > /dev/null 2>&1 &  - starts the server process in the background, so even when you exit the vm it will still be running.
+- ps -A (Check pid processes)
+- kill (pid) - ex: kill 1107 - Used to kill processes shown in ps -a. Kill npm and node processes until site goes down if you need to terminate.
 
 
 Step to step instructions to replicate deployment on a fresh machine:
@@ -81,22 +82,28 @@ apt-get install nginx
 9) Copy default nginx file over (cd to nginx-config dir): sudo cp default /etc/nginx/sites-available
 
 sudo service nginx restart - everytime you make changes
+sudo nginx -t - check if it is configured properly
 
+10) Sign and manually deploy a TLS certificate signed by LetsEncrypt, the CA:
 
--- Certbot not working --
-Problems:
-1) Doesn't identify python packages properly on VM
-2) Cannot successfully authenticate using SFU domain on different VM
+- sudo certbot certonly -a manual -d mydomain.ca
 
--- Attempted to solve using different clients, same issue. Seems like SFU problem?
+Follow the rest of the instructions in /nginx-config/default comments on how to deploy the file they want you to use.
+ Copy (use sudo) the generated certificates to the appropriate directory.
 
-10) Install certbot
-$ sudo apt-get update
-$ sudo apt-get install software-properties-common
-$ sudo add-apt-repository ppa:certbot/certbot
-$ sudo apt-get update
-$ sudo apt-get install python-certbot-nginx
-
-11) Start server permanently: nohup npm start &
+11) Start server permanently: nohup npm start > /dev/null 2>&1 &
 
 12) Visit the website to make sure things are working: cmpt373-1177g.cmpt.sfu.ca
+
+13) To kill the server:
+- ps -a
+- kill npm and node threads until the site goes down.
+
+Server will not automatically relaunch itself on termination at this time.
+You can see the console logs in the root folder at file nohup.out
+
+Extra:
+
+Db.js password: hooh392
+pythonPath: '/usr/bin/python3',
+scriptPath: '/home/cwzhang/project/src/PyScripts/',
