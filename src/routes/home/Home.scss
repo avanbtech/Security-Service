@@ -20,6 +20,17 @@
   filter: blur(4px);
 }
 
+.footer {
+  margin: 0 auto;
+  max-width: 100%;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: #efefef;
+  text-align: center;
+}
+
 .container {
   margin: 0 auto;
   padding: 0 0 120px;
