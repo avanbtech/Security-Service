@@ -1,7 +1,8 @@
 import axios from 'axios';
 
-// Call all the functions in this module with 'await'
+let DBUrl = 'http://localhost:3001/graphql';
 
+// Call all the functions in this module with 'await'
 async function getReqByID(reqID) {
   let res = null;
 
@@ -9,7 +10,8 @@ async function getReqByID(reqID) {
 
   const dbQuery = '{request(accessID: ' + reqNum + '){date status details accountCode authorizedBy authorizedID authorizedDate authorizedPhone user { department requestBy sfuBCID phone fax email licensed } event { nameOfEvent location numberOfattendees eventDates }}}';
 
-  await axios.post('http://localhost:3001/graphql', {
+
+  await axios.post(DBUrl, {
     query: dbQuery,
   })
     .then(function (response) {
@@ -31,7 +33,7 @@ async function getUserByReqID(reqID) {
 
   const dbQuery = '{request(accessID: ' + reqNum + '){user { department requestBy sfuBCID phone fax email licensed }}}';
 
-  await axios.post('http://localhost:3001/graphql', {
+  await axios.post(DBUrl, {
     query: dbQuery,
   })
     .then(function (response) {
@@ -50,7 +52,7 @@ async function getUserByReqID(reqID) {
 async function getReqForServiceView() {
   let res = null;
 
-  await axios.post('http://localhost:3001/graphql', {
+  await axios.post(DBUrl, {
     query: '{request{accessID user{requestBy sfuBCID} date status event{eventDates location}}}',
   })
     .then(function (response) {
@@ -67,12 +69,12 @@ async function getReqForServiceView() {
 
 async function getReqForStatusView(reqID) {
   let res = null;
-  
+
     const reqNum = '\"' + reqID + '\"';
-  
+
     const dbQuery = '{request(accessID: ' + reqNum + '){status accessID user { sfuBCID }}}';
-  
-    await axios.post('http://localhost:3001/graphql', {
+
+    await axios.post(DBUrl, {
       query: dbQuery,
     })
       .then(function (response) {
@@ -83,9 +85,39 @@ async function getReqForStatusView(reqID) {
       .catch(function (error) {
         console.log(error.data);
       });
-  
+
     console.log(res);
     return res;
+}
+
+
+// USAGE FOR isValidCodeAndEmail
+// Make a call to the function: let result = dbFetch.isValidCodeAndEmail(accessID, email);
+// The above call returns a promise. Therefore, we have to wait for promise to be resolved.
+// Therefore, we user Promise.then() function as:
+// result.then((response) => {
+//   console.log(`Emails match? : ${response}`);
+// })
+async function isValidCodeAndEmail(reqID, email) {
+  let res = false;
+
+  const reqNum = '\"' + reqID + '\"';
+  const dbQuery = '{request(accessID: ' + reqNum + '){ user { email }}}';
+
+  await axios.post(DBUrl, {
+    query: dbQuery,
+  })
+    .then((response) => {
+      // console.log(response.data.data.request);
+      if(response['data']['data']['request']) {
+        res = response['data']['data']['request'][0]['user']['email'] === email;
+      }
+    }).catch((error) => {
+
+      console.log(`Error: ${error.data}`);
+    });
+
+  return res;
 }
 
 module.exports = {
@@ -93,4 +125,5 @@ module.exports = {
   getUserByReqID,
   getReqForServiceView,
   getReqForStatusView,
+  isValidCodeAndEmail,
 };

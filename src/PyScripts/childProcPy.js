@@ -56,7 +56,6 @@ function locateFilePath(reqID, isCSV) {
     let files = fs.readdirSync('ExportedCSVs/', { encoding : 'utf8' });
 
     for (let x = 0; x < files.length; x++) {
-      console.log("LOOP2");
       if (files[x] === 'dataexport.csv') {
         return `ExportedCSVs/${files[x]}`;
       }
