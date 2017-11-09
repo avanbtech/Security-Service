@@ -1,4 +1,6 @@
 import Sequelize from 'sequelize';
+import findRemoveSync from 'find-remove';
+
 
 // Add your configuration for DB
 const Conn = new Sequelize(
@@ -253,10 +255,16 @@ Request.belongsTo(User);
 
 Security.hasMany(Guard, {foreignKey: "accessID", sourceKey: "accessID"});
 
+
+// TODO: REPLACE FORCE PARAM
 //FOR DEPLOYING
 //Conn.sync({ force: false});
 
 //FOR TESTING
-Conn.sync({ force: true});
+Conn.sync({ force: true}).then(() => {
+  findRemoveSync('ExportedCSVs/', {files: '*.*'});
+  findRemoveSync('ExportedPDFs/', {files: '*.*'});
+  console.log('Cleaned up temporary export directories.');
+});
 
 export default Conn;

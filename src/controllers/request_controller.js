@@ -1,7 +1,8 @@
 import db from '../core/db';
-import exportMethod from '../PyScripts/childProcPy'
+import exportMethods from '../PyScripts/childProcPy'
 import nodemailer from 'nodemailer';
 import xoauth2 from 'xoauth2';
+
 
 import dbMethods from './dbCommitMethods';
 
@@ -220,11 +221,24 @@ exports.check_status = function (req, res, next) {
   res.redirect('/StatusForm');
 };
 
-exports.export_data = function (req, res, next) {
-  // TODO: FOR DEMO ONLY. REMOVE THE EXPORT METHODS.
-  // Export data
-  exportMethod("111", "csv");
-  exportMethod(req.body.referenceID, "pdf");
+exports.export_to_pdf = function (req, res, next) {
 
-  res.redirect('/');
+  exportMethods.exportReqToPDF(req.body.referenceID);
+
+  // Have to wait about 10 seconds to let the python script finish
+  // running and then locate the file in the ExportedPDFs directory
+  // Couldn't find a method to sleep thread in JS (wtf)
+  setTimeout(() => {
+    let filePath = exportMethods.locateFilePath(req.body.referenceID, false);
+
+    if (filePath) {
+      console.log(`File path was: ${filePath}`);
+
+      res.download(filePath.toString(), 'request.pdf');
+    } else {
+      console.log("INVALID PATH");
+      // TODO: SHOW AN ALERT INSTEAD OF A REDIRECTION
+      res.redirect("/");
+    }
+  }, 10000);
 };
