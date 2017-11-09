@@ -47,14 +47,15 @@ class App extends Component {
 
   render() {
     return !this.props.error ? (
-      <div>
+      <div className={s.root}>
         <Header />
-        {this.props.children}
+        <div className={s.wrapper}>
+          {this.props.children}
+          <div className={s.push}></div>
+        </div>
         <div className={s.footer}>
-         <div className={s.footerContent}>
-            <Feedback />
-            <Footer />
-          </div>
+          <Feedback />
+          <Footer />
         </div>
       </div>
     ) : this.props.children;
