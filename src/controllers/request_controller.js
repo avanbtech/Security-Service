@@ -3,7 +3,6 @@ import exportMethods from '../PyScripts/childProcPy'
 import nodemailer from 'nodemailer';
 import xoauth2 from 'xoauth2';
 
-
 import dbMethods from './dbCommitMethods';
 
 let transporter = nodemailer.createTransport({

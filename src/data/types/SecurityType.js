@@ -13,6 +13,12 @@ const Security = new GraphQLObjectType({
   description: 'Security group for an event',
   fields: () => {
     return {
+      groupID: {
+        type: GraphQLInt,
+        resolve(security) {
+          return security.groupID;
+        },
+      },
       dbID: {
         type: GraphQLInt,
         resolve(security) {

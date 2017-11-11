@@ -11,6 +11,8 @@ import Router from './routes';
 import assets from './assets';
 import { port, auth, analytics } from './config';
 
+import axios from 'axios';
+
 var expressValidator = require('express-validator');
 
 const server = global.server = express();
@@ -51,6 +53,7 @@ server.use('/graphql', expressGraphQL(req => ({
   rootValue: { request: req },
   pretty: process.env.NODE_ENV !== 'production',
 })));
+
 
 //
 // Register server-side rendering middleware
@@ -106,6 +109,7 @@ server.use((err, req, res, next) => { // eslint-disable-line no-unused-vars
     stack: process.env.NODE_ENV === 'production' ? '' : err.stack,
   }));
 });
+
 
 //
 // Launch the server

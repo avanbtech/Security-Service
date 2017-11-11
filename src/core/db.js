@@ -139,6 +139,11 @@ const Event = Conn.define('event', {
 });
 
 const Guard = Conn.define('guard', {
+  groupID: {
+    type: Sequelize.INTEGER,
+    allowNull: false,
+    primaryKey: true,
+  },
   accessID: {
     type: Sequelize.STRING,
     allowNull: false,
@@ -146,7 +151,6 @@ const Guard = Conn.define('guard', {
   dispatchNumber: {
     type: Sequelize.INTEGER,
     allowNull: false,
-    unique: true,
     primaryKey: true,
   },
   location: {
@@ -173,9 +177,21 @@ const Guard = Conn.define('guard', {
     type: Sequelize.STRING,
     allowNull: true,
   },
+}, {
+  indexes: [
+    {
+      unique: true,
+      fields: ['groupID', 'dispatchNumber'],
+    },
+  ],
 });
 
 const Security = Conn.define('security', {
+  groupID: {
+    type: Sequelize.INTEGER,
+    unique: true,
+    allowNull: false,
+  },
   accessID: {
     type: Sequelize.STRING,
     allowNull: false,
@@ -249,12 +265,13 @@ const Security = Conn.define('security', {
 Event.hasOne(Request);
 User.hasOne(Request);
 
+
 Request.belongsTo(Security);
 Request.belongsTo(Event);
 Request.belongsTo(User);
 
-Security.hasMany(Guard, {foreignKey: "accessID", sourceKey: "accessID"});
-
+Security.hasMany(Guard, {foreignKey: "groupID", sourceKey: "groupID"});
+Guard.hasMany(Security,  {foreignKey: "groupID", sourceKey: "groupID"});
 
 // TODO: REPLACE FORCE PARAM
 //FOR DEPLOYING

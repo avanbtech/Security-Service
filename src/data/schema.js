@@ -104,6 +104,9 @@ const EventArgs = {
 };
 
 const GuardArgs = {
+  groupID: {
+    type: GraphQLInt,
+  },
   accessID: {
     type: GraphQLString,
   },
@@ -131,6 +134,9 @@ const GuardArgs = {
 };
 
 const SecurityArgs = {
+  groupID: {
+    type: GraphQLInt,
+  },
   accessID: {
     type:  GraphQLString,
   },

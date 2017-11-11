@@ -49,6 +49,12 @@ function getCommonDBID() {
   return parseInt(String(date.getTime()).slice(-7) + String(date.getMinutes()));
 }
 
+function getSecurityGrpID() {
+  const date = new Date();
+
+  return parseInt(String(date.getTime()).slice(-3) + String(date.getSeconds()));
+}
+
 function commitRequestToDB(req) {
   const commonDbID = getCommonDBID();
   const uni_ID = uniqueID();
@@ -74,6 +80,7 @@ function commitRequestToDB(req) {
   });
 
   db.models.security.create({
+    groupID: getSecurityGrpID(),
     accessID: uni_ID,
     dbID: commonDbID,
     supervisor: "none",
@@ -111,15 +118,18 @@ function commitRequestToDB(req) {
   });
 }
 
-function createGuards(req) {
+function createGuards(req, grpID) {
   let x;
   const allGuards = [];
+
+  console.log(req.body);
 
   // TODO: ADD ERROR CHECKING WHEN NO GUARD IS ADDED TO THE REQUEST
 
   if(req.body.dispatchNumber instanceof Array) {
     for (x = 0; x < req.body.dispatchNumber.length; x++) {
       allGuards.push({
+        groupID: grpID,
         dispatchNumber: req.body.dispatchNumber[x],
         location: req.body.location[x],
         startDate: req.body.startDate[x],
@@ -132,6 +142,7 @@ function createGuards(req) {
     }
   } else {
     allGuards.push({
+      groupID: grpID,
       dispatchNumber: req.body.dispatchNumber,
       location: req.body.location,
       startDate: req.body.startDate,
@@ -148,6 +159,7 @@ function createGuards(req) {
 
 function commitApproveToDB(req) {
 
+  const grpID = getSecurityGrpID();
   // Update the security group details
   db.models.security.update({
       supervisor: req.body.supervisor,
@@ -168,20 +180,25 @@ function commitApproveToDB(req) {
     { where: { accessID: req.body.requestID } },
   );
 
-  // Clear all the previous guards from a security group
-  db.models.guard.destroy({
-    where: {
-      accessID: req.body.requestID
-    },
+  db.models.security.findOne({ where: { accessID: req.body.requestID } }).then((security) => {
+    // Clear all the previous guards from a security group
+    db.models.guard.destroy({
+      where: {
+        groupID: security['groupID'],
+      },
+    });
+
+    if(req.body.dispatchNumber) {
+      // Update the guards for the security group
+      let allGuards = createGuards(req, security.groupID);
+
+      let x;
+      for (x in allGuards) {
+        db.models.guard.findOrCreate({where: allGuards[x]});
+      }
+    }
   });
 
-  // Update the guards for the security group
-  let allGuards = createGuards(req);
-
-  let x;
-  for (x in allGuards) {
-    db.models.guard.upsert(allGuards[x]);
-  }
 
   // updating request status
   db.models.request.update(
