@@ -83,10 +83,9 @@ class RequestApprovalForm extends Component {
     e.preventDefault();
   }
 
-  onSubmit = e =>{
-    e.preventDefault();
+  onSubmit = e => {
     const error = this.validate();
-    if (error){
+    if (error) {
       e.preventDefault();
     }
   };
