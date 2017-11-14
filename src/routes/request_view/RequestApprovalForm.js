@@ -124,9 +124,6 @@ class RequestApprovalForm extends Component {
   }
 
   validate = () => {
-    console.log(this.state.guardForms);
-    console.log(this.state.officeObjects);
-
     let isError = false;
     const errors = {};
 
@@ -243,16 +240,11 @@ class RequestApprovalForm extends Component {
     }
 
     let hasChildError = false;
-    console.log('Initial: ' + hasChildError);
     this.state.officeObjects.map(officer => {
       if(officer !== null) {
         hasChildError = hasChildError || officer.validate();
       }
-      console.log('After first: ' + hasChildError);
     });
-    console.log('At last: ' + hasChildError);
-    console.log('Officer objects:');
-    console.log(this.state.officeObjects);
     isError = isError || hasChildError;
     this.setState({
         ...this.state,
@@ -265,9 +257,6 @@ class RequestApprovalForm extends Component {
   render() {
     const { value } = this.state;
     this.state.officeObjects = [];
-    console.log('Rendering offece objects:');
-    console.log(this.state.officeObjects);
-    console.log(this.state.guardForms);
     return (
       <Form action="/ServiceView/approve" method="post">
         <br/>
