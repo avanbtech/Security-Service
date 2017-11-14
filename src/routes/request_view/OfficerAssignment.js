@@ -45,6 +45,22 @@ class OfficerAssignment extends Component {
       errors.nameError = "";
     }
 
+    if(this.state.startDate.length == 0){
+      isError = true;
+      errors.startDateError = "An start date must be specified.";
+    }
+    else {
+      errors.startDateError = "";
+    }
+
+    if(this.state.endDate.length == 0){
+      isError = true;
+      errors.endDateError = "An end date must be specified";
+    }
+    else {
+      errors.endDateError = "";
+    }
+
     if(this.state.location.replace('/\s/g','').length == 0){
       isError = true;
       errors.locationError = "This field cannot be empty";
@@ -111,7 +127,9 @@ class OfficerAssignment extends Component {
             <label> Start date </label>
             <DatePicker
               name='startDate'
+              errorText={this.state.startDateError}
               hintText="Start Date"
+              value={this.state.startDate}
               container="inline" />
           </Form.Field>
           <Form.Field required>
@@ -119,6 +137,8 @@ class OfficerAssignment extends Component {
             <DatePicker
               name='endDate'
               hintText="End Date"
+              errorText={this.state.endDateError}
+              value={this.state.endDate}
               container="inline" />
           </Form.Field>
         </Form.Group>
