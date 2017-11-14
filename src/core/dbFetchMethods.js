@@ -108,7 +108,6 @@ async function isValidCodeAndEmail(reqID, email) {
     query: dbQuery,
   })
     .then((response) => {
-      // console.log(response.data.data.request);
       if(response['data']['data']['request']) {
         res = response['data']['data']['request'][0]['user']['email'] === email;
       }

@@ -6,7 +6,7 @@ import RequestApproval from './RequestApproval';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 
 function ServiceView({request, requestID, approved}) {
-  if(request !== null) {
+  if(request.length > 0) {
     return (
       <MuiThemeProvider>
         <div className={s.root}>
