@@ -11,11 +11,14 @@ import DatePicker from 'material-ui/DatePicker';
 
 function ServiceViewReq({serviceRequests, filterObject}) {
   var rows = [];
-  for(var i = 0; i < serviceRequests.length; i++) {
-    rows.push(<OneServiceRequest serviceRequest={
-      serviceRequests[i]
-    }/>);
+  if(serviceRequests !== null) {
+    for(var i = 0; i < serviceRequests.length; i++) {
+      rows.push(<OneServiceRequest serviceRequest={
+        serviceRequests[i]
+      }/>);
+    }
   }
+
   return (
     <div className={s.root}>
       <div className={s.filter_container}>
