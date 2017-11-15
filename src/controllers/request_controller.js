@@ -140,7 +140,12 @@ exports.request_view = function () {
 
 
 exports.get_accessID = function (req, res, next) {
-  console.log(req);
+  req.checkBody('referenceID', 'Reference ID must be specified').notEmpty();
+  req.filter('referenceID').escape();
+  req.filter('referenceID').trim();
+
+  res.redirect('/StatusForm/' + req.body.referenceID);
+  console.log(req.body.referenceID);
 };
 
 exports.request_approve = function (req, res, next) {
