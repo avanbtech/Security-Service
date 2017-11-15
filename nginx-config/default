@@ -54,5 +54,9 @@ server {
     alias /home/cwzhang/project/nginx-config/;
     index V-jKuBWx0J0MSrjtWZeZLoEQJhS0m63godq0y7CBZ5k;
   }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> 82bfc8b04cb18c8a0fb5c710f4e6c996af6453e6
 }

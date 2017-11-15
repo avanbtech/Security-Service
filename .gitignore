@@ -3,3 +3,7 @@
 **/node_modules
 **/build
 .idea
+**/ExportedCSVs
+**/ExportedPDFs
+npm-debug.log
+nohup.out

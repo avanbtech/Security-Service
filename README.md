@@ -1,18 +1,53 @@
-# Security Service Request System (Last edited 10/04/17)
+# Security Service Request System (Last edited 11/7/17)
 ## About
 This is group Gamma's CMPT 373 Term Project.  We are developing a web application form to replace the current SFU security services request system with an online solution, that the "customer" can fill out the necessary information, which then will be automatically accessible to security for further processing.
-We are using the MERN(ish) stack to complete this project, consisting of a SQL database (name to be determined?), Express (Framework for web applications), React (Front end framework - HTML/CSS etc.), and Node.js (Server side, back end framework) as the underlying frameworks.
+We are using the MERN(ish) stack to complete this project, consisting of MySQL, Express, React, and Node.js as the underlying frameworks. As of the current time, you can find a deployed version of our project [here](https://cmpt373-1177g.cmpt.sfu.ca/), hosted on a SFU VM.
 
 ## Project Description
 The Security Service Request System is a system in which a user can fill out and send security service request.
 A security staff member can then see a list of pending requests and choose to review them. The security side of the request will be filled then by a staff member, then forwarded to the appropriate parties.
 
-## Run instructions
-- clone the project then follow the following commands
-- $ npm install //(should have node package manager installed on your machine)
+## Initial run instructions (as of 11/7/17)
+- clone the project then follow the instructions
+
+- set up npm/node
+- set up mysql
+- npm install semantic-ui-react --save 
+- npm install semantic-ui-css --save
+
+- install python 3
+
+- pip3 install PyPDF2
+      
+- pip3 install reportlab
+      
+- pip3 install requests
+      
+- pip3 install pandas
+      
+- pip3 install selenium
+      
+- pip3 install Faker
+
+3. Go to src/PyScripts/pyoptions.js and replace the python3 executable path
+     (use command which python3 on your machine to find out this path)
+
+  
+4. Replace scriptPath in the same file to PyScripts folder on your machine.
+
+  
+5. Run npm install if you haven't done it in a while to install all the new
+ node packages.
+
 - $ mysqld //(command to run mysql server on local machine download mysql from https://dev.mysql.com/downloads/mysql/)
+- open mysql shell (mysql -u root -p) and 'create database demodb;' if not already done
+- change the password in db.js to your MySQL password, otherwise you will get an error with database queries.
+
 - $ npm start
 
+- Npm start is sufficient for future runs. This will host the project on localhost:3001
+
+- Deployment instructions can be found at nginx-config/deployment-instructions.txt directory.
 
 ## Initial setup instructions 
 The following instructions are for **Windows**. You can find a more detailed documentation (which includes other OS!) [here](https://developer.mozilla.org/en-US/docs/Learn/Server-side/Express_Nodejs/development_environment). 
@@ -94,9 +129,6 @@ Here is our current directory structure and a brief explaination of what everyth
 - Remember to check Slack twice a day for any updates! You can also install the Slack app on your phone to have notifications pushed to you! (Remember to mute #git-status though, it gets spammy)
 - If you need help or have expected delays, communicate sooner rather than later. We are here to help you! There isn't all that much work (yet) for eight people, so pair programming is likely to happen so everyone has something to do.
 - Finally, be transparent about what you're doing so everyone is up to date with what is going on. This will allow for a smooth team effort throughout the semester.
-
-## Current features
-- To be filled!
 
 ## Transport Layer Security
 Please take a look at the following to learn about TLS. We need to implement TLS v1.2 in our web application:

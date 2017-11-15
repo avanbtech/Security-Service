@@ -91,6 +91,7 @@ sudo nginx -t - check if it is configured properly
 Follow the rest of the instructions in /nginx-config/default comments on how to deploy the file they want you to use.
  Copy (use sudo) the generated certificates to the appropriate directory.
 
+<<<<<<< HEAD
 11) Start server permanently: sudo nohup npm start > /dev/null 2>&1 & - Maybe sudo is needed, not sure yet. Will look into screen later.
 
 12) Visit the website to make sure things are working: cmpt373-1177g.cmpt.sfu.ca
@@ -98,6 +99,13 @@ Follow the rest of the instructions in /nginx-config/default comments on how to 
 13) Exit putty using logout, apparently this works but closing the terminal directly will kill the process ??
 
 14) To kill the server:
+=======
+11) Start server permanently: nohup npm start > /dev/null 2>&1 &
+
+12) Visit the website to make sure things are working: cmpt373-1177g.cmpt.sfu.ca
+
+13) To kill the server:
+>>>>>>> 82bfc8b04cb18c8a0fb5c710f4e6c996af6453e6
 - ps -a
 - kill npm and node threads until the site goes down.
 

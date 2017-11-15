@@ -1,19 +1,18 @@
-import React, { PropTypes } from 'react';
-import withStyles from 'isomorphic-style-loader/lib/withStyles';
-import s from './ServiceView.scss';
+import React, { PropTypes, Component } from 'react';
+import { Table } from 'semantic-ui-react'
 
-function OneServiceRequest({serviceRequest}) {
-
-  return (
-    <tr>
-      <td><a href={'/ServiceView/' + serviceRequest.requestId}>{serviceRequest.requestId}</a></td>
-      <td>{serviceRequest.date}</td>
-      <td>{serviceRequest.requestBy}</td>
-      <td>{serviceRequest.sfu_id}</td>
-      <td>{serviceRequest.location}</td>
-      <td>{serviceRequest.event_date}</td>
-    </tr>
-  );
+export default class OneServiceRequest extends Component {
+  render(){
+    return (
+      <Table.Row>
+        <Table.Cell><a href={'/ServiceView/' + this.props.serviceRequest.requestId}>{this.props.serviceRequest.requestId}</a></Table.Cell>
+        <Table.Cell>{this.props.serviceRequest.date}</Table.Cell>
+        <Table.Cell>{this.props.serviceRequest.status}</Table.Cell>
+        <Table.Cell>{this.props.serviceRequest.requestBy}</Table.Cell>
+        <Table.Cell>{this.props.serviceRequest.sfu_id}</Table.Cell>
+        <Table.Cell>{this.props.serviceRequest.location}</Table.Cell>
+        <Table.Cell>{this.props.serviceRequest.event_date}</Table.Cell>
+      </Table.Row>
+    );
+  }
 }
-
-export default withStyles(OneServiceRequest, s);
