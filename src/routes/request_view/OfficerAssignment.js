@@ -76,10 +76,10 @@ class OfficerAssignment extends Component {
     }
 
     if (startDateValid && endDateValid) {
-      const startDate = Date(this.state.startDate);
-      const endDate = Date(this.state.endDate);
-      console.log('Start date: ' + startDate);
-      console.log('End date: ' + endDate);
+      const startDate = new Date(this.state.startDate);
+      startDate.setHours(0, 0, 0, 0);
+      const endDate = new Date(this.state.endDate);
+      endDate.setHours(0, 0, 0, 0);
       if (startDate > endDate) {
         errors.startDateError = "Start date cannot be after end date.";
         isError = true;
