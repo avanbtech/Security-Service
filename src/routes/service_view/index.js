@@ -1,7 +1,7 @@
 import React from 'react';
 import ServiceViewReq from './ServiceView';
 import fetch from '../../core/fetch';
-import dbMethods from '../../core/dbFetchMethods';
+import dbMethods from '../../data/dbFetchMethods';
 export const path = '/ServiceView';
 export const action = async (state) => {
 

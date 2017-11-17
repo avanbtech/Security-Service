@@ -1,7 +1,7 @@
 import React from 'react';
 import StatusForm from './StatusForm';
 
-import methods from '../../core/dbFetchMethods'
+import methods from '../../data/dbFetchMethods'
 export const path = '/StatusForm/:referenceID';
 export const action = async (state) => {
   const title = 'Status form that displays current request status and information user entered';
@@ -9,7 +9,7 @@ export const action = async (state) => {
   const res = await methods.getReqForStatusView(state.params.referenceID);
 
   let request;
-  
+
   if (res[0] == null || res == null){
     request = ({
       requestID: "",
@@ -25,7 +25,7 @@ export const action = async (state) => {
     exists: true
   });
 }
-  
+
 
   state.context.onSetTitle(title);
   return <StatusForm request={request} />;
