@@ -33,6 +33,18 @@ class OfficerAssignment extends Component {
     });
   }
 
+  handleStartDateChange = (event, date) => {
+    this.setState({
+      startDate: date,
+    });
+  };
+
+  handleEndDateChange = (event, date) => {
+    this.setState({
+      endDate: date,
+    });
+  };
+
   validate = () => {
     let isError = false;
     const errors = {};
@@ -43,6 +55,35 @@ class OfficerAssignment extends Component {
     }
     else {
       errors.nameError = "";
+    }
+
+    let startDateValid = true;
+    if (this.state.startDate.length == 0) {
+      isError = true;
+      errors.startDateError = "An start date must be specified.";
+      startDateValid = false;
+    } else {
+      errors.startDateError = "";
+    }
+
+    let endDateValid = true;
+    if (this.state.endDate.length == 0) {
+      isError = true;
+      errors.endDateError = "An end date must be specified";
+      endDateValid = false;
+    } else {
+      errors.endDateError = "";
+    }
+
+    if (startDateValid && endDateValid) {
+      const startDate = new Date(this.state.startDate);
+      startDate.setHours(0, 0, 0, 0);
+      const endDate = new Date(this.state.endDate);
+      endDate.setHours(0, 0, 0, 0);
+      if (startDate > endDate) {
+        errors.startDateError = "Start date cannot be after end date.";
+        isError = true;
+      }
     }
 
     if(this.state.location.replace('/\s/g','').length == 0){
@@ -111,7 +152,10 @@ class OfficerAssignment extends Component {
             <label> Start date </label>
             <DatePicker
               name='startDate'
+              errorText={this.state.startDateError}
               hintText="Start Date"
+              value={this.state.startDate}
+              onChange={this.handleStartDateChange}
               container="inline" />
           </Form.Field>
           <Form.Field required>
@@ -119,6 +163,9 @@ class OfficerAssignment extends Component {
             <DatePicker
               name='endDate'
               hintText="End Date"
+              errorText={this.state.endDateError}
+              value={this.state.endDate}
+              onChange={this.handleEndDateChange}
               container="inline" />
           </Form.Field>
         </Form.Group>
