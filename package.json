@@ -24,6 +24,7 @@
     "graphiql": "0.10.0",
     "graphql": "0.10.0",
     "graphql-date": "^1.0.3",
+    "graphql-request": "^1.4.0",
     "grommet": "^2.0.0-alpha.3",
     "history": "2.0.1",
     "ipv6-normalize": "^1.0.1",

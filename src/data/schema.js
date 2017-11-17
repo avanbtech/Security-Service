@@ -7,7 +7,7 @@ import {
   GraphQLFloat,
 } from 'graphql';
 
-import Db from '../core/db';
+import Db from './db';
 import Event from './types/EventType';
 import User from './types/UserType';
 import Request from './types/RequestType';
