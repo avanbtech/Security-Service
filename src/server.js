@@ -10,6 +10,7 @@ import schema from './data/schema';
 import Router from './routes';
 import assets from './assets';
 import { port, auth, analytics } from './config';
+import dbMethods from './data/dbFetchMethods';
 
 import axios from 'axios';
 
@@ -55,6 +56,16 @@ server.use('/graphql', expressGraphQL(req => ({
 })));
 
 
+server.use('/SVEndpt', async (req, res) => {
+  let data = null;
+  await dbMethods.getReqForServiceView().then((resp) => {
+
+    data = resp;
+
+    res.send(data);
+  });
+});
+
 //
 // Register server-side rendering middleware
 // -----------------------------------------------------------------------------
@@ -87,6 +98,8 @@ server.get('*', async (req, res, next) => {
     next(err);
   }
 });
+
+
 
 // Handle POST requests
 var request = require('./routes/request');
