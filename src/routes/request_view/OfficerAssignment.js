@@ -24,17 +24,17 @@ class OfficerAssignment extends Component {
     */
 
     this.state = {
-      name: props.name,
+      name: props.name === undefined ? '' : props.name,
       nameError: '',
-      location: props.location,
+      location: props.location === undefined ? '' : props.location,
       locationError:'',
-      dispatchNumber: props.dispatchNumber,
+      dispatchNumber: props.dispatchNumber === undefined ? '' : props.distpachNumber,
       dispatchNumberError:'',
-      startDate: props.startDate,
-      endDate: props.endDate,
-      phone: props.phone,
+      startDate: props.startDate === undefined ? new Date() : props.startDate,
+      endDate: props.endDate === undefined ? new Date() : props.endDate,
+      phone: props.phone === undefined ? '' : props.phone,
       phoneError:'',
-      remarks: props.remarks,
+      remarks: props.remarks === undefined ? '' : props.remarks,
     };
   }
 
