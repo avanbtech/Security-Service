@@ -71,21 +71,6 @@ class RequestApprovalForm extends Component {
     this.setState({
       officerObjects: newOfficerObjects
     });
-    /*
-    const newGuardList = this.state.guardForms;
-    const guardID = newGuardList.length - 1;
-    if(guardID > -1 && guardID < newGuardList.length){
-      newGuardList.splice(guardID, 1);
-      let index = 0;
-      newGuardList.map((item) => {
-        item.id = index;
-        index++;
-      });
-      this.setState({
-        guardForms: newGuardList
-      });
-    }
-    */
   };
 
   addGuard = e => {
@@ -101,15 +86,6 @@ class RequestApprovalForm extends Component {
     this.setState({
       officerObjects: newOfficerObjects
     })
-
-    /*
-    const newGuardList = this.state.guardForms;
-    let index = this.state.guardForms.length;
-    newGuardList.push({id:index});
-    this.setState({
-      guardForms: newGuardList
-    });
-    */
   }
 
   onSubmit = e => {
