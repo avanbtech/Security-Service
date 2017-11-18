@@ -14,20 +14,15 @@ import homebackground from '../../../test.jpg';
 
 function Home() {
   return (
-  	<div className="home">
-	    <div className={s.root}>
-          <div className={s.blur}>
-          </div>
-        <div className={s.container}>
-          <Main className={s.main} />
-        </div>
-        <div className={s.footer}>
-          <div className={s.footerContent}>
-            <Feedback />
-            <Footer />
-          </div>
-        </div>
-	    </div>
+    <div className={s.root}>
+			<link rel="stylesheet"
+		              href="//cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.12/semantic.min.css"
+		        />
+      <div className={s.blur}>
+      </div>
+      <div className={s.container}>
+        <Main className={s.main} />
+      </div>
     </div>
   );
 }
