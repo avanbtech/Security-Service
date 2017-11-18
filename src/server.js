@@ -56,14 +56,34 @@ server.use('/graphql', expressGraphQL(req => ({
 })));
 
 
-server.use('/SVEndpt', async (req, res) => {
+server.use('/servicedt', async (req, res) => {
   let data = null;
   await dbMethods.getReqForServiceView().then((resp) => {
-
     data = resp;
-
-    res.send(data);
   });
+
+  res.setHeader('Content-Type', 'application/json');
+
+  const final = {
+    reqData: data,
+  };
+
+  res.json(final);
+});
+
+server.use('/stcheck', async (req, res) => {
+  let data = null;
+
+  await dbMethods.getReqForStatusView(req.body.referenceID).then((resp) => {
+    data = resp;
+  });
+  res.setHeader("content-type" ,"application/arraybuffer");
+
+  const final = {
+    reqData: data,
+  };
+
+  res.json(final);
 });
 
 //

@@ -1,12 +1,15 @@
 import React from 'react';
 import StatusForm from './StatusForm';
-
-import methods from '../../data/dbFetchMethods'
+import axios from 'axios';
 export const path = '/StatusForm/:referenceID';
 export const action = async (state) => {
   const title = 'Status form that displays current request status and information user entered';
 
-  const res = await methods.getReqForStatusView(state.params.referenceID);
+  let res = null;
+
+  await getData(state.params.referenceID).then((response) => {
+    res = response.data.reqData;
+  });
 
   let request;
 
@@ -30,3 +33,17 @@ export const action = async (state) => {
   state.context.onSetTitle(title);
   return <StatusForm request={request} />;
 };
+
+
+async function getData(refID) {
+  let res = [];
+  const url = "http://localhost:3001/stcheck";
+
+  await axios.post(url, {
+    referenceID: refID,
+  }).then(function (response){
+    res = response;
+  });
+
+  return res;
+}
