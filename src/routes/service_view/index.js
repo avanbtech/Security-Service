@@ -5,7 +5,7 @@ import axios from 'axios';
 async function fetchData() {
   let res = null;
 
-  await axios.post("http://localhost:3001/SVEndpt")
+  await axios.post("http://localhost:3001/servicedt")
     .then(function (response) {
 
       res = response;
@@ -43,14 +43,14 @@ export const action = async (state) => {
     endDateFilterStr = state.query.end_date;
     endDateFilter = Date.parse(endDateFilterStr);
   }
-  const res = await fetchData();
+  let res = [];
+  await fetchData().then((response) => {
+    res = response.data.reqData;
+  });
 
-  console.log(`\nRES IS: ${res}`);
   let rows = [];
 
   if(res != null) {
-    console.log("\n\n\n\nHERE\n\n\n\n");
-
     for (let x = 0; x < res.length; x++) {
       const requestDateStr = res[x]['date'].split("T")[0];
       const requestDate = Date.parse(requestDateStr);
