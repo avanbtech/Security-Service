@@ -13,18 +13,22 @@ const styles = {
 
 
 class OfficerAssignment extends Component {
-  state = {
-    name:'',
-    nameError:'',
-    location:'',
-    locationError:'',
-    dispatchNumber:'',
-    dispatchNumberError:'',
-    startDate:'',
-    endDate:'',
-    phone:'',
-    phoneError:'',
-    remarks:'',
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      name: props.name,
+      nameError: '',
+      location: props.location,
+      locationError:'',
+      dispatchNumber: props.dispatchNumber,
+      dispatchNumberError:'',
+      startDate: props.startDate,
+      endDate: props.endDate,
+      phone: props.phone,
+      phoneError:'',
+      remarks: props.remarks,
+    };
   }
 
   change = e =>{
