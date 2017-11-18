@@ -272,11 +272,19 @@ class RequestApprovalForm extends Component {
       const currentOfficerObject = this.state.officerObjects[i];
       officerRows.push(
         <div>
-          <div className={s.action_container}>
-            <Form.Button onClick = {e => this.removeGuard(this.state.officerObjects[i].id, e)}>
-              Remove Guard
-            </Form.Button>
-          </div>
+          <table className={s.removeOfficer}>
+            <tbody>
+              <tr>
+                <td><h4>Security Officer/SCSP Information</h4></td>
+                <td>
+                  <a className={s.removeAction} href="javascript:void(0)"
+                     onClick={e => this.removeGuard(this.state.officerObjects[i].id, e)}>
+                    Remove this guard
+                  </a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
           <OfficerAssignment
             ref={
               instance => {
@@ -287,7 +295,6 @@ class RequestApprovalForm extends Component {
         </div>
       );
     }
-
     return (
       <Form action="/ServiceView/approve" method="post">
         <br/>

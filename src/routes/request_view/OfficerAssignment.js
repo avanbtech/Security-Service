@@ -135,7 +135,6 @@ class OfficerAssignment extends Component {
     const { value } = this.state;
     return (
       <div className={s.officer}>
-        <h4>Security Officer/SCSP Information</h4>
         <Form.Group widths='equal'>
           <Form.Field required>
             <label> Dispatch number </label>
