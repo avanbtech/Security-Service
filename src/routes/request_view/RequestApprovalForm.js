@@ -58,8 +58,20 @@ class RequestApprovalForm extends Component {
     lastOfficerID:0
   }
 
-  removeGuard = (e) => {
+  removeGuard = (officerId, e) => {
     e.preventDefault();
+    const newOfficerObjects = this.state.officerObjects;
+    for(let i = 0; i < newOfficerObjects.length; i++) {
+      if(newOfficerObjects[i].id == officerId) {
+        newOfficerObjects.splice(i, 1);
+        //newOfficerObjects[i].toBeRendered = false;
+        break;
+      }
+    }
+    this.setState({
+      officerObjects: newOfficerObjects
+    });
+    /*
     const newGuardList = this.state.guardForms;
     const guardID = newGuardList.length - 1;
     if(guardID > -1 && guardID < newGuardList.length){
@@ -73,7 +85,7 @@ class RequestApprovalForm extends Component {
         guardForms: newGuardList
       });
     }
-
+    */
   };
 
   addGuard = e => {
@@ -290,7 +302,7 @@ class RequestApprovalForm extends Component {
         <div>
           <div className={s.action_container}>
             <Form.Button
-              onClick = {e => this.removeGuard(e)}>Remove Guard</Form.Button>
+              onClick = {e => this.removeGuard(this.state.officerObjects[i].id, e)}>Remove Guard</Form.Button>
           </div>
           <OfficerAssignment
             name={name}
