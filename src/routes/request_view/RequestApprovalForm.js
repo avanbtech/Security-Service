@@ -213,7 +213,7 @@ class RequestApprovalForm extends Component {
     }
 
     let hasChildError = false;
-    this.state.officeObjects.map(officer => {
+    this.state.officerObjects.map(officer => {
       if (officer.instance !== null) {
         hasChildError = hasChildError || officer.instance.validate();
       }
