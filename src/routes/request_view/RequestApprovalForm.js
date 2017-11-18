@@ -275,7 +275,7 @@ class RequestApprovalForm extends Component {
     const { value } = this.state;
 
     var officerRows = [];
-    for(var i = 0; i < this.state.officerObjects.length; i++) {
+    for(let i = 0; i < this.state.officerObjects.length; i++) {
       if(!this.state.officerObjects[i].toBeRendered) {
         continue;
       }
