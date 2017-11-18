@@ -16,6 +16,11 @@ class OfficerAssignment extends Component {
   constructor(props) {
     super(props);
 
+    const startDate = new Date(props.startDate);
+    startDate.setHours(0, 0, 0, 0);
+    const endDate = new Date(props.endDate);
+    endDate.setHours(0, 0, 0, 0);
+
     this.state = {
       name: props.name,
       nameError: '',
@@ -23,8 +28,8 @@ class OfficerAssignment extends Component {
       locationError:'',
       dispatchNumber: props.dispatchNumber,
       dispatchNumberError:'',
-      startDate: props.startDate,
-      endDate: props.endDate,
+      startDate: startDate,
+      endDate: endDate,
       phone: props.phone,
       phoneError:'',
       remarks: props.remarks,
