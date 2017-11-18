@@ -279,6 +279,13 @@ class RequestApprovalForm extends Component {
       if(!this.state.officerObjects[i].toBeRendered) {
         continue;
       }
+      let name = this.state.officerObjects[i].instance === null ? '' : this.state.officerObjects[i].instance.state.name;
+      let location = this.state.officerObjects[i].instance === null ? '' : this.state.officerObjects[i].instance.state.location;
+      let dispatchNumber = this.state.officerObjects[i].instance === null ? '' : this.state.officerObjects[i].instance.state.dispatchNumber;
+      let startDate = this.state.officerObjects[i].instance === null ? '' : this.state.officerObjects[i].instance.state.startDate;
+      let endDate = this.state.officerObjects[i].instance === null ? '' : this.state.officerObjects[i].instance.state.endDate;
+      let phone = this.state.officerObjects[i].instance === null ? '' : this.state.officerObjects[i].instance.state.phone;
+      let remarks = this.state.officerObjects[i].instance === null ? '' : this.state.officerObjects[i].instance.state.remarks;
       officerRows.push(
         <div>
           <div className={s.action_container}>
@@ -286,6 +293,13 @@ class RequestApprovalForm extends Component {
               onClick = {e => this.removeGuard(e)}>Remove Guard</Form.Button>
           </div>
           <OfficerAssignment
+            name={name}
+            location={location}
+            dispatchNumber={dispatchNumber}
+            startDate={startDate}
+            endDate={endDate}
+            phone={phone}
+            remarks={remarks}
             ref={
               instance => {
                 this.state.officerObjects[i].instance = instance;
