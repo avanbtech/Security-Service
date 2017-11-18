@@ -58,36 +58,6 @@ class RequestApprovalForm extends Component {
     lastOfficerID:0
   }
 
-  removeGuard = (officerId, e) => {
-    e.preventDefault();
-    const newOfficerObjects = this.state.officerObjects;
-    for(let i = 0; i < newOfficerObjects.length; i++) {
-      if(newOfficerObjects[i].id == officerId) {
-        newOfficerObjects.splice(i, 1);
-        //newOfficerObjects[i].toBeRendered = false;
-        break;
-      }
-    }
-    this.setState({
-      officerObjects: newOfficerObjects
-    });
-  };
-
-  addGuard = e => {
-    e.preventDefault();
-    ++this.state.lastOfficerID;
-    // adding a new officer
-    const newOfficerObjects = this.state.officerObjects;
-    newOfficerObjects.push({
-      id: this.state.lastOfficerID,
-      toBeRendered: true,
-      instance: null,
-    });
-    this.setState({
-      officerObjects: newOfficerObjects
-    })
-  }
-
   onSubmit = e => {
     const error = this.validate();
     if (error) {
@@ -259,6 +229,45 @@ class RequestApprovalForm extends Component {
     return isError;
   };
 
+  removeGuard = (officerId, e) => {
+    e.preventDefault();
+    const newOfficerObjects = this.state.officerObjects;
+    let indexToBeRemoved = -1;
+    for(let i = 0; i < newOfficerObjects.length; i++) {
+      if(newOfficerObjects[i].id == officerId) {
+        indexToBeRemoved = i;
+        //newOfficerObjects[i].toBeRendered = false;
+        break;
+      }
+    }
+    if (indexToBeRemoved > -1) {
+      for (let j = indexToBeRemoved; j < newOfficerObjects.length - 1; j++) {
+        newOfficerObjects[j].instance.setState({
+          ...newOfficerObjects[j + 1].instance.state,
+        });
+      }
+      newOfficerObjects.splice(newOfficerObjects.length - 1, 1);
+      this.setState({
+        officerObjects: newOfficerObjects,
+      });
+    }
+  };
+
+  addGuard = e => {
+    e.preventDefault();
+    ++this.state.lastOfficerID;
+    // adding a new officer
+    const newOfficerObjects = this.state.officerObjects;
+    newOfficerObjects.push({
+      id: this.state.lastOfficerID,
+      toBeRendered: true,
+      instance: null,
+    });
+    this.setState({
+      officerObjects: newOfficerObjects
+    })
+  }
+
   render() {
     const { value } = this.state;
 
@@ -274,6 +283,7 @@ class RequestApprovalForm extends Component {
       let endDate = this.state.officerObjects[i].instance === null ? '' : this.state.officerObjects[i].instance.state.endDate;
       let phone = this.state.officerObjects[i].instance === null ? '' : this.state.officerObjects[i].instance.state.phone;
       let remarks = this.state.officerObjects[i].instance === null ? '' : this.state.officerObjects[i].instance.state.remarks;
+      const currentOfficerObject = this.state.officerObjects[i];
       officerRows.push(
         <div>
           <div className={s.action_container}>
@@ -281,7 +291,7 @@ class RequestApprovalForm extends Component {
               onClick = {e => this.removeGuard(this.state.officerObjects[i].id, e)}>Remove Guard</Form.Button>
           </div>
           <OfficerAssignment
-            name={name}
+            name="ABCD"
             location={location}
             dispatchNumber={dispatchNumber}
             startDate={startDate}
@@ -290,7 +300,7 @@ class RequestApprovalForm extends Component {
             remarks={remarks}
             ref={
               instance => {
-                this.state.officerObjects[i].instance = instance;
+                currentOfficerObject.instance = instance;
               }
             }
           />
