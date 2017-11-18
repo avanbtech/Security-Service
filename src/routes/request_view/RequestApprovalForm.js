@@ -50,8 +50,6 @@ class RequestApprovalForm extends Component {
     signature:'',
     signatureError:'',
     remarks:'',
-    guardForms:[{
-      id:0}],
     officerObjects:[
       {id: 0, toBeRendered: true, instance: null}
     ],
@@ -216,8 +214,8 @@ class RequestApprovalForm extends Component {
 
     let hasChildError = false;
     this.state.officeObjects.map(officer => {
-      if (officer !== null) {
-        hasChildError = hasChildError || officer.validate();
+      if (officer.instance !== null) {
+        hasChildError = hasChildError || officer.instance.validate();
       }
     });
     isError = isError || hasChildError;
