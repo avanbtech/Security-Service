@@ -5,7 +5,7 @@ import axios from 'axios';
 async function fetchData() {
   let res = null;
 
-  await axios.post("http://localhost:3001/servicedt")
+  await axios.post("https://cmpt373-1177g.cmpt.sfu.ca/servicedt")
     .then(function (response) {
 
       res = response;

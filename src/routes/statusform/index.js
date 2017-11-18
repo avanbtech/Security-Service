@@ -1,6 +1,20 @@
 import React from 'react';
 import StatusForm from './StatusForm';
 import axios from 'axios';
+
+async function getData(refID) {
+  let res = [];
+  const url = "https://cmpt373-1177g.cmpt.sfu.ca/stcheck";
+
+  await axios.post(url, {
+    referenceID: refID,
+  }).then(function (response){
+    res = response;
+  });
+
+  return res;
+}
+
 export const path = '/StatusForm/:referenceID';
 export const action = async (state) => {
   const title = 'Status form that displays current request status and information user entered';
@@ -35,15 +49,4 @@ export const action = async (state) => {
 };
 
 
-async function getData(refID) {
-  let res = [];
-  const url = "http://localhost:3001/stcheck";
 
-  await axios.post(url, {
-    referenceID: refID,
-  }).then(function (response){
-    res = response;
-  });
-
-  return res;
-}
