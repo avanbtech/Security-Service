@@ -52,7 +52,8 @@ class RequestApprovalForm extends Component {
     remarks:'',
     guardForms:[{
       id:0}],
-    officeObjects:[]
+    officerObjects:[],
+    lastOfficerID:0
   }
 
   removeGuard = (e) => {
@@ -74,13 +75,27 @@ class RequestApprovalForm extends Component {
   };
 
   addGuard = e => {
+    e.preventDefault();
+    // adding a new officer
+    const newOfficerObjects = this.state.officerObjects;
+    newOfficerObjects.push({
+      id: this.state.lastOfficerID,
+      toBeRendered: true,
+      officerObject: null,
+    });
+    this.setState({
+      officerObjects: newOfficerObjects
+    })
+    ++this.state.lastOfficerID;
+
+    /*
     const newGuardList = this.state.guardForms;
     let index = this.state.guardForms.length;
     newGuardList.push({id:index});
     this.setState({
       guardForms: newGuardList
     });
-    e.preventDefault();
+    */
   }
 
   onSubmit = e => {
@@ -452,7 +467,15 @@ class RequestApprovalForm extends Component {
         </Form.Group>
         {
           this.state.guardForms.map((item) => (
-            <OfficerAssignment ref={instance => {this.state.officeObjects.push(instance);}}/>
+            <div>
+              <div className={s.action_container}>
+                <Form.Button
+                  onClick = {e => this.removeGuard(e)}>Remove Guard</Form.Button>
+              </div>
+              <OfficerAssignment
+                ref={instance => {this.state.officeObjects.push(instance);}}
+              />
+            </div>
           ))
         }
         <div className={s.action_container}>
@@ -461,13 +484,6 @@ class RequestApprovalForm extends Component {
         </div>
         <input type='hidden' name='requestID' value={this.props.requestID}/>
         <input type='hidden' name='email' value={this.props.email}/>
-        {
-          this.state.guardForms.length > 0 &&
-          <div className={s.action_container}>
-            <Form.Button
-              onClick = {e => this.removeGuard(e)}>Remove Guard</Form.Button>
-          </div>
-        }
         <Form.Button
           onClick = {e => this.onSubmit(e)}>Submit</Form.Button>
       </Form>
