@@ -52,7 +52,9 @@ class RequestApprovalForm extends Component {
     remarks:'',
     guardForms:[{
       id:0}],
-    officerObjects:[],
+    officerObjects:[
+      {id: 0, toBeRendered: true, instance: null}
+    ],
     lastOfficerID:0
   }
 
@@ -76,17 +78,17 @@ class RequestApprovalForm extends Component {
 
   addGuard = e => {
     e.preventDefault();
+    ++this.state.lastOfficerID;
     // adding a new officer
     const newOfficerObjects = this.state.officerObjects;
     newOfficerObjects.push({
       id: this.state.lastOfficerID,
       toBeRendered: true,
-      officerObject: null,
+      instance: null,
     });
     this.setState({
       officerObjects: newOfficerObjects
     })
-    ++this.state.lastOfficerID;
 
     /*
     const newGuardList = this.state.guardForms;
@@ -271,7 +273,29 @@ class RequestApprovalForm extends Component {
 
   render() {
     const { value } = this.state;
-    this.state.officeObjects = [];
+
+    var officerRows = [];
+    for(var i = 0; i < this.state.officerObjects.length; i++) {
+      if(!this.state.officerObjects[i].toBeRendered) {
+        continue;
+      }
+      officerRows.push(
+        <div>
+          <div className={s.action_container}>
+            <Form.Button
+              onClick = {e => this.removeGuard(e)}>Remove Guard</Form.Button>
+          </div>
+          <OfficerAssignment
+            ref={
+              instance => {
+                this.state.officerObjects[i].instance = instance;
+              }
+            }
+          />
+        </div>
+      );
+    }
+
     return (
       <Form action="/ServiceView/approve" method="post">
         <br/>
@@ -465,19 +489,7 @@ class RequestApprovalForm extends Component {
             />
           </Form.Field>
         </Form.Group>
-        {
-          this.state.guardForms.map((item) => (
-            <div>
-              <div className={s.action_container}>
-                <Form.Button
-                  onClick = {e => this.removeGuard(e)}>Remove Guard</Form.Button>
-              </div>
-              <OfficerAssignment
-                ref={instance => {this.state.officeObjects.push(instance);}}
-              />
-            </div>
-          ))
-        }
+        {officerRows}
         <div className={s.action_container}>
           <Form.Button
             onClick = {e => this.addGuard(e)}>Add Guard</Form.Button>
