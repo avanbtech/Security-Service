@@ -37,7 +37,7 @@ const MainPage = () => (
         <br />
         <br />
         <div className={s.box}>
-          <div className={s.icon}>
+          <div className={s.formicon}>
             <img src={formicon} height={165} width={165} />
           </div>
           <div className={s.description}>
@@ -46,31 +46,33 @@ const MainPage = () => (
           <Link className={s.link} to="/Customer">
             <FlatButton
               label = "Make a Request"
-              backgroundColor = 'rgba(0, 0, 0, 0.1)'
+              backgroundColor = 'rgba(0, 0, 0, 0)'
               labelStyle = {{color: '#FFEBEE'}}
               hoverColor = 'rgba(116, 21, 27, 0.6)'
+              width = {100}
             />
           </Link>
         </div>
         <div className = {s.box}>
-          <div className={s.icon}>
-            <img src={statusicon} height={160} width={160} paddingLeft={2} />
+          <div className={s.statusicon}>
+            <img src={statusicon} height={159} width={160} />
           </div>
           <div className={s.description}>
-            Check the current status of a previously submitted request (Accepted, Rejected, Pending).
+            Check the current status of a previously submitted request <br /> (Accepted, Rejected, Pending).
           </div>
           <Link className = {s.link} to="/Status">
             <FlatButton
-              label ="Check Your Request"
-              backgroundColor = 'rgba(0, 0, 0, 0.39)'
+              label ="Check Status"
+              backgroundColor = 'rgba(0, 0, 0, 0)'
               labelStyle = {{color: '#FFEBEE'}}
-              hoverColor = '#a6192e'
+              hoverColor = 'rgba(116, 21, 27, 0.6)'
+              width = {100}
             />
           </Link>
         </div>
         <div className = {s.box}>
-          <div className={s.icon}>
-            <img src={lockicon} height={155} width={155} />
+          <div className={s.lockicon}>
+            <img src={lockicon} height={165} width={165} />
           </div>
           <div className={s.description}>
             Restricted - authorization required.
@@ -78,25 +80,27 @@ const MainPage = () => (
           <Link className = {s.link} to="/ServiceView">
             <FlatButton
               label = "Service View"
-              backgroundColor = 'rgba(0, 0, 0, 0.39)'
+              backgroundColor = 'rgba(0, 0, 0, 0)'
               labelStyle = {{color: '#FFEBEE'}}
-              hoverColor = 'rgba(116, 21, 27, 0.78)'
+              hoverColor = 'rgba(116, 21, 27, 0.6)'
+              width = {100}
             />
           </Link>
         </div>
         <div className={s.box}>
-          <div className={s.icon}>
-            <img src={exporticon} height={145} width={145} />
+          <div className={s.exporticon}>
+            <img src={exporticon} height={170} width={170} />
           </div>
           <div className={s.description}>
             Export a request information in CSV format.
           </div>
           <Link className={s.link} to="/CSV">
             <FlatButton
-                label = "Export Data Demo"
-                backgroundColor = 'rgba(0, 0, 0, 0.39)'
+                label = "Export Data"
+                backgroundColor = 'rgba(0, 0, 0, 0)'
                 labelStyle ={{color: '#FFEBEE'}}
-                hoverColor = 'rgba(116, 21, 27, 0.78)'
+                hoverColor = 'rgba(116, 21, 27, 0.6)'
+                width = {100}
                 //onclick here
               />
           </Link>
