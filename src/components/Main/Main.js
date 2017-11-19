@@ -13,6 +13,11 @@ import Paper from 'material-ui/Paper';
 import s from './Main.scss';
 import Link from '../Link';
 
+import formicon from '../../../form.png';
+import statusicon from '../../../status.png';
+import lockicon from '../../../lock.png';
+import exporticon from '../../../export.png';
+
 
 const style = {
   height: 450,
@@ -32,19 +37,25 @@ const MainPage = () => (
         <br />
         <br />
         <div className={s.box}>
+          <div className={s.icon}>
+            <img src={formicon} height={165} width={165} />
+          </div>
           <div className={s.description}>
             Complete an online application form to request security services.
           </div>
           <Link className={s.link} to="/Customer">
             <FlatButton
               label = "Make a Request"
-              backgroundColor = 'rgba(0, 0, 0, 0.39)'
+              backgroundColor = 'rgba(0, 0, 0, 0.1)'
               labelStyle = {{color: '#FFEBEE'}}
-              hoverColor = 'rgba(116, 21, 27, 0.78)'
+              hoverColor = 'rgba(116, 21, 27, 0.6)'
             />
           </Link>
         </div>
         <div className = {s.box}>
+          <div className={s.icon}>
+            <img src={statusicon} height={160} width={160} paddingLeft={2} />
+          </div>
           <div className={s.description}>
             Check the current status of a previously submitted request (Accepted, Rejected, Pending).
           </div>
@@ -58,6 +69,9 @@ const MainPage = () => (
           </Link>
         </div>
         <div className = {s.box}>
+          <div className={s.icon}>
+            <img src={lockicon} height={155} width={155} />
+          </div>
           <div className={s.description}>
             Restricted - authorization required.
           </div>
@@ -71,6 +85,9 @@ const MainPage = () => (
           </Link>
         </div>
         <div className={s.box}>
+          <div className={s.icon}>
+            <img src={exporticon} height={145} width={145} />
+          </div>
           <div className={s.description}>
             Export a request information in CSV format.
           </div>

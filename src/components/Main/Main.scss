@@ -42,12 +42,20 @@
   border-radius: 6px;
 }
 
+.icon {
+  margin: 0 auto;
+  display: block;
+  max-height: 165px;
+  max-width: 165px;
+}
+
 .spacer {
   color: rgba(255, 255, 255, .3);
 }
 
 .link {
   padding-top: 20px;
+  float: bottom;
 }
 
 .text,
