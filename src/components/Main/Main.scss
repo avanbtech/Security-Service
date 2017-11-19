@@ -1,14 +1,12 @@
 @import '../variables.scss';
 
 .root {
-  background: #333;
-  color: #fff;
-    text-align: center;
+  margin: 0 auto;
+  text-align: center;
 }
 
 .container {
   position: relative;
-  left: 150px;
 }
 
 .text {
@@ -20,8 +18,36 @@
   color: rgba(255, 255, 255, .3);
 }
 
+.description {
+  margin: 10px;
+  padding: 20px;
+  color: white;
+  text-align: center;
+  font-weight: lighter;
+  font-size: 1em;
+}
+
+.box {
+  margin: 20px; 
+  height: 450px;
+  width: 320px;
+  padding: 40px;
+  background-color: rgba(0, 0, 0, 0.78);
+  text-align: center;
+  display: block;
+  float: left;
+  font-weight: lighter;
+  font-family: 'verdana';
+  font-size: 1em;
+  border-radius: 6px;
+}
+
 .spacer {
   color: rgba(255, 255, 255, .3);
+}
+
+.link {
+  padding-top: 20px;
 }
 
 .text,
