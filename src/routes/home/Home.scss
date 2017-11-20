@@ -13,11 +13,11 @@
   top: 0;
   left: 0;
   z-index: -1;
-  background-image: url("./low-sfu.jpg");
+  background-image: url("../../../convo-mall.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
-  filter: blur(4px);
+  filter: blur(5px);
 }
 
 .footer {
@@ -27,14 +27,21 @@
   right: 0;
   bottom: 0;
   left: 0;
-  background-color: #efefef;
   text-align: center;
+  background-image: url("./textured-red-01-small.png");
+}
+
+.footerContent {
+  margin: 0 auto;
+  max-width: 100%;
+/*  padding-right: 2em;
+  padding-left: 2em;*/
 }
 
 .container {
   margin: 0 auto;
   padding: 0 0 120px;
-  max-width: 80%;
+  max-width: 94%;
 }
 
 .news {

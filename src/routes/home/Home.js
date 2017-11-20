@@ -16,8 +16,8 @@ function Home() {
   return (
     <div className={s.root}>
 			<link rel="stylesheet"
-		              href="//cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.12/semantic.min.css"
-		        />
+				href="//cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.12/semantic.min.css"
+			/>
       <div className={s.blur}>
       </div>
       <div className={s.container}>

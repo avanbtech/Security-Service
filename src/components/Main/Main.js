@@ -32,81 +32,81 @@ const MainPage = () => (
     <link rel="stylesheet"
         href="//cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.12/semantic.min.css"
     />
-    <MuiThemeProvider>
-      <div>
-        <br />
-        <br />
-        <div className={s.box}>
-          <div className={s.formicon}>
-            <img src={formicon} height={165} width={165} />
-          </div>
-          <div className={s.description}>
-            Complete an online application form to request security services.
-          </div>
-          <Link className={s.link} to="/Customer">
-            <FlatButton
-              label = "Make a Request"
-              backgroundColor = 'rgba(0, 0, 0, 0)'
-              labelStyle = {{color: '#FFEBEE'}}
-              hoverColor = 'rgba(116, 21, 27, 0.6)'
-              width = {100}
-            />
-          </Link>
-        </div>
-        <div className = {s.box}>
-          <div className={s.statusicon}>
-            <img src={statusicon} height={159} width={160} />
-          </div>
-          <div className={s.description}>
-            Check the current status of a previously submitted request <br /> (Accepted, Rejected, Pending).
-          </div>
-          <Link className = {s.link} to="/Status">
-            <FlatButton
-              label ="Check Status"
-              backgroundColor = 'rgba(0, 0, 0, 0)'
-              labelStyle = {{color: '#FFEBEE'}}
-              hoverColor = 'rgba(116, 21, 27, 0.6)'
-              width = {100}
-            />
-          </Link>
-        </div>
-        <div className = {s.box}>
-          <div className={s.lockicon}>
-            <img src={lockicon} height={165} width={165} />
-          </div>
-          <div className={s.description}>
-            Restricted - authorization required.
-          </div>
-          <Link className = {s.link} to="/ServiceView">
-            <FlatButton
-              label = "Service View"
-              backgroundColor = 'rgba(0, 0, 0, 0)'
-              labelStyle = {{color: '#FFEBEE'}}
-              hoverColor = 'rgba(116, 21, 27, 0.6)'
-              width = {100}
-            />
-          </Link>
-        </div>
-        <div className={s.box}>
-          <div className={s.exporticon}>
-            <img src={exporticon} height={170} width={170} />
-          </div>
-          <div className={s.description}>
-            Export a request information in CSV format.
-          </div>
-          <Link className={s.link} to="/CSV">
-            <FlatButton
-                label = "Export Data"
+    <div className={s.gradientBG}>
+      <MuiThemeProvider>
+        <div className={s.container1}>
+          <div className={s.box}>
+            <div className={s.formicon}>
+              <img src={formicon} height={165} width={165} />
+            </div>
+            <div className={s.description}>
+              Complete an online application form to request security services.
+            </div>
+            <Link className={s.link} to="/Customer">
+              <FlatButton
+                label = "Make a Request"
                 backgroundColor = 'rgba(0, 0, 0, 0)'
-                labelStyle ={{color: '#FFEBEE'}}
+                labelStyle = {{color: '#FFEBEE'}}
                 hoverColor = 'rgba(116, 21, 27, 0.6)'
                 width = {100}
-                //onclick here
               />
-          </Link>
+            </Link>
+          </div>
+          <div className = {s.box}>
+            <div className={s.statusicon}>
+              <img src={statusicon} height={159} width={160} />
+            </div>
+            <div className={s.description}>
+              Check the current status of a previously submitted request. <br /> (Accepted, Rejected, Pending)
+            </div>
+            <Link className = {s.link} to="/Status">
+              <FlatButton
+                label ="Check Status"
+                backgroundColor = 'rgba(0, 0, 0, 0)'
+                labelStyle = {{color: '#FFEBEE'}}
+                hoverColor = 'rgba(116, 21, 27, 0.6)'
+                width = {100}
+              />
+            </Link>
+          </div>
+          <div className = {s.box}>
+            <div className={s.lockicon}>
+              <img src={lockicon} height={165} width={165} />
+            </div>
+            <div className={s.description}>
+              Restricted - authorization required.
+            </div>
+            <Link className = {s.link} to="/ServiceView">
+              <FlatButton
+                label = "Service View"
+                backgroundColor = 'rgba(0, 0, 0, 0)'
+                labelStyle = {{color: '#FFEBEE'}}
+                hoverColor = 'rgba(116, 21, 27, 0.6)'
+                width = {100}
+              />
+            </Link>
+          </div>
+          <div className={s.box}>
+            <div className={s.exporticon}>
+              <img src={exporticon} height={170} width={170} />
+            </div>
+            <div className={s.description}>
+              Export a single request's information in CSV format.
+            </div>
+            <Link className={s.link} to="/CSV">
+              <FlatButton
+                  label = "Export Data"
+                  backgroundColor = 'rgba(0, 0, 0, 0)'
+                  labelStyle ={{color: '#FFEBEE'}}
+                  hoverColor = 'rgba(116, 21, 27, 0.6)'
+                  width = {100}
+                  //onclick here
+                />
+            </Link>
+          </div>
         </div>
-      </div>
-    </MuiThemeProvider>
+      </MuiThemeProvider>
+    </div>
   </div>
 );
 

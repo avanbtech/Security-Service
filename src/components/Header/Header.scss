@@ -4,7 +4,6 @@ $brand-color: #ffffff;
 
 .root {
   margin: 0 auto;
-  margin-bottom: 20px;
   max-height: 200px;
   background-image: url("./textured-red-01-small.png");
 }
@@ -19,16 +18,16 @@ $brand-color: #ffffff;
 
 .headerstrip{
   margin-top: 25px;
-  height:25px;
-  width:-50%;
+  height: 25px;
+  width: -50%;
   background-color: #3d3935;
   background-image: url("./header-strip.png");
   background-repeat: no-repeat;
 }
 
 .headerstripBG{
-  height:20px;
-  width:50%;
+  height: 20px;
+  width: 50%;
   color: black;
 }
 
