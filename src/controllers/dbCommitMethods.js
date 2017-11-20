@@ -186,17 +186,17 @@ function commitApproveToDB(req) {
       where: {
         groupID: security['groupID'],
       },
-    });
+    }).then(() => {
+      if(req.body.dispatchNumber) {
+        // Update the guards for the security group
+        let allGuards = createGuards(req, security.groupID);
 
-    if(req.body.dispatchNumber) {
-      // Update the guards for the security group
-      let allGuards = createGuards(req, security.groupID);
-
-      let x;
-      for (x in allGuards) {
-        db.models.guard.findOrCreate({where: allGuards[x]});
+        let x;
+        for (x in allGuards) {
+          db.models.guard.findOrCreate({where: allGuards[x]});
+        }
       }
-    }
+    });
   });
 
 
