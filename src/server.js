@@ -68,7 +68,12 @@ server.use('/exportGuards', async(req, res) => {
   });
 
   setTimeout(() => {
-    res.download(data);
+    if(data) {
+      res.download(data);
+    } else {
+      // TODO SHOW PROMPT INSTEAD OF REDIRECT
+      res.redirect("/");
+    }
   }, 5000);
 
 });

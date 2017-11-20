@@ -134,7 +134,11 @@ async function getGuardsForRequest(reqID) {
 
   const client = new GraphQLClient(DBUrl, { headers: {} });
   await client.request(query).then((data) => {
-    res = data.request[0].security.guards;
+    if(data.request[0]) {
+      res = data.request[0].security.guards;
+    } else {
+      res = null;
+    }
   });
 
   return res;
