@@ -1,31 +1,13 @@
 import React from 'react';
-import RaisedButton from 'material-ui/RaisedButton';
-import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import ActionAndroid from 'material-ui/svg-icons/action/android';
 import FlatButton from 'material-ui/FlatButton';
-import FontIcon from 'material-ui/FontIcon';
-import cx from 'classnames';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
-import Paper from 'material-ui/Paper';
-
 import s from './Main.scss';
 import Link from '../Link';
-
 import formicon from '../../../form.png';
 import statusicon from '../../../status.png';
 import lockicon from '../../../lock.png';
 import exporticon from '../../../export.png';
-
-
-const style = {
-  height: 450,
-  width: 320,
-  margin: 20,
-  textAlign: 'center',
-  display: 'inline-block',
-};
 
 const MainPage = () => (
   <div className={s.root}>
