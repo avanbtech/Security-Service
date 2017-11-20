@@ -1,4 +1,4 @@
-import db from '../core/db';
+import db from '../data/db';
 import exportMethods from '../PyScripts/childProcPy'
 import nodemailer from 'nodemailer';
 import xoauth2 from 'xoauth2';

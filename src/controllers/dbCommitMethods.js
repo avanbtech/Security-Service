@@ -1,4 +1,4 @@
-import db from '../core/db';
+import db from '../data/db';
 
 var NUM = '0000';
 var YEAR = '00';
