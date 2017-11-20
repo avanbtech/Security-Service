@@ -58,6 +58,7 @@ server.use('/graphql', expressGraphQL(req => ({
 server.use('/exportGuards', async(req, res) => {
 
   //TODO: ADD AUTH CHECK
+  //TODO: CHANGE REQ TO BE PASSED IN WITH THE REQ
   const reqID = '17-0001';
 
   let data = [];

@@ -31,36 +31,31 @@ function writeGuardsToPDF(allGuards) {
 
     doc.text(adminData, {align: 'left'});
 
-
     let i;
-    let x;
-    for(x = 0; x < 5; x++) {
-      for(i = 0; i < allGuards.length; i++) {
-        doc.moveDown(2);
-        doc.fontSize(12).text(`=========================================================================`, {align: 'center'});
-        const guard = allGuards[i];
-        const header = `Guard #${i + 1}\n`;
-        const adminInfo = `Security Group: ${guard.groupID}\n`;
-        const guardInfo = `     Name: ${guard.guardname}\n     Dispatch Number: ${guard.dispatchNumber}\n`;
-        const phn = `     Phone Number: ${guard.telephone}\n`;
-        const locInfo = `     Location: ${guard.location}\n`;
-        const dates = `     Start Date: ${guard.startDate.split('T')[0]}     End Date: ${guard.endDate.split('T')[0]}\n`;
-        const remarks = `     Remarks: ${guard.remarks}`;
 
-        const FinalStr = adminInfo + header + guardInfo + phn + locInfo + dates + remarks;
+    for(i = 0; i < allGuards.length; i++) {
+      doc.moveDown(2);
+      doc.fontSize(12).text(`=========================================================================`, {align: 'center'});
+      const guard = allGuards[i];
+      const header = `Guard #${i + 1}\n`;
+      const adminInfo = `Security Group: ${guard.groupID}\n`;
+      const guardInfo = `     Name: ${guard.guardname}\n     Dispatch Number: ${guard.dispatchNumber}\n`;
+      const phn = `     Phone Number: ${guard.telephone}\n`;
+      const locInfo = `     Location: ${guard.location}\n`;
+      const dates = `     Start Date: ${guard.startDate.split('T')[0]}     End Date: ${guard.endDate.split('T')[0]}\n`;
+      const remarks = `     Remarks: ${guard.remarks}`;
 
-        doc.fontSize(12).text(FinalStr);
-        doc.moveDown();
+      const FinalStr = adminInfo + header + guardInfo + phn + locInfo + dates + remarks;
 
-        doc.fontSize(12).text(`=========================================================================`, {align: 'center'});
+      doc.fontSize(12).text(FinalStr);
+      doc.moveDown();
 
-      }
+      doc.fontSize(12).text(`=========================================================================`, {align: 'center'});
+
     }
 
     doc.end();
   }
-
-
 
   return filePath;
 }
