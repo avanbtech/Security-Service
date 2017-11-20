@@ -6,7 +6,7 @@ import findRemoveSync from 'find-remove';
 const Conn = new Sequelize(
   'demodb',
   'root',
-  'YOUR PASSWORD HERE',
+  'hooh392',
   {
     dialect: 'mysql',
     host: 'localhost', //VM IP ADDRESS: '142.58.21.62',
