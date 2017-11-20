@@ -4,7 +4,6 @@ import s from './App.scss';
 import Header from '../Header';
 import Feedback from '../Feedback';
 import Footer from '../Footer';
-import Main from '../Main'
 
 class App extends Component {
 

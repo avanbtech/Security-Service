@@ -82,7 +82,6 @@ const MainPage = () => (
                   labelStyle ={{color: '#FFEBEE'}}
                   hoverColor = 'rgba(116, 21, 27, 0.6)'
                   width = {100}
-                  //onclick here
                 />
             </Link>
           </div>
