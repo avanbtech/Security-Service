@@ -11,8 +11,7 @@ import Router from './routes';
 import assets from './assets';
 import { port, auth, analytics } from './config';
 import dbMethods from './data/dbFetchMethods';
-
-import axios from 'axios';
+import expG from './data/exportGuardsPDF';
 
 var expressValidator = require('express-validator');
 
@@ -56,7 +55,27 @@ server.use('/graphql', expressGraphQL(req => ({
 })));
 
 
+server.use('/exportGuards', async(req, res) => {
+
+  //TODO: ADD AUTH CHECK
+  const reqID = '17-0001';
+
+  let data = [];
+
+  await expG.exportGuards(reqID).then((resp) => {
+    console.log(`EXPORTED TO ${resp}`);
+    data = resp;
+  });
+
+  setTimeout(() => {
+    res.download(data);
+  }, 5000);
+
+});
+
 server.use('/servicedt', async (req, res) => {
+
+  //TODO: ADD AUTH CHECK
   let data = null;
   await dbMethods.getReqForServiceView().then((resp) => {
     data = resp;
@@ -72,6 +91,7 @@ server.use('/servicedt', async (req, res) => {
 });
 
 server.use('/stcheck', async (req, res) => {
+  //TODO: ADD AUTH CHECK
   let data = null;
 
   await dbMethods.getReqForStatusView(req.body.referenceID).then((resp) => {

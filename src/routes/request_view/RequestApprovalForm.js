@@ -51,7 +51,8 @@ class RequestApprovalForm extends Component {
     signatureError:'',
     remarks:'',
     guardForms:[{
-      id:0}]
+      id:0}],
+    officeObjects:[]
   }
 
   removeGuard = (e) => {
@@ -82,9 +83,9 @@ class RequestApprovalForm extends Component {
     e.preventDefault();
   }
 
-  onSubmit = e =>{
+  onSubmit = e => {
     const error = this.validate();
-    if (error){
+    if (error) {
       e.preventDefault();
     }
   };
@@ -238,15 +239,24 @@ class RequestApprovalForm extends Component {
       errors.signatureError = "";
     }
 
+    let hasChildError = false;
+    this.state.officeObjects.map(officer => {
+      if(officer !== null) {
+        hasChildError = hasChildError || officer.validate();
+      }
+    });
+    isError = isError || hasChildError;
     this.setState({
         ...this.state,
         ...errors
     });
+
     return isError;
   };
 
   render() {
     const { value } = this.state;
+    this.state.officeObjects = [];
     return (
       <Form action="/ServiceView/approve" method="post">
         <br/>
@@ -442,7 +452,7 @@ class RequestApprovalForm extends Component {
         </Form.Group>
         {
           this.state.guardForms.map((item) => (
-              <OfficerAssignment/>
+            <OfficerAssignment ref={instance => {this.state.officeObjects.push(instance);}}/>
           ))
         }
         <div className={s.action_container}>
