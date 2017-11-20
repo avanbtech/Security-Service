@@ -1,12 +1,28 @@
 import React from 'react';
 import StatusForm from './StatusForm';
 
-import methods from '../../core/dbFetchMethods'
+async function getData(refID) {
+  let res = [];
+  const url = "https://cmpt373-1177g.cmpt.sfu.ca/stcheck";
+
+  await axios.post(url, {
+    referenceID: refID,
+  }).then(function (response){
+    res = response;
+  });
+
+  return res;
+}
+
 export const path = '/StatusForm/:referenceID';
 export const action = async (state) => {
   const title = 'Status form that displays current request status and information user entered';
 
-  const res = await methods.getReqForStatusView(state.params.referenceID);
+  let res = null;
+
+  await getData(state.params.referenceID).then((response) => {
+    res = response.data.reqData;
+  });
 
   let request;
   
