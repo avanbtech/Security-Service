@@ -130,12 +130,16 @@ async function isValidCodeAndEmail(reqID, email) {
 async function getGuardsForRequest(reqID) {
   let res = null;
 
-  let query= `{request(accessID: "${reqID}"){security {guards {groupID accessID dispatchNumber location startDate endDate guardname telephone remarks}}}}`;
+  let query= `{request(accessID: "${reqID}"){security{ \
+  supervisor preparedBy remarks guardRegularRate guardRegularHours guardOTRate \
+  guardOTHours scspRegularRate scspRegularHours scspOTRate scspOTHours totalGuardBillable \
+  totalSCSPBillable guards {groupID accessID dispatchNumber location startDate \
+  endDate guardname telephone remarks}}}}`;
 
   const client = new GraphQLClient(DBUrl, { headers: {} });
   await client.request(query).then((data) => {
     if(data.request[0]) {
-      res = data.request[0].security.guards;
+      res = data.request[0];
     } else {
       res = null;
     }

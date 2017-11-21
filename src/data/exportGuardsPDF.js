@@ -3,7 +3,51 @@ import fs from 'fs';
 
 import dbMethods from './dbFetchMethods';
 
-function writeGuardsToPDF(allGuards) {
+function parseSecurityData(securityGrp) {
+  const grpData0 = `Summary\n\
+=========================================================================\n\n`;
+
+  const grpData1  = `Supervisor: ${securityGrp.supervisor}    \
+              Prepared By: ${securityGrp.preparedBy}\n`;
+
+  const grpData2 = `Guards Reg. Rate: $${securityGrp.guardRegularRate}\n\
+Guard Reg. Hours: ${securityGrp.guardRegularHours}\n`;
+
+  const grpData3 = `Guards OT Rate: $${securityGrp.guardOTRate}\n\
+Guards OT Hours: ${securityGrp.guardOTHours}\n`;
+
+  const grpData4 = `SCSP Reg. Rate: $${securityGrp.scspRegularRate}\n\
+SCSP Reg. Hours: ${securityGrp.scspRegularHours}\n`;
+
+  const grpData5 = `SCSP OT Rate: $${securityGrp.scspOTRate}\n\
+SCSP OT Hours: ${securityGrp.scspOTHours}\n`;
+
+  const grpData6 = `Total Guard Billable Hours: ${securityGrp.totalGuardBillable}\n\
+Total SCSP Billable Hours: ${securityGrp.totalSCSPBillable}\n`;
+
+  const finalStr = grpData0 + grpData1 + grpData2 + grpData3 + grpData4 + grpData5 + grpData6;
+
+  return finalStr;
+}
+
+function parseGuardData(guard, num) {
+  const header = `Guard #${num}\n`;
+  const adminInfo = `Security Group: ${guard.groupID}\n`;
+  const guardInfo = `     Name: ${guard.guardname}\n     Dispatch Number: ${guard.dispatchNumber}\n`;
+  const phn = `     Phone Number: ${guard.telephone}\n`;
+  const locInfo = `     Location: ${guard.location}\n`;
+  const dates = `     Start Date: ${guard.startDate.split('T')[0]}     End Date: ${guard.endDate.split('T')[0]}\n`;
+  const remarks = `     Remarks: ${guard.remarks}`;
+
+  const FinalStr = adminInfo + header + guardInfo + phn + locInfo + dates + remarks;
+
+  return FinalStr;
+}
+
+function writeGuardsToPDF(data) {
+  const allGuards = data.security.guards;
+  const securityGrp = data.security;
+
   let filePath = null;
   let file = null;
 
@@ -15,7 +59,7 @@ function writeGuardsToPDF(allGuards) {
     });
 
     filePath = `ExportedPDFs/${allGuards[0].accessID}_guards.pdf`;
-    file = fs.createWriteStream(filePath, { encoding : 'utf8' })
+    file = fs.createWriteStream(filePath, { encoding : 'utf8' });
 
     let stream = doc.pipe(file);
     doc.moveUp(2);
@@ -23,13 +67,17 @@ function writeGuardsToPDF(allGuards) {
 
     const date = new Date();
 
-    doc.fontSize(12)
+    doc.fontSize(12);
     doc.moveDown();
 
     const adminData = `Date Exported: ${date.getDate()}-${date.getMonth() + 1}-${date.getFullYear()}\n` +
       `Total Guards Assigned: ${allGuards.length}`;
 
+    const finalStr = parseSecurityData(securityGrp);
+
     doc.text(adminData, {align: 'left'});
+    doc.moveDown();
+    doc.text(finalStr, {align: 'left'});
 
     let i;
 
@@ -37,15 +85,8 @@ function writeGuardsToPDF(allGuards) {
       doc.moveDown(2);
       doc.fontSize(12).text(`=========================================================================`, {align: 'center'});
       const guard = allGuards[i];
-      const header = `Guard #${i + 1}\n`;
-      const adminInfo = `Security Group: ${guard.groupID}\n`;
-      const guardInfo = `     Name: ${guard.guardname}\n     Dispatch Number: ${guard.dispatchNumber}\n`;
-      const phn = `     Phone Number: ${guard.telephone}\n`;
-      const locInfo = `     Location: ${guard.location}\n`;
-      const dates = `     Start Date: ${guard.startDate.split('T')[0]}     End Date: ${guard.endDate.split('T')[0]}\n`;
-      const remarks = `     Remarks: ${guard.remarks}`;
 
-      const FinalStr = adminInfo + header + guardInfo + phn + locInfo + dates + remarks;
+      const FinalStr = parseGuardData(guard, i + 1);
 
       doc.fontSize(12).text(FinalStr);
       doc.moveDown();
@@ -74,5 +115,3 @@ exports.exportGuards = async function exportGuardsToPDF(reqID) {
 
   return file;
 };
-
-
