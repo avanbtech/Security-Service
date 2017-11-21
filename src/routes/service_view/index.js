@@ -1,7 +1,23 @@
 import React from 'react';
 import ServiceViewReq from './ServiceView';
-import fetch from '../../core/fetch';
-import dbMethods from '../../core/dbFetchMethods';
+import axios from 'axios';
+
+async function fetchData() {
+  let res = null;
+
+  await axios.post("https://cmpt373-1177g.cmpt.sfu.ca/servicedt")
+    .then(function (response) {
+
+      res = response;
+    })
+    .catch(function (error) {
+      console.log(error.data);
+    });
+
+  return res;
+}
+
+
 export const path = '/ServiceView';
 export const action = async (state) => {
 
@@ -27,10 +43,14 @@ export const action = async (state) => {
     endDateFilterStr = state.query.end_date;
     endDateFilter = Date.parse(endDateFilterStr);
   }
-  let res = await dbMethods.getReqForServiceView();
+  let res = [];
+  await fetchData().then((response) => {
+    res = response.data.reqData;
+  });
+
   let rows = [];
 
-  if(res !== null) {
+  if(res != null) {
     for (let x = 0; x < res.length; x++) {
       const requestDateStr = res[x]['date'].split("T")[0];
       const requestDate = Date.parse(requestDateStr);
@@ -70,3 +90,5 @@ export const action = async (state) => {
     filterObject={filterObject}
   />;
 };
+
+

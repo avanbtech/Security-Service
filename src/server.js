@@ -10,8 +10,8 @@ import schema from './data/schema';
 import Router from './routes';
 import assets from './assets';
 import { port, auth, analytics } from './config';
-
-import axios from 'axios';
+import dbMethods from './data/dbFetchMethods';
+import expG from './data/exportGuardsPDF';
 
 var expressValidator = require('express-validator');
 
@@ -55,6 +55,64 @@ server.use('/graphql', expressGraphQL(req => ({
 })));
 
 
+server.use('/exportGuards', async(req, res) => {
+
+  //TODO: ADD AUTH CHECK
+  //TODO: CHANGE REQ TO BE PASSED IN WITH THE REQ
+
+  const reqID = req.body.referenceID;
+
+  let data = [];
+
+  await expG.exportGuards(reqID).then((resp) => {
+    console.log(`EXPORTED TO ${resp}`);
+    data = resp;
+  });
+
+  setTimeout(() => {
+    if(data) {
+      res.download(data);
+    } else {
+      // TODO SHOW PROMPT INSTEAD OF REDIRECT
+      res.redirect("/");
+    }
+  }, 5000);
+
+});
+
+server.use('/servicedt', async (req, res) => {
+
+  //TODO: ADD AUTH CHECK
+  let data = null;
+  await dbMethods.getReqForServiceView().then((resp) => {
+    data = resp;
+  });
+
+  res.setHeader('Content-Type', 'application/json');
+
+  const final = {
+    reqData: data,
+  };
+
+  res.json(final);
+});
+
+server.use('/stcheck', async (req, res) => {
+  //TODO: ADD AUTH CHECK
+  let data = null;
+
+  await dbMethods.getReqForStatusView(req.body.referenceID).then((resp) => {
+    data = resp;
+  });
+  res.setHeader("content-type" ,"application/arraybuffer");
+
+  const final = {
+    reqData: data,
+  };
+
+  res.json(final);
+});
+
 //
 // Register server-side rendering middleware
 // -----------------------------------------------------------------------------
@@ -87,6 +145,8 @@ server.get('*', async (req, res, next) => {
     next(err);
   }
 });
+
+
 
 // Handle POST requests
 var request = require('./routes/request');
