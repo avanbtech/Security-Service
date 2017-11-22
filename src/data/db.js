@@ -10,6 +10,7 @@ const Conn = new Sequelize(
   {
     dialect: 'mysql',
     host: 'localhost', //VM IP ADDRESS: '142.58.21.62',
+    logging: false,
   }
 );
 
@@ -279,13 +280,13 @@ Guard.hasMany(Security,  {foreignKey: "groupID", sourceKey: "groupID"});
 
 // TODO: REPLACE FORCE PARAM
 //FOR DEPLOYING
-Conn.sync({ force: false});
+// Conn.sync({ force: false});
 
 //FOR TESTING
-// Conn.sync({ force: true}).then(() => {
-//   findRemoveSync('ExportedCSVs/', {files: '*.*'});
-//   findRemoveSync('ExportedPDFs/', {files: '*.*'});
-//   console.log('Cleaned up temporary export directories.');
-// });
+Conn.sync({ force: true}).then(() => {
+  findRemoveSync('ExportedCSVs/', {files: '*.*'});
+  findRemoveSync('ExportedPDFs/', {files: '*.*'});
+  console.log('Cleaned up temporary export directories.');
+});
 
 export default Conn;

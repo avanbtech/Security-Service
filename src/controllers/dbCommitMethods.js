@@ -122,7 +122,7 @@ function createGuards(req, grpID) {
   let x;
   const allGuards = [];
 
-  console.log(req.body);
+  console.log(`REQ BODY: ${req.body}`);
 
   // TODO: ADD ERROR CHECKING WHEN NO GUARD IS ADDED TO THE REQUEST
 
@@ -138,7 +138,7 @@ function createGuards(req, grpID) {
         telephone: req.body.phone[x],
         accessID: req.body.requestID,
         remarks: req.body.remarks[x + 1],
-        grdType: "null in DBCommitMethodsFile",
+        grdType: req.body.grdType[x],
       });
     }
   } else {
@@ -152,6 +152,7 @@ function createGuards(req, grpID) {
       telephone: req.body.phone,
       accessID: req.body.requestID,
       remarks: req.body.remarks[1],
+      grdType: req.body.grdType,
     });
   }
 

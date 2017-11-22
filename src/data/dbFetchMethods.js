@@ -134,7 +134,7 @@ async function getGuardsForRequest(reqID) {
   supervisor preparedBy remarks guardRegularRate guardRegularHours guardOTRate \
   guardOTHours scspRegularRate scspRegularHours scspOTRate scspOTHours totalGuardBillable \
   totalSCSPBillable guards {groupID accessID dispatchNumber location startDate \
-  endDate guardname telephone remarks}}}}`;
+  endDate guardname telephone grdType remarks}}}}`;
 
   const client = new GraphQLClient(DBUrl, { headers: {} });
   await client.request(query).then((data) => {

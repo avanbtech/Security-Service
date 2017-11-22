@@ -33,7 +33,7 @@ Total SCSP Billable Hours: ${securityGrp.totalSCSPBillable}\n`;
 function parseGuardData(guard, num) {
   const header = `Guard #${num}\n`;
   const adminInfo = `Security Group: ${guard.groupID}\n`;
-  const guardInfo = `     Name: ${guard.guardname}\n     Dispatch Number: ${guard.dispatchNumber}\n`;
+  const guardInfo = `     Type: ${guard.grdType}\n     Name: ${guard.guardname}\n     Dispatch Number: ${guard.dispatchNumber}\n`;
   const phn = `     Phone Number: ${guard.telephone}\n`;
   const locInfo = `     Location: ${guard.location}\n`;
   const dates = `     Start Date: ${guard.startDate.split('T')[0]}     End Date: ${guard.endDate.split('T')[0]}\n`;
