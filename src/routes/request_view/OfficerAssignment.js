@@ -28,6 +28,8 @@ class OfficerAssignment extends Component {
       nameError: '',
       location: props.location === undefined ? '' : props.location,
       locationError:'',
+      guardType: props.guardType === undefined ? 'Regular' : props.guardType,
+      guardTypeStr: props.guardType === undefined ? 'Regular' : props.guardType,
       dispatchNumber: props.dispatchNumber === undefined ? '' : props.distpachNumber,
       dispatchNumberError:'',
       startDate: props.startDate === undefined ? new Date() : props.startDate,
