@@ -3,6 +3,8 @@ import { Button,  Form, Message } from 'semantic-ui-react'
 import TextField from "material-ui/TextField"
 import DatePicker from "material-ui/DatePicker"
 import s from './RequestView.scss'
+import SelectField from 'material-ui/SelectField';
+import MenuItem from 'material-ui/MenuItem';
 
 const styles = {
   customWidth: {
@@ -28,6 +30,8 @@ class OfficerAssignment extends Component {
       nameError: '',
       location: props.location === undefined ? '' : props.location,
       locationError:'',
+      guardType: props.guardType === undefined ? 'Regular' : props.guardType,
+      guardTypeStr: props.guardType === undefined ? 'Regular' : props.guardType,
       dispatchNumber: props.dispatchNumber === undefined ? '' : props.distpachNumber,
       dispatchNumberError:'',
       startDate: props.startDate === undefined ? new Date() : props.startDate,
@@ -54,6 +58,11 @@ class OfficerAssignment extends Component {
     this.setState({
       endDate: date,
     });
+  };
+
+  handleChangeGuardType = (event, index, value) => {
+    this.setState({guardType: value});
+    this.setState({guardTypeStr: value});
   };
 
   validate = () => {
@@ -155,6 +164,21 @@ class OfficerAssignment extends Component {
               onChange = {e => this.change(e)}
               value = {this.state.location}
               errorText={this.state.locationError}/>
+          </Form.Field>
+          <Form.Field required>
+            <label> Guard Type </label>
+            <SelectField
+              maxHeight={300}
+              name='guardType'
+              value={this.state.guardType}
+              onChange={this.handleChangeGuardType}
+              style={styles.customWidth}
+              autoWidth={true}
+            >
+              <MenuItem key={1} primaryText={'Regular'} value={'Regular' } />
+              <MenuItem key={2} primaryText={'Special'} value={'Special' } />
+              <MenuItem key={3} primaryText={'SSEP'} value={'SSEP' } />
+            </SelectField>
           </Form.Field>
         </Form.Group>
         <Form.Group widths='equal'>
