@@ -31,7 +31,7 @@ class OfficerAssignment extends Component {
       location: props.location === undefined ? '' : props.location,
       locationError:'',
       guardType: props.guardType === undefined ? 'Regular' : props.guardType,
-      guardTypeStr: props.guardType === undefined ? 'Regular' : props.guardType,
+      grdType: props.guardType === undefined ? 'Regular' : props.guardType,
       dispatchNumber: props.dispatchNumber === undefined ? '' : props.distpachNumber,
       dispatchNumberError:'',
       startDate: props.startDate === undefined ? new Date() : props.startDate,
@@ -62,7 +62,7 @@ class OfficerAssignment extends Component {
 
   handleChangeGuardType = (event, index, value) => {
     this.setState({guardType: value});
-    this.setState({guardTypeStr: value});
+    this.setState({grdType: value});
   };
 
   validate = () => {
@@ -179,6 +179,7 @@ class OfficerAssignment extends Component {
               <MenuItem key={2} primaryText={'Special'} value={'Special' } />
               <MenuItem key={3} primaryText={'SSEP'} value={'SSEP' } />
             </SelectField>
+            <Form.Input type="hidden" name="grdType" value={this.state.grdType} />
           </Form.Field>
         </Form.Group>
         <Form.Group widths='equal'>
