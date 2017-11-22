@@ -49,7 +49,7 @@ class OfficerAssignment extends Component {
     });
   };
 
-  handleChangeDistribution = (event, index, value) => {
+  handleChangeGuardType = (event, index, value) => {
     this.setState({guardType: value});
     this.setState({guardTypeStr: value});
   };
