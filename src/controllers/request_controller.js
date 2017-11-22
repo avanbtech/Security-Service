@@ -1,7 +1,9 @@
-import db from '../core/db';
-import exportMethod from '../PyScripts/childProcPy'
+import db from '../data/db';
+import exportMethods from '../PyScripts/childProcPy'
 import nodemailer from 'nodemailer';
 import xoauth2 from 'xoauth2';
+
+import dbMethods from './dbCommitMethods';
 
 let transporter = nodemailer.createTransport({
   service: 'gmail',
@@ -15,104 +17,6 @@ let transporter = nodemailer.createTransport({
     rejectUnauthorized:false
   }
 });
-
-
-var NUM = '0000';
-var YEAR = '00';
-
-function uniqueID() {
-  var d = new Date();
-  var abbrevYear = d.getFullYear().toString().slice(-2);
-
-  var oldYear = parseInt(YEAR);
-  abbrevYear = parseInt(abbrevYear);
-
-  if (oldYear < abbrevYear) {
-    YEAR = abbrevYear.toString();
-    NUM = '0000';
-  }
-
-  return String(abbrevYear) + '-' + IncNum();
-}
-
-function IncNum() {
-  var int_num = parseInt(NUM);
-
-  if (int_num !== null && int_num < 10000) {
-    int_num += 1;
-  }
-
-  NUM = String(int_num);
-
-  while (NUM.length < 4) {
-    NUM = '0' + NUM;
-  }
-  return NUM;
-}
-
-function getCurrDate() {
-  const today = new Date();
-
-  const year = today.getFullYear();
-  const month = today.getMonth();
-  const day = today.getDay();
-
-  return year + '-' + month + '-' + day;
-}
-
-function getCommonDBID() {
-  const date = new Date();
-
-  return parseInt(String(date.getTime()).slice(-7) + String(date.getMinutes()));
-}
-
-function commitToDB(req) {
-  const commonDbID = getCommonDBID();
-  const uni_ID = uniqueID();
-
-  db.models.user.create({
-    dbID: commonDbID,
-    sfuBCID: req.body.id,
-    department: req.body.department,    // TODO: NO WAY TO GET THE DEPT, ADD IT
-    requestBy: req.body.requestBy,
-    phone: req.body.phone,
-    fax: req.body.fax,
-    email: req.body.email,
-    licensed: req.body.licensed,
-  });
-
-  db.models.event.create({
-    dbID: commonDbID,
-    nameOfEvent: req.body.nameOfEvent,
-    location: req.body.location,
-    numberOfattendees: req.body.numberOfAttendees,
-    eventDates: [req.body.eventDate],   // TODO: CONFIRM DATES ARE JOINED BY ';'
-    times: req.body.time,
-  });
-
-  db.models.request.create({
-    accessID: uni_ID,
-    dbID: commonDbID,
-    eventDbID: commonDbID,
-    userDbID: commonDbID,
-    status: 'Pending',
-    statusDate: new Date(),
-    date: req.body.date,
-    details: req.body.detail,
-    accountCode: req.body.accountCode,
-    invoice: 99999,
-    authorizedBy: req.body.authorizedBy,
-    authorizedID: req.body.authorizedID,
-    authorizedDate: req.body.authorizedDate,
-    authorizedPhone: req.body.authorizedPhone,
-  });
-
-  // Un comment to make a query to the DB
-  // makeReq();
-
-  // Un comment to run the PDF saving python script
-  // saveToPDF(uni_ID);
-}
 
 function sendemailToUser(req) {
   let mailOptions = {
@@ -128,7 +32,7 @@ function sendemailToUser(req) {
     console.log("sent");
     console.log(info);
    });
-};
+}
 
 function sendemailToUserWithRejection(req) {
   let mailOptions = {
@@ -144,7 +48,7 @@ function sendemailToUserWithRejection(req) {
     console.log("sent");
     console.log(info);
    });
-};
+}
 
 function sendemailToUserWithApproval(req) {
   let mailOptions = {
@@ -160,7 +64,7 @@ function sendemailToUserWithApproval(req) {
     console.log("sent");
     console.log(info);
    });
-};
+}
 
 function checkNotEmpty(req) {
   req.checkBody('date', 'date name must be specified').notEmpty();
@@ -180,7 +84,7 @@ function checkNotEmpty(req) {
   req.checkBody('id', 'id name must be specified').notEmpty();
   req.checkBody('numberOfAttendees', 'numberOfAttendees name must be specified').notEmpty();
   req.checkBody('time', 'time name must be specified').notEmpty();
-};
+}
 
 function filterInput(req) {
   req.filter('date').escape();
@@ -217,13 +121,13 @@ function filterInput(req) {
   req.filter('numberOfAttendees').trim();
   req.filter('time').escape();
   req.filter('time').trim();
-};
+}
 
 exports.request_post = function (req, res, next) {
   checkNotEmpty(req);
   filterInput(req);
 
-  commitToDB(req);
+  dbMethods.commitRequestToDB(req);
   sendemailToUser(req);
 
   res.redirect('/');
@@ -233,18 +137,17 @@ exports.request_view = function () {
   console.log('abcd');
 };
 
-function commitApproveToDB(req) {
-  //TODO: approval details should be saved to database
 
-  // updating request status
-  db.models.request.update(
-    {status : 'Accepted'},
-    {where: {accessID: req.body.requestID}},
-  );
-}
+
 exports.get_accessID = function (req, res, next) {
-  console.log(req);
-}
+  req.checkBody('referenceID', 'Reference ID must be specified').notEmpty();
+  req.filter('referenceID').escape();
+  req.filter('referenceID').trim();
+
+  res.redirect('/StatusForm/' + req.body.referenceID);
+  console.log(req.body.referenceID);
+};
+
 exports.request_approve = function (req, res, next) {
   req.filter('requestID').escape();
   req.filter('requestID').trim();
@@ -295,7 +198,7 @@ exports.request_approve = function (req, res, next) {
   req.filter('signature').trim();
 
 
-  commitApproveToDB(req);
+  dbMethods.commitApproveToDB(req);
   sendemailToUserWithApproval(req);
   res.redirect('/ServiceView');
 };
@@ -312,26 +215,35 @@ exports.request_reject = function (req, res, next) {
   ).then(() => {
     res.redirect('/ServiceView');
   });
-
-
 };
 
 exports.check_status = function (req, res, next) {
   req.checkBody('referenceID', 'Reference ID must be specified').notEmpty();
   req.filter('referenceID').escape();
   req.filter('referenceID').trim();
-  console.log(req.body.referenceID);
-
-
 
   res.redirect('/StatusForm');
 };
 
-exports.export_data = function (req, res, next) {
-  // TODO: FOR DEMO ONLY. REMOVE THE EXPORT METHODS.
-  // Export data
-  exportMethod("111", "csv");
-  exportMethod(req.body.referenceID, "pdf");
+exports.export_to_pdf = function (req, res, next) {
 
-  res.redirect('/');
-}
+  exportMethods.exportReqToPDF(req.body.referenceID);
+
+  // Have to wait about 10 seconds to let the python script finish
+  // running and then locate the file in the ExportedPDFs directory
+  // Couldn't find a method to sleep thread in JS (wtf)
+  setTimeout(() => {
+    let filePath = exportMethods.locateFilePath(req.body.referenceID, false);
+
+    if (filePath) {
+      console.log(`File path was: ${filePath}`);
+
+      res.download(filePath.toString(), 'request.pdf');
+    } else {
+      console.log("INVALID PATH");
+      // TODO: SHOW AN ALERT INSTEAD OF A REDIRECTION
+      res.redirect("/");
+    }
+  }, 10000);
+};
+

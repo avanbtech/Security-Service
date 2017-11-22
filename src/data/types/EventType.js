@@ -44,7 +44,7 @@ const Event = new GraphQLObjectType({
         },
       },
       times: {
-        type: GraphQLInt,
+        type: GraphQLString,
         resolve(event) {
           return event.times;
         },
@@ -52,9 +52,9 @@ const Event = new GraphQLObjectType({
       request: {
         type: requestType,
         resolve(event) {
-          return event.getRequest()
-        }
-      }
+          return event.getRequest();
+        },
+      },
     };
   },
 });

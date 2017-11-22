@@ -79,7 +79,7 @@ def main():
         driver = webdriver.Chrome("./chromedriver")
 
 
-    driver.get("localhost:3001/Customer")
+    driver.get("http://192.168.0.32/Customer")
 
     date = driver.find_element_by_name("date")
     date.click()

@@ -50,46 +50,20 @@ class RequestApprovalForm extends Component {
     signature:'',
     signatureError:'',
     remarks:'',
-    guardForms:[{
-      id:0}]
+    officerObjects:[
+      {id: 0, toBeRendered: true, instance: null}
+    ],
+    lastOfficerID:0
   }
 
-  removeGuard = (e) => {
-    e.preventDefault();
-    const newGuardList = this.state.guardForms;
-    const guardID = newGuardList.length - 1;
-    if(guardID > -1 && guardID < newGuardList.length){
-      newGuardList.splice(guardID, 1);
-      let index = 0;
-      newGuardList.map((item) => {
-        item.id = index;
-        index++;
-      });
-      this.setState({
-        guardForms: newGuardList
-      });
-    }
-
-  };
-
-  addGuard = e => {
-    const newGuardList = this.state.guardForms;
-    let index = this.state.guardForms.length;
-    newGuardList.push({id:index});
-    this.setState({
-      guardForms: newGuardList
-    });
-    e.preventDefault();
-  }
-
-  onSubmit = e =>{
+  onSubmit = e => {
     const error = this.validate();
-    if (error){
+    if (error) {
       e.preventDefault();
     }
   };
 
-  change = e =>{
+  change = e => {
     this.setState({
       [e.target.name]: e.target.value
     });
@@ -126,7 +100,7 @@ class RequestApprovalForm extends Component {
     let isError = false;
     const errors = {};
 
-    if(this.state.supervisor.replace('/\s/g','').length == 0){
+    if(this.state.supervisor.replace('/\s/g','').length == 0) {
       isError = true;
       errors.supervisorError = "This field cannot be empty";
     }
@@ -134,7 +108,7 @@ class RequestApprovalForm extends Component {
       errors.supervisorError = "";
     }
 
-    if(this.state.distributionList.replace('/\s/g','').length == 0){
+    if(this.state.distributionList.replace('/\s/g','').length == 0) {
       isError = true;
       errors.distributionError = "This field cannot be empty";
     }
@@ -142,7 +116,7 @@ class RequestApprovalForm extends Component {
       errors.distributionError = "";
     }
 
-    if (isNaN(this.state.guardRegularRate) || this.state.guardRegularRate.replace(/\s/g, "").length == 0){
+    if (isNaN(this.state.guardRegularRate) || this.state.guardRegularRate.replace(/\s/g, "").length == 0) {
       isError = true;
       errors.guardRegularRateError = 'Guard regular rate should be numeric';
     }
@@ -150,7 +124,7 @@ class RequestApprovalForm extends Component {
       errors.guardRegularRateError = '';
     }
 
-    if (isNaN(this.state.guardRegularHours) || this.state.guardRegularHours.replace(/\s/g, "").length == 0){
+    if (isNaN(this.state.guardRegularHours) || this.state.guardRegularHours.replace(/\s/g, "").length == 0) {
       isError = true;
       errors.guardRegularHoursError = 'Guard regular hours should be numeric';
     }
@@ -158,7 +132,7 @@ class RequestApprovalForm extends Component {
       errors.guardRegularHoursError = '';
     }
 
-    if (isNaN(this.state.guardOTRate) || this.state.guardOTRate.replace(/\s/g, "").length == 0){
+    if (isNaN(this.state.guardOTRate) || this.state.guardOTRate.replace(/\s/g, "").length == 0) {
       isError = true;
       errors.guardOTRateError = 'Guard overtime rate should be numeric';
     }
@@ -166,7 +140,7 @@ class RequestApprovalForm extends Component {
       errors.guardOTRateError = '';
     }
 
-    if (isNaN(this.state.guardOTHours) || this.state.guardOTHours.replace(/\s/g, "").length == 0){
+    if (isNaN(this.state.guardOTHours) || this.state.guardOTHours.replace(/\s/g, "").length == 0) {
       isError = true;
       errors.guardOTHoursError = 'Guard overtime hours should be numeric';
     }
@@ -174,7 +148,7 @@ class RequestApprovalForm extends Component {
       errors.guardOTHoursError = '';
     }
 
-    if (isNaN(this.state.scspRegularRate) || this.state.scspRegularRate.replace(/\s/g, "").length == 0){
+    if (isNaN(this.state.scspRegularRate) || this.state.scspRegularRate.replace(/\s/g, "").length == 0) {
       isError = true;
       errors.scspRegularRateError = 'SCSP regular rate should be numeric';
     }
@@ -182,7 +156,7 @@ class RequestApprovalForm extends Component {
       errors.scspRegularRateError = '';
     }
 
-    if (isNaN(this.state.scspRegularHours) || this.state.scspRegularHours.replace(/\s/g, "").length == 0){
+    if (isNaN(this.state.scspRegularHours) || this.state.scspRegularHours.replace(/\s/g, "").length == 0) {
       isError = true;
       errors.scspRegularHoursError = 'SCSP regular hours should be numeric';
     }
@@ -190,7 +164,7 @@ class RequestApprovalForm extends Component {
       errors.scspRegularHoursError = '';
     }
 
-    if (isNaN(this.state.scspOTRate) || this.state.scspOTRate.replace(/\s/g, "").length == 0){
+    if (isNaN(this.state.scspOTRate) || this.state.scspOTRate.replace(/\s/g, "").length == 0) {
       isError = true;
       errors.scspOTRateError = 'SCSP overtime rate should be numeric';
     }
@@ -198,7 +172,7 @@ class RequestApprovalForm extends Component {
       errors.scspOTRateError = '';
     }
 
-    if (isNaN(this.state.scspOTHours) || this.state.scspOTHours.replace(/\s/g, "").length == 0){
+    if (isNaN(this.state.scspOTHours) || this.state.scspOTHours.replace(/\s/g, "").length == 0) {
       isError = true;
       errors.scspOTHoursError = 'SCSP overtime hours should be numeric';
     }
@@ -206,7 +180,7 @@ class RequestApprovalForm extends Component {
       errors.scspOTHoursError = '';
     }
 
-    if (isNaN(this.state.totalGuardBillable) || this.state.totalGuardBillable.replace(/\s/g, "").length == 0){
+    if (isNaN(this.state.totalGuardBillable) || this.state.totalGuardBillable.replace(/\s/g, "").length == 0) {
       isError = true;
       errors.totalGuardBillableError = 'Total guard billable should be numeric';
     }
@@ -214,7 +188,7 @@ class RequestApprovalForm extends Component {
       errors.totalGuardBillableError = '';
     }
 
-    if (isNaN(this.state.totalSCSPBillable) || this.state.totalSCSPBillable.replace(/\s/g, "").length == 0){
+    if (isNaN(this.state.totalSCSPBillable) || this.state.totalSCSPBillable.replace(/\s/g, "").length == 0) {
       isError = true;
       errors.totalSCSPBillableError = 'Total guard billable should be numeric';
     }
@@ -222,7 +196,7 @@ class RequestApprovalForm extends Component {
       errors.totalSCSPBillableError = '';
     }
 
-    if(this.state.preparedBy.replace('/\s/g','').length == 0){
+    if (this.state.preparedBy.replace('/\s/g','').length == 0){
       isError = true;
       errors.preparedByError = "This field cannot be empty";
     }
@@ -230,7 +204,7 @@ class RequestApprovalForm extends Component {
       errors.preparedByError = "";
     }
 
-    if(this.state.signature.replace('/\s/g','').length == 0){
+    if (this.state.signature.replace('/\s/g','').length == 0){
       isError = true;
       errors.signatureError = "This field cannot be empty";
     }
@@ -238,15 +212,89 @@ class RequestApprovalForm extends Component {
       errors.signatureError = "";
     }
 
+    let hasChildError = false;
+    this.state.officerObjects.map(officer => {
+      if (officer.instance !== null) {
+        hasChildError = hasChildError || officer.instance.validate();
+      }
+    });
+    isError = isError || hasChildError;
     this.setState({
         ...this.state,
-        ...errors
+        ...errors,
     });
+
     return isError;
   };
 
+  removeGuard = (officerId, e) => {
+    e.preventDefault();
+    const newOfficerObjects = this.state.officerObjects;
+    let indexToBeRemoved = -1;
+    for (let i = 0; i < newOfficerObjects.length; i++) {
+      if (newOfficerObjects[i].id === officerId) {
+        indexToBeRemoved = i;
+        break;
+      }
+    }
+    if (indexToBeRemoved > -1) {
+      for (let j = indexToBeRemoved; j < newOfficerObjects.length - 1; j++) {
+        newOfficerObjects[j].instance.setState({
+          ...newOfficerObjects[j + 1].instance.state,
+        });
+      }
+      newOfficerObjects.splice(newOfficerObjects.length - 1, 1);
+      this.setState({
+        officerObjects: newOfficerObjects,
+      });
+    }
+  };
+
+  addGuard = e => {
+    e.preventDefault();
+    ++this.state.lastOfficerID;
+    // adding a new officer
+    const newOfficerObjects = this.state.officerObjects;
+    newOfficerObjects.push({
+      id: this.state.lastOfficerID,
+      toBeRendered: true,
+      instance: null,
+    });
+    this.setState({
+      officerObjects: newOfficerObjects
+    });
+  }
+
   render() {
     const { value } = this.state;
+    let officerRows = [];
+    for (let i = 0; i < this.state.officerObjects.length; i++) {
+      const currentOfficerObject = this.state.officerObjects[i];
+      officerRows.push(
+        <div>
+          <table className={s.removeOfficer}>
+            <tbody>
+              <tr>
+                <td><h4>Security Officer/SCSP Information</h4></td>
+                <td>
+                  <a className={s.removeAction} href="javascript:void(0)"
+                     onClick={e => this.removeGuard(this.state.officerObjects[i].id, e)}>
+                    Remove this guard
+                  </a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <OfficerAssignment
+            ref={
+              instance => {
+                currentOfficerObject.instance = instance;
+              }
+            }
+          />
+        </div>
+      );
+    }
     return (
       <Form action="/ServiceView/approve" method="post">
         <br/>
@@ -440,24 +488,13 @@ class RequestApprovalForm extends Component {
             />
           </Form.Field>
         </Form.Group>
-        {
-          this.state.guardForms.map((item) => (
-              <OfficerAssignment/>
-          ))
-        }
+        {officerRows}
         <div className={s.action_container}>
           <Form.Button
             onClick = {e => this.addGuard(e)}>Add Guard</Form.Button>
         </div>
         <input type='hidden' name='requestID' value={this.props.requestID}/>
         <input type='hidden' name='email' value={this.props.email}/>
-        {
-          this.state.guardForms.length > 0 &&
-          <div className={s.action_container}>
-            <Form.Button
-              onClick = {e => this.removeGuard(e)}>Remove Guard</Form.Button>
-          </div>
-        }
         <Form.Button
           onClick = {e => this.onSubmit(e)}>Submit</Form.Button>
       </Form>

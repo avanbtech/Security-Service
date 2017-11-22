@@ -24,8 +24,8 @@ currTime = time.localtime()
 if not (os.path.exists("ExportedCSVs/")):
     os.makedirs("ExportedCSVs/")
 
-outPath = 'ExportedCSVs/' + str(currTime.tm_year) + '_' + str(currTime.tm_mon) + '_' + str(currTime.tm_mday) + '_' + 'dataexport.csv'
-
+# outPath = 'ExportedCSVs/' + str(currTime.tm_year) + '_' + str(currTime.tm_mon) + '_' + str(currTime.tm_mday) + '_' + 'dataexport.csv'
+outPath = 'ExportedCSVs/' + 'dataexport.csv'
 f = open(outPath, 'w')
 w = csv.writer(f)
 w.writerow(df)
