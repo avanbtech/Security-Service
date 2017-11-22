@@ -20,10 +20,10 @@ let transporter = nodemailer.createTransport({
 
 function sendemailToUser(req) {
   let mailOptions = {
-    from: 'cmpt373gammafrom@gmail.com',
+    from: 'SFUsecurity@sfu.ca',
     to: req.body.email,
     subject: 'Now we receive your request',
-    text: 'We have received your request, we will quickly give you feedback once it gets processed',
+    text: 'We have received your request, we will quickly give you feedback once it gets processed' + req.body.requestID,
   };
   transporter.sendMail(mailOptions, (error, info)=>{
      if(error){
