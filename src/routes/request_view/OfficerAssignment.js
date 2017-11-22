@@ -155,18 +155,21 @@ class OfficerAssignment extends Component {
               value = {this.state.location}
               errorText={this.state.locationError}/>
           </Form.Field>
-          <SelectField
-            maxHeight={300}
-            name='guardType'
-            value={this.state.guardType}
-            onChange={this.handleChangeGuardType}
-            style={styles.customWidth}
-            autoWidth={true}
-          >
-            <MenuItem key={1} primaryText={'Regular'} value={'Regular' } />
-            <MenuItem key={2} primaryText={'Special'} value={'Special' } />
-            <MenuItem key={3} primaryText={'SSEP'} value={'SSEP' } />
-          </SelectField>
+          <Form.Field required>
+            <label> Guard Type </label>
+            <SelectField
+              maxHeight={300}
+              name='guardType'
+              value={this.state.guardType}
+              onChange={this.handleChangeGuardType}
+              style={styles.customWidth}
+              autoWidth={true}
+            >
+              <MenuItem key={1} primaryText={'Regular'} value={'Regular' } />
+              <MenuItem key={2} primaryText={'Special'} value={'Special' } />
+              <MenuItem key={3} primaryText={'SSEP'} value={'SSEP' } />
+            </SelectField>
+          </Form.Field>
         </Form.Group>
         <Form.Group widths='equal'>
           <Form.Field required>
