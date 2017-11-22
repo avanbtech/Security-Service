@@ -18,6 +18,8 @@ class OfficerAssignment extends Component {
     nameError:'',
     location:'',
     locationError:'',
+    guardType:'Regular',
+    guardTypeStr:'Regular',
     dispatchNumber:'',
     dispatchNumberError:'',
     startDate:'',
