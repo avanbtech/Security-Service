@@ -177,6 +177,10 @@ const Guard = Conn.define('guard', {
     type: Sequelize.STRING,
     allowNull: true,
   },
+  grdType: {
+    type: Sequelize.STRING,
+    allowNull: false,
+  },
 }, {
   indexes: [
     {

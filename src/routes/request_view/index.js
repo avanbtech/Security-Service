@@ -10,6 +10,8 @@ export const action = async (state) => {
   if('approved' in state.query && state.query.approved == 'yes'){
     approved = true;
   }
+
+  //TODO: MOVE THIS CALL THROUGH SERVER
   let res = await dbMethods.getReqByID(state.params.id);
   let rows = [];
   return <RequestView
