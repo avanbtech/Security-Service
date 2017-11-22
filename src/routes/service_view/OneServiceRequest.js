@@ -4,7 +4,7 @@ import { Table } from 'semantic-ui-react'
 export default class OneServiceRequest extends Component {
   render(){
     let exportGuardList = <p></p>;
-    if(this.props.serviceRequest.status === 'Approve') {
+    if(this.props.serviceRequest.status === 'Accepted') {
       exportGuardList =
         <a href={'/ServiceView/export_guard_list?id=' + this.props.serviceRequest.requestId}>
           PDF
