@@ -68,6 +68,12 @@ const Guard = new GraphQLObjectType({
           return guard.remarks;
         },
       },
+      grdType: {
+        type: GraphQLString,
+        resolve(guard) {
+          return guard.grdType;
+        },
+      },
       request: {
         type: new GraphQLList(Security),
         resolve(guard) {

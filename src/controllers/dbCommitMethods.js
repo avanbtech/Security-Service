@@ -138,6 +138,7 @@ function createGuards(req, grpID) {
         telephone: req.body.phone[x],
         accessID: req.body.requestID,
         remarks: req.body.remarks[x + 1],
+        grdType: "null in DBCommitMethodsFile",
       });
     }
   } else {

@@ -131,6 +131,9 @@ const GuardArgs = {
   remarks: {
     type: GraphQLString,
   },
+  grdType: {
+    type: GraphQLString,
+  },
 };
 
 const SecurityArgs = {
