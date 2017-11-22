@@ -19,6 +19,7 @@ export default class OneServiceRequest extends Component {
         <Table.Cell>{this.props.serviceRequest.sfu_id}</Table.Cell>
         <Table.Cell>{this.props.serviceRequest.location}</Table.Cell>
         <Table.Cell>{this.props.serviceRequest.event_date}</Table.Cell>
+        <Table.Cell>{exportGuardList}</Table.Cell>
       </Table.Row>
     );
   }
