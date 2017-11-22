@@ -13,18 +13,29 @@ const styles = {
 
 
 class OfficerAssignment extends Component {
-  state = {
-    name:'',
-    nameError:'',
-    location:'',
-    locationError:'',
-    dispatchNumber:'',
-    dispatchNumberError:'',
-    startDate:'',
-    endDate:'',
-    phone:'',
-    phoneError:'',
-    remarks:'',
+  constructor(props) {
+    super(props);
+
+    /*
+    const startDate = new Date(props.startDate);
+    startDate.setHours(0, 0, 0, 0);
+    const endDate = new Date(props.endDate);
+    endDate.setHours(0, 0, 0, 0);
+    */
+
+    this.state = {
+      name: props.name === undefined ? '' : props.name,
+      nameError: '',
+      location: props.location === undefined ? '' : props.location,
+      locationError:'',
+      dispatchNumber: props.dispatchNumber === undefined ? '' : props.distpachNumber,
+      dispatchNumberError:'',
+      startDate: props.startDate === undefined ? new Date() : props.startDate,
+      endDate: props.endDate === undefined ? new Date() : props.endDate,
+      phone: props.phone === undefined ? '' : props.phone,
+      phoneError:'',
+      remarks: props.remarks === undefined ? '' : props.remarks,
+    };
   }
 
   change = e =>{
@@ -124,7 +135,6 @@ class OfficerAssignment extends Component {
     const { value } = this.state;
     return (
       <div className={s.officer}>
-        <h4>Security Officer/SCSP Information</h4>
         <Form.Group widths='equal'>
           <Form.Field required>
             <label> Dispatch number </label>
