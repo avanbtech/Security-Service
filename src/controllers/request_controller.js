@@ -1,3 +1,5 @@
+"use strict";
+
 import db from '../data/db';
 import exportMethods from '../PyScripts/childProcPy'
 import nodemailer from 'nodemailer';
@@ -5,66 +7,75 @@ import xoauth2 from 'xoauth2';
 
 import dbMethods from './dbCommitMethods';
 
+
+//Sets up the mailing server given parameters
+const EMAILSERVICE= 'gmail';
+const EMAILADDR = 'cmpt373gammafrom@gmail.com';
+const EMAILADDR_PASSWORD = 'Cmpt373gamma';
+const EMAIL_SERVER_PORT = 25;
+
 let transporter = nodemailer.createTransport({
-  service: 'gmail',
+  service: EMAILSERVICE,
   secure: false,
-  port: 25,
+  port: EMAIL_SERVER_PORT,
   auth: {
-      user: 'cmpt373gammafrom@gmail.com',
-      pass: 'Cmpt373gamma'
+      user: EMAILADDR,
+      pass: EMAILADDR_PASSWORD,
   },
   tls:{
     rejectUnauthorized:false
   }
 });
 
+//Base function that sends different types of emails using EMAILSERVICE address
+//Takes req, subject line, and email contents as arguments.
+function sendMailTemplate(req, subjectLine, emailContents) {
+  let mailOptions = {
+    from: EMAILSERVICE,
+    to: req.body.email,
+    subject: subjectLine,
+    text: emailContents,
+  };
+  transporter.sendMail(mailOptions, (error, info)=>{
+     if(error){
+        console.log(error);
+    }
+    console.log("Email sent from sendMailTemplate successfully!");
+    console.log(info);
+   });
+}
+
+//Sends an email to the user
 function sendemailToUser(req) {
-  let mailOptions = {
-    from: 'cmpt373gammafrom@gmail.com',
-    to: req.body.email,
-    subject: 'Now we receive your request',
-    text: 'We have received your request, we will quickly give you feedback once it gets processed',
-  };
-  transporter.sendMail(mailOptions, (error, info)=>{
-     if(error){
-        console.log(error);
-    }
-    console.log("sent");
-    console.log(info);
-   });
+
+const emailSubject = 'We have recieved your request!';
+const emailText = 'We have received your security services request, we will get back to you as soon as it is processed.';
+
+  sendMailTemplate(req, emailSubject, emailText);
+  console.log("sendemailToUser function called successfully!");
 }
 
-function sendemailToUserWithRejection(req) {
-  let mailOptions = {
-    from: 'cmpt373gammafrom@gmail.com',
-    to: req.body.email,
-    subject: 'We reject your request',
-    text: 'We have rejected your request since your request does not meet requirements',
-  };
-  transporter.sendMail(mailOptions, (error, info)=>{
-     if(error){
-        console.log(error);
-    }
-    console.log("sent");
-    console.log(info);
-   });
-}
-
+//Sends an email to the user approving their security request
 function sendemailToUserWithApproval(req) {
-  let mailOptions = {
-    from: 'cmpt373gammafrom@gmail.com',
-    to: req.body.email,
-    subject: 'We approve your request',
-    text: 'We have approved your request, your request will quickly proceed to next step',
-  };
-  transporter.sendMail(mailOptions, (error, info)=>{
-     if(error){
-        console.log(error);
-    }
-    console.log("sent");
-    console.log(info);
-   });
+
+  const emailSubject = 'We have approved your request.';
+  const emailText = 'We have approved your security request. It will now be forwarded into the next step of the process!';
+
+    sendMailTemplate(req, emailSubject, emailText);
+    console.log("sendemailToUserWithApproval function called successfully!");
 }
+
+//Sends an email to the user rejecting their security request
+function sendemailToUserWithRejection(req) {
+
+  const emailSubject = 'We have rejected your request...';
+  const emailText = 'We have rejected your security request because your request does not meet our requirements.';
+
+    sendMailTemplate(req, emailSubject, emailText);
+    console.log("sendemailToUserWithRejection function called successfully!");
+}
+
+
 
 function checkNotEmpty(req) {
   req.checkBody('date', 'date name must be specified').notEmpty();
@@ -132,12 +143,6 @@ exports.request_post = function (req, res, next) {
 
   res.redirect('/');
 };
-
-exports.request_view = function () {
-  console.log('abcd');
-};
-
-
 
 exports.get_accessID = function (req, res, next) {
   req.checkBody('referenceID', 'Reference ID must be specified').notEmpty();
@@ -246,4 +251,3 @@ exports.export_to_pdf = function (req, res, next) {
     }
   }, 10000);
 };
-
