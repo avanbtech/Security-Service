@@ -8,7 +8,7 @@ In summary, website is deployed at cmpt373-1177g.cmpt.sfu.ca using nginx to reve
 Useful commands:
 
 - sudo su - goes into root mode
-- sudo service restart nginx - necessary to load nginx changes
+- sudo service nginx restart - necessary to load nginx changes
 - sudo cp default /etc/nginx/sites-available (when you are in the nginx-config directory) - updates nginx configuration to what we have in this folder
 - sudo nginx -t - checks if nginx is configured properly
 - screen - starts a new screen session - NOT NECESSARY IF SITE IS ALREADY DEPLOYED
