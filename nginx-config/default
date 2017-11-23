@@ -46,21 +46,11 @@ server {
 
 #Proxies all connections to serviceview through cas first
   location /ServiceView {
-  proxy_pass https://cas.sfu.ca/cas/login?service=https://cmpt373-1177g.cmpt.sfu.ca/ServiceView;
-  proxy_http_version 1.1;
-  proxy_set_header Upgrade $http_upgrade;
-  proxy_set_header Connection 'upgrade';
-  proxy_set_header Host $host;
-  proxy_cache_bypass $http_upgrade;
+  return https://cas.sfu.ca/cas/login?service=https://cmpt373-1177g.cmpt.sfu.ca/ServiceView;
   }
 
     location /ServiceView/ticket=* {
-    proxy_pass https://cmpt373-1177g.cmpt.sfu.ca/ServiceViewAuthWorking;
-    proxy_http_version 1.1;
-    proxy_set_header Upgrade $http_upgrade;
-    proxy_set_header Connection 'upgrade';
-    proxy_set_header Host $host;
-    proxy_cache_bypass $http_upgrade;
+    return https://cmpt373-1177g.cmpt.sfu.ca/ServiceViewAuthWorking;
     }
 
 # Needed to sign our TLS certificate with LetsEncrypt CA
