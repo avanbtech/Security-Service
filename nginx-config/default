@@ -44,15 +44,6 @@ server {
     proxy_cache_bypass $http_upgrade;
   }
 
-#Proxies all connections to serviceview through cas first
-  location /ServiceView {
-  return 301 https://cas.sfu.ca/cas/login?service=https://cmpt373-1177g.cmpt.sfu.ca/ServiceView;
-  }
-
-    location /ServiceView/ticket=* {
-    return 301 https://www.google.ca/woo;
-    }
-
 # Needed to sign our TLS certificate with LetsEncrypt CA
 # At cmpt373-1177g.cmpt.sfu.ca/.well-known/acme-challenge/V-jKuBWx0J0MSrjtWZeZLoEQJhS0m63godq0y7CBZ5k
 # We host a file in our VM's directory: /home/cwzhang/project/nginx-config/
