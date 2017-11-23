@@ -50,7 +50,7 @@ server {
   }
 
     location /ServiceView/ticket=* {
-    return 301 https://cmpt373-1177g.cmpt.sfu.ca/ServiceViewAuthWorking;
+    return 301 https://www.google.ca/woo;
     }
 
 # Needed to sign our TLS certificate with LetsEncrypt CA
