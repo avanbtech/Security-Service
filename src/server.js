@@ -159,6 +159,37 @@ server.use((err, req, res, next) => { // eslint-disable-line no-unused-vars
   }));
 });
 
+var CASAuthentication = require('cas-authentication');
+
+var cas = new CASAuthentication({
+    cas_url         : 'https://cas.sfu.ca/cas/login',
+    service_url     : 'https://cmpt373-1177g.cmpt.sfu.ca',
+    cas_version     : '3.0',
+    renew           : true,
+    is_dev_mode     : false,
+    dev_mode_user   : '',
+    dev_mode_info   : {},
+    session_name    : 'cas_user',
+    session_info    : 'cas_userinfo',
+    destroy_session : false
+});
+
+var session = require('express-session');
+
+// Set up an Express session, which is required for CASAuthentication.
+server.use( session({
+    secret            : 'super secret key',
+    resave            : false,
+    saveUninitialized : true
+}));
+
+
+// Unauthenticated clients will be redirected to the CAS login and then back to
+// this route once authenticated.
+server.get( '/Customer', cas.bounce, function ( req, res ) {
+    res.send( '<html><body>Hello!</body></html>' );
+});
+
 
 //
 // Launch the server
