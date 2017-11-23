@@ -3,19 +3,32 @@
 $brand-color: #ffffff;
 
 .root {
-  background: #d30e0e;
-  color: #fff;
+  margin: 0 auto;
+  max-height: 200px;
+  background-image: url("./textured-red-01-small.png");
 }
 
 .container {
   margin: 0 auto;
   padding: 20px 0;
-  max-width: $max-content-width;
+  max-width: 90%;
+  max-height: 148px;
+  background: linear-gradient(to bottom right, white , #cac6c6);
 }
 
-.container1{
-  height:20px;
-  width:20px;
+.headerstrip{
+  margin-top: 25px;
+  height: 25px;
+  width: -50%;
+  background-color: #3d3935;
+  background-image: url("./header-strip.png");
+  background-repeat: no-repeat;
+}
+
+.headerstripBG{
+  height: 20px;
+  width: 50%;
+  color: black;
 }
 
 .brand {
@@ -24,30 +37,22 @@ $brand-color: #ffffff;
   font-size: 1.75em; /* ~28px */
 }
 
-.brandTxt {
-  margin-left: 10px;
-}
-
 .nav {
   float: right;
-  margin-top: 6px;
+  margin-top: 3px;
 }
 
 .banner {
-  text-align: center;
+  text-align: left;
+  margin-left: 99px;
+  margin-top: 10px;
 }
 
 .bannerTitle {
   margin: 0;
-  padding: 10px;
-  font-weight: normal;
-  font-size: 4em;
-  line-height: 1em;
-}
-
-.bannerDesc {
   padding: 0;
-  color: rgba(255, 255, 255, .5);
-  font-size: 1.25em;
-  margin: 0;
+  font-weight: normal;
+  font-size: 1.6em;
+  color: black;
+  line-height: 1em;
 }

@@ -4,7 +4,6 @@ import s from './App.scss';
 import Header from '../Header';
 import Feedback from '../Feedback';
 import Footer from '../Footer';
-import Main from '../Main'
 
 class App extends Component {
 
@@ -47,11 +46,16 @@ class App extends Component {
 
   render() {
     return !this.props.error ? (
-      <div>
+      <div className={s.root}>
         <Header />
-        {this.props.children}
-        <Feedback />
-        <Footer />
+        <div className={s.wrapper}>
+          {this.props.children}
+          <div className={s.push}></div>
+        </div>
+        <div className={s.footer}>
+          <Feedback />
+          <Footer />
+        </div>
       </div>
     ) : this.props.children;
   }

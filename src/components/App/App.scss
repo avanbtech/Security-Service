@@ -34,6 +34,31 @@ html {
   text-shadow: none;
 }
 
+.root {
+  height: 100%;
+  margin: 0;
+}
+
+.footer {
+  height: 140px;
+  position: fixed;
+  width: 100%;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+
+.push {
+  height: 125px;
+}
+
+.wrapper {
+  min-height: 100%;
+  padding: 20px;
+  margin: 0 auto -140px;
+}
+
+
 /*
  * A better looking default horizontal rule
  */
