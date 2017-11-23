@@ -157,6 +157,12 @@ server.use((err, req, res, next) => { // eslint-disable-line no-unused-vars
   }));
 });
 
+server.get('/Customer', function(req, res, next) {
+
+  console.log('sent a service view!!');
+    res.send('respond with a resource ServiceView');
+});
+
 //
 // Launch the server
 // -----------------------------------------------------------------------------
