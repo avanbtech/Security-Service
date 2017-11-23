@@ -1,14 +1,14 @@
 @import '../variables.scss';
 
 .root {
-  background: #333;
-  color: #fff;
+  background: #4e4944;
+  color: #4e4944;
 }
 
 .container {
   margin: 0 auto;
   padding: 20px 15px;
-  max-width: $max-content-width;
+  max-width: inherit;
   text-align: center;
 }
 

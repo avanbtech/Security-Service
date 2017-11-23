@@ -10,7 +10,6 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import AppBar from 'material-ui/AppBar';
 import FlatButton from 'material-ui/FlatButton';
 
-
 const recentsIcon = <FontIcon className="material-icons">restore</FontIcon>;
 const favoritesIcon = <FontIcon className="material-icons">favorite</FontIcon>;
 const nearbyIcon = <IconLocationOn />;
@@ -24,19 +23,17 @@ class BottomNavigationExampleSimple extends Component {
 
   render() {
     return (
-
 	    <MuiThemeProvider> 
 	     	<Paper zDepth={1}>
-		        <BottomNavigation selectedIndex={this.state.selectedIndex}>
-		          <BottomNavigationItem
-		            label="@CMPT373-GAMMA"
-		            icon={nearbyIcon}
-		            style ={{ left: 9}}
-		          />
-		        </BottomNavigation>
-      		</Paper>
+	        <BottomNavigation selectedIndex={this.state.selectedIndex}>
+	          <BottomNavigationItem
+	            label="@CMPT373-GAMMA"
+	            icon={nearbyIcon}
+	            style ={{ left: 9}}
+	          />
+	        </BottomNavigation>
+      	</Paper>
 	    </MuiThemeProvider> 
-
     );
   }
 }
