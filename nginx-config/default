@@ -46,11 +46,11 @@ server {
 
 #Proxies all connections to serviceview through cas first
   location /ServiceView {
-  return https://cas.sfu.ca/cas/login?service=https://cmpt373-1177g.cmpt.sfu.ca/ServiceView;
+  return 301 https://cas.sfu.ca/cas/login?service=https://cmpt373-1177g.cmpt.sfu.ca/ServiceView;
   }
 
     location /ServiceView/ticket=* {
-    return https://cmpt373-1177g.cmpt.sfu.ca/ServiceViewAuthWorking;
+    return 301 https://cmpt373-1177g.cmpt.sfu.ca/ServiceViewAuthWorking;
     }
 
 # Needed to sign our TLS certificate with LetsEncrypt CA
