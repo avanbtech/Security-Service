@@ -89,7 +89,7 @@ Follow the rest of the instructions in /nginx-config/default comments on how to 
 11) Install screen - sudo apt-get install screen
 Screen is used to keep the node server persistent even after exiting the virtual machine console.
 
-12) Start server permanently: 
+12) Start server permanently:
 - screen
 - cd ~/project
 - sudo npm install
@@ -110,5 +110,3 @@ Extra:
 Db.js password: hooh392
 pythonPath: '/usr/bin/python3',
 scriptPath: '/home/cwzhang/project/src/PyScripts/',
-
-
