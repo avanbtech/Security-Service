@@ -23,7 +23,7 @@ const User = Conn.define('user', {
   },
   sfuBCID: {
     type: Sequelize.STRING,
-    allowNull: false,
+    allowNull: true,
   },
   department: {
     type: Sequelize.STRING,

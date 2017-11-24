@@ -79,7 +79,7 @@ class FormExampleSubcomponentControl extends Component {
     const errors = {};
     var todaysDate = new Date();
     todaysDate.setHours(0,0,0,0);
-    
+
     if (this.state.requestBy.length < 3 ){
       isError = true;
       errors.requestByError = "Full name should be provided";
@@ -95,22 +95,13 @@ class FormExampleSubcomponentControl extends Component {
     else{
       errors.dateError = "";
     }*/
-    if ((Date.parse(this.state.date) - Date.parse(todaysDate)) <= 0 || (this.state.date.length == 0)){
+    if ((Date.parse(this.state.date) - Date.parse(todaysDate)) < 0 || (this.state.date.length == 0)){
       isError = true;
       errors.dateError = "This field cannot be empty";
     }
     else {
       errors.dateError = "";
     }
-
-    if (this.state.id.replace(/\s/g, "").length == 0){
-      isError = true;
-      errors.idError = "SFU ID or BCDL should be provided";
-    }
-    else{
-      errors.idError = "";
-    }
-
 
     var phoneno = /^\d{10}$/;
     var phone2 = /^\d{3}-\d{3}-\d{4}$/;
@@ -176,7 +167,7 @@ class FormExampleSubcomponentControl extends Component {
       errors.eventDateError = "";
     }*/
 
-    if ((Date.parse(this.state.eventDate) - Date.parse(todaysDate) <= 0) ||this.state.eventDate.length == 0){
+    if ((Date.parse(this.state.eventDate) - Date.parse(todaysDate) < 0) ||this.state.eventDate.length == 0){
       isError = true;
       errors.eventDateError = "This field cannot be empty";
     }
@@ -217,7 +208,7 @@ class FormExampleSubcomponentControl extends Component {
         errors.authorizedDateError = "";
     }*/
 
-    if ((Date.parse(this.state.authorizedDate) - Date.parse(todaysDate) <= 0)||this.state.authorizedDate.length == 0){
+    if ((Date.parse(this.state.authorizedDate) - Date.parse(todaysDate) < 0)||this.state.authorizedDate.length == 0){
       isError = true;
       errors.authorizedDateError = "This field cannot be empty";
     }
@@ -540,15 +531,14 @@ class FormExampleSubcomponentControl extends Component {
                     value = {this.state.requestBy}
                     errorText={this.state.requestByError}/>
                 </Form.Field>
-                <Form.Field required>
-                <label> SFU ID or BCDL </label>
-                  <TextField
-                    fullWidth = {true}
-                    name = "id"
-                    placeholder = 'SFU ID or BCDL'
-                    onChange = {e => this.change(e)}
-                    errorText={this.state.idError} />
-                </Form.Field>
+                <Form.Field >
+                <label> SFU ID </label>
+                <TextField
+                  fullWidth={true}
+                  name='SFU ID'
+                  placeholder='SFU ID'
+                  onChange = {e => this.change(e)}/>
+              </Form.Field>
             </Form.Group>
             <Form.Group widths='equal'>
               <Form.Field required>
