@@ -3,4 +3,4 @@
 - Remember to configure your MySQL database password at /src/core/db.js
 
 - npm install in the root folder then npm start will run the site
-- Can be accessed for development purposes at localhost:3001
+- Website can be accessed for development purposes at localhost:3001

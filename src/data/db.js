@@ -2,14 +2,14 @@ import Sequelize from 'sequelize';
 import findRemoveSync from 'find-remove';
 
 
-// Add your configuration for DB
+// Add your configuration for the DB
 const Conn = new Sequelize(
-  'demodb',
-  'root',
-  'hooh392',
+  'demodb', //Name of database initalized in mySQL
+  'root', //Username to access db
+  'hooh392', //Your mySQL DB password
   {
     dialect: 'mysql',
-    host: 'localhost', //VM IP ADDRESS: '142.58.21.62',
+    host: 'localhost',
     logging: false,
   }
 );
