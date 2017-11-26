@@ -25,7 +25,7 @@ Troubleshooting: Are you using putty? If you try to SSH into it directly, you wi
 
 2) Clone project into folder (Set up git and ssh keys, then clone)
 
-3) Install node and npm using linuxbrew (not globally done by default) - http://blog.teamtreehouse.com/install-node-js-npm-linux
+3) Install node and npm using LinuxBrew (not globally done by default) - http://blog.teamtreehouse.com/install-node-js-npm-linux
 -Instructions on this website will redirect you to homebrew main page because outdated package.
 
 4) Install necessary npm dependencies in source folder (~/project)
@@ -33,7 +33,7 @@ npm install
 npm install semantic-ui-react --save
 npm install semantic-ui-css --save
 
-5) Setup database
+5) Set up database
 sudo apt-get update
 sudo apt-get install mysql-server
 mysql_secure_installation
@@ -89,7 +89,7 @@ Follow the rest of the instructions in /nginx-config/default comments on how to 
 11) Install screen - sudo apt-get install screen
 Screen is used to keep the node server persistent even after exiting the virtual machine console.
 
-12) Start server permanently: 
+12) Start server permanently:
 - screen
 - cd ~/project
 - sudo npm install
@@ -112,3 +112,6 @@ pythonPath: '/usr/bin/python3',
 scriptPath: '/home/cwzhang/project/src/PyScripts/',
 
 
+Extra notes:
+- You can set up apache instead of nginx, but nginx is lighter and better for Node.js backends
+- The benefit of apache instead of node.js is it's easier to configure CAS with it
