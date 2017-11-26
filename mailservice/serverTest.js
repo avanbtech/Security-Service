@@ -1,4 +1,5 @@
-'use strict'
+"use strict";
+
 const nodemailer = require('nodemailer');
 const SMTPConnection = require('./library/smtp-connection');
 

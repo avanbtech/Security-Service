@@ -1,5 +1,6 @@
 The database name is called "securityrequestsystem".
 The table name is "requestinformation".
+
 The "id" is referred to the unique number for checking status.
 The "statusDate" is the date of the processing, admitted, or refuse etc.
 The "date" is the event date in the request information section.
