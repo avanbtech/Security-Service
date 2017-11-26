@@ -1,128 +1,44 @@
-# Security Service Request System (Last edited 11/7/17)
+# Security Service Request System (Last edited 11/26/17)
 ## About
 This is group Gamma's CMPT 373 Term Project.  We are developing a web application form to replace the current SFU security services request system with an online solution, that the "customer" can fill out the necessary information, which then will be automatically accessible to security for further processing.
 We are using the MERN(ish) stack to complete this project, consisting of MySQL, Express, React, and Node.js as the underlying frameworks. As of the current time, you can find a deployed version of our project [here](https://cmpt373-1177g.cmpt.sfu.ca/), hosted on a SFU VM.
 
 ## Project Description
-The Security Service Request System is a system in which a user can fill out and send security service request.
+The Security Service Request System is a system in which a user can fill out and send security service requests.
 A security staff member can then see a list of pending requests and choose to review them. The security side of the request will be filled then by a staff member, then forwarded to the appropriate parties.
 
-## Initial run instructions (as of 11/7/17)
-- clone the project then follow the instructions
-
-- set up npm/node
+## Initial setup instructions (as of 11/26/17)
+- Clone the project then follow the instructions (git clone repository-url-here)
+- Remember to use 'sudo' if you have permission denied issues.   
+  
+- set up npm and node.js
 - set up mysql
-- npm install semantic-ui-react --save 
-- npm install semantic-ui-css --save
-
-- install python 3
+- install python3
 
 - pip3 install PyPDF2
-      
 - pip3 install reportlab
-      
 - pip3 install requests
-      
 - pip3 install pandas
-      
 - pip3 install selenium
-      
 - pip3 install Faker
 
-3. Go to src/PyScripts/pyoptions.js and replace the python3 executable path
-     (use command which python3 on your machine to find out this path)
+- Go to src/PyScripts/pyoptions.js and replace the python3 executable path (use command 'which python3' on your machine to find out this path)
 
-  
-4. Replace scriptPath in the same file to PyScripts folder on your machine.
-
-  
-5. Run npm install if you haven't done it in a while to install all the new
- node packages.
+- Replace scriptPath in the same file to PyScripts folder on your machine.
 
 - $ mysqld //(command to run mysql server on local machine download mysql from https://dev.mysql.com/downloads/mysql/)
 - open mysql shell (mysql -u root -p) and 'create database demodb;' if not already done
 - change the password in db.js to your MySQL password, otherwise you will get an error with database queries.
 
-- $ npm start
-
-- Npm start is sufficient for future runs. This will host the project on localhost:3001
+- $ npm install
+- $ npm start - This will host the project on localhost:3001
 
 - Deployment instructions can be found at nginx-config/deployment-instructions.txt directory.
 
-## Initial setup instructions 
-The following instructions are for **Windows**. You can find a more detailed documentation (which includes other OS!) [here](https://developer.mozilla.org/en-US/docs/Learn/Server-side/Express_Nodejs/development_environment). 
+- You can check your node and npm versions with node or npm -v 
 
-## Dependencies
-All dependencies should be in package.json and added to the project with npm install
-
-### Node.js
-
-- Go [here](https://nodejs.org/en/) and install node.js. The LTS version should suffice, and follow the installation prompts.
-- Test to make sure that both node.js and npm, the node package manager are installed properly. Use the following commands in a command prompt (I suggest git bash, the prompt that comes with installing git on your computer!) to test.
-- As for developing on Windows. I suggest using [Atom](https://atom.io/). It allows you to see the directory tree of our project, which allows for efficient code modification.
-
-```
-node -v
-npm -v
-```
-
-You should get an output that looks like this:
-
-```
-node -v
-v7.10.0
-
-npm -v
-4.2.0
-```
-### Express
-
-- Express is simply another library we acquire from the node package manager (npm) of node.js. This should already be done in the skeleton code, so you shouldn't need to do anything!
-- However, if you want to learn what is going on, please read [this](https://developer.mozilla.org/en-US/docs/Learn/Server-side/Express_Nodejs/development_environment#Using_NPM). It will explain how to set it up on a new project.
-- Troubleshooting tip: If you try to run express, and you get 'express: command not found' after installing it using 'npm install express-generator -g'; add the first directory to your Path (i.e: C:\Users\Aria\AppData\Roaming\npm\express). You can do this by going to 'control panel/system/advanced system settings/environment variables/system variables' and adding a new Path variable for where you installed it. [img1](http://puu.sh/xIYK4/d91613bc7d.png) [img2](http://puu.sh/xIYDe/a2185b9232.png) [img3](http://puu.sh/xIYLY/e452a33aa0.png) [Stackoverflow-source](https://stackoverflow.com/questions/39276576/bash-express-command-not-found)
-
-### React.js
-
-- To have React, our front end framework communicate with Express, our middle-ware, please read [this](https://daveceddia.com/create-react-app-express-backend/) guide.
-- This step should be already completed in our master branch, so you don't need to worry about it either!
-
-### Additional npm commands and information
-
-Please install the required dependencies using 'npm install' before building from the source. You would do this inside the main directory that branches to everything else shown below in directory structure.
-- Please also run "npm install semantic-ui-react --save" and "npm install semantic-ui-css --save" as well.
-
-Here are several npm commands to help build and deploy the application on your own working environment:
-
-```
-npm start
-npm build
-npm deploy
-npm test
-npm copy
-npm clean
-```
-
-### Directory structure 
-Here is our current directory structure and a brief explaination of what everything is.
-
-```
-.
-├── /build/                     # The folder for compiled output
-├── /node_modules/              # 3rd-party libraries and utilities
-├── /src/                       # The source code of the application; most of them are front-end stuff
-├── /tools/                     # Build automation scripts and utilities
-│   ├── /lib/                   # Library for utility snippets
-│   ├── /build.js               # Builds the project from source to output (build) folder
-│   ├── /bundle.js              # Bundles the web resources into package(s) through Webpack
-│   ├── /clean.js               # Cleans up the output (build) folder
-│   ├── /copy.js                # Copies static files to output (build) folder
-│   ├── /deploy.js              # Deploys your web application
-│   ├── /run.js                 # Helper function for running build automation tasks
-│   ├── /runServer.js           # Launches (or restarts) Node.js server
-│   ├── /start.js               # Launches the development web server with "live reload"
-│   └── /webpack.config.js      # Configurations for client-side and server-side bundles
-└── package.json                # The list of 3rd party libraries and utilities
-```
+## Directory structure 
+- You can find our directory structure in the file: ~Project-Information-Documents/directory-structure.txt
 
 ## Coding style and guidelines
 - Please follow this coding style when making commits to the respository: [Javascript ES6 Coding Style Guide](http://es6-features.org/#Constants)
@@ -130,13 +46,6 @@ Here is our current directory structure and a brief explaination of what everyth
 - If you need help or have expected delays, communicate sooner rather than later. We are here to help you! There isn't all that much work (yet) for eight people, so pair programming is likely to happen so everyone has something to do.
 - Finally, be transparent about what you're doing so everyone is up to date with what is going on. This will allow for a smooth team effort throughout the semester.
 
-## Transport Layer Security
-Please take a look at the following to learn about TLS. We need to implement TLS v1.2 in our web application:
-
--[Our Gitlab wiki](https://csil-git1.cs.surrey.sfu.ca/sankaitk/CMPT373-Gamma/wikis/transport-layer-security-(tls)-information-and-implementation)
--[Wikipedia](https://en.wikipedia.org/wiki/Transport_Layer_Security)
--[Sitepoint security stack + node.js](https://www.sitepoint.com/how-to-use-ssltls-with-node-js/)
--[Node.js express middleware structure tutorial](https://blog.risingstack.com/your-first-node-js-http-server/)
 
 ## Group resources
 Please take a look at the following resources to keep up with our current group activities:  
@@ -157,6 +66,14 @@ Please take a look at these following tutorials if you need to brush up on your 
 - [Introduction to Node.js (w3schools)](https://www.w3schools.com/nodejs/)
 - [Express/Node.js tutorial](https://developer.mozilla.org/en-US/docs/Learn/Server-side/Express_Nodejs)
 - [React with Express/Node.js tutorial](https://daveceddia.com/create-react-app-express-backend/)
+ 
+## Transport Layer Security (Already implemented)
+Please take a look at the following to learn about TLS. We need to implement TLS v1.2 in our web application:
+
+-[Our Gitlab wiki](https://csil-git1.cs.surrey.sfu.ca/sankaitk/CMPT373-Gamma/wikis/transport-layer-security-(tls)-information-and-implementation)
+-[Wikipedia](https://en.wikipedia.org/wiki/Transport_Layer_Security)
+-[Sitepoint security stack + node.js](https://www.sitepoint.com/how-to-use-ssltls-with-node-js/)
+-[Node.js express middleware structure tutorial](https://blog.risingstack.com/your-first-node-js-http-server/)
 
 ## Use Cases
 
