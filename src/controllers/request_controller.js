@@ -34,7 +34,7 @@ function escapeAndTrimInput(req, dbParam) {
 
 //Checks if an input is empty in req, with a given dbParam Field, with a given emptyErrMessage.
 function checkIfInputIsEmptyInField(req, dbParam, emptyErrMessage) {
-  req.checkbody(dbParam, emptyErrMessage).notEmpty();
+  req.checkBody(dbParam, emptyErrMessage).notEmpty();
 }
 /*End Helper Functions definitions*/
 
@@ -136,7 +136,7 @@ inputArray.push('numberOfAttendees');
 inputArray.push('time');
 
 inputArray.forEach(function(element) {
-    escapeAndTrimInput(element);
+    escapeAndTrimInput(req, element);
 });
 
 }
