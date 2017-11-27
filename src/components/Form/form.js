@@ -46,6 +46,8 @@ class FormExampleSubcomponentControl extends Component {
     eventDateError:'',
     time:'',
     timeError:'',
+    endtime:'',
+    endtimeError:'',
     detail:'',
     accountCode:'',
     accountCodeError:'',
@@ -203,6 +205,13 @@ class FormExampleSubcomponentControl extends Component {
     else{
       errors.timeError = "";
     }
+    if (this.state.endtime.length == 0){
+      isError = true;
+      errors.endtimeError = "Time should be in HH:MM format";
+    }
+    else{
+      errors.endtimeError = "";
+    }
     var accountCode1 = /^\d{4}-\d{2}-\d{4}-\d{5}$/;
     var accountCode2 = /^\d{4}-\d{2}-?\d{8}$/;
     if (!this.state.accountCode.match(accountCode1) && !this.state.accountCode.match(accountCode2)){
@@ -320,6 +329,9 @@ class FormExampleSubcomponentControl extends Component {
 
   handleChangeTimePicker24 = (event, date) => {
     this.setState({time: date});
+  };
+  handleChangeEndTimePicker24 = (event, date) => {
+    this.setState({endtime: date});
   };
 
   FormExampleSuccess = () => (
@@ -646,7 +658,7 @@ class FormExampleSubcomponentControl extends Component {
                     errorText={this.state.eventDateError} />
                 </Form.Field>
                 <Form.Field required>
-                  <label> Time(s) </label>
+                  <label> Time </label>
                   <TimePicker
                     format="24hr"
                     fullWidth={true}
@@ -654,6 +666,16 @@ class FormExampleSubcomponentControl extends Component {
                     placeholder='HH:MM'
                     onChange={this.handleChangeTimePicker24}
                     errorText={this.state.timeError} />
+                </Form.Field>
+                <Form.Field required>
+                  <label> End Time </label>
+                  <TimePicker
+                    format="24hr"
+                    fullWidth={true}
+                    name='endtime'
+                    placeholder='HH:MM'
+                    onChange={this.handleChangeEndTimePicker24}
+                    errorText={this.state.endtimeError} />
                 </Form.Field>
             </Form.Group>
             <Form.TextArea

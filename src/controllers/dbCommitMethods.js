@@ -81,6 +81,7 @@ function commitRequestToDB(req) {
     numberOfattendees: req.body.numberOfAttendees,
     eventDates: [req.body.eventDate],   // TODO: CONFIRM DATES ARE JOINED BY ';'
     times: req.body.time,
+    endTime: req.body.endtime,
   });
 
   db.models.security.create({

@@ -101,6 +101,9 @@ const EventArgs = {
   times: {
     type: GraphQLString,
   },
+  endTime: {
+    type: GraphQLString
+  },
 };
 
 const GuardArgs = {
@@ -301,6 +304,7 @@ const Mutation = new GraphQLObjectType({
             location: args.location,
             eventDates: args.eventDates.split(';'),
             times: args.times,
+            endTime: args.endTime,
 
           });
         },
