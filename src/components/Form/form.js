@@ -99,7 +99,7 @@ class FormExampleSubcomponentControl extends Component {
     else{
       errors.dateError = "";
     }*/
-    if ((Date.parse(this.state.date) - Date.parse(todaysDate)) <= 0 || (this.state.date.length == 0)){
+    if ((Date.parse(this.state.date) - Date.parse(todaysDate)) < 0 || (this.state.date.length == 0)){
       isError = true;
       errors.dateError = "This field cannot be empty";
     }
@@ -180,7 +180,7 @@ class FormExampleSubcomponentControl extends Component {
       errors.eventDateError = "";
     }*/
 
-    if ((Date.parse(this.state.eventDate) - Date.parse(todaysDate) <= 0) ||this.state.eventDate.length == 0){
+    if ((Date.parse(this.state.eventDate) - Date.parse(todaysDate) < 0) ||this.state.eventDate.length == 0){
       isError = true;
       errors.eventDateError = "This field cannot be empty";
     }
@@ -221,7 +221,7 @@ class FormExampleSubcomponentControl extends Component {
         errors.authorizedDateError = "";
     }*/
 
-    if ((Date.parse(this.state.authorizedDate) - Date.parse(todaysDate) <= 0)||this.state.authorizedDate.length == 0){
+    if ((Date.parse(this.state.authorizedDate) - Date.parse(todaysDate) < 0)||this.state.authorizedDate.length == 0){
       isError = true;
       errors.authorizedDateError = "This field cannot be empty";
     }
