@@ -46,11 +46,23 @@ server.use('/graphql', expressGraphQL(req => ({
   pretty: process.env.NODE_ENV !== 'production',
 })));
 
+
 server.use('/guardjobcheck', async(req, res) =>{
   let data = null;
   await dbMethods.getReqForGuardJobs(req.body.dispatchNumber).then((resp) => {
     data = resp;
   });
+
+server.use('/login', (req, res) => {
+  console.log("LOGIN ATTEMPT");
+
+  console.log(req.query.ticket);
+
+});
+
+
+
+
 
   res.setHeader('Content-Type', 'application/json');
 

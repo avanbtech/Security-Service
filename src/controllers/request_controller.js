@@ -6,11 +6,14 @@
 "use strict";
 
 import db from '../data/db';
-import exportMethods from '../PyScripts/childProcPy'
+import exportMethods from '../PyScripts/childProcPy';
 import nodemailer from 'nodemailer';
 import xoauth2 from 'xoauth2';
 import expG from '../data/exportGuardsPDF';
 import dbMethods from './dbCommitMethods';
+
+const CAS_LOGIN_LINK = 'https://cas.sfu.ca/cas/login?service=https://cmpt373-1177g.cmpt.sfu.ca/login';
+const CAS_LOGIN_TEMP = 'https://cas.sfu.ca/cas/login?service=https://localhost:3000/login';
 
 /*Helper Functions*/
 //Base function that sends different types of emails using EMAILSERVICE address
@@ -333,4 +336,13 @@ exports.guardExport = async (req, res) => {
       }
     }, 5000);
   });
+
+exports.casredirect = function(req, res) {
+
+  console.log("LOGIN ATTEMPT");
+  res.redirect(CAS_LOGIN_TEMP);
+};
+
+exports.login = function(req, res) {
+  res.send("LOGIN SCREEN");
 };
