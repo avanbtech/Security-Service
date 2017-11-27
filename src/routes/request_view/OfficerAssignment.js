@@ -229,11 +229,12 @@ class OfficerAssignment extends Component {
         <Form.Group>
           {officerAssignedDatesRows}
         </Form.Group>
-        <div className={s.action_container}>
-          <Form.Button
-            onClick = {e => this.addDate(e)}>Add Date</Form.Button>
-          <br />
-        </div>
+        <p className={s.action_container}>
+          <a className={s.removeAction} href="javascript:void(0)"
+             onClick={e => this.addDate(e)}>
+            Add date range
+          </a>
+        </p>
         <Form.Group widths='equal'>
           <Form.Field>
             <label> Remarks </label>
