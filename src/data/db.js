@@ -95,7 +95,7 @@ const Request = Conn.define('request', {
   },
   authorizedID: {
     type: Sequelize.STRING,
-    allowNull: false
+    allowNull: true
   },
   authorizedDate: {
     type: Sequelize.DATE,
