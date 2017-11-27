@@ -148,7 +148,7 @@ class OfficerAssignment extends Component {
       const currentAssignedDateObject = this.state.officerAssignedDatesObjects[i];
       officerAssignedDatesRows.push(
         <div>
-          <p>
+          <p className={s.date_title}>
             <a className={s.removeAction} href="javascript:void(0)"
                onClick={e => this.removeDate(this.state.officerAssignedDatesObjects[i].id, e)}>
               Remove this date range
