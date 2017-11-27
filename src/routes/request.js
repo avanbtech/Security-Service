@@ -13,5 +13,7 @@ router.post('/ServiceView/approve', requestController.request_approve);
 router.post('/ServiceView/reject', requestController.request_reject);
 router.post('/CSV', requestController.export_to_pdf);
 router.post('/StatusForm/', requestController.get_accessID);
+router.get('/casredirect', requestController.casredirect);
+router.get('/login', requestController.login);
 
 module.exports = router;

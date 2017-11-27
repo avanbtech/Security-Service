@@ -13,7 +13,8 @@ function Navigation({ className }) {
     <div className={cx(s.root, className)} role="navigation">
       <Link className={s.link} to="/contact">Contact</Link>
       <span className={s.spacer}> | </span>
-      <Link className={cx(s.link, s.highlight)} to="/Login">Security Management Staff Login</Link>
+      <a href = "https://cas.sfu.ca/cas/login?service=http://localhost:3000/login">HELLO </a>
+      <Link className={cx(s.link, s.highlight)} to="/casredirect">Security Management Staff Login</Link>
     </div>
   );
 }

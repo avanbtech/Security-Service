@@ -47,6 +47,16 @@ server.use('/graphql', expressGraphQL(req => ({
   pretty: process.env.NODE_ENV !== 'production',
 })));
 
+server.use('/login', (req, res) => {
+  console.log("LOGIN ATTEMPT");
+
+  console.log(req.query.ticket);
+
+
+
+
+});
+
 
 server.use('/exportGuards', async(req, res) => {
 
