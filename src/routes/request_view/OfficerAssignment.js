@@ -5,6 +5,7 @@ import DatePicker from "material-ui/DatePicker"
 import s from './RequestView.scss'
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
+import OfficerAssignedDate from './OfficerAssignedDate';
 
 const styles = {
   customWidth: {
@@ -141,6 +142,35 @@ class OfficerAssignment extends Component {
 
   render() {
     const { value } = this.state;
+
+    let officerAssignedDatesRows = [];
+    for (let i = 0; i < this.state.officerAssignedDatesObjects.length; i++) {
+      const currentAssignedDateObject = this.state.officerAssignedDatesObjects[i];
+      officerAssignedDatesRows.push(
+        <div>
+          <table className={s.removeOfficer}>
+            <tbody>
+            <tr>
+              <td><h4>Assigned Dates</h4></td>
+              <td>
+                <a className={s.removeAction} href="javascript:void(0)"
+                   onClick={e => this.removeDate(this.state.officerAssignedDatesObjects[i].id, e)}>
+                  Remove this date range
+                </a>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+          <OfficerAssignedDate
+            ref={
+              instance => {
+                currentAssignedDateObject.instance = instance;
+              }
+            }
+          />
+        </div>
+      );
+
     return (
       <div className={s.officer}>
         <Form.Group widths='equal'>
