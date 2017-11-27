@@ -226,11 +226,11 @@ class OfficerAssignment extends Component {
               errorText={this.state.phoneError}/>
           </Form.Field>
         </Form.Group>
-        <Form.Group>
+        <Form.Group width="equal">
           {officerAssignedDatesRows}
         </Form.Group>
         <p className={s.action_container}>
-          <a className={s.removeAction} href="javascript:void(0)"
+          <a className={s.addAction} href="javascript:void(0)"
              onClick={e => this.addDate(e)}>
             Add date range
           </a>
