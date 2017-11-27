@@ -148,19 +148,31 @@ class OfficerAssignment extends Component {
       const currentAssignedDateObject = this.state.officerAssignedDatesObjects[i];
       officerAssignedDatesRows.push(
         <div>
-          <p className={s.date_title}>
-            <a className={s.removeAction} href="javascript:void(0)"
-               onClick={e => this.removeDate(this.state.officerAssignedDatesObjects[i].id, e)}>
-              Remove this date range
-            </a>
-          </p>
-          <OfficerAssignedDate
-            ref={
-              instance => {
-                currentAssignedDateObject.instance = instance;
-              }
-            }
-          />
+          <table>
+            <tbody>
+            <tr>
+              <td>
+                <p className={s.date_title}>
+                  <a className={s.removeAction} href="javascript:void(0)"
+                     onClick={e => this.removeDate(this.state.officerAssignedDatesObjects[i].id, e)}>
+                    Remove this date range
+                  </a>
+                </p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <OfficerAssignedDate
+                  ref={
+                    instance => {
+                      currentAssignedDateObject.instance = instance;
+                    }
+                  }
+                />
+              </td>
+            </tr>
+            </tbody>
+          </table>
         </div>
       );
     }
@@ -226,9 +238,7 @@ class OfficerAssignment extends Component {
               errorText={this.state.phoneError}/>
           </Form.Field>
         </Form.Group>
-        <Form.Group width="equal">
-          {officerAssignedDatesRows}
-        </Form.Group>
+        {officerAssignedDatesRows}
         <p className={s.action_container}>
           <a className={s.addAction} href="javascript:void(0)"
              onClick={e => this.addDate(e)}>
