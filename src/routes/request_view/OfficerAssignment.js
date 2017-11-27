@@ -18,13 +18,6 @@ class OfficerAssignment extends Component {
   constructor(props) {
     super(props);
 
-    /*
-    const startDate = new Date(props.startDate);
-    startDate.setHours(0, 0, 0, 0);
-    const endDate = new Date(props.endDate);
-    endDate.setHours(0, 0, 0, 0);
-    */
-
     this.state = {
       name: props.name === undefined ? '' : props.name,
       nameError: '',
@@ -34,11 +27,12 @@ class OfficerAssignment extends Component {
       grdType: props.guardType === undefined ? 'Regular' : props.guardType,
       dispatchNumber: props.dispatchNumber === undefined ? '' : props.distpachNumber,
       dispatchNumberError:'',
-      startDate: props.startDate === undefined ? new Date() : props.startDate,
-      endDate: props.endDate === undefined ? new Date() : props.endDate,
       phone: props.phone === undefined ? '' : props.phone,
       phoneError:'',
       remarks: props.remarks === undefined ? '' : props.remarks,
+      officerAssignedDatesObjects: [
+        { id: 0, instance: null },
+      ],
     };
   }
 
@@ -47,18 +41,6 @@ class OfficerAssignment extends Component {
       [e.target.name]: e.target.value
     });
   }
-
-  handleStartDateChange = (event, date) => {
-    this.setState({
-      startDate: date,
-    });
-  };
-
-  handleEndDateChange = (event, date) => {
-    this.setState({
-      endDate: date,
-    });
-  };
 
   handleChangeGuardType = (event, index, value) => {
     this.setState({guardType: value});
@@ -75,35 +57,6 @@ class OfficerAssignment extends Component {
     }
     else {
       errors.nameError = "";
-    }
-
-    let startDateValid = true;
-    if (this.state.startDate.length == 0) {
-      isError = true;
-      errors.startDateError = "An start date must be specified.";
-      startDateValid = false;
-    } else {
-      errors.startDateError = "";
-    }
-
-    let endDateValid = true;
-    if (this.state.endDate.length == 0) {
-      isError = true;
-      errors.endDateError = "An end date must be specified";
-      endDateValid = false;
-    } else {
-      errors.endDateError = "";
-    }
-
-    if (startDateValid && endDateValid) {
-      const startDate = new Date(this.state.startDate);
-      startDate.setHours(0, 0, 0, 0);
-      const endDate = new Date(this.state.endDate);
-      endDate.setHours(0, 0, 0, 0);
-      if (startDate > endDate) {
-        errors.startDateError = "Start date cannot be after end date.";
-        isError = true;
-      }
     }
 
     if(this.state.location.replace('/\s/g','').length == 0){
@@ -180,28 +133,6 @@ class OfficerAssignment extends Component {
               <MenuItem key={3} primaryText={'SSEP'} value={'SSEP' } />
             </SelectField>
             <Form.Input type="hidden" name="grdType" value={this.state.grdType} />
-          </Form.Field>
-        </Form.Group>
-        <Form.Group widths='equal'>
-          <Form.Field required>
-            <label> Start date </label>
-            <DatePicker
-              name='startDate'
-              errorText={this.state.startDateError}
-              hintText="Start Date"
-              value={this.state.startDate}
-              onChange={this.handleStartDateChange}
-              container="inline" />
-          </Form.Field>
-          <Form.Field required>
-            <label> End date </label>
-            <DatePicker
-              name='endDate'
-              hintText="End Date"
-              errorText={this.state.endDateError}
-              value={this.state.endDate}
-              onChange={this.handleEndDateChange}
-              container="inline" />
           </Form.Field>
         </Form.Group>
         <Form.Group widths='equal'>
