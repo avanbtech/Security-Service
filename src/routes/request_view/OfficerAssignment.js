@@ -148,19 +148,12 @@ class OfficerAssignment extends Component {
       const currentAssignedDateObject = this.state.officerAssignedDatesObjects[i];
       officerAssignedDatesRows.push(
         <div>
-          <table className={s.removeOfficer}>
-            <tbody>
-            <tr>
-              <td><h4>Assigned Dates</h4></td>
-              <td>
-                <a className={s.removeAction} href="javascript:void(0)"
-                   onClick={e => this.removeDate(this.state.officerAssignedDatesObjects[i].id, e)}>
-                  Remove this date range
-                </a>
-              </td>
-            </tr>
-            </tbody>
-          </table>
+          <p>
+            <a className={s.removeAction} href="javascript:void(0)"
+               onClick={e => this.removeDate(this.state.officerAssignedDatesObjects[i].id, e)}>
+              Remove this date range
+            </a>
+          </p>
           <OfficerAssignedDate
             ref={
               instance => {
