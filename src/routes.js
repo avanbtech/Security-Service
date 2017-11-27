@@ -1,3 +1,7 @@
+/* routes.js
+** Stores all the routes required in our web application
+*/
+
 import React from 'react';
 import Router from 'react-routing/src/Router';
 import fetch from './core/fetch';

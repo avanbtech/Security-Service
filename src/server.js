@@ -1,3 +1,7 @@
+/* server.js
+** Controls the middleware and starting of our web server - npm start
+*/
+
 import 'babel-polyfill';
 import path from 'path';
 import express from 'express';
@@ -161,7 +165,8 @@ server.use((err, req, res, next) => { // eslint-disable-line no-unused-vars
 
 
 //
-// Launch the server
+// Launches the server
+// For development purposes, check localhost:3001
 // -----------------------------------------------------------------------------
 server.listen(port, () => {
   console.log(`The server is running at http://localhost:${port}/`);

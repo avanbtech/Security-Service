@@ -1,3 +1,7 @@
+/* ErrorPage.js
+** Holds the logic and base HTML and JavaScript for the Error Page
+*/
+
 import React, { Component, PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import s from './ErrorPage.scss';

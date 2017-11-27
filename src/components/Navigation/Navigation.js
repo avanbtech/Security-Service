@@ -1,3 +1,7 @@
+/* Navigation.js
+** Holds the logic and base HTML and JavaScript for the Navigation pane above the main page
+*/
+
 import React, { PropTypes } from 'react';
 import cx from 'classnames';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';

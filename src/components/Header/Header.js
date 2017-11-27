@@ -1,3 +1,7 @@
+/* Header.js
+** Holds the logic and base HTML and JavaScript for the header of the main page
+*/
+
 import React from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import s from './Header.scss';

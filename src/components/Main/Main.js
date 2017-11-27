@@ -1,3 +1,7 @@
+/* Main.js
+** Holds the logic and base HTML and JavaScript for the Main/Default page
+*/
+
 import React from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import FlatButton from 'material-ui/FlatButton';

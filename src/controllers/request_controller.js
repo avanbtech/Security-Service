@@ -1,3 +1,8 @@
+/* request_controller.js
+** Main controller for requests which come in and out of our web application
+** This function concerns the email server and the make a request form
+*/
+
 "use strict";
 
 import db from '../data/db';

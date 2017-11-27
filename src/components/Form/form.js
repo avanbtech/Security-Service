@@ -1,3 +1,7 @@
+/* Form.js
+** Holds the logic and base HTML and JavaScript for the status form
+*/
+
 import React, { Component } from 'react'
 import { Button,  Form, Message } from 'semantic-ui-react'
 import TextField from "material-ui/TextField"
@@ -79,7 +83,7 @@ class FormExampleSubcomponentControl extends Component {
     const errors = {};
     var todaysDate = new Date();
     todaysDate.setHours(0,0,0,0);
-    
+
     if (this.state.requestBy.length < 3 ){
       isError = true;
       errors.requestByError = "Full name should be provided";
