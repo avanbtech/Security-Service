@@ -170,7 +170,7 @@ class OfficerAssignment extends Component {
           />
         </div>
       );
-
+    }
     return (
       <div className={s.officer}>
         <Form.Group widths='equal'>
@@ -251,7 +251,7 @@ class OfficerAssignment extends Component {
           </Form.Field>
         </Form.Group>
       </div>
-    )
+    );
   }
 }
 
