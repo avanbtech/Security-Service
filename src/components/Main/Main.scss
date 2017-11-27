@@ -1,3 +1,7 @@
+/* Main.scss
+** CSS styling for the main page
+*/
+
 @import '../variables.scss';
 
 .root {
@@ -42,7 +46,7 @@
 }
 
 .box {
-  margin: 20px; 
+  margin: 20px;
   height: 450px;
   width: 320px;
   padding: 40px;

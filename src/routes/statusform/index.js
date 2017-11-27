@@ -1,3 +1,7 @@
+/* statusform/index.js
+** The index file for statusform
+*/
+
 import React from 'react';
 import StatusForm from './StatusForm';
 import axios from 'axios';
@@ -47,6 +51,3 @@ export const action = async (state) => {
   state.context.onSetTitle(title);
   return <StatusForm request={request} />;
 };
-
-
-

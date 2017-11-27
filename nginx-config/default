@@ -44,6 +44,8 @@ server {
     proxy_cache_bypass $http_upgrade;
   }
 
+# Template code for manual TLS verification
+
 # Needed to sign our TLS certificate with LetsEncrypt CA
 # At cmpt373-1177g.cmpt.sfu.ca/.well-known/acme-challenge/V-jKuBWx0J0MSrjtWZeZLoEQJhS0m63godq0y7CBZ5k
 # We host a file in our VM's directory: /home/cwzhang/project/nginx-config/

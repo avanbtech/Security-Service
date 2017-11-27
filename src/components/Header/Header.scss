@@ -1,3 +1,7 @@
+/* Header.scss
+** CSS styling for the header
+*/
+
 @import '../variables.scss';
 
 $brand-color: #ffffff;
@@ -5,7 +9,7 @@ $brand-color: #ffffff;
 .root {
   margin: 0 auto;
   max-height: 200px;
-  background-image: url("./textured-red-01-small.png");
+  background-image: url("./res/textured-red-01-small.png");
 }
 
 .container {
@@ -21,7 +25,7 @@ $brand-color: #ffffff;
   height: 25px;
   width: -50%;
   background-color: #3d3935;
-  background-image: url("./header-strip.png");
+  background-image: url("./res/header-strip.png");
   background-repeat: no-repeat;
 }
 

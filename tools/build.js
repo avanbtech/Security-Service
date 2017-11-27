@@ -1,3 +1,5 @@
+/* Script ran when we call npm build */
+
 import run from './run';
 import clean from './clean';
 import copy from './copy';

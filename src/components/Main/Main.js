@@ -1,13 +1,17 @@
+/* Main.js
+** Holds the logic and base HTML and JavaScript for the Main/Default page
+*/
+
 import React from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import FlatButton from 'material-ui/FlatButton';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import s from './Main.scss';
 import Link from '../Link';
-import formicon from '../../../form.png';
-import statusicon from '../../../status.png';
-import lockicon from '../../../lock.png';
-import exporticon from '../../../export.png';
+import formicon from './res/form.png';
+import statusicon from './res/status.png';
+import lockicon from './res/lock.png';
+import exporticon from './res/export.png';
 
 const MainPage = () => (
   <div className={s.root}>

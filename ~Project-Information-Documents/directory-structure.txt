@@ -1,0 +1,35 @@
+The directory structure of our project can be briefly explained as follows:
+
+Important directory locations:
+
+Web server:
+nginx-config/default: Nginx configuration for our deployed web server. This needs to be modified and copied to our VM whenever we change the web server.
+nginx-config/certs: Stores our generated HTTPS certificates for use in nginx-config/default.
+
+Database:
+src/data/db.js: Stores configuration information for the database. You must change the password in this file to align with your mySQL password installed on your machine.
+
+Python:
+src/PyScripts/pyoptions.js: Stores python configuration options. You must edit the python path and directory in this folder for python scripts to work properly.
+
+
+Rest of directories:
+.git: Git folder to store git information.
+~Project-Information-Documents: Stores documents to explain basic instructions on how our code works.
+build: Built materials - Not a folder we need to worry about.
+DB Docs: Basic documentation on how to initialize our database.
+mailservice: Stores code that deals with our mailing service.
+materials: Stores some referenced files in our front end code.
+mysql: Stores some mysql scripts, notably the one that we use to create the table for our security request system.
+nginx-config: Stores web server configuration which reverse proxies into our node.js code.
+
+src: Stores our source code.
+src/components: Stores the react code for our front-end.
+src/controllers: Holds back end code for our web app.
+src/data: More database code and configuration, some generated with GraphQL.
+src/PyScripts: Python scripts.
+src/routes: React routes.
+src/server.js: Where our server code is initialized.
+
+Testing Tools: Contains a python script to autofill our security system form.
+tools: More useful npm command files that can be called (npm start)

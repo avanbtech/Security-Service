@@ -1,3 +1,6 @@
+/* Footer.js
+** Holds the logic and base HTML and JavaScript for the footer of our main page
+*/
 
 import React, {Component} from 'react';
 import FontIcon from 'material-ui/FontIcon';
@@ -23,7 +26,7 @@ class BottomNavigationExampleSimple extends Component {
 
   render() {
     return (
-	    <MuiThemeProvider> 
+	    <MuiThemeProvider>
 	     	<Paper zDepth={1}>
 	        <BottomNavigation selectedIndex={this.state.selectedIndex}>
 	          <BottomNavigationItem
@@ -33,7 +36,7 @@ class BottomNavigationExampleSimple extends Component {
 	          />
 	        </BottomNavigation>
       	</Paper>
-	    </MuiThemeProvider> 
+	    </MuiThemeProvider>
     );
   }
 }

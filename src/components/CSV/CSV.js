@@ -1,3 +1,7 @@
+/* CSV.js
+** Holds the front end logic of the CSV Export to PDF Page
+*/
+
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import Link from '../Link';
 import Navigation from '../Navigation';

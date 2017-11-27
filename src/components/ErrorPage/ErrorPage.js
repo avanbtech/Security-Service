@@ -1,3 +1,7 @@
+/* ErrorPage.js
+** Holds the logic and base HTML and JavaScript for the Error Page
+*/
+
 import React, { Component, PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import s from './ErrorPage.scss';
@@ -19,7 +23,7 @@ class ErrorPage extends Component {
     return (
       <div>
         <h1>{title}</h1>
-        <p>Sorry, an critical error occurred on this page.</p>
+        <p>Sorry, an critical error has occurred on this page.</p>
       </div>
     );
   }

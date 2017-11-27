@@ -1,11 +1,15 @@
+/* Header.js
+** Holds the logic and base HTML and JavaScript for the header of the main page
+*/
+
 import React from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import s from './Header.scss';
 import Link from '../Link';
 import Navigation from '../Navigation';
-import redbg from './textured-red-01-small.png'
-import logo from './sfu-logo@2x.png'
-import headerStrip from './header-strip.png'
+import redbg from './res/textured-red-01-small.png'
+import logo from './res/sfu-logo@2x.png'
+import headerStrip from './res/header-strip.png'
 
 function Header() {
   return (

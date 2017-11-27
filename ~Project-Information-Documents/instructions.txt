@@ -4,3 +4,5 @@
 
 - npm install in the root folder then npm start will run the site
 - Website can be accessed for development purposes at localhost:3001
+
+-Deployment instructions can be found at /nginx-config/deployment-instructions.txt

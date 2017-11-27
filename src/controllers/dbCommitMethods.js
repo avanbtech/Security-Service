@@ -1,3 +1,7 @@
+/* dbCommitMethods.js
+** This file concerns the database logic
+*/
+
 import db from '../data/db';
 
 var NUM = '0000';

@@ -1,4 +1,3 @@
-
 .DS_Store
 **/node_modules
 **/build
@@ -7,4 +6,3 @@
 **/ExportedPDFs
 npm-debug.log
 nohup.out
-package-lock.json
