@@ -233,6 +233,11 @@ class OfficerAssignment extends Component {
               errorText={this.state.phoneError}/>
           </Form.Field>
         </Form.Group>
+        {officerAssignedDatesRows}
+        <div className={s.action_container}>
+          <Form.Button
+            onClick = {e => this.addDate(e)}>Add Date</Form.Button>
+        </div>
         <Form.Group widths='equal'>
           <Form.Field>
             <label> Remarks </label>
