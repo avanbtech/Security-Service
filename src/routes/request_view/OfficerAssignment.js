@@ -33,6 +33,7 @@ class OfficerAssignment extends Component {
       officerAssignedDatesObjects: [
         { id: 0, instance: null },
       ],
+      lastAssignedDateID: 0,
     };
   }
 
@@ -87,12 +88,57 @@ class OfficerAssignment extends Component {
       errors.phoneError = "";
     }
 
+    let hasChildError = false;
+    this.state.officerAssignedDatesObjects.map(oneDate => {
+      if (oneDate.instance !== null) {
+        hasChildError = hasChildError || oneDate.instance.validate();
+      }
+    });
+    isError = isError || hasChildError;
+
     this.setState({
         ...this.state,
         ...errors
     });
     return isError;
   };
+
+  removeDate = (dateId, e) => {
+    e.preventDefault();
+    const newDateObjects = this.state.officerAssignedDatesObjects;
+    let indexToBeRemoved = -1;
+    for (let i = 0; i < newDateObjects.length; i++) {
+      if (newDateObjects[i].id === dateId) {
+        indexToBeRemoved = i;
+        break;
+      }
+    }
+    if (indexToBeRemoved > -1) {
+      for (let j = indexToBeRemoved; j < newDateObjects.length - 1; j++) {
+        newDateObjects[j].instance.setState({
+          ...newDateObjects[j + 1].instance.state,
+        });
+      }
+      newDateObjects.splice(newDateObjects.length - 1, 1);
+      this.setState({
+        officerObjects: newDateObjects,
+      });
+    }
+  };
+
+  addDate = e => {
+    e.preventDefault();
+    ++this.state.lastAssignedDateID;
+    const newDateObjects = this.state.officerAssignedDatesObjects;
+    newDateObjects.push({
+      id: this.state.lastAssignedDateID,
+      instance: null,
+    });
+    this.setState({
+      officerAssignedDatesObjects: newDateObjects
+    });
+  }
+
   render() {
     const { value } = this.state;
     return (
