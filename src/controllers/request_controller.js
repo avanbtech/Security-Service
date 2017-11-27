@@ -111,7 +111,6 @@ function checkIfRequestInformationNotEmpty(req) {
   checkIfInputIsEmptyInField(req, 'lastName', 'parameter: lastName name must be specified');
   checkIfInputIsEmptyInField(req, 'userName', 'parameter: userName name must be specified');
   checkIfInputIsEmptyInField(req, 'email', 'parameter: email must be specified');
-  checkIfInputIsEmptyInField(req, 'id', 'parameter: id must be specified');
   checkIfInputIsEmptyInField(req, 'numberOfAttendees', 'parameter: numberOfAttendees must be specified');
   checkIfInputIsEmptyInField(req, 'time', 'parameter: time must be specified');
   checkIfInputIsEmptyInField(req, 'endtime', 'parameter: end time must be specified');
@@ -137,7 +136,6 @@ inputArray.push('firstName');
 inputArray.push('lastName');
 inputArray.push('userName');
 inputArray.push('email');
-inputArray.push('id');
 inputArray.push('numberOfAttendees');
 inputArray.push('time');
 inputArray.push('endtime');

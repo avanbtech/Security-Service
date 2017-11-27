@@ -21,9 +21,9 @@ const User = Conn.define('user', {
     allowNull: true,
     primaryKey: true,
   },
-  sfuBCID: {
+  sfuID: {
     type: Sequelize.STRING,
-    allowNull: false,
+    allowNull: true,
   },
   department: {
     type: Sequelize.STRING,

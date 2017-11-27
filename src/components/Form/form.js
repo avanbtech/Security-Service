@@ -29,7 +29,6 @@ class FormExampleSubcomponentControl extends Component {
     requestBy:'',
     requestByError:'',
     id:'',
-    idError:'',
     phone:'',
     phoneError:'',
     fax:'',
@@ -54,7 +53,6 @@ class FormExampleSubcomponentControl extends Component {
     authorizedBy:'',
     authorizedByError:'',
     authorizedID:'',
-    authorizedIDError:'',
     authorizedDate:'',
     authorizedDateError:'',
     authorizedSignature:'',
@@ -109,13 +107,13 @@ class FormExampleSubcomponentControl extends Component {
       errors.dateError = "";
     }
 
-    if (this.state.id.replace(/\s/g, "").length == 0){
+    /*if (this.state.id.replace(/\s/g, "").length == 0){
       isError = true;
       errors.idError = "SFU ID or BCDL should be provided";
     }
     else{
       errors.idError = "";
-    }
+    }*/
 
 
     var phoneno = /^\d{10}$/;
@@ -246,13 +244,13 @@ class FormExampleSubcomponentControl extends Component {
       errors.authorizedByError = '';
     }
 
-    if (this.state.authorizedID.replace(/\s/g, "").length == 0 ){
+    /*if (this.state.authorizedID.replace(/\s/g, "").length == 0 ){
       isError = true;
       errors.authorizedIDError = 'Authorized ID should be provided';
     }
     else {
       errors.authorizedIDError = '';
-    }
+    }*/
 
     if(!this.state.authorizedPhone.match(phoneno) && !this.state.authorizedPhone.match(phone2))
     {
@@ -556,14 +554,13 @@ class FormExampleSubcomponentControl extends Component {
                     value = {this.state.requestBy}
                     errorText={this.state.requestByError}/>
                 </Form.Field>
-                <Form.Field required>
-                <label> SFU ID or BCDL </label>
+                <Form.Field>
+                <label> SFU ID </label>
                   <TextField
                     fullWidth = {true}
                     name = "id"
-                    placeholder = 'SFU ID or BCDL'
-                    onChange = {e => this.change(e)}
-                    errorText={this.state.idError} />
+                    placeholder = 'SFU ID'
+                    onChange = {e => this.change(e)}/>
                 </Form.Field>
             </Form.Group>
             <Form.Group widths='equal'>
@@ -705,14 +702,13 @@ class FormExampleSubcomponentControl extends Component {
                     onChange = {e => this.change(e)}
                     errorText={this.state.authorizedByError} />
                 </Form.Field>
-                <Form.Field required>
-                  <label> SFU ID/BCDL </label>
+                <Form.Field>
+                  <label> SFU ID </label>
                   <TextField
                     fullWidth={true}
                     name='authorizedID'
-                    placeholder='SFU ID/BCDL'
-                    onChange = {e => this.change(e)}
-                    errorText={this.state.authorizedIDError} />
+                    placeholder='SFU ID'
+                    onChange = {e => this.change(e)}/>
                 </Form.Field>
           <Form.Field required>
                   <label> Date </label>

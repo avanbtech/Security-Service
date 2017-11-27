@@ -20,7 +20,7 @@ const UserArgs = {
   dbID: {
     type: GraphQLInt,
   },
-  sfuBCID: {
+  sfuID: {
     type: GraphQLString,
   },
   department: {
@@ -257,7 +257,7 @@ const Mutation = new GraphQLObjectType({
         resolve(source, args) {
           return Db.models.user.create({
             dbID: args.dbID,
-            sfuBCID: args.sfuBCID,
+            sfuID: args.sfuID,
             department: args.department,
             requestBy: args.requestBy,
             phone: args.phone,
