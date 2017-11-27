@@ -226,10 +226,13 @@ class OfficerAssignment extends Component {
               errorText={this.state.phoneError}/>
           </Form.Field>
         </Form.Group>
-        {officerAssignedDatesRows}
+        <Form.Group>
+          {officerAssignedDatesRows}
+        </Form.Group>
         <div className={s.action_container}>
           <Form.Button
             onClick = {e => this.addDate(e)}>Add Date</Form.Button>
+          <br />
         </div>
         <Form.Group widths='equal'>
           <Form.Field>

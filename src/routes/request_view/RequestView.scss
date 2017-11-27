@@ -75,7 +75,7 @@ table.request_request_table td {
 }
 
 .action_container {
-  float: left;
+  float: right;
   overflow:hidden;
   padding-right: 50px;
   margin-bottom: 50px;
@@ -97,4 +97,9 @@ table.removeOfficer td {
   padding-top: 10px;
   padding-bottom: 0;
   margin-bottom: 0;
+}
+
+.date_body {
+  padding-top: 0;
+  margin-top: 0;
 }
