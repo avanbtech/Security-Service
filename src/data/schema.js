@@ -66,7 +66,7 @@ const RequestArgs = {
     type: GraphQLString,
   },
   invoice: {
-    type: GraphQLInt,
+    type: GraphQLString,
   },
   authorizedBy: {
     type: GraphQLString,

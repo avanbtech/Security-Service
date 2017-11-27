@@ -60,7 +60,9 @@ class FormExampleSubcomponentControl extends Component {
     authorizedPhone:'',
     authorizedPhoneError:'',
     licensed:'',
-    licensedError:''
+    licensedError:'',
+    invoice:'',
+    invoiceError:''
   }
 
 
@@ -210,14 +212,38 @@ class FormExampleSubcomponentControl extends Component {
     else{
       errors.endtimeError = "";
     }
-    var accountCode1 = /^\d{4}-\d{2}-\d{4}-\d{5}$/;
+
+
+    /*var accountCode1 = /^\d{4}-\d{2}-\d{4}-\d{5}$/;
     var accountCode2 = /^\d{4}-\d{2}-?\d{8}$/;
     if (!this.state.accountCode.match(accountCode1) && !this.state.accountCode.match(accountCode2)){
       isError = true;
       errors.accountCodeError = 'Account code should be in OOOO-FF-DDDD-PPPPP or OOOO-FF-JJJJJJJJ format';
+      if (this.state.invoice == 'yes'){
+        errors.accountCodeError = '';
+      }
     }
     else {
       errors.accountCodeError = '';
+    }*/
+
+    if (this.state.invoice == "yes"){
+      errors.accountCodeError = '';
+    }
+    else if (this.state.invoice == "no"){
+      var accountCode1 = /^\d{4}-\d{2}-\d{4}-\d{5}$/;
+      var accountCode2 = /^\d{4}-\d{2}-?\d{8}$/;
+      if (!this.state.accountCode.match(accountCode1) && !this.state.accountCode.match(accountCode2)){
+        isError = true;
+        errors.accountCodeError = 'Account code should be in OOOO-FF-DDDD-PPPPP or OOOO-FF-JJJJJJJJ format';
+      }
+      else{
+        errors.accountCodeError = '';
+      }
+      errors.accountCodeError = 'Account code should be in OOOO-FF-DDDD-PPPPP or OOOO-FF-JJJJJJJJ format';
+    }
+    else{
+      errors.accountCodeError = 'Account code should be in OOOO-FF-DDDD-PPPPP or OOOO-FF-JJJJJJJJ format';
     }
 
     /*if (!this.validateDate(this.state.authorizedDate)){
@@ -268,6 +294,13 @@ class FormExampleSubcomponentControl extends Component {
     else {
       errors.licensedError = "";
     }
+    if(this.state.invoice.length == 0){
+      isError = true;
+      errors.invoiceError = "This field must select";
+    }
+    else {
+      errors.invoiceError = "";
+    }
 
     if(this.state.authorizedSignature.replace('/\s/g','').length == 0){
       isError = true;
@@ -300,6 +333,10 @@ class FormExampleSubcomponentControl extends Component {
 
   handleLicensedChecked = (e, {value}) => {
     this.setState({licensed: { value }.value});
+  }
+
+  handleInvoiceChecked = (e, {value}) => {
+    this.setState({invoice: { value }.value});
   }
 
   handleDepartmentChange = (event, index, value) => {
@@ -682,6 +719,25 @@ class FormExampleSubcomponentControl extends Component {
               onChange = {e => this.change(e)} />
             <h2> Payment Detail </h2>
             <Form.Field required>
+              <Form.Group inline>
+              {/* "value" in data package represent the state of this part */}
+                  <label> Please Invoice </label>
+                  <Form.Radio
+                    name='invoice'
+                    label='Yes'
+                    value='yes'
+                    checked={this.state.invoice === 'yes'}
+                    onChange={this.handleInvoiceChecked} />
+                  <Form.Radio
+                    name='invoice'
+                    label='No'
+                    value='no'
+                    checked={this.state.invoice === 'no'}
+                    onChange={this.handleInvoiceChecked} />
+                  <label style={{color:'red'}}>{this.state.invoiceError}</label>
+              </Form.Group>
+            </Form.Field>
+            <Form.Field>
                 <label> Account Code </label>
               <TextField
                 fullWidth={true}
@@ -690,7 +746,6 @@ class FormExampleSubcomponentControl extends Component {
                 onChange = {e => this.change(e)}
                 errorText={this.state.accountCodeError} />
             </Form.Field>
-            <Form.Checkbox label='Please Invoice' /> {/* "did not intergrated into data package yet */}
             <h2> Authorization Detail </h2>
             <Form.Group widths='equal'>
               <Form.Field required>

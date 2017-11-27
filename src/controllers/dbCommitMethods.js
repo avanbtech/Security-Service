@@ -115,7 +115,7 @@ function commitRequestToDB(req) {
     date: req.body.date,
     details: req.body.detail,
     accountCode: req.body.accountCode,
-    invoice: 99999,
+    invoice: req.body.invoice,
     authorizedBy: req.body.authorizedBy,
     authorizedID: req.body.authorizedID,
     authorizedDate: req.body.authorizedDate,

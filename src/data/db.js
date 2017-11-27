@@ -83,10 +83,10 @@ const Request = Conn.define('request', {
   },
   accountCode: {
     type: Sequelize.STRING,
-    allowNull: false
+    allowNull: true
   },
   invoice: {
-    type: Sequelize.INTEGER,
+    type: Sequelize.STRING,
     allowNull: false
   },
   authorizedBy: {

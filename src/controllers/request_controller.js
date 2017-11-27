@@ -104,6 +104,7 @@ function checkIfRequestInformationNotEmpty(req) {
   checkIfInputIsEmptyInField(req, 'fax', 'parameter: fax is optional');
   checkIfInputIsEmptyInField(req, 'nameOfEvent', 'parameter: nameOfEvent must be specified');
   checkIfInputIsEmptyInField(req, 'licensed', 'parameter: licensed must be specified');
+  checkIfInputIsEmptyInField(req, 'invoice', 'parameter: invoice must be specified');
   checkIfInputIsEmptyInField(req, 'location', 'parameter: location must be specified');
   checkIfInputIsEmptyInField(req, 'eventDate', 'parameter: eventDate must be specified');
   checkIfInputIsEmptyInField(req, 'detail', 'parameter: detail must be specified');
@@ -129,6 +130,7 @@ inputArray.push('phone');
 inputArray.push('fax');
 inputArray.push('nameOfEvent');
 inputArray.push('licensed');
+inputArray.push('invoice');
 inputArray.push('location');
 inputArray.push('eventDate');
 inputArray.push('detail');
@@ -147,10 +149,14 @@ inputArray.forEach(function(element) {
 }
 
 exports.request_post = function (req, res, next) {
+  console.log("success post");
   checkIfRequestInformationNotEmpty(req);
+  console.log("check not empty");
   filterInputInRequestInformation(req);
+  console.log("trim");
 
   dbMethods.commitRequestToDB(req);
+  console.log("create databases;");
   sendemailToUser(req);
 
   res.redirect('/');
