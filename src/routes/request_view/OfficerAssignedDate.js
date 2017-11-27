@@ -73,30 +73,32 @@ class OfficerAssignedDate extends Component {
   };
   render() {
     return (
-      <div className={s.officer}>
-        <Form.Group widths='equal'>
-          <Form.Field required>
-            <label> Start date </label>
-            <DatePicker
-              name='startDate'
-              errorText={this.state.startDateError}
-              hintText="Start Date"
-              value={this.state.startDate}
-              onChange={this.handleStartDateChange}
-              container="inline" />
-          </Form.Field>
-          <Form.Field required>
-            <label> End date </label>
-            <DatePicker
-              name='endDate'
-              hintText="End Date"
-              errorText={this.state.endDateError}
-              value={this.state.endDate}
-              onChange={this.handleEndDateChange}
-              container="inline" />
-          </Form.Field>
-        </Form.Group>
-      </div>
+      <Form.Group widths='equal'>
+        <Form.Field required>
+          <label> Start date </label>
+          <DatePicker
+            name='startDate'
+            errorText={this.state.startDateError}
+            hintText="Start Date"
+            value={this.state.startDate}
+            onChange={this.handleStartDateChange}
+            container="inline"
+            className={s.date_body}
+          />
+        </Form.Field>
+        <Form.Field required>
+          <label> End date </label>
+          <DatePicker
+            name='endDate'
+            hintText="End Date"
+            errorText={this.state.endDateError}
+            value={this.state.endDate}
+            onChange={this.handleEndDateChange}
+            container="inline"
+            className={s.date_body}
+          />
+        </Form.Field>
+      </Form.Group>
     );
   }
 }
