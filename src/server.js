@@ -74,71 +74,11 @@ server.use('/login', (req, res) => {
 
       } catch(e) {
         console.log(`Login Failed: ${e}`);
+        res.redirect("/");
       }
 
     });
-
-
   });
-});
-
-
-server.use('/exportGuards', async(req, res) => {
-
-  //TODO: ADD AUTH CHECK
-  //TODO: CHANGE REQ TO BE PASSED IN WITH THE REQ
-
-  const reqID = req.body.referenceID;
-
-  let data = [];
-
-  await expG.exportGuards(reqID).then((resp) => {
-    console.log(`EXPORTED TO ${resp}`);
-    data = resp;
-  });
-
-  setTimeout(() => {
-    if(data) {
-      res.download(data);
-    } else {
-      // TODO SHOW PROMPT INSTEAD OF REDIRECT
-      res.redirect("/");
-    }
-  }, 5000);
-
-});
-
-server.use('/servicedt', async (req, res) => {
-
-  //TODO: ADD AUTH CHECK
-  let data = null;
-  await dbMethods.getReqForServiceView().then((resp) => {
-    data = resp;
-  });
-
-  res.setHeader('Content-Type', 'application/json');
-
-  const final = {
-    reqData: data,
-  };
-
-  res.json(final);
-});
-
-server.use('/stcheck', async (req, res) => {
-  //TODO: ADD AUTH CHECK
-  let data = null;
-
-  await dbMethods.getReqForStatusView(req.body.referenceID).then((resp) => {
-    data = resp;
-  });
-  res.setHeader("content-type" ,"application/arraybuffer");
-
-  const final = {
-    reqData: data,
-  };
-
-  res.json(final);
 });
 
 //
@@ -179,6 +119,88 @@ server.get('*', async (req, res, next) => {
 // Handle POST requests
 var request = require('./routes/request');
 server.use('/', request);
+
+
+
+
+server.use('/exportGuards', async(req, res) => {
+
+  try {
+
+    //TODO: ADD AUTH CHECK
+    // USE THIS CODE TO AUTHENTICATE
+    // const token = req.body.token;
+    //
+    // jwt.verify(token, JWT_SECRET_KEY);
+
+    const reqID = req.body.referenceID;
+
+    let data = [];
+
+    await expG.exportGuards(reqID).then((resp) => {
+      console.log(`EXPORTED TO ${resp}`);
+      data = resp;
+    });
+
+    setTimeout(() => {
+      if(data) {
+        res.download(data);
+      } else {
+        // TODO SHOW PROMPT INSTEAD OF REDIRECT
+        res.redirect("/");
+      }
+    }, 5000);
+
+  } catch(e) {
+    console.log("INVALID TOKEN");
+    res.send("INVALID TOKEN");
+  }
+
+
+
+});
+
+server.use('/servicedt', async (req, res) => {
+
+  try {
+    //TODO: ADD AUTH CHECK
+    const token = req.body.token;
+    jwt.verify(token, JWT_SECRET_KEY);
+
+    let data = null;
+    await dbMethods.getReqForServiceView().then((resp) => {
+      data = resp;
+    });
+
+    res.setHeader('Content-Type', 'application/json');
+
+    const final = {
+      reqData: data,
+    };
+
+
+    res.json(final);
+  } catch(e) {
+    res.send('https://sfu.ca');
+  }
+});
+
+server.use('/stcheck', async (req, res) => {
+  //TODO: ADD AUTH CHECK
+  let data = null;
+
+  await dbMethods.getReqForStatusView(req.body.referenceID).then((resp) => {
+    data = resp;
+  });
+  res.setHeader("content-type" ,"application/arraybuffer");
+
+  const final = {
+    reqData: data,
+  };
+
+  res.json(final);
+});
+
 
 //
 // Error handling
