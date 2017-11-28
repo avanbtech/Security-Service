@@ -19,9 +19,13 @@ const routes = [
   require('./routes/service_view'),
   require('./routes/request_view'),
   require('./routes/CSV'),
+<<<<<<< dca3bea0ec672c8d86e473681bc41f805d4efe93
   require('./routes/security_view'),
   require('./routes/guard_view'),
   require('./routes/guard_jobs'),
+=======
+  require('./routes/forward'),
+>>>>>>> Temp
 ];
 
 const router = new Router(on => {
