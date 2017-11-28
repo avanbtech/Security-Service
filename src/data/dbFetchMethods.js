@@ -81,8 +81,8 @@ async function getReqForStatusView(reqID) {
 
   const reqNum = '\"' + reqID + '\"';
 
-  const dbQuery = '{request(accessID: ' + reqNum + '){status accessID user { sfuBCID }}}';
-
+  const dbQuery = '{request(accessID: ' + reqNum + '){status accessID user { sfuBCID  email}}}';
+/*
   await axios.post(DBUrl, {
     query: dbQuery,
   })
@@ -94,7 +94,12 @@ async function getReqForStatusView(reqID) {
     .catch(function (error) {
       console.log(error.data);
     });
-
+    */
+    const client = new GraphQLClient(DBUrl, { headers: {} });
+    await client.request(dbQuery).then((data) => {
+      console.log(data.request);
+      res = data.request;
+    });
   return res;
 }
 

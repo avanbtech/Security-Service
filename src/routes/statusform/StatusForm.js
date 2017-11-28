@@ -12,7 +12,7 @@ function Status({ request }) {
   if(request.exists == true){
     row =(<StatusRequest statusRequest={request}/>);
   } else {
-    row = ( <th>Could Not Find Request by ID</th>);
+    row = ( <th>Could Not Find Request by ID or Invalid email.</th>);
   }
   
   return (

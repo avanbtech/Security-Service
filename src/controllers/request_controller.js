@@ -167,13 +167,14 @@ exports.get_accessID = function (req, res, next) {
   checkIfRequestInformationNotEmpty(req, 'referenceID', 'Reference ID must be specified');
   escapeAndTrimInput(req, 'referenceID');
 
-  res.redirect('/StatusForm/' + req.body.referenceID);
+  res.redirect('/StatusForm/' + req.body.referenceID + "/" + req.body.email);
   console.log(req.body.referenceID);
+  console.log(req.body.email);
 };
 
 //Sanitizes input in exports.request_approve
 function sanitizeRequestApprove(req) {
-  escapeAndTrimInput('requestID');
+  escapeAndTrimInput(req, 'requestID');
 
   checkIfRequestInformationNotEmpty(req, 'supervisor', 'Supervisor must be specified');
   checkIfRequestInformationNotEmpty(req, 'distribution', 'Distribution must be specified');
