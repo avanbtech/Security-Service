@@ -16,6 +16,7 @@ const routes = [
   require('./routes/customer'),
   require('./routes/status'),
   require('./routes/statusform'),
+  require('./routes/guard_info_pdf'),
   require('./routes/service_view'),
   require('./routes/request_view'),
   require('./routes/CSV'),

@@ -6,7 +6,7 @@ import findRemoveSync from 'find-remove';
 const Conn = new Sequelize(
   'demodb', //Name of database initalized in mySQL
   'root', //Username to access db
-  'panda', //Your mySQL DB password
+  'hhhhhh', //Your mySQL DB password
   {
     dialect: 'mysql',
     host: 'localhost',
@@ -23,7 +23,7 @@ const User = Conn.define('user', {
   },
   sfuBCID: {
     type: Sequelize.STRING,
-    allowNull: false,
+    allowNull: true,
   },
   department: {
     type: Sequelize.STRING,
@@ -83,10 +83,10 @@ const Request = Conn.define('request', {
   },
   accountCode: {
     type: Sequelize.STRING,
-    allowNull: false
+    allowNull: true
   },
   invoice: {
-    type: Sequelize.INTEGER,
+    type: Sequelize.STRING,
     allowNull: false
   },
   authorizedBy: {
@@ -95,7 +95,7 @@ const Request = Conn.define('request', {
   },
   authorizedID: {
     type: Sequelize.STRING,
-    allowNull: false
+    allowNull: true
   },
   authorizedDate: {
     type: Sequelize.DATE,
@@ -104,7 +104,11 @@ const Request = Conn.define('request', {
   authorizedPhone: {
     type: Sequelize.STRING,
     allowNull: false
-  }
+  },
+  emergencyContact: {
+    type: Sequelize.STRING,
+    allowNull: false
+  },
 });
 
 const Event = Conn.define('event', {
@@ -134,6 +138,10 @@ const Event = Conn.define('event', {
     },
   },
   times: {
+    type: Sequelize.STRING,
+    allowNull: false,
+  },
+  endTime: {
     type: Sequelize.STRING,
     allowNull: false,
   },
