@@ -91,7 +91,6 @@ server.use('/servicedt', async (req, res) => {
 });
 
 server.use('/stcheck', async (req, res) => {
-  //TODO: ADD AUTH CHECK
   let data = null;
 
   await dbMethods.getReqForStatusView(req.body.referenceID).then((resp) => {
