@@ -32,6 +32,8 @@ class FormExampleSubcomponentControl extends Component {
     idError:'',
     phone:'',
     phoneError:'',
+    emergencyContact:'',
+    emergencyContactError: '',
     fax:'',
     faxError:'',
     email:'',
@@ -252,6 +254,20 @@ class FormExampleSubcomponentControl extends Component {
     }
     else {
       errors.authorizedPhoneError = "";
+    }
+
+    if(!this.state.emergencyContact.match(phoneno) && !this.state.emergencyContact.match(phone2)){
+      isError = true;
+      errors.emergencyContactError = "Emergency contact number should be in XXXXXXXXXX or XXX-XXX-XXXX format";
+    }
+    else{
+      if (this.state.emergencyContact.replace(/[^0-9]/g, '') === this.state.authorizedPhone.replace(/[^0-9]/g, '')){
+        isError = true;
+        errors.emergencyContactError = "Emergency can not be same with your phone number";
+      }
+      else{
+        errors.emergencyContactError = "";
+      }
     }
 
     if(this.state.licensed.length == 0){
@@ -721,6 +737,15 @@ class FormExampleSubcomponentControl extends Component {
                     placeholder='XXX-XXX-XXXX'
                     onChange = {e => this.change(e)}
                     errorText={this.state.authorizedPhoneError} />
+                </Form.Field>
+                <Form.Field required>
+                  <label> Emergency Contact </label>
+                  <TextField
+                    fullWidth={true}
+                    name='emergencyContact'
+                    placeholder='XXX-XXX-XXXX'
+                    onChange = {e => this.change(e)}
+                    errorText={this.state.emergencyContactError} />
                 </Form.Field>
             </Form.Group>
 

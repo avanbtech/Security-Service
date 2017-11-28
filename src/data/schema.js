@@ -80,6 +80,9 @@ const RequestArgs = {
   authorizedPhone: {
     type: GraphQLString,
   },
+  emergencyContact: {
+    type: GraphQLString,
+  },
 };
 
 const EventArgs = {
@@ -283,7 +286,8 @@ const Mutation = new GraphQLObjectType({
             authorizedBy: args.authorizedBy,
             authorizedID: args.authorizedID,
             authorizedDate: args.authorizedDate,
-            authorizedPhone: args.authorizedPhone
+            authorizedPhone: args.authorizedPhone,
+            emergencyContact: args.emergencyContact,
           });
         },
       },

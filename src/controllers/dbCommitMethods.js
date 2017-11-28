@@ -119,6 +119,7 @@ function commitRequestToDB(req) {
     authorizedID: req.body.authorizedID,
     authorizedDate: req.body.authorizedDate,
     authorizedPhone: req.body.authorizedPhone,
+    emergencyContact: req.body.emergencyContact,
   });
 }
 

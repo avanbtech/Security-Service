@@ -104,7 +104,11 @@ const Request = Conn.define('request', {
   authorizedPhone: {
     type: Sequelize.STRING,
     allowNull: false
-  }
+  },
+  emergencyContact: {
+    type: Sequelize.STRING,
+    allowNull: false
+  },
 });
 
 const Event = Conn.define('event', {

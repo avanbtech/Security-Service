@@ -86,7 +86,12 @@ const Request  = new GraphQLObjectType({
           return request.authorizedPhone;
         },
       },
-
+      emergencyContact: {
+        type: GraphQLString,
+        resolve(request) {
+          return request.emergencyContact;
+        },
+      },
       user: {
         type: User,
         resolve(request) {
