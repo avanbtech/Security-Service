@@ -6,7 +6,7 @@ export default class OneServiceRequest extends Component {
     let exportGuardList = <p></p>;
     if(this.props.serviceRequest.status === 'Accepted') {
       exportGuardList =
-        <a href={'/ServiceView/export_guard_list/' + this.props.serviceRequest.requestId}>
+        <a target="_blank" href={'/ServiceView/export_guard_list/' + this.props.serviceRequest.requestId}>
           PDF
         </a>;
     }
