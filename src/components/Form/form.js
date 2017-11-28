@@ -29,7 +29,6 @@ class FormExampleSubcomponentControl extends Component {
     requestBy:'',
     requestByError:'',
     id:'',
-    idError:'',
     phone:'',
     phoneError:'',
     fax:'',
@@ -46,13 +45,14 @@ class FormExampleSubcomponentControl extends Component {
     eventDateError:'',
     time:'',
     timeError:'',
+    endtime:'',
+    endtimeError:'',
     detail:'',
     accountCode:'',
     accountCodeError:'',
     authorizedBy:'',
     authorizedByError:'',
     authorizedID:'',
-    authorizedIDError:'',
     authorizedDate:'',
     authorizedDateError:'',
     authorizedSignature:'',
@@ -60,7 +60,9 @@ class FormExampleSubcomponentControl extends Component {
     authorizedPhone:'',
     authorizedPhoneError:'',
     licensed:'',
-    licensedError:''
+    licensedError:'',
+    invoice:'',
+    invoiceError:''
   }
 
 
@@ -99,7 +101,7 @@ class FormExampleSubcomponentControl extends Component {
     else{
       errors.dateError = "";
     }*/
-    if ((Date.parse(this.state.date) - Date.parse(todaysDate)) <= 0 || (this.state.date.length == 0)){
+    if ((Date.parse(this.state.date) - Date.parse(todaysDate)) < 0 || (this.state.date.length == 0)){
       isError = true;
       errors.dateError = "This field cannot be empty";
     }
@@ -107,13 +109,13 @@ class FormExampleSubcomponentControl extends Component {
       errors.dateError = "";
     }
 
-    if (this.state.id.replace(/\s/g, "").length == 0){
+    /*if (this.state.id.replace(/\s/g, "").length == 0){
       isError = true;
       errors.idError = "SFU ID or BCDL should be provided";
     }
     else{
       errors.idError = "";
-    }
+    }*/
 
 
     var phoneno = /^\d{10}$/;
@@ -180,7 +182,7 @@ class FormExampleSubcomponentControl extends Component {
       errors.eventDateError = "";
     }*/
 
-    if ((Date.parse(this.state.eventDate) - Date.parse(todaysDate) <= 0) ||this.state.eventDate.length == 0){
+    if ((Date.parse(this.state.eventDate) - Date.parse(todaysDate) < 0) ||this.state.eventDate.length == 0){
       isError = true;
       errors.eventDateError = "This field cannot be empty";
     }
@@ -203,14 +205,45 @@ class FormExampleSubcomponentControl extends Component {
     else{
       errors.timeError = "";
     }
-    var accountCode1 = /^\d{4}-\d{2}-\d{4}-\d{5}$/;
+    if (this.state.endtime.length == 0){
+      isError = true;
+      errors.endtimeError = "Time should be in HH:MM format";
+    }
+    else{
+      errors.endtimeError = "";
+    }
+
+
+    /*var accountCode1 = /^\d{4}-\d{2}-\d{4}-\d{5}$/;
     var accountCode2 = /^\d{4}-\d{2}-?\d{8}$/;
     if (!this.state.accountCode.match(accountCode1) && !this.state.accountCode.match(accountCode2)){
       isError = true;
       errors.accountCodeError = 'Account code should be in OOOO-FF-DDDD-PPPPP or OOOO-FF-JJJJJJJJ format';
+      if (this.state.invoice == 'yes'){
+        errors.accountCodeError = '';
+      }
     }
     else {
       errors.accountCodeError = '';
+    }*/
+
+    if (this.state.invoice == "yes"){
+      errors.accountCodeError = '';
+    }
+    else if (this.state.invoice == "no"){
+      var accountCode1 = /^\d{4}-\d{2}-\d{4}-\d{5}$/;
+      var accountCode2 = /^\d{4}-\d{2}-?\d{8}$/;
+      if (!this.state.accountCode.match(accountCode1) && !this.state.accountCode.match(accountCode2)){
+        isError = true;
+        errors.accountCodeError = 'Account code should be in OOOO-FF-DDDD-PPPPP or OOOO-FF-JJJJJJJJ format';
+      }
+      else{
+        errors.accountCodeError = '';
+      }
+      errors.accountCodeError = 'Account code should be in OOOO-FF-DDDD-PPPPP or OOOO-FF-JJJJJJJJ format';
+    }
+    else{
+      errors.accountCodeError = 'Account code should be in OOOO-FF-DDDD-PPPPP or OOOO-FF-JJJJJJJJ format';
     }
 
     /*if (!this.validateDate(this.state.authorizedDate)){
@@ -221,7 +254,7 @@ class FormExampleSubcomponentControl extends Component {
         errors.authorizedDateError = "";
     }*/
 
-    if ((Date.parse(this.state.authorizedDate) - Date.parse(todaysDate) <= 0)||this.state.authorizedDate.length == 0){
+    if ((Date.parse(this.state.authorizedDate) - Date.parse(todaysDate) < 0)||this.state.authorizedDate.length == 0){
       isError = true;
       errors.authorizedDateError = "This field cannot be empty";
     }
@@ -237,13 +270,13 @@ class FormExampleSubcomponentControl extends Component {
       errors.authorizedByError = '';
     }
 
-    if (this.state.authorizedID.replace(/\s/g, "").length == 0 ){
+    /*if (this.state.authorizedID.replace(/\s/g, "").length == 0 ){
       isError = true;
       errors.authorizedIDError = 'Authorized ID should be provided';
     }
     else {
       errors.authorizedIDError = '';
-    }
+    }*/
 
     if(!this.state.authorizedPhone.match(phoneno) && !this.state.authorizedPhone.match(phone2))
     {
@@ -260,6 +293,13 @@ class FormExampleSubcomponentControl extends Component {
     }
     else {
       errors.licensedError = "";
+    }
+    if(this.state.invoice.length == 0){
+      isError = true;
+      errors.invoiceError = "This field must select";
+    }
+    else {
+      errors.invoiceError = "";
     }
 
     if(this.state.authorizedSignature.replace('/\s/g','').length == 0){
@@ -295,6 +335,10 @@ class FormExampleSubcomponentControl extends Component {
     this.setState({licensed: { value }.value});
   }
 
+  handleInvoiceChecked = (e, {value}) => {
+    this.setState({invoice: { value }.value});
+  }
+
   handleDepartmentChange = (event, index, value) => {
     this.setState({departmentList: value});
     this.setState({department: value});
@@ -320,6 +364,9 @@ class FormExampleSubcomponentControl extends Component {
 
   handleChangeTimePicker24 = (event, date) => {
     this.setState({time: date});
+  };
+  handleChangeEndTimePicker24 = (event, date) => {
+    this.setState({endtime: date});
   };
 
   FormExampleSuccess = () => (
@@ -544,14 +591,13 @@ class FormExampleSubcomponentControl extends Component {
                     value = {this.state.requestBy}
                     errorText={this.state.requestByError}/>
                 </Form.Field>
-                <Form.Field required>
-                <label> SFU ID or BCDL </label>
+                <Form.Field>
+                <label> SFU ID </label>
                   <TextField
                     fullWidth = {true}
                     name = "id"
-                    placeholder = 'SFU ID or BCDL'
-                    onChange = {e => this.change(e)}
-                    errorText={this.state.idError} />
+                    placeholder = 'SFU ID'
+                    onChange = {e => this.change(e)}/>
                 </Form.Field>
             </Form.Group>
             <Form.Group widths='equal'>
@@ -646,7 +692,7 @@ class FormExampleSubcomponentControl extends Component {
                     errorText={this.state.eventDateError} />
                 </Form.Field>
                 <Form.Field required>
-                  <label> Time(s) </label>
+                  <label> Time </label>
                   <TimePicker
                     format="24hr"
                     fullWidth={true}
@@ -654,6 +700,16 @@ class FormExampleSubcomponentControl extends Component {
                     placeholder='HH:MM'
                     onChange={this.handleChangeTimePicker24}
                     errorText={this.state.timeError} />
+                </Form.Field>
+                <Form.Field required>
+                  <label> End Time </label>
+                  <TimePicker
+                    format="24hr"
+                    fullWidth={true}
+                    name='endtime'
+                    placeholder='HH:MM'
+                    onChange={this.handleChangeEndTimePicker24}
+                    errorText={this.state.endtimeError} />
                 </Form.Field>
             </Form.Group>
             <Form.TextArea
@@ -663,6 +719,25 @@ class FormExampleSubcomponentControl extends Component {
               onChange = {e => this.change(e)} />
             <h2> Payment Detail </h2>
             <Form.Field required>
+              <Form.Group inline>
+              {/* "value" in data package represent the state of this part */}
+                  <label> Please Invoice </label>
+                  <Form.Radio
+                    name='invoice'
+                    label='Yes'
+                    value='yes'
+                    checked={this.state.invoice === 'yes'}
+                    onChange={this.handleInvoiceChecked} />
+                  <Form.Radio
+                    name='invoice'
+                    label='No'
+                    value='no'
+                    checked={this.state.invoice === 'no'}
+                    onChange={this.handleInvoiceChecked} />
+                  <label style={{color:'red'}}>{this.state.invoiceError}</label>
+              </Form.Group>
+            </Form.Field>
+            <Form.Field>
                 <label> Account Code </label>
               <TextField
                 fullWidth={true}
@@ -671,7 +746,6 @@ class FormExampleSubcomponentControl extends Component {
                 onChange = {e => this.change(e)}
                 errorText={this.state.accountCodeError} />
             </Form.Field>
-            <Form.Checkbox label='Please Invoice' /> {/* "did not intergrated into data package yet */}
             <h2> Authorization Detail </h2>
             <Form.Group widths='equal'>
               <Form.Field required>
@@ -683,14 +757,13 @@ class FormExampleSubcomponentControl extends Component {
                     onChange = {e => this.change(e)}
                     errorText={this.state.authorizedByError} />
                 </Form.Field>
-                <Form.Field required>
-                  <label> SFU ID/BCDL </label>
+                <Form.Field>
+                  <label> SFU ID </label>
                   <TextField
                     fullWidth={true}
                     name='authorizedID'
-                    placeholder='SFU ID/BCDL'
-                    onChange = {e => this.change(e)}
-                    errorText={this.state.authorizedIDError} />
+                    placeholder='SFU ID'
+                    onChange = {e => this.change(e)}/>
                 </Form.Field>
           <Form.Field required>
                   <label> Date </label>
