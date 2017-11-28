@@ -29,8 +29,9 @@ export const action = async (state) => {
     res = response.data.reqData;
   });
  */
-//Replace with commented code above for VM use.
+//begin Replace with commented code above for VM use.
   res = await methods.getReqForStatusView(state.params.referenceID);
+//end
   let request;
 
   if (res[0] == null || res == null ){

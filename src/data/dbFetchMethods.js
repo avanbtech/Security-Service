@@ -153,6 +153,21 @@ async function getGuardsForRequest(reqID) {
   return res;
 }
 
+async function getReqForGuardView() {
+  let res = null;
+
+  let query= '{guard { dispatchNumber guardname telephone}}';
+
+  const client = new GraphQLClient(DBUrl, { headers: {} });
+  await client.request(query).then((data) => {
+    console.log(data.request);
+    res = data.request;
+  });
+
+  return res;
+}
+
+
 module.exports = {
   getReqByID,
   getUserByReqID,
@@ -160,4 +175,5 @@ module.exports = {
   getReqForStatusView,
   isValidCodeAndEmail,
   getGuardsForRequest,
+  getReqForGuardView,
 };

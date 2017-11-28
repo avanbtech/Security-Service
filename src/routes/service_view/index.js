@@ -1,6 +1,7 @@
 import React from 'react';
 import ServiceViewReq from './ServiceView';
 import axios from 'axios';
+import methods from '../../data/dbFetchMethods'
 
 async function fetchData() {
   let res = null;
@@ -44,10 +45,13 @@ export const action = async (state) => {
     endDateFilter = Date.parse(endDateFilterStr);
   }
   let res = [];
-  await fetchData().then((response) => {
+  /*await fetchData().then((response) => {
     res = response.data.reqData;
   });
-
+*/
+//begin - Replace with commented code above for VM use
+  res = await methods.getReqForServiceView();
+//end
   let rows = [];
 
   if(res != null) {
