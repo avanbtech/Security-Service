@@ -20,6 +20,7 @@ import axios from 'axios';
 import jwt from 'jsonwebtoken';
 
 
+
 var expressValidator = require('express-validator');
 
 const server = global.server = express();
@@ -70,11 +71,11 @@ server.use('/login', (req, res) => {
 
         const token = jwt.sign(data, JWT_SECRET_KEY);
 
-        res.redirect("/ServiceView" + `?token=${token}`);
+        res.redirect("/ServiceView" + `?token=${token}&login=true`);
 
       } catch(e) {
         console.log(`Login Failed: ${e}`);
-        res.redirect("/");
+        res.redirect('http://localhost:3001');
       }
 
     });
@@ -121,8 +122,6 @@ var request = require('./routes/request');
 server.use('/', request);
 
 
-
-
 server.use('/exportGuards', async(req, res) => {
 
   try {
@@ -163,7 +162,7 @@ server.use('/exportGuards', async(req, res) => {
 server.use('/servicedt', async (req, res) => {
 
   try {
-    //TODO: ADD AUTH CHECK
+    //AUTH CHECK
     const token = req.body.token;
     jwt.verify(token, JWT_SECRET_KEY);
 
