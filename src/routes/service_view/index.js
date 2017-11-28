@@ -2,11 +2,12 @@ import React from 'react';
 import ServiceViewReq from './ServiceView';
 import axios from 'axios';
 import methods from '../../data/dbFetchMethods';
+import {reactLocalStorage} from 'reactjs-localstorage';
 
-async function fetchData() {
+async function fetchData(authtoken) {
   let res = null;
 
-  await axios.post("http://localhost:3001/servicedt")
+  await axios.post("http://localhost:3001/servicedt", { token : authtoken})
     .then(function (response) {
       res = response;
     })
@@ -44,14 +45,27 @@ export const action = async (state) => {
     endDateFilter = Date.parse(endDateFilterStr);
   }
 
+  let token;
+  let error;
   try {
-    console.log(state.query.token);
+    token = state.query.token;
+
+    if(!token) {
+      throw "NO TOKEN";
+    }
+
   } catch(e) {
-    console.log("NO TOKEN");
+    console.log(e);
+    error = true;
+  }
+
+  if(error) {
+    error = false;
+    return "NOT AUTHORIZED. Please Log in.";
   }
 
   let res = [];
-  await fetchData().then((response) => {
+  await fetchData(token).then((response) => {
     res = response.data.reqData;
   });
 
