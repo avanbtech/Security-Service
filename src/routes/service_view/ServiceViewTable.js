@@ -80,7 +80,7 @@ export default class ServiceViewTable extends Component {
 	              Event Date
 	            </Table.HeaderCell>
               <Table.HeaderCell sorted={column === 'status' ? direction : null} onClick={this.handleSort('status')}>
-                Export Guard List
+                Guard Info
               </Table.HeaderCell>
 	          </Table.Row>
 	        </Table.Header>
