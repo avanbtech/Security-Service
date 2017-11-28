@@ -15,6 +15,7 @@ Useful commands:
 - Ctrl + A then Ctrl + D - Exits the current screen session, which will run in the background
 - screen -r - Re-enters screen
 - screen -ls - Lists the screens that currently exist
+- screen -X -S [screen #id] kill - Kills the given screen process id from -ls
 
 Step to step instructions to replicate deployment on a fresh machine:
 
