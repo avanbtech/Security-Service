@@ -260,13 +260,6 @@ exports.export_to_pdf = function (req, res, next) {
   }, waitTimeInMS);
 };
 
-
-exports.casredirect = function(req, res) {
-
-  console.log("LOGIN ATTEMPT");
-  res.redirect(CAS_LOGIN_TEMP);
-};
-
-exports.login = function(req, res) {
-  res.send("LOGIN SCREEN");
-};
+exports.load = function(req, res) {
+  console.log(`REQ MADE: ${req}`);
+}

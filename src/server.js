@@ -16,10 +16,12 @@ import assets from './assets';
 import { port, auth, analytics } from './config';
 import dbMethods from './data/dbFetchMethods';
 import expG from './data/exportGuardsPDF';
-
+import axios from 'axios';
 var expressValidator = require('express-validator');
 
 const server = global.server = express();
+
+const parseString = require('xml2js').parseString;
 
 //
 // Tell any CSS tooling (such as Material UI) to use all vendor prefixes if the
@@ -48,13 +50,18 @@ server.use('/graphql', expressGraphQL(req => ({
 })));
 
 server.use('/login', (req, res) => {
-  console.log("LOGIN ATTEMPT");
+  // Service URL for deployment: https%3A%2F%2Fcmpt373-1177g.cmpt.sfu.ca%2Flogin
 
-  console.log(req.query.ticket);
+  axios.get(`https://cas.sfu.ca/cas/serviceValidate?ticket=${req.query.ticket}&service=http%3A%2F%2Flocalhost%3A3000%2Flogin`).then((resp) => {
+    //console.log(resp.data);
 
+    parseString(resp.data, function (err, result) {
+      console.log(result['cas:serviceResponse']['cas:authenticationSuccess']);
+    });
 
-
-
+    res.query.str = "HFISN";
+    res.redirect("/forward");
+  });
 });
 
 
