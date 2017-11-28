@@ -49,12 +49,6 @@ const Event = new GraphQLObjectType({
           return event.times;
         },
       },
-      endTime: {
-        type: GraphQLString,
-        resolve(event) {
-          return event.endTime;
-        },
-      },
       request: {
         type: requestType,
         resolve(event) {
