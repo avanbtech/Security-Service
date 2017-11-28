@@ -19,7 +19,6 @@ const routes = [
   require('./routes/service_view'),
   require('./routes/request_view'),
   require('./routes/CSV'),
-  require('./routes/forward'),
 ];
 
 const router = new Router(on => {

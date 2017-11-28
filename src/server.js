@@ -17,11 +17,16 @@ import { port, auth, analytics } from './config';
 import dbMethods from './data/dbFetchMethods';
 import expG from './data/exportGuardsPDF';
 import axios from 'axios';
+import jwt from 'jsonwebtoken';
+
+
 var expressValidator = require('express-validator');
 
 const server = global.server = express();
 
 const parseString = require('xml2js').parseString;
+
+const JWT_SECRET_KEY = "TEAM GAMMA";
 
 //
 // Tell any CSS tooling (such as Material UI) to use all vendor prefixes if the
@@ -56,11 +61,24 @@ server.use('/login', (req, res) => {
     //console.log(resp.data);
 
     parseString(resp.data, function (err, result) {
-      console.log(result['cas:serviceResponse']['cas:authenticationSuccess']);
+      //console.log(result['cas:serviceResponse']['cas:authenticationSuccess']);
+
+      try {
+        const data = {
+          user : result['cas:serviceResponse']['cas:authenticationSuccess'][0]['cas:user'],
+        };
+
+        const token = jwt.sign(data, JWT_SECRET_KEY);
+
+        res.redirect("/ServiceView" + `?token=${token}`);
+
+      } catch(e) {
+        console.log(`Login Failed: ${e}`);
+      }
+
     });
 
-    res.query.str = "HFISN";
-    res.redirect("/forward");
+
   });
 });
 
