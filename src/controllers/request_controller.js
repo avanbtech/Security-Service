@@ -9,7 +9,7 @@ import db from '../data/db';
 import exportMethods from '../PyScripts/childProcPy'
 import nodemailer from 'nodemailer';
 import xoauth2 from 'xoauth2';
-
+import expG from '../data/exportGuardsPDF';
 import dbMethods from './dbCommitMethods';
 
 /*Helper Functions*/
@@ -116,7 +116,7 @@ function checkIfRequestInformationNotEmpty(req) {
   checkIfInputIsEmptyInField(req, 'time', 'parameter: time must be specified');
   checkIfInputIsEmptyInField(req, 'endtime', 'parameter: end time must be specified');
   checkIfInputIsEmptyInField(req, 'emergencyContact', 'emergencyContact: phone must be specified');
-  
+
 
 }
 
@@ -262,4 +262,26 @@ exports.export_to_pdf = function (req, res, next) {
       res.redirect("/");
     }
   }, waitTimeInMS);
+};
+
+exports.exportGuards = async (req, res) => {
+  const reqID = req.body.referenceID;
+
+  let data = [];
+
+  await expG.exportGuards(reqID).then((resp) => {
+    console.log(`EXPORTED TO ${resp}`);
+    data = resp;
+
+    setTimeout(() => {
+      if(data) {
+
+        res.sendFile(`/Users/sankait/Projects/CMPT373-Gamma/${resp}`);
+        // res.download(data);
+      } else {
+        // TODO SHOW PROMPT INSTEAD OF REDIRECT
+        res.redirect("/");
+      }
+    }, 5000);
+  });
 };
