@@ -17,10 +17,10 @@ const UserType = new GraphQLObjectType({
           return event.dbID;
         }
       },
-      sfuID: {
+      sfuBCID: {
         type: GraphQLString,
         resolve(event) {
-          return event.sfuID;
+          return event.sfuBCID;
         }
       },
       department: {

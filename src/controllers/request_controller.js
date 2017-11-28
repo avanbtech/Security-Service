@@ -115,6 +115,8 @@ function checkIfRequestInformationNotEmpty(req) {
   checkIfInputIsEmptyInField(req, 'numberOfAttendees', 'parameter: numberOfAttendees must be specified');
   checkIfInputIsEmptyInField(req, 'time', 'parameter: time must be specified');
   checkIfInputIsEmptyInField(req, 'endtime', 'parameter: end time must be specified');
+  checkIfInputIsEmptyInField(req, 'emergencyContact', 'emergencyContact: phone must be specified');
+  
 
 }
 
@@ -141,6 +143,8 @@ inputArray.push('email');
 inputArray.push('numberOfAttendees');
 inputArray.push('time');
 inputArray.push('endtime');
+inputArray.push('emergencyContact');
+
 
 inputArray.forEach(function(element) {
     escapeAndTrimInput(req, element);
@@ -149,12 +153,8 @@ inputArray.forEach(function(element) {
 }
 
 exports.request_post = function (req, res, next) {
-  console.log("success post");
   checkIfRequestInformationNotEmpty(req);
-  console.log("check not empty");
   filterInputInRequestInformation(req);
-  console.log("trim");
-
   dbMethods.commitRequestToDB(req);
   console.log("create databases;");
   sendemailToUser(req);

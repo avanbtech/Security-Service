@@ -65,7 +65,7 @@ function commitRequestToDB(req) {
 
   db.models.user.create({
     dbID: commonDbID,
-    sfuID: req.body.id,
+    sfuBCID: req.body.id,
     department: req.body.department,
     requestBy: req.body.requestBy,
     phone: req.body.phone,
@@ -120,6 +120,7 @@ function commitRequestToDB(req) {
     authorizedID: req.body.authorizedID,
     authorizedDate: req.body.authorizedDate,
     authorizedPhone: req.body.authorizedPhone,
+    emergencyContact: req.body.emergencyContact,
   });
 }
 
