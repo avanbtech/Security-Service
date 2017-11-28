@@ -174,7 +174,7 @@ exports.get_accessID = function (req, res, next) {
 
 //Sanitizes input in exports.request_approve
 function sanitizeRequestApprove(req) {
-  escapeAndTrimInput('requestID');
+  escapeAndTrimInput(req, 'requestID');
 
   checkIfRequestInformationNotEmpty(req, 'supervisor', 'Supervisor must be specified');
   checkIfRequestInformationNotEmpty(req, 'distribution', 'Distribution must be specified');
