@@ -81,7 +81,6 @@ function commitRequestToDB(req) {
     numberOfattendees: req.body.numberOfAttendees,
     eventDates: [req.body.eventDate],   // TODO: CONFIRM DATES ARE JOINED BY ';'
     times: req.body.time,
-    endTime: req.body.endtime,
   });
 
   db.models.security.create({
@@ -115,7 +114,7 @@ function commitRequestToDB(req) {
     date: req.body.date,
     details: req.body.detail,
     accountCode: req.body.accountCode,
-    invoice: req.body.invoice,
+    invoice: 99999,
     authorizedBy: req.body.authorizedBy,
     authorizedID: req.body.authorizedID,
     authorizedDate: req.body.authorizedDate,

@@ -57,7 +57,7 @@ const Request  = new GraphQLObjectType({
         },
       },
       invoice: {
-        type: GraphQLString,
+        type: GraphQLInt,
         resolve(request) {
           return request.invoice;
         },

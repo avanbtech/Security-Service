@@ -104,7 +104,6 @@ function checkIfRequestInformationNotEmpty(req) {
   checkIfInputIsEmptyInField(req, 'fax', 'parameter: fax is optional');
   checkIfInputIsEmptyInField(req, 'nameOfEvent', 'parameter: nameOfEvent must be specified');
   checkIfInputIsEmptyInField(req, 'licensed', 'parameter: licensed must be specified');
-  checkIfInputIsEmptyInField(req, 'invoice', 'parameter: invoice must be specified');
   checkIfInputIsEmptyInField(req, 'location', 'parameter: location must be specified');
   checkIfInputIsEmptyInField(req, 'eventDate', 'parameter: eventDate must be specified');
   checkIfInputIsEmptyInField(req, 'detail', 'parameter: detail must be specified');
@@ -112,6 +111,7 @@ function checkIfRequestInformationNotEmpty(req) {
   checkIfInputIsEmptyInField(req, 'lastName', 'parameter: lastName name must be specified');
   checkIfInputIsEmptyInField(req, 'userName', 'parameter: userName name must be specified');
   checkIfInputIsEmptyInField(req, 'email', 'parameter: email must be specified');
+  checkIfInputIsEmptyInField(req, 'id', 'parameter: id must be specified');
   checkIfInputIsEmptyInField(req, 'numberOfAttendees', 'parameter: numberOfAttendees must be specified');
   checkIfInputIsEmptyInField(req, 'time', 'parameter: time must be specified');
   checkIfInputIsEmptyInField(req, 'endtime', 'parameter: end time must be specified');
@@ -132,7 +132,6 @@ inputArray.push('phone');
 inputArray.push('fax');
 inputArray.push('nameOfEvent');
 inputArray.push('licensed');
-inputArray.push('invoice');
 inputArray.push('location');
 inputArray.push('eventDate');
 inputArray.push('detail');
@@ -140,6 +139,7 @@ inputArray.push('firstName');
 inputArray.push('lastName');
 inputArray.push('userName');
 inputArray.push('email');
+inputArray.push('id');
 inputArray.push('numberOfAttendees');
 inputArray.push('time');
 inputArray.push('endtime');
@@ -156,7 +156,6 @@ exports.request_post = function (req, res, next) {
   checkIfRequestInformationNotEmpty(req);
   filterInputInRequestInformation(req);
   dbMethods.commitRequestToDB(req);
-  console.log("create databases;");
   sendemailToUser(req);
 
   res.redirect('/');
