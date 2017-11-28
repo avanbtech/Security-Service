@@ -47,22 +47,21 @@ export const action = async (state) => {
 
   let token;
   let error;
+
   try {
     token = state.query.token;
 
     if(!token) {
-      throw "NO TOKEN";
+      throw "no token";
     }
-
   } catch(e) {
-    console.log(e);
     error = true;
   }
 
   if(error) {
-    error = false;
-    return "NOT AUTHORIZED. Please Log in.";
+    return "NOT AUTHORIZED. Please Log in";
   }
+
 
   let res = [];
   await fetchData(token).then((response) => {

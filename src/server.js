@@ -17,6 +17,10 @@ import { port, auth, analytics } from './config';
 import dbMethods from './data/dbFetchMethods';
 import expG from './data/exportGuardsPDF';
 import axios from 'axios';
+import jwt from 'jsonwebtoken';
+
+
+
 var expressValidator = require('express-validator');
 
 const server = global.server = express();
@@ -61,13 +65,13 @@ server.use('/login', (req, res) => {
 
   console.log(req.query.ticket);
 
-});
+        res.redirect("/ServiceView" + `?token=${token}&login=true`);
 
   axios.get(`https://cas.sfu.ca/cas/serviceValidate?ticket=${req.query.ticket}&service=http%3A%2F%2Flocalhost%3A3000%2Flogin`).then((resp) => {
     //console.log(resp.data);
       } catch(e) {
         console.log(`Login Failed: ${e}`);
-        res.redirect("/");
+        res.redirect('http://localhost:3001');
       }
 
     parseString(resp.data, function (err, result) {
@@ -171,8 +175,6 @@ var request = require('./routes/request');
 server.use('/', request);
 
 
-
-
 server.use('/exportGuards', async(req, res) => {
 
   try {
@@ -213,7 +215,7 @@ server.use('/exportGuards', async(req, res) => {
 server.use('/servicedt', async (req, res) => {
 
   try {
-    //TODO: ADD AUTH CHECK
+    //AUTH CHECK
     const token = req.body.token;
     jwt.verify(token, JWT_SECRET_KEY);
 

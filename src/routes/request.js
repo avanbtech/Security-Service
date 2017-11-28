@@ -19,5 +19,6 @@ router.post('/exportguards', requestController.guardExport);
 router.get('/casredirect', requestController.casredirect);
 router.get('/login', requestController.login);
 router.get('/forward', requestController.load);
+router.post('/login', requestController.load);
 
 module.exports = router;

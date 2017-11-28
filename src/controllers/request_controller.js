@@ -12,8 +12,6 @@ import xoauth2 from 'xoauth2';
 import expG from '../data/exportGuardsPDF';
 import dbMethods from './dbCommitMethods';
 
-const CAS_LOGIN_LINK = 'https://cas.sfu.ca/cas/login?service=https://cmpt373-1177g.cmpt.sfu.ca/login';
-const CAS_LOGIN_TEMP = 'https://cas.sfu.ca/cas/login?service=https://localhost:3000/login';
 
 /*Helper Functions*/
 //Base function that sends different types of emails using EMAILSERVICE address
