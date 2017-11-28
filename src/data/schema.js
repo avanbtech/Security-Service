@@ -20,7 +20,7 @@ const UserArgs = {
   dbID: {
     type: GraphQLInt,
   },
-  sfuID: {
+  sfuBCID: {
     type: GraphQLString,
   },
   department: {
@@ -66,7 +66,7 @@ const RequestArgs = {
     type: GraphQLString,
   },
   invoice: {
-    type: GraphQLString,
+    type: GraphQLInt,
   },
   authorizedBy: {
     type: GraphQLString,
@@ -100,9 +100,6 @@ const EventArgs = {
   },
   times: {
     type: GraphQLString,
-  },
-  endTime: {
-    type: GraphQLString
   },
 };
 
@@ -257,7 +254,7 @@ const Mutation = new GraphQLObjectType({
         resolve(source, args) {
           return Db.models.user.create({
             dbID: args.dbID,
-            sfuID: args.sfuID,
+            sfuBCID: args.sfuBCID,
             department: args.department,
             requestBy: args.requestBy,
             phone: args.phone,
@@ -304,7 +301,6 @@ const Mutation = new GraphQLObjectType({
             location: args.location,
             eventDates: args.eventDates.split(';'),
             times: args.times,
-            endTime: args.endTime,
 
           });
         },
