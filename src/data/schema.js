@@ -66,7 +66,7 @@ const RequestArgs = {
     type: GraphQLString,
   },
   invoice: {
-    type: GraphQLInt,
+    type: GraphQLString,
   },
   authorizedBy: {
     type: GraphQLString,
@@ -103,6 +103,9 @@ const EventArgs = {
   },
   times: {
     type: GraphQLString,
+  },
+  endTime: {
+    type: GraphQLString
   },
 };
 
@@ -305,6 +308,7 @@ const Mutation = new GraphQLObjectType({
             location: args.location,
             eventDates: args.eventDates.split(';'),
             times: args.times,
+            endTime: args.endTime,
 
           });
         },
