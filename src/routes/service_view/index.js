@@ -43,6 +43,13 @@ export const action = async (state) => {
     endDateFilterStr = state.query.end_date;
     endDateFilter = Date.parse(endDateFilterStr);
   }
+
+  try {
+    console.log(state.query.token);
+  } catch(e) {
+    console.log("NO TOKEN");
+  }
+
   let res = [];
   await fetchData().then((response) => {
     res = response.data.reqData;

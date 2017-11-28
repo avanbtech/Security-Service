@@ -15,12 +15,8 @@ import Router from './routes';
 import assets from './assets';
 import { port, auth, analytics } from './config';
 import dbMethods from './data/dbFetchMethods';
-<<<<<<< dca3bea0ec672c8d86e473681bc41f805d4efe93
-
-=======
 import expG from './data/exportGuardsPDF';
 import axios from 'axios';
->>>>>>> Temp
 var expressValidator = require('express-validator');
 
 const server = global.server = express();
@@ -61,15 +57,11 @@ server.use('/guardjobcheck', async(req, res) =>{
   });
 
 server.use('/login', (req, res) => {
-<<<<<<< dca3bea0ec672c8d86e473681bc41f805d4efe93
   console.log("LOGIN ATTEMPT");
 
   console.log(req.query.ticket);
 
 });
-=======
-  // Service URL for deployment: https%3A%2F%2Fcmpt373-1177g.cmpt.sfu.ca%2Flogin
->>>>>>> Temp
 
   axios.get(`https://cas.sfu.ca/cas/serviceValidate?ticket=${req.query.ticket}&service=http%3A%2F%2Flocalhost%3A3000%2Flogin`).then((resp) => {
     //console.log(resp.data);
@@ -78,13 +70,6 @@ server.use('/login', (req, res) => {
       console.log(result['cas:serviceResponse']['cas:authenticationSuccess']);
     });
 
-<<<<<<< dca3bea0ec672c8d86e473681bc41f805d4efe93
-=======
-    res.query.str = "HFISN";
-    res.redirect("/forward");
-  });
-});
->>>>>>> Temp
 
 
   res.setHeader('Content-Type', 'application/json');

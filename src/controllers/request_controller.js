@@ -315,7 +315,6 @@ exports.export_to_pdf = function (req, res, next) {
   }, waitTimeInMS);
 };
 
-<<<<<<< dca3bea0ec672c8d86e473681bc41f805d4efe93
 exports.get_guards = function(req, res, next){
   res.redirect('/GuardView');
 };
@@ -347,8 +346,6 @@ exports.casredirect = function(req, res) {
 exports.login = function(req, res) {
   res.send("LOGIN SCREEN");
 };
-=======
 exports.load = function(req, res) {
   console.log(`REQ MADE: ${req}`);
 }
->>>>>>> Temp
