@@ -1,4 +1,5 @@
-// ../step-definition/main-page.js
+// ../step-definitions/main-page.js
+
 const mainPageObject = require('../page-objects/main-page-object');
 
 module.exports = function () {

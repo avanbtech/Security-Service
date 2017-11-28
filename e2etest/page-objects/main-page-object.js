@@ -1,7 +1,7 @@
 // ../page-objects/main-page-object.js
 
 module.exports = {
-  url: 'localhost:3001',
+  url: 'http://localhost:3001',
 
   elements: {
     requestButton: by.id('30'),
@@ -9,4 +9,4 @@ module.exports = {
     serviceViewButton: by.id('50'),
     exportDataButton: by.id('58'),
   }
-}
+};
