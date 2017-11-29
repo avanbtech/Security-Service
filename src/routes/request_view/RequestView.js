@@ -3,7 +3,7 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import s from './RequestView.scss';
 import NotFound from './NotFound';
 import RequestApproval from './RequestApproval';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 function ServiceView({request, requestID, approved}) {
   if(request.length > 0) {

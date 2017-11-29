@@ -1,7 +1,7 @@
 import React, { PropTypes, Component } from 'react';
-import { Table } from 'semantic-ui-react'
-import _ from 'lodash'
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
+import { Table } from 'semantic-ui-react';
+import _ from 'lodash';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import OneServiceRequest from '../../routes/service_view/OneServiceRequest';
 
 export default class ServiceViewTable extends Component {

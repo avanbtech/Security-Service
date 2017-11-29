@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import s from './RequestView.scss';
-import { Button,  Form, Message } from 'semantic-ui-react'
+import { Button,  Form, Message } from 'semantic-ui-react';
 
 function ApprovalPrompt(input) {
   var approveLabel = input.status == "Accepted" ? "Update" : "Approve";
