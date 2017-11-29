@@ -55,40 +55,6 @@ const MainPage = () => (
               />
             </Link>
           </div>
-          <div className = {s.box}>
-            <div className={s.lockicon}>
-              <img src={lockicon} height={165} width={165} />
-            </div>
-            <div className={s.description}>
-              Restricted - authorization required.
-            </div>
-            <Link className = {s.link} to="/ServiceView">
-              <FlatButton
-                label = "Service View"
-                backgroundColor = 'rgba(0, 0, 0, 0)'
-                labelStyle = {{color: '#FFEBEE'}}
-                hoverColor = 'rgba(116, 21, 27, 0.6)'
-                width = {100}
-              />
-            </Link>
-          </div>
-          <div className={s.box}>
-            <div className={s.exporticon}>
-              <img src={exporticon} height={170} width={170} />
-            </div>
-            <div className={s.description}>
-              Export a single request's information in CSV format.
-            </div>
-            <Link className={s.link} to="/CSV">
-              <FlatButton
-                  label = "Export Data"
-                  backgroundColor = 'rgba(0, 0, 0, 0)'
-                  labelStyle ={{color: '#FFEBEE'}}
-                  hoverColor = 'rgba(116, 21, 27, 0.6)'
-                  width = {100}
-                />
-            </Link>
-          </div>
         </div>
       </MuiThemeProvider>
     </div>
