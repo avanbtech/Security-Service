@@ -107,6 +107,15 @@ server.use('/stcheck', async (req, res) => {
   res.json(final);
 });
 
+//For CAS Use
+server.use('/login', (req, res) => {
+  console.log("LOGIN ATTEMPT");
+
+  console.log(req.query.ticket);
+
+});
+
+
 //
 // Register server-side rendering middleware
 // -----------------------------------------------------------------------------

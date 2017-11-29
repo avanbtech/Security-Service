@@ -12,6 +12,10 @@ import xoauth2 from 'xoauth2';
 import expG from '../data/exportGuardsPDF';
 import dbMethods from './dbCommitMethods';
 
+//For CAS Use
+const CAS_LOGIN_LINK = 'https://cas.sfu.ca/cas/login?service=https://cmpt373-1177g.cmpt.sfu.ca/login';
+const CAS_LOGIN_TEMP = 'https://cas.sfu.ca/cas/login?service=https://localhost:3000/login';
+
 /*Helper Functions*/
 //Base function that sends different types of emails using EMAILSERVICE address
 //Takes req, subject line, and email contents as arguments.
@@ -201,7 +205,7 @@ exports.request_post = function (req, res, next) {
 
   sendemailToUser(req);
 
-  
+
 };
 
 
@@ -333,4 +337,15 @@ exports.guardExport = async (req, res) => {
       }
     }, 5000);
   });
+};
+
+//For CAS Use
+exports.casredirect = function(req, res) {
+
+  console.log("LOGIN ATTEMPT");
+  res.redirect(CAS_LOGIN_TEMP);
+};
+
+exports.login = function(req, res) {
+  res.send("LOGIN SCREEN");
 };

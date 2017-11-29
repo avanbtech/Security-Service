@@ -16,5 +16,7 @@ router.post('/StatusForm/', requestController.get_accessID);
 router.post('/GuardView', requestController.get_guards);
 router.post('/GuardJobs/:dispatchNumber', requestController.get_guardJobs);
 router.post('/exportguards', requestController.guardExport);
+router.get('/casredirect', requestController.casredirect);
+router.get('/login', requestController.login);
 
 module.exports = router;
