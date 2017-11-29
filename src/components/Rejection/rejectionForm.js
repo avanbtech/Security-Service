@@ -109,16 +109,11 @@ class rejectionFormComponent extends Component {
     }
   }
 
-
-
-
-
-
-
-
-
-
-
-
-
 }
+
+export default rejectionFormComponent
+
+
+
+
+
