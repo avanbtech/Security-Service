@@ -212,6 +212,8 @@ exports.request_approve = function (req, res, next) {
 
   sanitizeRequestApprove(req);
 
+  console.log(req.body);
+
   dbMethods.commitApproveToDB(req);
   sendemailToUserWithApproval(req);
   res.redirect('/ServiceView');
