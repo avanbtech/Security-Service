@@ -101,6 +101,18 @@ const EventArgs = {
   eventDates: {
     type: GraphQLString
   },
+  secondDate: {
+    type: GraphQLString
+  },
+  thirdDate: {
+    type: GraphQLString
+  },
+  fourthDate: {
+    type: GraphQLString
+  },
+  fifthDate: {
+    type: GraphQLString
+  },
   times: {
     type: GraphQLString,
   },
@@ -307,6 +319,10 @@ const Mutation = new GraphQLObjectType({
             numberOfattendees: args.numberOfattendees,
             location: args.location,
             eventDates: args.eventDates.split(';'),
+            secondDate: args.secondDate,
+            thirdDate: args.thirdDate,
+            fourthDate: args.fourthDate,
+            fifthDate: args.fifthDate,
             times: args.times,
             endTime: args.endTime,
 

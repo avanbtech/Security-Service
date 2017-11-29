@@ -1,6 +1,6 @@
-import React, { Component } from 'react'
-import { Button,  Form, Message } from 'semantic-ui-react'
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
+import React, { Component } from 'react';
+import { Button,  Form, Message } from 'semantic-ui-react';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import DatePicker from 'material-ui/DatePicker';
 import s from './ServiceView.scss';
 
