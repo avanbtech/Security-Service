@@ -2,17 +2,17 @@
 ** Holds the logic and base HTML and JavaScript for the status form
 */
 
-import React, { Component } from 'react'
-import { Button,  Form, Message } from 'semantic-ui-react'
-import TextField from "material-ui/TextField"
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
+import React, { Component } from 'react';
+import { Button,  Form, Message } from 'semantic-ui-react';
+import TextField from "material-ui/TextField";
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import DatePicker from 'material-ui/DatePicker';
 import TimePicker from 'material-ui/TimePicker';
 import DropDownMenu from 'material-ui/DropDownMenu';
 import MenuItem from 'material-ui/MenuItem';
 import SelectField from 'material-ui/SelectField';
 import AdditionalEventDate from './AdditionalEventDate';
-import s from './EventDates.scss'
+import s from './EventDates.scss';
 
 const styles = {
   customWidth: {
@@ -110,7 +110,7 @@ class FormExampleSubcomponentControl extends Component {
       evenDatesObjects: newevenDatesObjects
     });
     }
-    
+
   }
   change = e =>{
     this.setState({
@@ -916,7 +916,7 @@ class FormExampleSubcomponentControl extends Component {
                 {/* "did not intergrated into data package yet */}
               </Form.Group>
             </Form.Field>
-            
+
             <Form.Button onClick = {e => this.onSubmit(e)} >Submit</Form.Button>
           </Form>
         </MuiThemeProvider>

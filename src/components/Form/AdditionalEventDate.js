@@ -1,8 +1,8 @@
-import React, { Component } from 'react'
-import { Button,  Form, Message } from 'semantic-ui-react'
-import TextField from "material-ui/TextField"
-import DatePicker from "material-ui/DatePicker"
-import s from './EventDates.scss'
+import React, { Component } from 'react';
+import { Button,  Form, Message } from 'semantic-ui-react';
+import TextField from "material-ui/TextField";
+import DatePicker from "material-ui/DatePicker";
+import s from './EventDates.scss';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 
@@ -67,7 +67,7 @@ class AdditionalEventDate extends Component {
     var todaysDate = new Date();
     todaysDate.setHours(0,0,0,0);
 
-   
+
     if (Date.parse(this.state.secondDate) - Date.parse(todaysDate) < 0) {
       isError = true;
       errors.secondDateError = "The Second Event date can not be the past day";
@@ -96,7 +96,7 @@ class AdditionalEventDate extends Component {
       errors.fifthDateError = "";
     }
 
-    
+
     if ((Date.parse(this.state.secondDate) - Date.parse(this.state.thirdDate)) == 0){
       isError = true;
       errors.secondDateError = "The Second Event date can not be the same the third";
