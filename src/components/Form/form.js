@@ -23,8 +23,6 @@ const styles = {
   },
 };
 
-
-
 class FormExampleSubcomponentControl extends Component {
   state = {
     date:'',

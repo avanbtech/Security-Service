@@ -1,6 +1,0 @@
-/**
- * @providesModule SCSSStub
- */
-
-module.exports = {};
-

@@ -13,8 +13,6 @@ const styles = {
   },
 };
 
-
-
 class OfficerAssignment extends Component {
   constructor(props) {
     super(props);

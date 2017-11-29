@@ -13,8 +13,6 @@ const styles = {
   },
 };
 
-
-
 class RequestApprovalForm extends Component {
 
   state = {

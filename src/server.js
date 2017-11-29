@@ -139,8 +139,6 @@ server.get('*', async (req, res, next) => {
   }
 });
 
-
-
 // Handle POST requests
 var request = require('./routes/request');
 server.use('/', request);
@@ -162,7 +160,6 @@ server.use((err, req, res, next) => { // eslint-disable-line no-unused-vars
     stack: process.env.NODE_ENV === 'production' ? '' : err.stack,
   }));
 });
-
 
 //
 // Launches the server

@@ -7,7 +7,7 @@ function Contact({ title }) {
     <div className={s.root}>
       <div className={s.container}>
         <h1>{title}</h1>
-        
+
     <ContactInfo developerInfo={developerInfo} />
 
       </div>
@@ -15,15 +15,12 @@ function Contact({ title }) {
   );
 }
 
-
-{/*This part of the code can be encapsulated better by moving the function elsewhere and importing it perhaps*/}
 function ContactInfo(props) {
 
   const content = props.developerInfo.map((developer) =>
 
     <div key={developer.id}>
 
-{/*Edit html for developer name and ids here*/}
     <li><p> <b>{developer.name}: </b>
     {developer.sfuid}@sfu.ca </p></li>
 
@@ -36,7 +33,6 @@ function ContactInfo(props) {
   );
 }
 
-{/*Fill out developer name and emails here*/}
 const developerInfo = [
   {id: 1, name: 'Raymond Huang', sfuid: 'xiruih'},
   {id: 2, name: 'Junru Tao', sfuid: 'junrut'},
