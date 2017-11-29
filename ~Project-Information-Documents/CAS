@@ -1,1 +1,13 @@
-Change "https://cas.sfu.ca/cas/login?service=https://localhost:3001/Security" to VM link if demonstrating on VM at src/components/Navigation/Navigation.js.
+CAS Documentation:
+
+We currently have a few CAS domains registered on the official SFU System:
+
+https://cmpt373-1177g.cmpt.sfu.ca/Login
+https://cmpt373-1177g.cmpt.sfu.ca/Register
+
+Clicking the security service view will redirect you to the CAS portal, which will redirect us back if you connected properly with a verification token.
+
+
+
+Change "https://cas.sfu.ca/cas/login?service=https://localhost:3001/Security" to VM link (Localhost -> https://cmpt373-1177g.cmpt.sfu.ca/)
+if demonstrating on VM at src/components/Navigation/Navigation.js.
