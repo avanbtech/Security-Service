@@ -8,7 +8,6 @@ async function fetchData() {
 
   await axios.post("https://cmpt373-1177g.cmpt.sfu.ca/servicedt")
     .then(function (response) {
-
       res = response;
     })
     .catch(function (error) {
@@ -45,12 +44,12 @@ export const action = async (state) => {
     endDateFilter = Date.parse(endDateFilterStr);
   }
   let res = [];
-  /*await fetchData().then((response) => {
+  await fetchData().then((response) => {
     res = response.data.reqData;
   });
-*/
+
 //begin - Replace with commented code above for VM use
-  res = await methods.getReqForServiceView();
+ // res = await methods.getReqForServiceView();
 //end
   let rows = [];
 

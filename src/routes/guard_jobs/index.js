@@ -16,11 +16,13 @@ function contains(a, obj) {
     return false;
 }
 
-async function getData() {
+async function getData(dispatchNumber) {
   let res = [];
   const url = "https://cmpt373-1177g.cmpt.sfu.ca/guardjobcheck";
 
-  await axios.post(url)
+  await axios.post(url,{
+      dispatchNumber: dispatchNumber
+  })
   .then(function (response) {
     res = response;
   })

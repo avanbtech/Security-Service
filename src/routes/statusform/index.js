@@ -24,14 +24,14 @@ export const action = async (state) => {
   const title = 'Status form that displays current request status and information user entered';
 
   let res = null;
-/*
+
   await getData(state.params.referenceID).then((response) => {
     res = response.data.reqData;
   });
- */
-//begin Replace with commented code above for VM use.
+ 
+
   res = await methods.getReqForStatusView(state.params.referenceID);
-//end
+
   let request;
 
   if (res[0] == null || res == null ){
