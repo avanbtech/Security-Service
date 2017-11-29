@@ -2,15 +2,19 @@ import React, { Component } from 'react';
 import { Form } from 'semantic-ui-react';
 import DatePicker from 'material-ui/DatePicker';
 import s from './RequestView.scss';
-
+import TextField from "material-ui/TextField"
 
 class OfficerAssignedDate extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      startDate: props.startDate === undefined ? new Date() : props.startDate,
-      endDate: props.endDate === undefined ? new Date() : props.endDate,
+      assignedDate: props.assignedDate === undefined ? new Date() : props.assignedDate,
+      assignedDateError: '',
+      startTime: props.startTime === undefined ? new Date() : props.startTime,
+      startTimeError: '',
+      endTime: props.endTime === undefined ? new Date() : props.endTime,
+      endTimeError: '',
     };
   }
 
@@ -20,15 +24,9 @@ class OfficerAssignedDate extends Component {
     });
   }
 
-  handleStartDateChange = (event, date) => {
+  handleAssignedDateChange = (event, date) => {
     this.setState({
-      startDate: date,
-    });
-  };
-
-  handleEndDateChange = (event, date) => {
-    this.setState({
-      endDate: date,
+      assignedDate: date,
     });
   };
 
@@ -36,32 +34,35 @@ class OfficerAssignedDate extends Component {
     let isError = false;
     const errors = {};
 
-    let startDateValid = true;
-    if (this.state.startDate.length == 0) {
+    if (this.state.assignedDate.length == 0) {
       isError = true;
-      errors.startDateError = 'An start date must be specified.';
-      startDateValid = false;
+      errors.assignedDateError = 'A date must be specified.';
     } else {
-      errors.startDateError = '';
+      errors.assignedDateError = '';
     }
 
-    let endDateValid = true;
-    if (this.state.endDate.length == 0) {
+    var isValidStartTime = /^([0-1]?[0-9]|2[0-4]):([0-5][0-9])?$/.test(this.state.startTime);
+    if (!isValidStartTime) {
       isError = true;
-      errors.endDateError = 'An end date must be specified';
-      endDateValid = false;
+      errors.startTimeError = 'A valid start time must be specified.';
     } else {
-      errors.endDateError = '';
+      errors.startTimeError = '';
     }
 
-    if (startDateValid && endDateValid) {
-      const startDate = new Date(this.state.startDate);
-      startDate.setHours(0, 0, 0, 0);
-      const endDate = new Date(this.state.endDate);
-      endDate.setHours(0, 0, 0, 0);
-      if (startDate > endDate) {
-        errors.startDateError = 'Start date cannot be after end date.';
+    var isValidEndTime = /^([0-1]?[0-9]|2[0-4]):([0-5][0-9])?$/.test(this.state.endTime);
+    if (!isValidEndTime) {
+      isError = true;
+      errors.endTimeError = 'A valid end time must be specified.';
+    } else {
+      errors.endTimeError = '';
+    }
+
+    if(isValidEndTime && isValidStartTime) {
+      str1 = this.state.startTime + ':00';
+      str2 = this.state.endTime + ':00';
+      if(str1 > str2) {
         isError = true;
+        errors.startTimeError = 'Start time cannot be larger than end time.';
       }
     }
 
@@ -77,26 +78,34 @@ class OfficerAssignedDate extends Component {
         <Form.Field required>
           <label> Start date </label>
           <DatePicker
-            name='startDate'
-            errorText={this.state.startDateError}
+            name='assignedDate'
+            errorText={this.state.assignedDateError}
             hintText="Start Date"
-            value={this.state.startDate}
-            onChange={this.handleStartDateChange}
+            value={this.state.assignedDate}
+            onChange={this.handleAssignedDateChange}
             container="inline"
             className={s.date_body}
           />
         </Form.Field>
         <Form.Field required>
-          <label> End date </label>
-          <DatePicker
-            name='endDate'
-            hintText="End Date"
-            errorText={this.state.endDateError}
-            value={this.state.endDate}
-            onChange={this.handleEndDateChange}
-            container="inline"
-            className={s.date_body}
-          />
+          <label> Start Time </label>
+          <TextField
+            fullWidth={true}
+            name='startTime'
+            placeholder='HH:MM'
+            onChange = {e => this.change(e)}
+            value = {this.state.startTime}
+            errorText={this.state.startTimeError}/>
+        </Form.Field>
+        <Form.Field required>
+          <label> End Time </label>
+          <TextField
+            fullWidth={true}
+            name='endTime'
+            placeholder='HH:MM'
+            onChange = {e => this.change(e)}
+            value = {this.state.endTime}
+            errorText={this.state.endTimeError}/>
         </Form.Field>
       </Form.Group>
     );
