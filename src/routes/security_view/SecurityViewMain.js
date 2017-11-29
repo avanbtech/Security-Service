@@ -24,7 +24,7 @@ const SecurityViewMain = () => (
               <img src={lockicon} height={165} width={165} />
             </div>
             <div className={s.description}>
-              Restricted - authorization required.
+              View all requests.
             </div>
             <Link className = {s.link} to="/ServiceView">
               <FlatButton
