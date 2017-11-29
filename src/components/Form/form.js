@@ -143,14 +143,6 @@ class FormExampleSubcomponentControl extends Component {
     else {
       errors.requestByError = "";
     }
-
-    /*if (!this.validateDate(this.state.date)){
-      isError = true;
-      errors.dateError = "Date should be in YYYY-MM-DD format";
-    }
-    else{
-      errors.dateError = "";
-    }*/
     if ((Date.parse(this.state.date) - Date.parse(todaysDate)) < 0 || (this.state.date.length == 0)){
       isError = true;
       errors.dateError = "This field cannot be empty";
@@ -158,14 +150,6 @@ class FormExampleSubcomponentControl extends Component {
     else {
       errors.dateError = "";
     }
-
-    /*if (this.state.id.replace(/\s/g, "").length == 0){
-      isError = true;
-      errors.idError = "SFU ID or BCDL should be provided";
-    }
-    else{
-      errors.idError = "";
-    }*/
 
 
     var phoneno = /^\d{10}$/;
@@ -223,14 +207,6 @@ class FormExampleSubcomponentControl extends Component {
       errors.numberOfAttendeesError = '';
     }
 
-    /*if(!this.validateDate(this.state.eventDate))
-    {
-      isError = true;
-      errors.eventDateError = "Date should be in YYYY-MM-DD format";
-    }
-    else {
-      errors.eventDateError = "";
-    }*/
 
     if ((Date.parse(this.state.eventDate) - Date.parse(todaysDate) < 0) ||this.state.eventDate.length == 0){
       isError = true;
@@ -240,14 +216,6 @@ class FormExampleSubcomponentControl extends Component {
       errors.eventDateError = "";
     }
 
-    /*var eventTime = /^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]/;
-    if (!this.state.time.match(eventTime) || this.state.time.replace(/\s/g, "").length == 0){
-      isError = true;
-      errors.timeError = "Time should be in HH:MM format";
-    }
-    else{
-      errors.timeError = "";
-    }*/
     if (this.state.time.length == 0){
       isError = true;
       errors.timeError = "Time should be in HH:MM format";
@@ -255,6 +223,7 @@ class FormExampleSubcomponentControl extends Component {
     else{
       errors.timeError = "";
     }
+
     if (this.state.endtime.length == 0){
       isError = true;
       errors.endtimeError = "Time should be in HH:MM format";
@@ -262,20 +231,6 @@ class FormExampleSubcomponentControl extends Component {
     else{
       errors.endtimeError = "";
     }
-
-
-    /*var accountCode1 = /^\d{4}-\d{2}-\d{4}-\d{5}$/;
-    var accountCode2 = /^\d{4}-\d{2}-?\d{8}$/;
-    if (!this.state.accountCode.match(accountCode1) && !this.state.accountCode.match(accountCode2)){
-      isError = true;
-      errors.accountCodeError = 'Account code should be in OOOO-FF-DDDD-PPPPP or OOOO-FF-JJJJJJJJ format';
-      if (this.state.invoice == 'yes'){
-        errors.accountCodeError = '';
-      }
-    }
-    else {
-      errors.accountCodeError = '';
-    }*/
 
     if (this.state.invoice == "yes"){
       errors.accountCodeError = '';
@@ -296,14 +251,6 @@ class FormExampleSubcomponentControl extends Component {
       errors.accountCodeError = 'Account code should be in OOOO-FF-DDDD-PPPPP or OOOO-FF-JJJJJJJJ format';
     }
 
-    /*if (!this.validateDate(this.state.authorizedDate)){
-      isError = true;
-      errors.authorizedDateError = "Date should be in YYYY-MM-DD format";
-    }
-    else{
-        errors.authorizedDateError = "";
-    }*/
-
     if ((Date.parse(this.state.authorizedDate) - Date.parse(todaysDate) < 0)||this.state.authorizedDate.length == 0){
       isError = true;
       errors.authorizedDateError = "This field cannot be empty";
@@ -319,14 +266,6 @@ class FormExampleSubcomponentControl extends Component {
     else {
       errors.authorizedByError = '';
     }
-
-    /*if (this.state.authorizedID.replace(/\s/g, "").length == 0 ){
-      isError = true;
-      errors.authorizedIDError = 'Authorized ID should be provided';
-    }
-    else {
-      errors.authorizedIDError = '';
-    }*/
 
     if(!this.state.authorizedPhone.match(phoneno) && !this.state.authorizedPhone.match(phone2))
     {
@@ -478,32 +417,32 @@ class FormExampleSubcomponentControl extends Component {
       const { value } = this.state;
       let evenDatesRows = [];
       for (let i = 0; i < this.state.evenDatesObjects.length; i++) {
-      const currentEvenDatesObjects = this.state.evenDatesObjects[i];
-      evenDatesRows.push(
-        <div>
-          <table className={s.removeOfficer}>
-            <tbody>
-              <tr>
-                <td><h4>Addition Event Dates</h4></td>
-                <td>
-                  <a className={s.removeAction} href="javascript:void(0)"
-                     onClick={e => this.removeGuard(this.state.evenDatesObjects[i].id, e)}>
-                    Remove the Multiple Event Date
-                  </a>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-          <AdditionalEventDate
-            ref={
-              instance => {
-                currentEvenDatesObjects.instance = instance;
+        const currentEvenDatesObjects = this.state.evenDatesObjects[i];
+        evenDatesRows.push(
+          <div>
+            <table className={s.removeOfficer}>
+              <tbody>
+                <tr>
+                  <td><h4>Addition Event Dates</h4></td>
+                  <td>
+                    <a className={s.removeAction} href="javascript:void(0)"
+                      onClick={e => this.removeGuard(this.state.evenDatesObjects[i].id, e)}>
+                      Remove the Multiple Event Date
+                    </a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <AdditionalEventDate
+              ref={
+                instance => {
+                  currentEvenDatesObjects.instance = instance;
+                }
               }
-            }
-          />
-        </div>
-      );
-    }
+            />
+          </div>
+        );
+      }
       return (
         <MuiThemeProvider>
           <Form action="/customer"
