@@ -5,7 +5,7 @@ import findRemoveSync from 'find-remove';
 const Conn = new Sequelize(
   'demodb', //Name of database initalized in mySQL
   'root', //Username to access db
-  'hooh392', //Your mySQL DB password
+  'panda', //Your mySQL DB password
   {
     dialect: 'mysql',
     host: 'localhost',
@@ -303,13 +303,14 @@ Guard.hasMany(Security,  {foreignKey: "groupID", sourceKey: "groupID"});
 
 // TODO: REPLACE FORCE PARAM
 //FOR DEPLOYING
-//Conn.sync({ force: false});
+Conn.sync({ force: false});
 
 //FOR TESTING
+/*
 Conn.sync({ force: true}).then(() => {
   findRemoveSync('ExportedCSVs/', {files: '*.*'});
   findRemoveSync('ExportedPDFs/', {files: '*.*'});
   console.log('Cleaned up temporary export directories.');
 });
-
+*/
 export default Conn;
