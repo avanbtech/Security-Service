@@ -9,7 +9,7 @@ import db from '../data/db';
 import exportMethods from '../PyScripts/childProcPy'
 import nodemailer from 'nodemailer';
 import xoauth2 from 'xoauth2';
-
+import expG from '../data/exportGuardsPDF';
 import dbMethods from './dbCommitMethods';
 
 /*Helper Functions*/
@@ -104,6 +104,7 @@ function checkIfRequestInformationNotEmpty(req) {
   checkIfInputIsEmptyInField(req, 'fax', 'parameter: fax is optional');
   checkIfInputIsEmptyInField(req, 'nameOfEvent', 'parameter: nameOfEvent must be specified');
   checkIfInputIsEmptyInField(req, 'licensed', 'parameter: licensed must be specified');
+  checkIfInputIsEmptyInField(req, 'invoice', 'parameter: invoice must be specified');
   checkIfInputIsEmptyInField(req, 'location', 'parameter: location must be specified');
   checkIfInputIsEmptyInField(req, 'eventDate', 'parameter: eventDate must be specified');
   checkIfInputIsEmptyInField(req, 'detail', 'parameter: detail must be specified');
@@ -111,9 +112,11 @@ function checkIfRequestInformationNotEmpty(req) {
   checkIfInputIsEmptyInField(req, 'lastName', 'parameter: lastName name must be specified');
   checkIfInputIsEmptyInField(req, 'userName', 'parameter: userName name must be specified');
   checkIfInputIsEmptyInField(req, 'email', 'parameter: email must be specified');
-  checkIfInputIsEmptyInField(req, 'id', 'parameter: id must be specified');
   checkIfInputIsEmptyInField(req, 'numberOfAttendees', 'parameter: numberOfAttendees must be specified');
   checkIfInputIsEmptyInField(req, 'time', 'parameter: time must be specified');
+  checkIfInputIsEmptyInField(req, 'endtime', 'parameter: end time must be specified');
+  checkIfInputIsEmptyInField(req, 'emergencyContact', 'emergencyContact: phone must be specified');
+
 
 }
 
@@ -129,6 +132,7 @@ inputArray.push('phone');
 inputArray.push('fax');
 inputArray.push('nameOfEvent');
 inputArray.push('licensed');
+inputArray.push('invoice');
 inputArray.push('location');
 inputArray.push('eventDate');
 inputArray.push('detail');
@@ -136,9 +140,11 @@ inputArray.push('firstName');
 inputArray.push('lastName');
 inputArray.push('userName');
 inputArray.push('email');
-inputArray.push('id');
 inputArray.push('numberOfAttendees');
 inputArray.push('time');
+inputArray.push('endtime');
+inputArray.push('emergencyContact');
+
 
 inputArray.forEach(function(element) {
     escapeAndTrimInput(req, element);
@@ -149,8 +155,8 @@ inputArray.forEach(function(element) {
 exports.request_post = function (req, res, next) {
   checkIfRequestInformationNotEmpty(req);
   filterInputInRequestInformation(req);
-
   dbMethods.commitRequestToDB(req);
+  console.log("create databases;");
   sendemailToUser(req);
 
   res.redirect('/');
@@ -161,13 +167,14 @@ exports.get_accessID = function (req, res, next) {
   checkIfRequestInformationNotEmpty(req, 'referenceID', 'Reference ID must be specified');
   escapeAndTrimInput(req, 'referenceID');
 
-  res.redirect('/StatusForm/' + req.body.referenceID);
+  res.redirect('/StatusForm/' + req.body.referenceID + "/" + req.body.email);
   console.log(req.body.referenceID);
+  console.log(req.body.email);
 };
 
 //Sanitizes input in exports.request_approve
 function sanitizeRequestApprove(req) {
-  escapeAndTrimInput('requestID');
+  escapeAndTrimInput(req, 'requestID');
 
   checkIfRequestInformationNotEmpty(req, 'supervisor', 'Supervisor must be specified');
   checkIfRequestInformationNotEmpty(req, 'distribution', 'Distribution must be specified');
@@ -255,4 +262,26 @@ exports.export_to_pdf = function (req, res, next) {
       res.redirect("/");
     }
   }, waitTimeInMS);
+};
+
+exports.exportGuards = async (req, res) => {
+  const reqID = req.body.referenceID;
+
+  let data = [];
+
+  await expG.exportGuards(reqID).then((resp) => {
+    console.log(`EXPORTED TO ${resp}`);
+    data = resp;
+
+    setTimeout(() => {
+      if(data) {
+
+        res.sendFile(`/Users/sankait/Projects/CMPT373-Gamma/${resp}`);
+        // res.download(data);
+      } else {
+        // TODO SHOW PROMPT INSTEAD OF REDIRECT
+        res.redirect("/");
+      }
+    }, 5000);
+  });
 };
