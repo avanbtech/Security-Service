@@ -276,8 +276,8 @@ exports.exportGuards = async (req, res) => {
     setTimeout(() => {
       if(data) {
 
-        res.sendFile(`/Users/sankait/Projects/CMPT373-Gamma/${resp}`);
-        // res.download(data);
+        // res.sendFile(`/Users/sankait/Projects/CMPT373-Gamma/${resp}`);
+        res.download(data);
       } else {
         // TODO SHOW PROMPT INSTEAD OF REDIRECT
         res.redirect("/");
