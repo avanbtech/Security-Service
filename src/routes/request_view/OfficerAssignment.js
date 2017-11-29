@@ -20,6 +20,7 @@ class OfficerAssignment extends Component {
     super(props);
 
     this.state = {
+      guard_id: props.guard_id,
       name: props.name === undefined ? '' : props.name,
       nameError: '',
       location: props.location === undefined ? '' : props.location,

@@ -291,6 +291,7 @@ class RequestApprovalForm extends Component {
                 currentOfficerObject.instance = instance;
               }
             }
+            guard_id={currentOfficerObject.id}
           />
         </div>
       );
