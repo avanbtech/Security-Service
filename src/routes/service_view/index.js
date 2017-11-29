@@ -43,13 +43,16 @@ export const action = async (state) => {
     endDateFilterStr = state.query.end_date;
     endDateFilter = Date.parse(endDateFilterStr);
   }
+  
   let res = [];
+  
+  /*
   await fetchData().then((response) => {
     res = response.data.reqData;
   });
-
+*/
 //begin - Replace with commented code above for VM use
- // res = await methods.getReqForServiceView();
+  res = await methods.getReqForServiceView();
 //end
   let rows = [];
 

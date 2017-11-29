@@ -40,7 +40,9 @@ export const action = async (state) => {
     let res = null;
     /*
     await getData(state.params.referenceID).then((response) => {
-        res = response.data.reqData;
+        if(response.data != null){
+            res = response.data.reqData;
+        }
     });
     */
     //begin Replace with commented code above for VM use.

@@ -28,7 +28,7 @@ async function getData() {
     console.log(error.data);
   });
 
-return res;
+  return res;
 }
 
 export const path = '/GuardView';
@@ -36,13 +36,15 @@ export const action = async (state) => {
   const title = 'Status form that displays current request status and information user entered';
 
   let res = null;
-
+/*
   await getData(state.params.referenceID).then((response) => {
-    res = response.data.reqData;
+    if(response.data != null){
+      res = response.data.reqData;
+    }
   });
-
+*/
 //begin Replace with commented code above for VM use.
- // res = await methods.getReqForGuardView();
+  res = await methods.getReqForGuardView();
 //end
   let request = [];
   let dispatchNumbers = [];

@@ -24,11 +24,11 @@ export const action = async (state) => {
   const title = 'Status form that displays current request status and information user entered';
 
   let res = null;
-
+  /*
   await getData(state.params.referenceID).then((response) => {
     res = response.data.reqData;
   });
- 
+ */
 
   res = await methods.getReqForStatusView(state.params.referenceID);
 
