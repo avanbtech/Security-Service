@@ -137,6 +137,22 @@ const Event = Conn.define('event', {
       this.setDataValue('eventDates',val.join(';'));
     },
   },
+  secondDate: {
+    type: Sequelize.STRING,
+    allowNull:true,
+  },
+  thirdDate: {
+    type: Sequelize.STRING,
+    allowNull:true,
+  },
+  fourthDate: {
+    type: Sequelize.STRING,
+    allowNull:true,
+  },
+  fifthDate: {
+    type: Sequelize.STRING,
+    allowNull:true,
+  },
   times: {
     type: Sequelize.STRING,
     allowNull: false,
