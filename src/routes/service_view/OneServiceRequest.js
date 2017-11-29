@@ -1,5 +1,5 @@
 import React, { PropTypes, Component } from 'react';
-import { Table } from 'semantic-ui-react'
+import { Table } from 'semantic-ui-react';
 import axios from 'axios';
 export default class OneServiceRequest extends Component {
   render(){

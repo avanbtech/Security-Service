@@ -4,8 +4,8 @@ import s from './ServiceView.scss';
 import OneServiceRequest from './OneServiceRequest';
 import ServiceViewTable from './ServiceViewTable';
 import FilterForm from './FilterForm';
-import {Form} from 'semantic-ui-react'
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
+import {Form} from 'semantic-ui-react';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import DatePicker from 'material-ui/DatePicker';
 
 
@@ -30,8 +30,12 @@ function ServiceViewReq({serviceRequests, filterObject}) {
         />
         <ServiceViewTable serviceRequests={serviceRequests} />
       </div>
+      <Form action="/GuardView" method="post">
+          <div className={s.button_container}>
+            <Form.Button>Guards</Form.Button>
+          </div>
+        </Form>
     </div>
   );
 }
 export default withStyles(ServiceViewReq, s);
-
