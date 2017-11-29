@@ -182,14 +182,6 @@ const Guard = Conn.define('guard', {
     type: Sequelize.STRING,
     allowNull: false,
   },
-  startDate: {
-    type: Sequelize.DATE,
-    allowNull: false,
-  },
-  endDate: {
-    type: Sequelize.DATE,
-    allowNull: false,
-  },
   guardname: {
     type: Sequelize.STRING,
     allowNull: false,
@@ -205,6 +197,14 @@ const Guard = Conn.define('guard', {
   grdType: {
     type: Sequelize.STRING,
     allowNull: false,
+  },
+  schedule: {
+    type: Sequelize.STRING,
+    allowNull: false,
+
+    set: function (val) {
+      this.setDataValue('schedule',val.join(';'));
+    },
   },
 }, {
   indexes: [

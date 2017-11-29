@@ -38,16 +38,11 @@ const Guard = new GraphQLObjectType({
           return guard.location;
         },
       },
-      startDate: {
-        type: GraphQLDate,
+      schedule: {
+        type: new GraphQLList(GraphQLString),
         resolve(guard) {
-          return guard.startDate;
-        },
-      },
-      endDate: {
-        type: GraphQLDate,
-        resolve(guard) {
-          return guard.endDate;
+          const dates = guard.schedule.split(';');
+          return dates;
         },
       },
       guardname: {

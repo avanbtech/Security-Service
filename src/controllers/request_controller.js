@@ -194,11 +194,11 @@ exports.request_post = function (req, res, next) {
   console.log(req.body.fourthDate);
   console.log(req.body.fifthDate);
   console.log(req.body.additionalEvenDate);
-  
+
   checkIfRequestInformationNotEmpty(req);
   filterInputInRequestInformation(req);
   dbMethods.commitRequestToDB(req);
-  
+
   sendemailToUser(req);
 
   res.redirect('/');
@@ -315,7 +315,7 @@ exports.export_to_pdf = function (req, res, next) {
 exports.get_guards = function(req, res, next){
   res.redirect('/GuardView');
 };
-exports.exportGuards = async (req, res) => {
+exports.guardExport = async (req, res) => {
   const reqID = req.body.referenceID;
 
   let data = [];
