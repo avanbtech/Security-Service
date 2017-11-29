@@ -1,0 +1,1 @@
+Change "https://cas.sfu.ca/cas/login?service=https://localhost:3001/Security" to VM link if demonstrating on VM at src/components/Navigation/Navigation.js.
