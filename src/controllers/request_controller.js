@@ -344,6 +344,8 @@ exports.casredirect = function(req, res) {
 exports.login = function(req, res) {
   res.send("LOGIN SCREEN");
 };
+
 exports.load = function(req, res) {
   console.log(`REQ MADE: ${req}`);
-}
+  res.send("EXPORTS LOAD Called");
+};

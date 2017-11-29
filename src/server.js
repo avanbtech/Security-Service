@@ -54,39 +54,11 @@ server.use('/graphql', expressGraphQL(req => ({
 })));
 
 
-server.use('/guardjobcheck', async(req, res) =>{
+server.use('/guardjobcheck', async(req, res) => {
   let data = null;
   await dbMethods.getReqForGuardJobs(req.body.dispatchNumber).then((resp) => {
     data = resp;
   });
-
-server.use('/login', (req, res) => {
-  console.log("LOGIN ATTEMPT");
-
-  console.log(req.query.ticket);
-
-        res.redirect("/ServiceView" + `?token=${token}&login=true`);
-
-  axios.get(`https://cas.sfu.ca/cas/serviceValidate?ticket=${req.query.ticket}&service=http%3A%2F%2Flocalhost%3A3000%2Flogin`).then((resp) => {
-    //console.log(resp.data);
-      } catch(e) {
-        console.log(`Login Failed: ${e}`);
-        res.redirect('http://localhost:3001');
-      }
-
-    parseString(resp.data, function (err, result) {
-      console.log(result['cas:serviceResponse']['cas:authenticationSuccess']);
-    });
-
-
-
-  res.setHeader('Content-Type', 'application/json');
-
-  const final = {
-    reqData: data,
-  };
-
-  res.json(final);
 });
 
 server.use('/guardcheck', async(req, res) =>{
@@ -103,6 +75,7 @@ server.use('/guardcheck', async(req, res) =>{
 
   res.json(final);
 });
+
 server.use('/servicedt', async (req, res) => {
   //TODO: ADD AUTH CHECK
   let data = null;
@@ -133,6 +106,36 @@ server.use('/stcheck', async (req, res) => {
 
   res.json(final);
   });
+
+
+
+server.use('/login', (req, res) => {
+  console.log("LOGIN ATTEMPT");
+
+  console.log(req.query.ticket);
+
+        res.redirect("/Security" + `?token=${token}&login=true`);
+
+/*  axios.get(`https://cas.sfu.ca/cas/serviceValidate?ticket=${req.query.ticket}&service=http%3A%2F%2Flocalhost%3A3000%2Flogin`).then((resp) => {
+    console.log(resp.data);
+      } catch(e) {
+        console.log(`Login Failed: ${e}`);
+        res.redirect('http://localhost:3001');
+      };*/
+
+    parseString(resp.data, function (err, result) {
+      console.log(result['cas:serviceResponse']['cas:authenticationSuccess']);
+    });
+
+
+
+  res.setHeader('Content-Type', 'application/json');
+
+  const final = {
+    reqData: data,
+  };
+
+  res.json(final);
 });
 
 //
