@@ -1,6 +1,6 @@
-// move 2 boxes to this page
-// use same style sheet
-// reroute login button to go to this page
+/* SecurityViewHome.js
+  Home page for security
+*/
 
 import React, { PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';

@@ -1,5 +1,5 @@
-/* Main.js
-** Holds the logic and base HTML and JavaScript for the Main/Default page
+/* SecurityViewMain.js
+  Holds the logic and base HTML and JavaScript for the Main/Default page on the security side
 */
 
 import React from 'react';
