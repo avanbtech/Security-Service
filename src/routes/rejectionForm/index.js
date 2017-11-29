@@ -1,7 +1,7 @@
 import React from 'react';
 import Home from './Home';
 import fetch from '../../core/fetch';
-import RejectionForm from './RejectionForm'
+import RejectionForm from './RejectionForm';
 
 export const path = '/';
 export const action = async (state) => {

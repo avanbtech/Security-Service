@@ -75,6 +75,7 @@ server.use('/guardcheck', async(req, res) =>{
 
   res.json(final);
 });
+
 server.use('/servicedt', async (req, res) => {
   //TODO: ADD AUTH CHECK
   let data = null;
@@ -139,8 +140,6 @@ server.get('*', async (req, res, next) => {
   }
 });
 
-
-
 // Handle POST requests
 var request = require('./routes/request');
 server.use('/', request);
@@ -162,7 +161,6 @@ server.use((err, req, res, next) => { // eslint-disable-line no-unused-vars
     stack: process.env.NODE_ENV === 'production' ? '' : err.stack,
   }));
 });
-
 
 //
 // Launches the server

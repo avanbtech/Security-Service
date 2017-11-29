@@ -145,8 +145,8 @@ async function getReqForGuardView() {
 }
 async function getReqForGuardJobs(dispatchNumber){
   let res = null;
-  let dbQuery = '{guard(dispatchNumber:'+dispatchNumber+'){accessID guardname location startDate endDate}}';
-
+  //let dbQuery = '{guard(dispatchNumber:'+dispatchNumber+'){accessID guardname location startDate endDate}}';
+  let dbQuery ='{guard(dispatchNumber:'+dispatchNumber+'){accessID location}}';
   const client = new GraphQLClient(DBUrl, { headers: {} });
   await client.request(dbQuery).then((data) => {
     console.log("request made : " + dbQuery);

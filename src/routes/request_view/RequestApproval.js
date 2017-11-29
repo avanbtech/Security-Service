@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import s from './RequestView.scss';
 import ApprovalPrompt from './ApprovalPrompt';
@@ -9,8 +9,6 @@ const styles = {
     width: 600,
   },
 };
-
-
 
 class RequestApproval extends Component {
 

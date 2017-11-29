@@ -4,7 +4,6 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import DatePicker from 'material-ui/DatePicker';
 import s from './ServiceView.scss';
 
-
 function addDays(date, days) {
   var result = new Date(date);
   result.setDate(result.getDate() + days);

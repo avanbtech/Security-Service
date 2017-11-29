@@ -1,8 +1,8 @@
-import React, { Component } from 'react'
-import { Button,  Form, Message } from 'semantic-ui-react'
-import TextField from "material-ui/TextField"
-import DatePicker from "material-ui/DatePicker"
-import s from './RequestView.scss'
+import React, { Component } from 'react';
+import { Button,  Form, Message } from 'semantic-ui-react';
+import TextField from "material-ui/TextField";
+import DatePicker from "material-ui/DatePicker";
+import s from './RequestView.scss';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 import OfficerAssignedDate from './OfficerAssignedDate';
@@ -12,8 +12,6 @@ const styles = {
     width: 600,
   },
 };
-
-
 
 class OfficerAssignment extends Component {
   constructor(props) {

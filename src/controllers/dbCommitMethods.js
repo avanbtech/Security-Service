@@ -268,7 +268,6 @@ function commitApproveToDB(req) {
     });
   });
 
-
   // updating request status
   db.models.request.update(
     {

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Form } from 'semantic-ui-react';
 import DatePicker from 'material-ui/DatePicker';
 import s from './RequestView.scss';
-import TextField from "material-ui/TextField"
+import TextField from "material-ui/TextField";
 
 class OfficerAssignedDate extends Component {
   constructor(props) {
