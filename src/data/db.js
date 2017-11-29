@@ -137,6 +137,22 @@ const Event = Conn.define('event', {
       this.setDataValue('eventDates',val.join(';'));
     },
   },
+  secondDate: {
+    type: Sequelize.STRING,
+    allowNull:true,
+  },
+  thirdDate: {
+    type: Sequelize.STRING,
+    allowNull:true,
+  },
+  fourthDate: {
+    type: Sequelize.STRING,
+    allowNull:true,
+  },
+  fifthDate: {
+    type: Sequelize.STRING,
+    allowNull:true,
+  },
   times: {
     type: Sequelize.STRING,
     allowNull: false,
@@ -287,8 +303,8 @@ Security.hasMany(Guard, {foreignKey: "groupID", sourceKey: "groupID"});
 Guard.hasMany(Security,  {foreignKey: "groupID", sourceKey: "groupID"});
 
 // TODO: REPLACE FORCE PARAM
-// //FOR DEPLOYING
-// Conn.sync({ force: false});
+//FOR DEPLOYING
+//Conn.sync({ force: false});
 
 //FOR TESTING
 Conn.sync({ force: true}).then(() => {

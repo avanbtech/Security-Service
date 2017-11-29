@@ -43,6 +43,30 @@ const Event = new GraphQLObjectType({
           return dates;
         },
       },
+      secondDate: {
+        type: GraphQLString,
+        resolve(event){
+          return event.secondDate;
+        },
+      },
+      thirdDate: {
+        type: GraphQLString,
+        resolve(event){
+          return event.thirdDate;
+        },
+      },
+      fourthDate: {
+        type: GraphQLString,
+        resolve(event){
+          return event.fourthDate;
+        },
+      },
+      fifthDate: {
+        type: GraphQLString,
+        resolve(event){
+          return event.fifthDate;
+        },
+      },
       times: {
         type: GraphQLString,
         resolve(event) {
