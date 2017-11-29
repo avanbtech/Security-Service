@@ -440,7 +440,7 @@ class FormExampleSubcomponentControl extends Component {
             />
           </div>
         );
-      }
+      };
       return (
         <MuiThemeProvider>
           <Form action="/customer"
@@ -771,7 +771,7 @@ class FormExampleSubcomponentControl extends Component {
             </Form.Group>
             <div className={s.action_container}>
               <Form.Button
-               onClick = {e => this.addGuard(e)}>Add Even Date</Form.Button>
+               onClick = {e => this.addGuard(e)}>Add Event Date</Form.Button>
             </div>
             {evenDatesRows}
 
