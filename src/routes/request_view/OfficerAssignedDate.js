@@ -31,6 +31,14 @@ class OfficerAssignedDate extends Component {
     });
   };
 
+  handleChangeStartTime = (event, value) => {
+    this.setState({startTime: value});
+  };
+
+  handleChangeEndTime = (event, value) => {
+    this.setState({endTime: value});
+  };
+
   validate = () => {
     let isError = false;
     const errors = {};
@@ -73,13 +81,14 @@ class OfficerAssignedDate extends Component {
     });
     return isError;
   };
+
   render() {
     return (
       <Form.Group widths='equal'>
         <Form.Field required>
           <label> Start date </label>
           <DatePicker
-            name={'guard_' + guard_id + '[assignedDate]'}
+            name={'guard' + this.state.guard_id + '[assignedDate]'}
             errorText={this.state.assignedDateError}
             hintText="Start Date"
             value={this.state.assignedDate}
@@ -92,9 +101,9 @@ class OfficerAssignedDate extends Component {
           <label> Start Time </label>
           <TextField
             fullWidth={true}
-            name={'guard_' + guard_id + '[startTime]'}
+            name={'guard' + this.state.guard_id + '[startTime]'}
             placeholder='HH:MM'
-            onChange = {e => this.change(e)}
+            onChange = {this.handleChangeStartTime}
             value = {this.state.startTime}
             errorText={this.state.startTimeError}/>
         </Form.Field>
@@ -102,9 +111,9 @@ class OfficerAssignedDate extends Component {
           <label> End Time </label>
           <TextField
             fullWidth={true}
-            name={'guard_' + guard_id + '[endTime]'}
+            name={'guard' + this.state.guard_id + '[endTime]'}
             placeholder='HH:MM'
-            onChange = {e => this.change(e)}
+            onChange = {this.handleChangeEndTime}
             value = {this.state.endTime}
             errorText={this.state.endTimeError}/>
         </Form.Field>
