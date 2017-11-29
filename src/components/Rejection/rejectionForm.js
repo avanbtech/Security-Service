@@ -8,13 +8,11 @@ import DropDownMenu from 'material-ui/DropDownMenu';
 import MenuItem from 'material-ui/MenuItem';
 import SelectField from 'material-ui/SelectField';
 
-
 const styles = {
   customWidth: {
     width: 600,
   },
 };
-
 
 class rejectionFormComponent extends Component {
 
