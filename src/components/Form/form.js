@@ -2,15 +2,17 @@
 ** Holds the logic and base HTML and JavaScript for the status form
 */
 
-import React, { Component } from 'react'
-import { Button,  Form, Message } from 'semantic-ui-react'
-import TextField from "material-ui/TextField"
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
+import React, { Component } from 'react';
+import { Button,  Form, Message } from 'semantic-ui-react';
+import TextField from "material-ui/TextField";
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import DatePicker from 'material-ui/DatePicker';
 import TimePicker from 'material-ui/TimePicker';
 import DropDownMenu from 'material-ui/DropDownMenu';
 import MenuItem from 'material-ui/MenuItem';
 import SelectField from 'material-ui/SelectField';
+import AdditionalEventDate from './AdditionalEventDate';
+import s from './EventDates.scss';
 
 const styles = {
   customWidth: {
@@ -64,10 +66,52 @@ class FormExampleSubcomponentControl extends Component {
     licensed:'',
     licensedError:'',
     invoice:'',
-    invoiceError:''
+    invoiceError:'',
+    evenDatesObjects:[
+    ],
+    lastEvenDate:0
   }
 
+  removeGuard = (officerId, e) => {
+    e.preventDefault();
+    const newevenDatesObjects = this.state.evenDatesObjects;
+    let indexToBeRemoved = -1;
+    for (let i = 0; i < newevenDatesObjects.length; i++) {
+      if (newevenDatesObjects[i].id === officerId) {
+        indexToBeRemoved = i;
+        break;
+      }
+    }
+    if (indexToBeRemoved > -1) {
+      for (let j = indexToBeRemoved; j < newevenDatesObjects.length - 1; j++) {
+        newevenDatesObjects[j].instance.setState({
+          ...newevenDatesObjects[j + 1].instance.state,
+        });
+      }
+      newevenDatesObjects.splice(newevenDatesObjects.length - 1, 1);
+      this.setState({
+        evenDatesObjects: newevenDatesObjects,
+      });
+    }
+  };
 
+  addGuard = e => {
+    e.preventDefault();
+    if (!(this.state.evenDatesObjects.length > 0)){
+      ++this.state.lastEvenDate;
+    // adding a new officer
+    const newevenDatesObjects = this.state.evenDatesObjects;
+    newevenDatesObjects.push({
+      id: this.state.lastEvenDate,
+      toBeRendered: true,
+      instance: null,
+    });
+    this.setState({
+      evenDatesObjects: newevenDatesObjects
+    });
+    }
+
+  }
   change = e =>{
     this.setState({
       [e.target.name]: e.target.value
@@ -326,6 +370,14 @@ class FormExampleSubcomponentControl extends Component {
       errors.authorizedSignatureError = "";
     }
 
+    let hasChildError = false;
+    this.state.evenDatesObjects.map(officer => {
+      if (officer.instance !== null) {
+        hasChildError = hasChildError || officer.instance.validate();
+      }
+    });
+    isError = isError || hasChildError;
+
     this.setState({
         ...this.state,
         ...errors
@@ -399,7 +451,35 @@ class FormExampleSubcomponentControl extends Component {
 
 
     render() {
-      const { value } = this.state
+      const { value } = this.state;
+      let evenDatesRows = [];
+      for (let i = 0; i < this.state.evenDatesObjects.length; i++) {
+      const currentEvenDatesObjects = this.state.evenDatesObjects[i];
+      evenDatesRows.push(
+        <div>
+          <table className={s.removeOfficer}>
+            <tbody>
+              <tr>
+                <td><h4>Addition Event Dates</h4></td>
+                <td>
+                  <a className={s.removeAction} href="javascript:void(0)"
+                     onClick={e => this.removeGuard(this.state.evenDatesObjects[i].id, e)}>
+                    Remove the Multiple Event Date
+                  </a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <AdditionalEventDate
+            ref={
+              instance => {
+                currentEvenDatesObjects.instance = instance;
+              }
+            }
+          />
+        </div>
+      );
+    }
       return (
         <MuiThemeProvider>
           <Form action="/customer"
@@ -728,6 +808,12 @@ class FormExampleSubcomponentControl extends Component {
                     errorText={this.state.endtimeError} />
                 </Form.Field>
             </Form.Group>
+            <div className={s.action_container}>
+              <Form.Button
+               onClick = {e => this.addGuard(e)}>Add Even Date</Form.Button>
+            </div>
+            {evenDatesRows}
+
             <Form.TextArea
               name='detail'
               label='Details'
@@ -830,7 +916,8 @@ class FormExampleSubcomponentControl extends Component {
                 {/* "did not intergrated into data package yet */}
               </Form.Group>
             </Form.Field>
-            <Form.Button onClick = {e => this.onSubmit(e)} onChange = {this.FormExampleSuccess}>Submit</Form.Button>
+
+            <Form.Button onClick = {e => this.onSubmit(e)} >Submit</Form.Button>
           </Form>
         </MuiThemeProvider>
       )

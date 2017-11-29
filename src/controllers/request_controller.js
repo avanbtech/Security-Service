@@ -68,7 +68,7 @@ let transporter = nodemailer.createTransport({
 function sendemailToUser(req) {
 
 const emailSubject = 'We have recieved your request!';
-const emailText = 'We have received your security services request, we will get back to you as soon as it is processed.';
+const emailText = 'We have received your security services request, we will get back to you as soon as it is processed. Here is the request ID: ' + req.body.id + '. If you have further questions, please contact us as soon as possible';
 
   sendMailTemplate(req, emailSubject, emailText);
   console.log("sendemailToUser function called successfully!");
@@ -78,7 +78,7 @@ const emailText = 'We have received your security services request, we will get 
 function sendemailToUserWithApproval(req) {
 
   const emailSubject = 'We have approved your request.';
-  const emailText = 'We have approved your security request. It will now be forwarded into the next step of the process!';
+  const emailText = 'We have approved your security request. It will now be forwarded into the next step of the process! Here is the request ID: ' + req.body.id + '. If you have further questions, please contact us as soon as possible';
 
     sendMailTemplate(req, emailSubject, emailText);
     console.log("sendemailToUserWithApproval function called successfully!");
@@ -92,6 +92,41 @@ function sendemailToUserWithRejection(req) {
 
     sendMailTemplate(req, emailSubject, emailText);
     console.log("sendemailToUserWithRejection function called successfully!");
+}
+
+
+function sendEmailtoUserwithID(req){
+  let mailOptions = {
+    from: 'SFUSecurity',
+    to: req.body.email,
+    subject: 'We have received your request',
+    text: 'We have received your security services request, we will get back to you as soon as it is processed. Here is your referenceID: ' + req.body.referenceID
+,
+  };
+  transporter.sendMail(mailOptions, (error, info)=>{
+     if(error){
+        console.log(error);
+    }
+    console.log("Email sent from sendMailTemplate successfully!");
+    console.log(info);
+   });
+}
+
+function sendEmailtoUserwithIDwithRejection(req){
+  let mailOptions = {
+    from: 'SFUSecurity',
+    to: req.body.email,
+    subject: 'We have reject your request',
+    text: 'We have reject your security services request, The reason of rejection can be found online. If you have further request or question, please contact us as soon as possible. Here is your referenceID: ' + req.body.referenceID
+,
+  };
+  transporter.sendMail(mailOptions, (error, info)=>{
+     if(error){
+        console.log(error);
+    }
+    console.log("Email sent from sendMailTemplate successfully!");
+    console.log(info);
+   });
 }
 
 //Checks request information input for whether or not they are empty
@@ -153,10 +188,17 @@ inputArray.forEach(function(element) {
 }
 
 exports.request_post = function (req, res, next) {
+  console.log("create databases;");
+  console.log(req.body.secondDate);
+  console.log(req.body.thirdDate);
+  console.log(req.body.fourthDate);
+  console.log(req.body.fifthDate);
+  console.log(req.body.additionalEvenDate);
+  
   checkIfRequestInformationNotEmpty(req);
   filterInputInRequestInformation(req);
   dbMethods.commitRequestToDB(req);
-  console.log("create databases;");
+  
   sendemailToUser(req);
 
   res.redirect('/');
@@ -170,6 +212,11 @@ exports.get_accessID = function (req, res, next) {
   res.redirect('/StatusForm/' + req.body.referenceID + "/" + req.body.email);
   console.log(req.body.referenceID);
   console.log(req.body.email);
+};
+exports.get_guardJobs = function(req, res, next){
+  checkIfRequestInformationNotEmpty(req, 'dispatchNumber', 'Dispatch number must be specified');
+  escapeAndTrimInput(req, 'dispatchNumber');
+  res.redirect('/GuardJobs/' + req.body.dispatchNumber);
 };
 
 //Sanitizes input in exports.request_approve
@@ -265,6 +312,9 @@ exports.export_to_pdf = function (req, res, next) {
   }, waitTimeInMS);
 };
 
+exports.get_guards = function(req, res, next){
+  res.redirect('/GuardView');
+};
 exports.exportGuards = async (req, res) => {
   const reqID = req.body.referenceID;
 

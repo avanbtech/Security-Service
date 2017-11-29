@@ -80,6 +80,10 @@ function commitRequestToDB(req) {
     location: req.body.location,
     numberOfattendees: req.body.numberOfAttendees,
     eventDates: [req.body.eventDate],   // TODO: CONFIRM DATES ARE JOINED BY ';'
+    secondDate: req.body.secondDate,
+    thirdDate: req.body.thirdDate,
+    fourthDate: req.body.fourthDate,
+    fifthDate: req.body.fifthDate,
     times: req.body.time,
     endTime: req.body.endtime,
   });

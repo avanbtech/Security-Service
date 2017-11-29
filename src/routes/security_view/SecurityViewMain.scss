@@ -1,0 +1,123 @@
+/* SecurityViewMain.scss
+** CSS styling for the security side main page
+*/
+
+@import '../../components/variables.scss';
+
+.root {
+  margin: 0 auto;
+  text-align: center;
+}
+
+.container {
+  position: relative;
+}
+
+.text {
+  color: rgba(255, 255, 255, .5);
+}
+
+.textMuted {
+  composes: text;
+  color: rgba(255, 255, 255, .3);
+}
+
+.gradientBG {
+  float: left;
+  width: -webkit-fill-available;
+  margin-bottom: 130px;
+  margin-top: 0;
+  background: linear-gradient(rgba(206,206,206,0), rgba(206,206,206,0.3), rgba(206,206,206,0));
+}
+
+.description {
+  margin: 10px;
+  padding: 20px;
+  padding-top: 35px;
+  color: white;
+  text-align: center;
+  font-weight: lighter;
+  font-size: 1em;
+}
+
+.container1 {
+  display: inline-block;
+  padding: 30px;
+}
+
+.box {
+  margin: 50px;
+  height: 450px;
+  width: 320px;
+  padding: 40px;
+  background-color: rgba(49, 46, 44, 0.8);
+  text-align: center;
+  display: block;
+  float: left;
+  font-weight: lighter;
+  font-family: 'verdana';
+  font-size: 1em;
+  border-radius: 6px;
+  position: relative;
+}
+
+.formicon {
+  margin: 0 auto;
+  display: block;
+  max-height: 165px;
+  max-width: 165px;
+  padding-left: 17px;
+}
+
+.statusicon {
+  margin: 0 auto;
+  display: block;
+  max-height: 165px;
+  max-width: 165px;
+  padding-left: 17px;
+}
+
+.lockicon {
+  margin: 0 auto;
+  display: block;
+  max-height: 165px;
+  max-width: 165px;
+}
+
+.exporticon {
+  margin: 0 auto;
+  display: block;
+  max-height: 165px;
+  max-width: 165px;
+  padding-top: 5px;
+  padding-left: 8px;
+}
+
+.spacer {
+  color: rgba(255, 255, 255, .3);
+}
+
+.link {
+  margin: 0 auto;
+  display: block;
+  position: absolute;
+  bottom: 25px;
+  margin-left: 45px;
+}
+
+.text,
+.link {
+  padding: 2px 5px;
+  font-size: 1em;
+}
+
+.link,
+.link:active,
+.link:visited {
+  color: rgba(255, 255, 255, .6);
+  text-decoration: none;
+}
+
+.link:hover {
+  color: rgba(255, 255, 255, 1);
+}
