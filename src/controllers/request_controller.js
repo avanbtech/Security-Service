@@ -201,7 +201,7 @@ exports.request_post = function (req, res, next) {
 
   sendemailToUser(req);
 
-  res.redirect('/');
+  
 };
 
 

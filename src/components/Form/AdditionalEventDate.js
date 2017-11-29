@@ -145,7 +145,7 @@ class AdditionalEventDate extends Component {
     return (
       <div className={s.officer}>
         <Form.Group widths='equal'>
-          <Form.Field required>
+          <Form.Field>
             <label> Second date </label>
             <DatePicker
               name='secondDate'
@@ -155,7 +155,7 @@ class AdditionalEventDate extends Component {
               errorText={this.state.secondDateError}
               container="inline" />
           </Form.Field>
-          <Form.Field required>
+          <Form.Field>
             <label> Third date </label>
             <DatePicker
               name='thirdDate'
@@ -165,7 +165,7 @@ class AdditionalEventDate extends Component {
               errorText={this.state.thirdDateError}
               container="inline" />
           </Form.Field>
-          <Form.Field required>
+          <Form.Field>
             <label> Fourth date </label>
             <DatePicker
               name='fourthDate'
@@ -175,7 +175,7 @@ class AdditionalEventDate extends Component {
               errorText={this.state.fourthDateError}
               container="inline" />
           </Form.Field>
-          <Form.Field required>
+          <Form.Field>
             <label> Fifth date </label>
             <DatePicker
               name='fifthDate'
