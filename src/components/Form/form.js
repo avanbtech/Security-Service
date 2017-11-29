@@ -13,6 +13,9 @@ import MenuItem from 'material-ui/MenuItem';
 import SelectField from 'material-ui/SelectField';
 import AdditionalEventDate from './AdditionalEventDate';
 import s from './EventDates.scss';
+import Dialog from 'material-ui/Dialog';
+import FlatButton from 'material-ui/FlatButton';
+import RaisedButton from 'material-ui/RaisedButton';
 
 const styles = {
   customWidth: {
@@ -69,7 +72,8 @@ class FormExampleSubcomponentControl extends Component {
     invoiceError:'',
     evenDatesObjects:[
     ],
-    lastEvenDate:0
+    lastEvenDate:0,
+    open: false,
   }
 
   removeGuard = (officerId, e) => {
@@ -390,6 +394,9 @@ class FormExampleSubcomponentControl extends Component {
     if (error){
       e.preventDefault();
     }
+    else {
+      this.setState({open:true});
+    }
   };
 
 
@@ -437,6 +444,14 @@ class FormExampleSubcomponentControl extends Component {
     this.setState({endtime: date});
   };
 
+  handleOpen = () => {
+    this.setState({open: true});
+  };
+
+  handleClose = () => {
+    this.setState({open: false});
+  };
+
   FormExampleSuccess = () => (
     <Form success>
       <Form.Input label='Email' placeholder='joe@schmoe.com' />
@@ -451,6 +466,15 @@ class FormExampleSubcomponentControl extends Component {
 
 
     render() {
+      const actions = [
+       <FlatButton
+          label="Submit"
+         primary={true}
+         keyboardFocused={true}
+         onClick={this.handleClose}
+         href = '/'
+        />,
+      ];
       const { value } = this.state;
       let evenDatesRows = [];
       for (let i = 0; i < this.state.evenDatesObjects.length; i++) {
@@ -916,8 +940,16 @@ class FormExampleSubcomponentControl extends Component {
                 {/* "did not intergrated into data package yet */}
               </Form.Group>
             </Form.Field>
-
             <Form.Button onClick = {e => this.onSubmit(e)} >Submit</Form.Button>
+            <Dialog
+              title="Success"
+              actions={actions}
+              modal={false}
+              open={this.state.open}
+              onRequestClose={this.handleClose}
+            >
+              Your request was submitted successfully. The referenceID has been sent to your email.
+            </Dialog>
           </Form>
         </MuiThemeProvider>
       )
