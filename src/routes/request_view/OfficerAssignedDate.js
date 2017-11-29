@@ -11,9 +11,9 @@ class OfficerAssignedDate extends Component {
     this.state = {
       assignedDate: props.assignedDate === undefined ? new Date() : props.assignedDate,
       assignedDateError: '',
-      startTime: props.startTime === undefined ? new Date() : props.startTime,
+      startTime: props.startTime === undefined ? '' : props.startTime,
       startTimeError: '',
-      endTime: props.endTime === undefined ? new Date() : props.endTime,
+      endTime: props.endTime === undefined ? '' : props.endTime,
       endTimeError: '',
     };
   }
@@ -58,11 +58,11 @@ class OfficerAssignedDate extends Component {
     }
 
     if(isValidEndTime && isValidStartTime) {
-      str1 = this.state.startTime + ':00';
-      str2 = this.state.endTime + ':00';
+      let str1 = this.state.startTime + ':00';
+      let str2 = this.state.endTime + ':00';
       if(str1 > str2) {
         isError = true;
-        errors.startTimeError = 'Start time cannot be larger than end time.';
+        errors.startTimeError = 'Start time should be before end time.';
       }
     }
 
