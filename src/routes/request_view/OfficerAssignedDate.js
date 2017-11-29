@@ -9,6 +9,7 @@ class OfficerAssignedDate extends Component {
     super(props);
 
     this.state = {
+      guard_id: props.guard_id,
       assignedDate: props.assignedDate === undefined ? new Date() : props.assignedDate,
       assignedDateError: '',
       startTime: props.startTime === undefined ? '' : props.startTime,
@@ -28,6 +29,14 @@ class OfficerAssignedDate extends Component {
     this.setState({
       assignedDate: date,
     });
+  };
+
+  handleChangeStartTime = (event, value) => {
+    this.setState({startTime: value});
+  };
+
+  handleChangeEndTime = (event, value) => {
+    this.setState({endTime: value});
   };
 
   validate = () => {
@@ -72,13 +81,14 @@ class OfficerAssignedDate extends Component {
     });
     return isError;
   };
+
   render() {
     return (
       <Form.Group widths='equal'>
         <Form.Field required>
           <label> Start date </label>
           <DatePicker
-            name='assignedDate'
+            name={'date_' + this.state.guard_id + '[assignedDate]'}
             errorText={this.state.assignedDateError}
             hintText="Start Date"
             value={this.state.assignedDate}
@@ -91,9 +101,9 @@ class OfficerAssignedDate extends Component {
           <label> Start Time </label>
           <TextField
             fullWidth={true}
-            name='startTime'
+            name={'date_' + this.state.guard_id + '[startTime]'}
             placeholder='HH:MM'
-            onChange = {e => this.change(e)}
+            onChange = {this.handleChangeStartTime}
             value = {this.state.startTime}
             errorText={this.state.startTimeError}/>
         </Form.Field>
@@ -101,9 +111,9 @@ class OfficerAssignedDate extends Component {
           <label> End Time </label>
           <TextField
             fullWidth={true}
-            name='endTime'
+            name={'date_' + this.state.guard_id + '[endTime]'}
             placeholder='HH:MM'
-            onChange = {e => this.change(e)}
+            onChange = {this.handleChangeEndTime}
             value = {this.state.endTime}
             errorText={this.state.endTimeError}/>
         </Form.Field>
