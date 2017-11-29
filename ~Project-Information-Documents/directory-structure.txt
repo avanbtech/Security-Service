@@ -4,7 +4,6 @@ Important directory locations:
 
 Web server:
 nginx-config/default: Nginx configuration for our deployed web server. This needs to be modified and copied to our VM whenever we change the web server.
-nginx-config/certs: Stores our generated HTTPS certificates for use in nginx-config/default.
 
 Database:
 src/data/db.js: Stores configuration information for the database. You must change the password in this file to align with your mySQL password installed on your machine.
