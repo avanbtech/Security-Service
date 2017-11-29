@@ -153,10 +153,17 @@ inputArray.forEach(function(element) {
 }
 
 exports.request_post = function (req, res, next) {
+  console.log("create databases;");
+  console.log(req.body.secondDate);
+  console.log(req.body.thirdDate);
+  console.log(req.body.fourthDate);
+  console.log(req.body.fifthDate);
+  console.log(req.body.additionalEvenDate);
+  
   checkIfRequestInformationNotEmpty(req);
   filterInputInRequestInformation(req);
   dbMethods.commitRequestToDB(req);
-  console.log("create databases;");
+  
   sendemailToUser(req);
 
   res.redirect('/');

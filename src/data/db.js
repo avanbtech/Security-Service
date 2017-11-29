@@ -6,7 +6,7 @@ import findRemoveSync from 'find-remove';
 const Conn = new Sequelize(
   'demodb', //Name of database initalized in mySQL
   'root', //Username to access db
-  'hooh392', //Your mySQL DB password
+  'ymj8899174', //Your mySQL DB password
   {
     dialect: 'mysql',
     host: 'localhost',
@@ -136,6 +136,22 @@ const Event = Conn.define('event', {
     set: function (val) {
       this.setDataValue('eventDates',val.join(';'));
     },
+  },
+  secondDate: {
+    type: Sequelize.STRING,
+    allowNull:true,
+  },
+  thirdDate: {
+    type: Sequelize.STRING,
+    allowNull:true,
+  },
+  fourthDate: {
+    type: Sequelize.STRING,
+    allowNull:true,
+  },
+  fifthDate: {
+    type: Sequelize.STRING,
+    allowNull:true,
   },
   times: {
     type: Sequelize.STRING,
