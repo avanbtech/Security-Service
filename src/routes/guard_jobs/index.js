@@ -40,7 +40,9 @@ export const action = async (state) => {
     let res = null;
     /*
     await getData(state.params.referenceID).then((response) => {
-        res = response.data.reqData;
+        if(response.data != null){
+            res = response.data.reqData;
+        }
     });
     */
     //begin Replace with commented code above for VM use.
@@ -51,10 +53,13 @@ export const action = async (state) => {
     if (res == null || res[0] == null ){
         request[0] = ({
             accessID:"",
+            
             guardname:"",
             location:"",
+            /*
             startDate:"",
             endDate:"",
+            */
 
         })
     } else {
@@ -62,10 +67,13 @@ export const action = async (state) => {
         for(let x = 0; x < res.length; x++){
             request.push({
                 accessID: res[x]['accessID'],
+               
                 guardname: res[x]['guardname'],
                 location: res[x]['location'],
+               /*
                 startDate: res[x]['startDate'].split("T")[0],
                 endDate: res[x]['endDate'].split("T")[0],
+                */
             });
         }
     }
