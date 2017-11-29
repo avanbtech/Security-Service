@@ -258,7 +258,6 @@ exports.export_to_pdf = function (req, res, next) {
       res.download(filePath.toString(), downloadPDFName);
     } else {
       console.log("INVALID PATH");
-      // TODO: SHOW AN ALERT INSTEAD OF A REDIRECTION
       res.redirect("/");
     }
   }, waitTimeInMS);
@@ -276,10 +275,8 @@ exports.exportGuards = async (req, res) => {
     setTimeout(() => {
       if(data) {
 
-        // res.sendFile(`/Users/sankait/Projects/CMPT373-Gamma/${resp}`);
         res.download(data);
       } else {
-        // TODO SHOW PROMPT INSTEAD OF REDIRECT
         res.redirect("/");
       }
     }, 5000);
