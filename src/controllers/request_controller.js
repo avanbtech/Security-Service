@@ -268,11 +268,9 @@ exports.export_to_pdf = function (req, res, next) {
   }, waitTimeInMS);
 };
 
-<<<<<<< HEAD
 exports.get_guards = function(req, res, next){
   res.redirect('/GuardView');
 };
-=======
 exports.exportGuards = async (req, res) => {
   const reqID = req.body.referenceID;
 
@@ -292,4 +290,3 @@ exports.exportGuards = async (req, res) => {
     }, 5000);
   });
 };
->>>>>>> 7edcf9521daacd850ac19cc15e7e77a2e8037956

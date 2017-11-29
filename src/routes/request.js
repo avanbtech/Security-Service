@@ -13,11 +13,8 @@ router.post('/ServiceView/approve', requestController.request_approve);
 router.post('/ServiceView/reject', requestController.request_reject);
 router.post('/CSV', requestController.export_to_pdf);
 router.post('/StatusForm/', requestController.get_accessID);
-<<<<<<< HEAD
 router.post('/GuardView', requestController.get_guards);
 router.post('/GuardJobs/:dispatchNumber', requestController.get_guardJobs);
-=======
 router.post('/exportguards', requestController.exportGuards);
->>>>>>> 7edcf9521daacd850ac19cc15e7e77a2e8037956
 
 module.exports = router;
