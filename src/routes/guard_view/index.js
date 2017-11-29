@@ -7,6 +7,15 @@ import GuardView from './GuardView';
 import axios from 'axios';
 import methods from '../../data/dbFetchMethods'
 
+function contains(a, obj) {
+    for (var i = 0; i < a.length; i++) {
+        if (a[i] === obj) {
+            return true;
+        }
+    }
+    return false;
+}
+
 async function getData() {
   let res = [];
   const url = "https://cmpt373-1177g.cmpt.sfu.ca/guardcheck";
@@ -35,25 +44,30 @@ export const action = async (state) => {
 //begin Replace with commented code above for VM use.
   res = await methods.getReqForGuardView();
 //end
-  let request;
+  let request = [];
+  let dispatchNumbers = [];
 
   if (res == null || res[0] == null ){
-    request = ({
+    request[0] = ({
       dispatchNumber: "",
       name: "",
       telephone: "",
     })
   } else {
-      for(let x = 0; x < res.length; x++){
-        rows.push({
-            dispatchNumber: res[x]['dispatchNumber'],
-            name: res[x]['guardname'],
-            telephone: res[x]['telephone'],
-          });
-      }
+      
+    for(let x = 0; x < res.length; x++){
+        if(!contains(dispatchNumbers, res[x]['dispatchNumber'])){
+            request.push({
+                dispatchNumber: res[x]['dispatchNumber'],
+                name: res[x]['guardname'],
+                telephone: res[x]['telephone'],
+            });
+            dispatchNumbers.push(res[x]['dispatchNumber']);
+        }
+    }
 }
 
 
   state.context.onSetTitle(title);
-  return <GuardView guardRequest={request} />;
+  return <GuardView guardRequests={request} />;
 };

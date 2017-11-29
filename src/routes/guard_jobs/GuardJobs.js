@@ -1,25 +1,27 @@
 import React, { PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
-import s from './GuardView.scss';
-import OneGuardRequest from './OneGuardRequest';
+import s from './GuardJobs.scss';
+import OneJob from './OneJob';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import { Icon, Label, Menu, Table } from 'semantic-ui-react'
 
-function Guards({guardRequests}) {
+function GuardsJobs({guardJobs}) {
     var rows = [];
-     if(guardRequests != null){
-        for(var i = 0; i < guardRequests.length; i++) {
-            rows.push(<OneGuardRequest guardRequest={
-                guardRequests[i]
+    
+     if(guardJobs != null){
+        for(var i = 0; i < guardJobs.length; i++) {
+            rows.push(<OneJob guardJob={
+                guardJobs[i]
             }/>);
         }
+        console.log(rows);
     }
   return (
  
 
     <div className={s.root}>
         <div className={s.container}>
-        <h1 className={s.title}>Guards</h1>
+        <h1 className={s.title}>Jobs</h1>
         <link rel="stylesheet"
         href="//cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.12/semantic.min.css"
         />
@@ -27,12 +29,12 @@ function Guards({guardRequests}) {
         <Table celled>
         <Table.Header>
             <Table.Row>
-            <Table.HeaderCell>Dispatch Number</Table.HeaderCell>
-            <Table.HeaderCell>Name</Table.HeaderCell>
-            <Table.HeaderCell>Telephone</Table.HeaderCell>
+            <Table.HeaderCell>Reference ID</Table.HeaderCell>
+            <Table.HeaderCell>Location</Table.HeaderCell>
+            <Table.HeaderCell>Start Date</Table.HeaderCell>
+            <Table.HeaderCell>End Date</Table.HeaderCell>
             </Table.Row>
         </Table.Header>
-    
         <Table.Body>
         {rows}
         </Table.Body>
@@ -44,5 +46,5 @@ function Guards({guardRequests}) {
     </div>
   );
 }
-export default withStyles(Guards, s);
+export default withStyles(GuardsJobs, s);
 

@@ -174,7 +174,7 @@ exports.get_accessID = function (req, res, next) {
 exports.get_guardJobs = function(req, res, next){
   checkIfRequestInformationNotEmpty(req, 'dispatchNumber', 'Dispatch number must be specified');
   escapeAndTrimInput(req, 'dispatchNumber');
-  res.redirect('/Guards' + req.body.dispatchNumber);
+  res.redirect('/GuardJobs/' + req.body.dispatchNumber);
 };
 
 //Sanitizes input in exports.request_approve

@@ -156,15 +156,30 @@ async function getGuardsForRequest(reqID) {
 async function getReqForGuardView() {
   let res = null;
 
-  let query= '{guard { dispatchNumber guardname telephone}}';
+  let dbQuery= '{guard{dispatchNumber guardname telephone}}';
 
   const client = new GraphQLClient(DBUrl, { headers: {} });
-  await client.request(query).then((data) => {
-    console.log(data.request);
-    res = data.request;
+  await client.request(dbQuery).then((data) => {
+    console.log("request made : " + dbQuery);
+    console.log(data.guard);
+    res = data.guard;
   });
 
   return res;
+}
+async function getReqForGuardJobs(dispatchNumber){
+  let res = null;
+  let dbQuery = '{guard(dispatchNumber:'+dispatchNumber+'){accessID guardname location startDate endDate}}';
+ 
+  const client = new GraphQLClient(DBUrl, { headers: {} });
+  await client.request(dbQuery).then((data) => {
+    console.log("request made : " + dbQuery);
+    console.log(data.guard);
+    res = data.guard;
+  });
+
+  return res;
+
 }
 
 
@@ -176,4 +191,5 @@ module.exports = {
   isValidCodeAndEmail,
   getGuardsForRequest,
   getReqForGuardView,
+  getReqForGuardJobs,
 };
