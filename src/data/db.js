@@ -1,7 +1,6 @@
 import Sequelize from 'sequelize';
 import findRemoveSync from 'find-remove';
 
-
 // Add your configuration for the DB
 const Conn = new Sequelize(
   'demodb', //Name of database initalized in mySQL

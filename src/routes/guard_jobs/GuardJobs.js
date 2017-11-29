@@ -18,7 +18,6 @@ function GuardsJobs({guardJobs}) {
     }
   return (
 
-
     <div className={s.root}>
         <div className={s.container}>
         <h1 className={s.title}>Jobs</h1>

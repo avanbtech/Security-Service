@@ -6,6 +6,7 @@ import FlatButton from 'material-ui/FlatButton';
 import FontIcon from 'material-ui/FontIcon';
 import IconButton from 'material-ui/IconButton';
 import ActionHome from 'material-ui/svg-icons/action/find-in-page';
+
 class checkStatus extends Component {
   state = {
     referenceID: '',
@@ -70,7 +71,7 @@ class checkStatus extends Component {
                     onChange={this.handleChange}
                     errorText={this.state.referenceIDError}
                   />
-                 
+
                 </Form.Field>
                 <Form.Field required>
                 <label> email </label>
@@ -80,10 +81,10 @@ class checkStatus extends Component {
                   onChange={this.handleChange}
                   errorText={this.state.emailError}
                 />
-                 
+
                 </Form.Field>
 
-               
+
             </Form.Group>
             <Form.Button onClick = {e => this.onSubmit(e)} animated >
               <Button.Content visible>Search</Button.Content>

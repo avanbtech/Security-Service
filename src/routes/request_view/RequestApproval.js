@@ -10,8 +10,6 @@ const styles = {
   },
 };
 
-
-
 class RequestApproval extends Component {
 
   constructor(props) {
