@@ -171,6 +171,11 @@ exports.get_accessID = function (req, res, next) {
   console.log(req.body.referenceID);
   console.log(req.body.email);
 };
+exports.get_guardJobs = function(req, res, next){
+  checkIfRequestInformationNotEmpty(req, 'dispatchNumber', 'Dispatch number must be specified');
+  escapeAndTrimInput(req, 'dispatchNumber');
+  res.redirect('/GuardJobs/' + req.body.dispatchNumber);
+};
 
 //Sanitizes input in exports.request_approve
 function sanitizeRequestApprove(req) {
@@ -263,6 +268,9 @@ exports.export_to_pdf = function (req, res, next) {
   }, waitTimeInMS);
 };
 
+exports.get_guards = function(req, res, next){
+  res.redirect('/GuardView');
+};
 exports.exportGuards = async (req, res) => {
   const reqID = req.body.referenceID;
 
