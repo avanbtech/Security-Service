@@ -9,7 +9,7 @@ import db from '../data/db';
 import exportMethods from '../PyScripts/childProcPy';
 import nodemailer from 'nodemailer';
 import xoauth2 from 'xoauth2';
-
+import expG from '../data/exportGuardsPDF';
 import dbMethods from './dbCommitMethods';
 
 
@@ -69,7 +69,7 @@ let transporter = nodemailer.createTransport({
 function sendemailToUser(req) {
 
 const emailSubject = 'We have recieved your request!';
-const emailText = 'We have received your security services request, we will get back to you as soon as it is processed.';
+const emailText = 'We have received your security services request, we will get back to you as soon as it is processed. Here is the request ID: ' + req.body.id + '. If you have further questions, please contact us as soon as possible';
 
   sendMailTemplate(req, emailSubject, emailText);
   console.log("sendemailToUser function called successfully!");
@@ -79,7 +79,7 @@ const emailText = 'We have received your security services request, we will get 
 function sendemailToUserWithApproval(req) {
 
   const emailSubject = 'We have approved your request.';
-  const emailText = 'We have approved your security request. It will now be forwarded into the next step of the process!';
+  const emailText = 'We have approved your security request. It will now be forwarded into the next step of the process! Here is the request ID: ' + req.body.id + '. If you have further questions, please contact us as soon as possible';
 
     sendMailTemplate(req, emailSubject, emailText);
     console.log("sendemailToUserWithApproval function called successfully!");
@@ -95,6 +95,41 @@ function sendemailToUserWithRejection(req) {
     console.log("sendemailToUserWithRejection function called successfully!");
 }
 
+
+function sendEmailtoUserwithID(req){
+  let mailOptions = {
+    from: 'SFUSecurity',
+    to: req.body.email,
+    subject: 'We have received your request',
+    text: 'We have received your security services request, we will get back to you as soon as it is processed. Here is your referenceID: ' + req.body.referenceID
+,
+  };
+  transporter.sendMail(mailOptions, (error, info)=>{
+     if(error){
+        console.log(error);
+    }
+    console.log("Email sent from sendMailTemplate successfully!");
+    console.log(info);
+   });
+}
+
+function sendEmailtoUserwithIDwithRejection(req){
+  let mailOptions = {
+    from: 'SFUSecurity',
+    to: req.body.email,
+    subject: 'We have reject your request',
+    text: 'We have reject your security services request, The reason of rejection can be found online. If you have further request or question, please contact us as soon as possible. Here is your referenceID: ' + req.body.referenceID
+,
+  };
+  transporter.sendMail(mailOptions, (error, info)=>{
+     if(error){
+        console.log(error);
+    }
+    console.log("Email sent from sendMailTemplate successfully!");
+    console.log(info);
+   });
+}
+
 //Checks request information input for whether or not they are empty
 function checkIfRequestInformationNotEmpty(req) {
 
@@ -105,6 +140,7 @@ function checkIfRequestInformationNotEmpty(req) {
   checkIfInputIsEmptyInField(req, 'fax', 'parameter: fax is optional');
   checkIfInputIsEmptyInField(req, 'nameOfEvent', 'parameter: nameOfEvent must be specified');
   checkIfInputIsEmptyInField(req, 'licensed', 'parameter: licensed must be specified');
+  checkIfInputIsEmptyInField(req, 'invoice', 'parameter: invoice must be specified');
   checkIfInputIsEmptyInField(req, 'location', 'parameter: location must be specified');
   checkIfInputIsEmptyInField(req, 'eventDate', 'parameter: eventDate must be specified');
   checkIfInputIsEmptyInField(req, 'detail', 'parameter: detail must be specified');
@@ -112,9 +148,11 @@ function checkIfRequestInformationNotEmpty(req) {
   checkIfInputIsEmptyInField(req, 'lastName', 'parameter: lastName name must be specified');
   checkIfInputIsEmptyInField(req, 'userName', 'parameter: userName name must be specified');
   checkIfInputIsEmptyInField(req, 'email', 'parameter: email must be specified');
-  checkIfInputIsEmptyInField(req, 'id', 'parameter: id must be specified');
   checkIfInputIsEmptyInField(req, 'numberOfAttendees', 'parameter: numberOfAttendees must be specified');
   checkIfInputIsEmptyInField(req, 'time', 'parameter: time must be specified');
+  checkIfInputIsEmptyInField(req, 'endtime', 'parameter: end time must be specified');
+  checkIfInputIsEmptyInField(req, 'emergencyContact', 'emergencyContact: phone must be specified');
+
 
 }
 
@@ -130,6 +168,7 @@ inputArray.push('phone');
 inputArray.push('fax');
 inputArray.push('nameOfEvent');
 inputArray.push('licensed');
+inputArray.push('invoice');
 inputArray.push('location');
 inputArray.push('eventDate');
 inputArray.push('detail');
@@ -137,9 +176,11 @@ inputArray.push('firstName');
 inputArray.push('lastName');
 inputArray.push('userName');
 inputArray.push('email');
-inputArray.push('id');
 inputArray.push('numberOfAttendees');
 inputArray.push('time');
+inputArray.push('endtime');
+inputArray.push('emergencyContact');
+
 
 inputArray.forEach(function(element) {
     escapeAndTrimInput(req, element);
@@ -148,10 +189,17 @@ inputArray.forEach(function(element) {
 }
 
 exports.request_post = function (req, res, next) {
+  console.log("create databases;");
+  console.log(req.body.secondDate);
+  console.log(req.body.thirdDate);
+  console.log(req.body.fourthDate);
+  console.log(req.body.fifthDate);
+  console.log(req.body.additionalEvenDate);
+
   checkIfRequestInformationNotEmpty(req);
   filterInputInRequestInformation(req);
-
   dbMethods.commitRequestToDB(req);
+
   sendemailToUser(req);
 
   res.redirect('/');
@@ -162,13 +210,19 @@ exports.get_accessID = function (req, res, next) {
   checkIfRequestInformationNotEmpty(req, 'referenceID', 'Reference ID must be specified');
   escapeAndTrimInput(req, 'referenceID');
 
-  res.redirect('/StatusForm/' + req.body.referenceID);
+  res.redirect('/StatusForm/' + req.body.referenceID + "/" + req.body.email);
   console.log(req.body.referenceID);
+  console.log(req.body.email);
+};
+exports.get_guardJobs = function(req, res, next){
+  checkIfRequestInformationNotEmpty(req, 'dispatchNumber', 'Dispatch number must be specified');
+  escapeAndTrimInput(req, 'dispatchNumber');
+  res.redirect('/GuardJobs/' + req.body.dispatchNumber);
 };
 
 //Sanitizes input in exports.request_approve
 function sanitizeRequestApprove(req) {
-  escapeAndTrimInput('requestID');
+  escapeAndTrimInput(req, 'requestID');
 
   checkIfRequestInformationNotEmpty(req, 'supervisor', 'Supervisor must be specified');
   checkIfRequestInformationNotEmpty(req, 'distribution', 'Distribution must be specified');
@@ -205,6 +259,8 @@ function sanitizeRequestApprove(req) {
 exports.request_approve = function (req, res, next) {
 
   sanitizeRequestApprove(req);
+
+  console.log(req.body);
 
   dbMethods.commitApproveToDB(req);
   sendemailToUserWithApproval(req);
@@ -252,8 +308,30 @@ exports.export_to_pdf = function (req, res, next) {
       res.download(filePath.toString(), downloadPDFName);
     } else {
       console.log("INVALID PATH");
-      // TODO: SHOW AN ALERT INSTEAD OF A REDIRECTION
       res.redirect("/");
     }
   }, waitTimeInMS);
+};
+
+exports.get_guards = function(req, res, next){
+  res.redirect('/GuardView');
+};
+exports.guardExport = async (req, res) => {
+  const reqID = req.body.referenceID;
+
+  let data = [];
+
+  await expG.exportGuards(reqID).then((resp) => {
+    console.log(`EXPORTED TO ${resp}`);
+    data = resp;
+
+    setTimeout(() => {
+      if(data) {
+
+        res.download(data);
+      } else {
+        res.redirect("/");
+      }
+    }, 5000);
+  });
 };

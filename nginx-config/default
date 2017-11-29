@@ -31,8 +31,10 @@ server {
   server_name  cmpt373-1177g.cmpt.sfu.ca;
 
 # Replace with the directory you store the server certificate and key for ssl auth
-  ssl_certificate /home/cwzhang/project/nginx-config/certs/fullchain.pem;
-  ssl_certificate_key /home/cwzhang/project/nginx-config/certs/privkey.pem;
+# Fullchain.pem is the certificate, privkey.pem is the certificate key
+
+  ssl_certificate /home/cwzhang/certs/fullchain.pem;
+  ssl_certificate_key /home/cwzhang/certs/privkey.pem;
 
 # Proxies all connections to cmpt373-1177g.cmpt.sfu.ca automatically to our browsersync host at localhost:3001
   location / {

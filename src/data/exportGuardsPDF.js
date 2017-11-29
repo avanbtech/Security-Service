@@ -30,16 +30,31 @@ Total SCSP Billable Hours: ${securityGrp.totalSCSPBillable}\n`;
   return finalStr;
 }
 
+
+//Sample format for schedule: 2017-11-29?12:30?12:45,2017-11-29?12:30?12:40
+function formatScheduleData(schedule) {
+  let finalStr = '\n';
+
+  let x;
+  for(x = 0; x < schedule.length; x++) {
+    const data = schedule[x].split('?');
+    const str = "          Date: " + data[0] + " Start time: " + data[1] + " End Time: " + data[2] + "\n";
+
+    finalStr += str;
+  }
+
+  return finalStr;
+}
+
 function parseGuardData(guard, num) {
   const header = `Guard #${num}\n`;
   const adminInfo = `Security Group: ${guard.groupID}\n`;
   const guardInfo = `     Type: ${guard.grdType}\n     Name: ${guard.guardname}\n     Dispatch Number: ${guard.dispatchNumber}\n`;
   const phn = `     Phone Number: ${guard.telephone}\n`;
   const locInfo = `     Location: ${guard.location}\n`;
-  const dates = `     Start Date: ${guard.startDate.split('T')[0]}     End Date: ${guard.endDate.split('T')[0]}\n`;
   const remarks = `     Remarks: ${guard.remarks}`;
-
-  const FinalStr = adminInfo + header + guardInfo + phn + locInfo + dates + remarks;
+  const schedule = `     Schedule: ${formatScheduleData(guard.schedule)}\n`;
+  const FinalStr = adminInfo + header + guardInfo + phn + locInfo + schedule + remarks;
 
   return FinalStr;
 }

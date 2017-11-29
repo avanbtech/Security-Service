@@ -55,6 +55,45 @@ server.use('/graphql', expressGraphQL(req => ({
   pretty: process.env.NODE_ENV !== 'production',
 })));
 
+server.use('/guardjobcheck', async(req, res) =>{
+  let data = null;
+  await dbMethods.getReqForGuardJobs(req.body.dispatchNumber).then((resp) => {
+    data = resp;
+  });
+
+  res.setHeader('Content-Type', 'application/json');
+
+  const final = {
+    reqData: data,
+  };
+
+  res.json(final);
+});
+
+server.use('/guardcheck', async(req, res) =>{
+  let data = null;
+  await dbMethods.getReqForGuardView().then((resp) => {
+    data = resp;
+  });
+
+  res.setHeader('Content-Type', 'application/json');
+
+  const final = {
+    reqData: data,
+  };
+
+  res.json(final);
+});
+
+server.use('/servicedt', async (req, res) => {
+  //TODO: ADD AUTH CHECK
+  let data = null;
+  await dbMethods.getReqForServiceView().then((resp) => {
+    data = resp;
+  });
+
+  });
+
 server.use('/login', (req, res) => {
   // Service URL for deployment: https%3A%2F%2Fcmpt373-1177g.cmpt.sfu.ca%2Flogin
 
@@ -78,9 +117,25 @@ server.use('/login', (req, res) => {
         res.redirect('http://localhost:3001');
       }
 
-    });
-  });
+  const final = {
+    reqData: data,
+  };
+
+  res.json(final);
 });
+});
+});
+
+server.use('/stcheck', async (req, res) => {
+  let data = null;
+
+  await dbMethods.getReqForStatusView(req.body.referenceID).then((resp) => {
+    data = resp;
+    });
+
+  });
+
+
 
 //
 // Register server-side rendering middleware
@@ -154,10 +209,8 @@ server.use('/exportGuards', async(req, res) => {
     console.log("INVALID TOKEN");
     res.send("INVALID TOKEN");
   }
-
-
-
 });
+
 
 server.use('/servicedt', async (req, res) => {
 

@@ -10,6 +10,7 @@
     "babel-runtime": "6.6.1",
     "bluebird": "3.3.3",
     "body-parser": "1.15.0",
+    "chromedriver": "^2.33.2",
     "classnames": "2.2.3",
     "cookie-parser": "1.4.1",
     "eventemitter3": "1.1.1",
@@ -26,6 +27,8 @@
     "graphql-date": "^1.0.3",
     "graphql-request": "^1.4.0",
     "grommet": "^2.0.0-alpha.3",
+    "gulp": "^3.9.1",
+    "gulp-run": "^1.7.1",
     "history": "2.0.1",
     "ipv6-normalize": "^1.0.1",
     "isomorphic-style-loader": "0.0.12",
@@ -59,7 +62,8 @@
     "whatwg-fetch": "0.11.0",
     "xml2js": "^0.4.19",
     "xmlhttprequest": "^1.8.0",
-    "xoauth2": "^1.2.0"
+    "xoauth2": "^1.2.0",
+    "yargs": "^10.0.3"
   },
   "devDependencies": {
     "assets-webpack-plugin": "^3.3.0",
@@ -106,6 +110,7 @@
     "react-transform-hmr": "^1.0.4",
     "redbox-react": "^1.2.2",
     "replace": "^0.3.0",
+    "selenium-cucumber-js": "^1.5.8",
     "url-loader": "^0.5.7",
     "webpack": "^1.12.14",
     "webpack-hot-middleware": "^2.9.1",

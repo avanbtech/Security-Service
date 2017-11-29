@@ -75,14 +75,10 @@ table.request_request_table td {
 }
 
 .action_container {
-  float: left;
+  float: right;
   overflow:hidden;
   padding-right: 50px;
   margin-bottom: 50px;
-}
-
-.officer {
-  margin-top: 50px;
 }
 
 table.removeOfficer td {
@@ -91,4 +87,20 @@ table.removeOfficer td {
 
 .removeAction {
   color: red;
+}
+
+.addAction {
+  color: blue;
+  margin-bottom: 20px;
+}
+
+.date_title {
+  padding-top: 10px;
+  padding-bottom: 0;
+  margin-bottom: 0;
+}
+
+.date_body {
+  padding-top: 0;
+  margin-top: 0;
 }

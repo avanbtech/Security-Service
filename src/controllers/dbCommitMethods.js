@@ -80,7 +80,12 @@ function commitRequestToDB(req) {
     location: req.body.location,
     numberOfattendees: req.body.numberOfAttendees,
     eventDates: [req.body.eventDate],   // TODO: CONFIRM DATES ARE JOINED BY ';'
+    secondDate: req.body.secondDate,
+    thirdDate: req.body.thirdDate,
+    fourthDate: req.body.fourthDate,
+    fifthDate: req.body.fifthDate,
     times: req.body.time,
+    endTime: req.body.endtime,
   });
 
   db.models.security.create({
@@ -114,30 +119,66 @@ function commitRequestToDB(req) {
     date: req.body.date,
     details: req.body.detail,
     accountCode: req.body.accountCode,
-    invoice: 99999,
+    invoice: req.body.invoice,
     authorizedBy: req.body.authorizedBy,
     authorizedID: req.body.authorizedID,
     authorizedDate: req.body.authorizedDate,
     authorizedPhone: req.body.authorizedPhone,
+    emergencyContact: req.body.emergencyContact,
   });
+}
+
+function getGuardSchedule(req, x) {
+  const index = `date_${x}`;
+  const dateObj = req.body[index];
+
+  if(dateObj) {
+    const assignedDates = dateObj.assignedDate;
+    const startTimes = dateObj.startTime;
+    const endTimes = dateObj.endTime;
+
+    if(assignedDates instanceof Array) {
+      let x;
+      let schedules = [];
+      for(x = 0; x < assignedDates.length; x++) {
+        const date = assignedDates[x];
+        const sttime = startTimes[x];
+        const edtime = endTimes[x];
+
+        const finalStr = date + "?" + sttime + "?" + edtime;
+
+        schedules.push(finalStr);
+      }
+
+      return schedules;
+    } else {
+      const schedules = [];
+      schedules.push(`${assignedDates}?${startTimes}?${endTimes}`);
+
+      return schedules;
+    }
+  } else {
+    return [];
+  }
 }
 
 function createGuards(req, grpID) {
   let x;
   const allGuards = [];
 
-  console.log(`REQ BODY: ${req.body}`);
-
-  // TODO: ADD ERROR CHECKING WHEN NO GUARD IS ADDED TO THE REQUEST
+  if(req.body.dispatchNumber.length <= 0) {
+    return null;
+  }
 
   if(req.body.dispatchNumber instanceof Array) {
     for (x = 0; x < req.body.dispatchNumber.length; x++) {
+
+      const scheduleArray = getGuardSchedule(req, x);
       allGuards.push({
         groupID: grpID,
         dispatchNumber: req.body.dispatchNumber[x],
         location: req.body.location[x],
-        startDate: req.body.startDate[x],
-        endDate: req.body.startDate[x],
+        schedule: scheduleArray,
         guardname: req.body.name[x],
         telephone: req.body.phone[x],
         accessID: req.body.requestID,
@@ -150,8 +191,7 @@ function createGuards(req, grpID) {
       groupID: grpID,
       dispatchNumber: req.body.dispatchNumber,
       location: req.body.location,
-      startDate: req.body.startDate,
-      endDate: req.body.startDate,
+      schedule: ["NOT DEFINED"],
       guardname: req.body.name,
       telephone: req.body.phone,
       accessID: req.body.requestID,

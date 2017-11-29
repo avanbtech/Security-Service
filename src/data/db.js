@@ -23,7 +23,7 @@ const User = Conn.define('user', {
   },
   sfuBCID: {
     type: Sequelize.STRING,
-    allowNull: false,
+    allowNull: true,
   },
   department: {
     type: Sequelize.STRING,
@@ -83,10 +83,10 @@ const Request = Conn.define('request', {
   },
   accountCode: {
     type: Sequelize.STRING,
-    allowNull: false
+    allowNull: true
   },
   invoice: {
-    type: Sequelize.INTEGER,
+    type: Sequelize.STRING,
     allowNull: false
   },
   authorizedBy: {
@@ -95,7 +95,7 @@ const Request = Conn.define('request', {
   },
   authorizedID: {
     type: Sequelize.STRING,
-    allowNull: false
+    allowNull: true
   },
   authorizedDate: {
     type: Sequelize.DATE,
@@ -104,7 +104,11 @@ const Request = Conn.define('request', {
   authorizedPhone: {
     type: Sequelize.STRING,
     allowNull: false
-  }
+  },
+  emergencyContact: {
+    type: Sequelize.STRING,
+    allowNull: false
+  },
 });
 
 const Event = Conn.define('event', {
@@ -133,7 +137,27 @@ const Event = Conn.define('event', {
       this.setDataValue('eventDates',val.join(';'));
     },
   },
+  secondDate: {
+    type: Sequelize.STRING,
+    allowNull:true,
+  },
+  thirdDate: {
+    type: Sequelize.STRING,
+    allowNull:true,
+  },
+  fourthDate: {
+    type: Sequelize.STRING,
+    allowNull:true,
+  },
+  fifthDate: {
+    type: Sequelize.STRING,
+    allowNull:true,
+  },
   times: {
+    type: Sequelize.STRING,
+    allowNull: false,
+  },
+  endTime: {
     type: Sequelize.STRING,
     allowNull: false,
   },
@@ -158,14 +182,6 @@ const Guard = Conn.define('guard', {
     type: Sequelize.STRING,
     allowNull: false,
   },
-  startDate: {
-    type: Sequelize.DATE,
-    allowNull: false,
-  },
-  endDate: {
-    type: Sequelize.DATE,
-    allowNull: false,
-  },
   guardname: {
     type: Sequelize.STRING,
     allowNull: false,
@@ -181,6 +197,14 @@ const Guard = Conn.define('guard', {
   grdType: {
     type: Sequelize.STRING,
     allowNull: false,
+  },
+  schedule: {
+    type: Sequelize.STRING,
+    allowNull: false,
+
+    set: function (val) {
+      this.setDataValue('schedule',val.join(';'));
+    },
   },
 }, {
   indexes: [
@@ -280,7 +304,7 @@ Guard.hasMany(Security,  {foreignKey: "groupID", sourceKey: "groupID"});
 
 // TODO: REPLACE FORCE PARAM
 //FOR DEPLOYING
-// Conn.sync({ force: false});
+//Conn.sync({ force: false});
 
 //FOR TESTING
 Conn.sync({ force: true}).then(() => {

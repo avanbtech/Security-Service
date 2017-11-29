@@ -66,7 +66,7 @@ const RequestArgs = {
     type: GraphQLString,
   },
   invoice: {
-    type: GraphQLInt,
+    type: GraphQLString,
   },
   authorizedBy: {
     type: GraphQLString,
@@ -78,6 +78,9 @@ const RequestArgs = {
     type: GraphQLString,
   },
   authorizedPhone: {
+    type: GraphQLString,
+  },
+  emergencyContact: {
     type: GraphQLString,
   },
 };
@@ -98,8 +101,23 @@ const EventArgs = {
   eventDates: {
     type: GraphQLString
   },
+  secondDate: {
+    type: GraphQLString
+  },
+  thirdDate: {
+    type: GraphQLString
+  },
+  fourthDate: {
+    type: GraphQLString
+  },
+  fifthDate: {
+    type: GraphQLString
+  },
   times: {
     type: GraphQLString,
+  },
+  endTime: {
+    type: GraphQLString
   },
 };
 
@@ -116,12 +134,6 @@ const GuardArgs = {
   location: {
     type: GraphQLString,
   },
-  startDate: {
-    type: GraphQLString,
-  },
-  endDate: {
-    type: GraphQLString,
-  },
   telephone: {
     type: GraphQLString,
   },
@@ -133,6 +145,9 @@ const GuardArgs = {
   },
   grdType: {
     type: GraphQLString,
+  },
+  schedule: {
+    type: GraphQLString
   },
 };
 
@@ -283,7 +298,8 @@ const Mutation = new GraphQLObjectType({
             authorizedBy: args.authorizedBy,
             authorizedID: args.authorizedID,
             authorizedDate: args.authorizedDate,
-            authorizedPhone: args.authorizedPhone
+            authorizedPhone: args.authorizedPhone,
+            emergencyContact: args.emergencyContact,
           });
         },
       },
@@ -300,7 +316,12 @@ const Mutation = new GraphQLObjectType({
             numberOfattendees: args.numberOfattendees,
             location: args.location,
             eventDates: args.eventDates.split(';'),
+            secondDate: args.secondDate,
+            thirdDate: args.thirdDate,
+            fourthDate: args.fourthDate,
+            fifthDate: args.fifthDate,
             times: args.times,
+            endTime: args.endTime,
 
           });
         },

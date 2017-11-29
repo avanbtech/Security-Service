@@ -1,10 +1,11 @@
-import React, { Component } from 'react'
-import { Button,  Form, Message } from 'semantic-ui-react'
-import TextField from "material-ui/TextField"
-import DatePicker from "material-ui/DatePicker"
-import s from './RequestView.scss'
+import React, { Component } from 'react';
+import { Button,  Form, Message } from 'semantic-ui-react';
+import TextField from "material-ui/TextField";
+import DatePicker from "material-ui/DatePicker";
+import s from './RequestView.scss';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
+import OfficerAssignedDate from './OfficerAssignedDate';
 
 const styles = {
   customWidth: {
@@ -18,14 +19,8 @@ class OfficerAssignment extends Component {
   constructor(props) {
     super(props);
 
-    /*
-    const startDate = new Date(props.startDate);
-    startDate.setHours(0, 0, 0, 0);
-    const endDate = new Date(props.endDate);
-    endDate.setHours(0, 0, 0, 0);
-    */
-
     this.state = {
+      guard_id: props.guard_id,
       name: props.name === undefined ? '' : props.name,
       nameError: '',
       location: props.location === undefined ? '' : props.location,
@@ -34,11 +29,13 @@ class OfficerAssignment extends Component {
       grdType: props.guardType === undefined ? 'Regular' : props.guardType,
       dispatchNumber: props.dispatchNumber === undefined ? '' : props.distpachNumber,
       dispatchNumberError:'',
-      startDate: props.startDate === undefined ? new Date() : props.startDate,
-      endDate: props.endDate === undefined ? new Date() : props.endDate,
       phone: props.phone === undefined ? '' : props.phone,
       phoneError:'',
       remarks: props.remarks === undefined ? '' : props.remarks,
+      officerAssignedDatesObjects: [
+        { id: 0, instance: null },
+      ],
+      lastAssignedDateID: 0,
     };
   }
 
@@ -47,18 +44,6 @@ class OfficerAssignment extends Component {
       [e.target.name]: e.target.value
     });
   }
-
-  handleStartDateChange = (event, date) => {
-    this.setState({
-      startDate: date,
-    });
-  };
-
-  handleEndDateChange = (event, date) => {
-    this.setState({
-      endDate: date,
-    });
-  };
 
   handleChangeGuardType = (event, index, value) => {
     this.setState({guardType: value});
@@ -75,35 +60,6 @@ class OfficerAssignment extends Component {
     }
     else {
       errors.nameError = "";
-    }
-
-    let startDateValid = true;
-    if (this.state.startDate.length == 0) {
-      isError = true;
-      errors.startDateError = "An start date must be specified.";
-      startDateValid = false;
-    } else {
-      errors.startDateError = "";
-    }
-
-    let endDateValid = true;
-    if (this.state.endDate.length == 0) {
-      isError = true;
-      errors.endDateError = "An end date must be specified";
-      endDateValid = false;
-    } else {
-      errors.endDateError = "";
-    }
-
-    if (startDateValid && endDateValid) {
-      const startDate = new Date(this.state.startDate);
-      startDate.setHours(0, 0, 0, 0);
-      const endDate = new Date(this.state.endDate);
-      endDate.setHours(0, 0, 0, 0);
-      if (startDate > endDate) {
-        errors.startDateError = "Start date cannot be after end date.";
-        isError = true;
-      }
     }
 
     if(this.state.location.replace('/\s/g','').length == 0){
@@ -134,14 +90,94 @@ class OfficerAssignment extends Component {
       errors.phoneError = "";
     }
 
+    let hasChildError = false;
+    this.state.officerAssignedDatesObjects.map(oneDate => {
+      if (oneDate.instance !== null) {
+        hasChildError = hasChildError || oneDate.instance.validate();
+      }
+    });
+    isError = isError || hasChildError;
+
     this.setState({
         ...this.state,
         ...errors
     });
     return isError;
   };
+
+  removeDate = (dateId, e) => {
+    e.preventDefault();
+    const newDateObjects = this.state.officerAssignedDatesObjects;
+    let indexToBeRemoved = -1;
+    for (let i = 0; i < newDateObjects.length; i++) {
+      if (newDateObjects[i].id === dateId) {
+        indexToBeRemoved = i;
+        break;
+      }
+    }
+    if (indexToBeRemoved > -1) {
+      for (let j = indexToBeRemoved; j < newDateObjects.length - 1; j++) {
+        newDateObjects[j].instance.setState({
+          ...newDateObjects[j + 1].instance.state,
+        });
+      }
+      newDateObjects.splice(newDateObjects.length - 1, 1);
+      this.setState({
+        officerObjects: newDateObjects,
+      });
+    }
+  };
+
+  addDate = e => {
+    e.preventDefault();
+    ++this.state.lastAssignedDateID;
+    const newDateObjects = this.state.officerAssignedDatesObjects;
+    newDateObjects.push({
+      id: this.state.lastAssignedDateID,
+      instance: null,
+    });
+    this.setState({
+      officerAssignedDatesObjects: newDateObjects
+    });
+  }
+
   render() {
     const { value } = this.state;
+
+    let officerAssignedDatesRows = [];
+    for (let i = 0; i < this.state.officerAssignedDatesObjects.length; i++) {
+      const currentAssignedDateObject = this.state.officerAssignedDatesObjects[i];
+      officerAssignedDatesRows.push(
+        <div>
+          <table>
+            <tbody>
+            <tr>
+              <td>
+                <p className={s.date_title}>
+                  <a className={s.removeAction} href="javascript:void(0)"
+                     onClick={e => this.removeDate(this.state.officerAssignedDatesObjects[i].id, e)}>
+                    Remove this date range
+                  </a>
+                </p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <OfficerAssignedDate
+                  ref={
+                    instance => {
+                      currentAssignedDateObject.instance = instance;
+                    }
+                  }
+                  guard_id={currentAssignedDateObject.id}
+                />
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      );
+    }
     return (
       <div className={s.officer}>
         <Form.Group widths='equal'>
@@ -184,28 +220,6 @@ class OfficerAssignment extends Component {
         </Form.Group>
         <Form.Group widths='equal'>
           <Form.Field required>
-            <label> Start date </label>
-            <DatePicker
-              name='startDate'
-              errorText={this.state.startDateError}
-              hintText="Start Date"
-              value={this.state.startDate}
-              onChange={this.handleStartDateChange}
-              container="inline" />
-          </Form.Field>
-          <Form.Field required>
-            <label> End date </label>
-            <DatePicker
-              name='endDate'
-              hintText="End Date"
-              errorText={this.state.endDateError}
-              value={this.state.endDate}
-              onChange={this.handleEndDateChange}
-              container="inline" />
-          </Form.Field>
-        </Form.Group>
-        <Form.Group widths='equal'>
-          <Form.Field required>
             <label> Name </label>
             <TextField
               fullWidth={true}
@@ -226,6 +240,13 @@ class OfficerAssignment extends Component {
               errorText={this.state.phoneError}/>
           </Form.Field>
         </Form.Group>
+        {officerAssignedDatesRows}
+        <p className={s.action_container}>
+          <a className={s.addAction} href="javascript:void(0)"
+             onClick={e => this.addDate(e)}>
+            Add date range
+          </a>
+        </p>
         <Form.Group widths='equal'>
           <Form.Field>
             <label> Remarks </label>
@@ -239,7 +260,7 @@ class OfficerAssignment extends Component {
           </Form.Field>
         </Form.Group>
       </div>
-    )
+    );
   }
 }
 

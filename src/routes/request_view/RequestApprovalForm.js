@@ -1,6 +1,6 @@
-import React, { Component } from 'react'
-import { Button,  Form, Message } from 'semantic-ui-react'
-import TextField from "material-ui/TextField"
+import React, { Component } from 'react';
+import { Button,  Form, Message } from 'semantic-ui-react';
+import TextField from "material-ui/TextField";
 
 import MenuItem from 'material-ui/MenuItem';
 import SelectField from 'material-ui/SelectField';
@@ -291,6 +291,7 @@ class RequestApprovalForm extends Component {
                 currentOfficerObject.instance = instance;
               }
             }
+            guard_id={currentOfficerObject.id}
           />
         </div>
       );

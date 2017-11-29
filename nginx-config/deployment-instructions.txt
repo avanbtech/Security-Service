@@ -3,6 +3,9 @@
 As of the current time, node and npm packages are not installed globally, so you will not be able to do node commands within the vm.
 Server configuration is done on cwzhang, my account. Ask me (Alex) if you need anything regarding VM deployment for the time being.
 
+SSL certificates have been removed from the repository and stored in /home/cwzhang/certs on the virtual machine for securities sake. On other VM's you will need to generate
+a new certificate manually to have HTTPS. See instruction #10.
+
 In summary, website is deployed at cmpt373-1177g.cmpt.sfu.ca using nginx to reverse proxy http and https requests to the correct ports.
 
 Useful commands:
@@ -15,6 +18,7 @@ Useful commands:
 - Ctrl + A then Ctrl + D - Exits the current screen session, which will run in the background
 - screen -r - Re-enters screen
 - screen -ls - Lists the screens that currently exist
+- screen -X -S [screen #id] kill - Kills the given screen process id from -ls
 
 Step to step instructions to replicate deployment on a fresh machine:
 

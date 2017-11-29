@@ -1,5 +1,5 @@
 import React, { PropTypes, Component } from 'react';
-import { Table } from 'semantic-ui-react'
+import { Table } from 'semantic-ui-react';
 import OneServiceRequest from './OneServiceRequest';
 
 export default class ServiceViewTable extends Component {
@@ -79,6 +79,9 @@ export default class ServiceViewTable extends Component {
 	            <Table.HeaderCell sorted={column === 'event_date' ? direction : null} onClick={this.handleSort('event_date')}>
 	              Event Date
 	            </Table.HeaderCell>
+              <Table.HeaderCell sorted={column === 'status' ? direction : null} onClick={this.handleSort('status')}>
+                Guard Info
+              </Table.HeaderCell>
 	          </Table.Row>
 	        </Table.Header>
 	        <Table.Body>
@@ -88,4 +91,3 @@ export default class ServiceViewTable extends Component {
 	    )
 	}
 }
-

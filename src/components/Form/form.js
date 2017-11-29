@@ -2,15 +2,17 @@
 ** Holds the logic and base HTML and JavaScript for the status form
 */
 
-import React, { Component } from 'react'
-import { Button,  Form, Message } from 'semantic-ui-react'
-import TextField from "material-ui/TextField"
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
+import React, { Component } from 'react';
+import { Button,  Form, Message } from 'semantic-ui-react';
+import TextField from "material-ui/TextField";
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import DatePicker from 'material-ui/DatePicker';
 import TimePicker from 'material-ui/TimePicker';
 import DropDownMenu from 'material-ui/DropDownMenu';
 import MenuItem from 'material-ui/MenuItem';
 import SelectField from 'material-ui/SelectField';
+import AdditionalEventDate from './AdditionalEventDate';
+import s from './EventDates.scss';
 
 const styles = {
   customWidth: {
@@ -29,9 +31,10 @@ class FormExampleSubcomponentControl extends Component {
     requestBy:'',
     requestByError:'',
     id:'',
-    idError:'',
     phone:'',
     phoneError:'',
+    emergencyContact:'',
+    emergencyContactError: '',
     fax:'',
     faxError:'',
     email:'',
@@ -46,13 +49,14 @@ class FormExampleSubcomponentControl extends Component {
     eventDateError:'',
     time:'',
     timeError:'',
+    endtime:'',
+    endtimeError:'',
     detail:'',
     accountCode:'',
     accountCodeError:'',
     authorizedBy:'',
     authorizedByError:'',
     authorizedID:'',
-    authorizedIDError:'',
     authorizedDate:'',
     authorizedDateError:'',
     authorizedSignature:'',
@@ -60,10 +64,54 @@ class FormExampleSubcomponentControl extends Component {
     authorizedPhone:'',
     authorizedPhoneError:'',
     licensed:'',
-    licensedError:''
+    licensedError:'',
+    invoice:'',
+    invoiceError:'',
+    evenDatesObjects:[
+    ],
+    lastEvenDate:0
   }
 
+  removeGuard = (officerId, e) => {
+    e.preventDefault();
+    const newevenDatesObjects = this.state.evenDatesObjects;
+    let indexToBeRemoved = -1;
+    for (let i = 0; i < newevenDatesObjects.length; i++) {
+      if (newevenDatesObjects[i].id === officerId) {
+        indexToBeRemoved = i;
+        break;
+      }
+    }
+    if (indexToBeRemoved > -1) {
+      for (let j = indexToBeRemoved; j < newevenDatesObjects.length - 1; j++) {
+        newevenDatesObjects[j].instance.setState({
+          ...newevenDatesObjects[j + 1].instance.state,
+        });
+      }
+      newevenDatesObjects.splice(newevenDatesObjects.length - 1, 1);
+      this.setState({
+        evenDatesObjects: newevenDatesObjects,
+      });
+    }
+  };
 
+  addGuard = e => {
+    e.preventDefault();
+    if (!(this.state.evenDatesObjects.length > 0)){
+      ++this.state.lastEvenDate;
+    // adding a new officer
+    const newevenDatesObjects = this.state.evenDatesObjects;
+    newevenDatesObjects.push({
+      id: this.state.lastEvenDate,
+      toBeRendered: true,
+      instance: null,
+    });
+    this.setState({
+      evenDatesObjects: newevenDatesObjects
+    });
+    }
+
+  }
   change = e =>{
     this.setState({
       [e.target.name]: e.target.value
@@ -99,7 +147,7 @@ class FormExampleSubcomponentControl extends Component {
     else{
       errors.dateError = "";
     }*/
-    if ((Date.parse(this.state.date) - Date.parse(todaysDate)) <= 0 || (this.state.date.length == 0)){
+    if ((Date.parse(this.state.date) - Date.parse(todaysDate)) < 0 || (this.state.date.length == 0)){
       isError = true;
       errors.dateError = "This field cannot be empty";
     }
@@ -107,13 +155,13 @@ class FormExampleSubcomponentControl extends Component {
       errors.dateError = "";
     }
 
-    if (this.state.id.replace(/\s/g, "").length == 0){
+    /*if (this.state.id.replace(/\s/g, "").length == 0){
       isError = true;
       errors.idError = "SFU ID or BCDL should be provided";
     }
     else{
       errors.idError = "";
-    }
+    }*/
 
 
     var phoneno = /^\d{10}$/;
@@ -180,7 +228,7 @@ class FormExampleSubcomponentControl extends Component {
       errors.eventDateError = "";
     }*/
 
-    if ((Date.parse(this.state.eventDate) - Date.parse(todaysDate) <= 0) ||this.state.eventDate.length == 0){
+    if ((Date.parse(this.state.eventDate) - Date.parse(todaysDate) < 0) ||this.state.eventDate.length == 0){
       isError = true;
       errors.eventDateError = "This field cannot be empty";
     }
@@ -203,14 +251,45 @@ class FormExampleSubcomponentControl extends Component {
     else{
       errors.timeError = "";
     }
-    var accountCode1 = /^\d{4}-\d{2}-\d{4}-\d{5}$/;
+    if (this.state.endtime.length == 0){
+      isError = true;
+      errors.endtimeError = "Time should be in HH:MM format";
+    }
+    else{
+      errors.endtimeError = "";
+    }
+
+
+    /*var accountCode1 = /^\d{4}-\d{2}-\d{4}-\d{5}$/;
     var accountCode2 = /^\d{4}-\d{2}-?\d{8}$/;
     if (!this.state.accountCode.match(accountCode1) && !this.state.accountCode.match(accountCode2)){
       isError = true;
       errors.accountCodeError = 'Account code should be in OOOO-FF-DDDD-PPPPP or OOOO-FF-JJJJJJJJ format';
+      if (this.state.invoice == 'yes'){
+        errors.accountCodeError = '';
+      }
     }
     else {
       errors.accountCodeError = '';
+    }*/
+
+    if (this.state.invoice == "yes"){
+      errors.accountCodeError = '';
+    }
+    else if (this.state.invoice == "no"){
+      var accountCode1 = /^\d{4}-\d{2}-\d{4}-\d{5}$/;
+      var accountCode2 = /^\d{4}-\d{2}-?\d{8}$/;
+      if (!this.state.accountCode.match(accountCode1) && !this.state.accountCode.match(accountCode2)){
+        isError = true;
+        errors.accountCodeError = 'Account code should be in OOOO-FF-DDDD-PPPPP or OOOO-FF-JJJJJJJJ format';
+      }
+      else{
+        errors.accountCodeError = '';
+      }
+      errors.accountCodeError = 'Account code should be in OOOO-FF-DDDD-PPPPP or OOOO-FF-JJJJJJJJ format';
+    }
+    else{
+      errors.accountCodeError = 'Account code should be in OOOO-FF-DDDD-PPPPP or OOOO-FF-JJJJJJJJ format';
     }
 
     /*if (!this.validateDate(this.state.authorizedDate)){
@@ -221,7 +300,7 @@ class FormExampleSubcomponentControl extends Component {
         errors.authorizedDateError = "";
     }*/
 
-    if ((Date.parse(this.state.authorizedDate) - Date.parse(todaysDate) <= 0)||this.state.authorizedDate.length == 0){
+    if ((Date.parse(this.state.authorizedDate) - Date.parse(todaysDate) < 0)||this.state.authorizedDate.length == 0){
       isError = true;
       errors.authorizedDateError = "This field cannot be empty";
     }
@@ -237,13 +316,13 @@ class FormExampleSubcomponentControl extends Component {
       errors.authorizedByError = '';
     }
 
-    if (this.state.authorizedID.replace(/\s/g, "").length == 0 ){
+    /*if (this.state.authorizedID.replace(/\s/g, "").length == 0 ){
       isError = true;
       errors.authorizedIDError = 'Authorized ID should be provided';
     }
     else {
       errors.authorizedIDError = '';
-    }
+    }*/
 
     if(!this.state.authorizedPhone.match(phoneno) && !this.state.authorizedPhone.match(phone2))
     {
@@ -254,12 +333,33 @@ class FormExampleSubcomponentControl extends Component {
       errors.authorizedPhoneError = "";
     }
 
+    if(!this.state.emergencyContact.match(phoneno) && !this.state.emergencyContact.match(phone2)){
+      isError = true;
+      errors.emergencyContactError = "Emergency contact number should be in XXXXXXXXXX or XXX-XXX-XXXX format";
+    }
+    else{
+      if (this.state.emergencyContact.replace(/[^0-9]/g, '') === this.state.authorizedPhone.replace(/[^0-9]/g, '')){
+        isError = true;
+        errors.emergencyContactError = "Emergency can not be same with your phone number";
+      }
+      else{
+        errors.emergencyContactError = "";
+      }
+    }
+
     if(this.state.licensed.length == 0){
       isError = true;
       errors.licensedError = "This field cannot be empty";
     }
     else {
       errors.licensedError = "";
+    }
+    if(this.state.invoice.length == 0){
+      isError = true;
+      errors.invoiceError = "This field must select";
+    }
+    else {
+      errors.invoiceError = "";
     }
 
     if(this.state.authorizedSignature.replace('/\s/g','').length == 0){
@@ -269,6 +369,14 @@ class FormExampleSubcomponentControl extends Component {
     else {
       errors.authorizedSignatureError = "";
     }
+
+    let hasChildError = false;
+    this.state.evenDatesObjects.map(officer => {
+      if (officer.instance !== null) {
+        hasChildError = hasChildError || officer.instance.validate();
+      }
+    });
+    isError = isError || hasChildError;
 
     this.setState({
         ...this.state,
@@ -293,6 +401,10 @@ class FormExampleSubcomponentControl extends Component {
 
   handleLicensedChecked = (e, {value}) => {
     this.setState({licensed: { value }.value});
+  }
+
+  handleInvoiceChecked = (e, {value}) => {
+    this.setState({invoice: { value }.value});
   }
 
   handleDepartmentChange = (event, index, value) => {
@@ -321,6 +433,9 @@ class FormExampleSubcomponentControl extends Component {
   handleChangeTimePicker24 = (event, date) => {
     this.setState({time: date});
   };
+  handleChangeEndTimePicker24 = (event, date) => {
+    this.setState({endtime: date});
+  };
 
   FormExampleSuccess = () => (
     <Form success>
@@ -336,7 +451,35 @@ class FormExampleSubcomponentControl extends Component {
 
 
     render() {
-      const { value } = this.state
+      const { value } = this.state;
+      let evenDatesRows = [];
+      for (let i = 0; i < this.state.evenDatesObjects.length; i++) {
+      const currentEvenDatesObjects = this.state.evenDatesObjects[i];
+      evenDatesRows.push(
+        <div>
+          <table className={s.removeOfficer}>
+            <tbody>
+              <tr>
+                <td><h4>Addition Event Dates</h4></td>
+                <td>
+                  <a className={s.removeAction} href="javascript:void(0)"
+                     onClick={e => this.removeGuard(this.state.evenDatesObjects[i].id, e)}>
+                    Remove the Multiple Event Date
+                  </a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <AdditionalEventDate
+            ref={
+              instance => {
+                currentEvenDatesObjects.instance = instance;
+              }
+            }
+          />
+        </div>
+      );
+    }
       return (
         <MuiThemeProvider>
           <Form action="/customer"
@@ -544,14 +687,13 @@ class FormExampleSubcomponentControl extends Component {
                     value = {this.state.requestBy}
                     errorText={this.state.requestByError}/>
                 </Form.Field>
-                <Form.Field required>
-                <label> SFU ID or BCDL </label>
+                <Form.Field>
+                <label> SFU ID </label>
                   <TextField
                     fullWidth = {true}
                     name = "id"
-                    placeholder = 'SFU ID or BCDL'
-                    onChange = {e => this.change(e)}
-                    errorText={this.state.idError} />
+                    placeholder = 'SFU ID'
+                    onChange = {e => this.change(e)}/>
                 </Form.Field>
             </Form.Group>
             <Form.Group widths='equal'>
@@ -646,7 +788,7 @@ class FormExampleSubcomponentControl extends Component {
                     errorText={this.state.eventDateError} />
                 </Form.Field>
                 <Form.Field required>
-                  <label> Time(s) </label>
+                  <label> Time </label>
                   <TimePicker
                     format="24hr"
                     fullWidth={true}
@@ -655,7 +797,23 @@ class FormExampleSubcomponentControl extends Component {
                     onChange={this.handleChangeTimePicker24}
                     errorText={this.state.timeError} />
                 </Form.Field>
+                <Form.Field required>
+                  <label> End Time </label>
+                  <TimePicker
+                    format="24hr"
+                    fullWidth={true}
+                    name='endtime'
+                    placeholder='HH:MM'
+                    onChange={this.handleChangeEndTimePicker24}
+                    errorText={this.state.endtimeError} />
+                </Form.Field>
             </Form.Group>
+            <div className={s.action_container}>
+              <Form.Button
+               onClick = {e => this.addGuard(e)}>Add Even Date</Form.Button>
+            </div>
+            {evenDatesRows}
+
             <Form.TextArea
               name='detail'
               label='Details'
@@ -663,6 +821,25 @@ class FormExampleSubcomponentControl extends Component {
               onChange = {e => this.change(e)} />
             <h2> Payment Detail </h2>
             <Form.Field required>
+              <Form.Group inline>
+              {/* "value" in data package represent the state of this part */}
+                  <label> Please Invoice </label>
+                  <Form.Radio
+                    name='invoice'
+                    label='Yes'
+                    value='yes'
+                    checked={this.state.invoice === 'yes'}
+                    onChange={this.handleInvoiceChecked} />
+                  <Form.Radio
+                    name='invoice'
+                    label='No'
+                    value='no'
+                    checked={this.state.invoice === 'no'}
+                    onChange={this.handleInvoiceChecked} />
+                  <label style={{color:'red'}}>{this.state.invoiceError}</label>
+              </Form.Group>
+            </Form.Field>
+            <Form.Field>
                 <label> Account Code </label>
               <TextField
                 fullWidth={true}
@@ -671,7 +848,6 @@ class FormExampleSubcomponentControl extends Component {
                 onChange = {e => this.change(e)}
                 errorText={this.state.accountCodeError} />
             </Form.Field>
-            <Form.Checkbox label='Please Invoice' /> {/* "did not intergrated into data package yet */}
             <h2> Authorization Detail </h2>
             <Form.Group widths='equal'>
               <Form.Field required>
@@ -683,14 +859,13 @@ class FormExampleSubcomponentControl extends Component {
                     onChange = {e => this.change(e)}
                     errorText={this.state.authorizedByError} />
                 </Form.Field>
-                <Form.Field required>
-                  <label> SFU ID/BCDL </label>
+                <Form.Field>
+                  <label> SFU ID </label>
                   <TextField
                     fullWidth={true}
                     name='authorizedID'
-                    placeholder='SFU ID/BCDL'
-                    onChange = {e => this.change(e)}
-                    errorText={this.state.authorizedIDError} />
+                    placeholder='SFU ID'
+                    onChange = {e => this.change(e)}/>
                 </Form.Field>
           <Form.Field required>
                   <label> Date </label>
@@ -722,6 +897,15 @@ class FormExampleSubcomponentControl extends Component {
                     onChange = {e => this.change(e)}
                     errorText={this.state.authorizedPhoneError} />
                 </Form.Field>
+                <Form.Field required>
+                  <label> Emergency Contact </label>
+                  <TextField
+                    fullWidth={true}
+                    name='emergencyContact'
+                    placeholder='XXX-XXX-XXXX'
+                    onChange = {e => this.change(e)}
+                    errorText={this.state.emergencyContactError} />
+                </Form.Field>
             </Form.Group>
 
             <br></br>
@@ -732,7 +916,8 @@ class FormExampleSubcomponentControl extends Component {
                 {/* "did not intergrated into data package yet */}
               </Form.Group>
             </Form.Field>
-            <Form.Button onClick = {e => this.onSubmit(e)} onChange = {this.FormExampleSuccess}>Submit</Form.Button>
+
+            <Form.Button onClick = {e => this.onSubmit(e)} >Submit</Form.Button>
           </Form>
         </MuiThemeProvider>
       )
