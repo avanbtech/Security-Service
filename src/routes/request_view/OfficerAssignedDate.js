@@ -88,7 +88,7 @@ class OfficerAssignedDate extends Component {
         <Form.Field required>
           <label> Start date </label>
           <DatePicker
-            name={'guard' + this.state.guard_id + '[assignedDate]'}
+            name={'date_' + this.state.guard_id + '[assignedDate]'}
             errorText={this.state.assignedDateError}
             hintText="Start Date"
             value={this.state.assignedDate}
@@ -101,7 +101,7 @@ class OfficerAssignedDate extends Component {
           <label> Start Time </label>
           <TextField
             fullWidth={true}
-            name={'guard' + this.state.guard_id + '[startTime]'}
+            name={'date_' + this.state.guard_id + '[startTime]'}
             placeholder='HH:MM'
             onChange = {this.handleChangeStartTime}
             value = {this.state.startTime}
@@ -111,7 +111,7 @@ class OfficerAssignedDate extends Component {
           <label> End Time </label>
           <TextField
             fullWidth={true}
-            name={'guard' + this.state.guard_id + '[endTime]'}
+            name={'date_' + this.state.guard_id + '[endTime]'}
             placeholder='HH:MM'
             onChange = {this.handleChangeEndTime}
             value = {this.state.endTime}
