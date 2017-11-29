@@ -1,0 +1,6 @@
+{
+  "name": "rejectionForm",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./rejectionForm.js"
+}
