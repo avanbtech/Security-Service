@@ -55,18 +55,6 @@ async function getReqForServiceView() {
 
   let query= '{request{accessID user{requestBy sfuBCID} date status event{eventDates location}}}';
 
-  // await axios.post(DBUrl, {
-  //   query: '{request{accessID user{requestBy sfuBCID} date status event{eventDates location}}}',
-  // })
-  //   .then(function (response) {
-  //     if(response['data']['data']['request']) {
-  //       res = response.data['data']['request'];
-  //     }
-  //   })
-  //   .catch(function (error) {
-  //     console.log(error.data);
-  //   });
-
   const client = new GraphQLClient(DBUrl, { headers: {} });
   await client.request(query).then((data) => {
     console.log(data.request);
@@ -82,19 +70,7 @@ async function getReqForStatusView(reqID) {
   const reqNum = '\"' + reqID + '\"';
 
   const dbQuery = '{request(accessID: ' + reqNum + '){status accessID user { sfuBCID  email}}}';
-/*
-  await axios.post(DBUrl, {
-    query: dbQuery,
-  })
-    .then(function (response) {
-      if (response['data']['data']['request']) {
-        res = response.data['data']['request'];
-      }
-    })
-    .catch(function (error) {
-      console.log(error.data);
-    });
-    */
+
     const client = new GraphQLClient(DBUrl, { headers: {} });
     await client.request(dbQuery).then((data) => {
       console.log(data.request);

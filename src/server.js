@@ -73,6 +73,21 @@ server.use('/exportGuards', async(req, res) => {
 
 });
 
+server.use('/guardjobcheck', async(req, res) =>{
+  let data = null;
+  await dbMethods.getReqForGuardJobs(req.body.dispatchNumber).then((resp) => {
+    data = resp;
+  });
+
+  res.setHeader('Content-Type', 'application/json');
+
+  const final = {
+    reqData: data,
+  };
+
+  res.json(final);
+});
+
 server.use('/guardcheck', async(req, res) =>{
   let data = null;
   await dbMethods.getReqForGuardView().then((resp) => {

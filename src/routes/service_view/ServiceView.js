@@ -30,6 +30,11 @@ function ServiceViewReq({serviceRequests, filterObject}) {
         />
         <ServiceViewTable serviceRequests={serviceRequests} />
       </div>
+      <Form action="/GuardView" method="post">
+          <div className={s.button_container}>
+            <Form.Button>Guards</Form.Button>
+          </div>
+        </Form>
     </div>
   );
 }

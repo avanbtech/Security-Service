@@ -268,3 +268,7 @@ exports.export_to_pdf = function (req, res, next) {
     }
   }, waitTimeInMS);
 };
+
+exports.get_guards = function(req, res, next){
+  res.redirect('/GuardView');
+};

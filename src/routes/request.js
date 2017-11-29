@@ -13,6 +13,7 @@ router.post('/ServiceView/approve', requestController.request_approve);
 router.post('/ServiceView/reject', requestController.request_reject);
 router.post('/CSV', requestController.export_to_pdf);
 router.post('/StatusForm/', requestController.get_accessID);
+router.post('/GuardView', requestController.get_guards);
 router.post('/GuardJobs/:dispatchNumber', requestController.get_guardJobs);
 
 module.exports = router;
