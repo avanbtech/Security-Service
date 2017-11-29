@@ -169,6 +169,7 @@ class OfficerAssignment extends Component {
                       currentAssignedDateObject.instance = instance;
                     }
                   }
+                  guard_id={this.state.guard_id}
                 />
               </td>
             </tr>
