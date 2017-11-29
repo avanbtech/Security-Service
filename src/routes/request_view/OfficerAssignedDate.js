@@ -9,6 +9,7 @@ class OfficerAssignedDate extends Component {
     super(props);
 
     this.state = {
+      guard_id: props.guard_id,
       assignedDate: props.assignedDate === undefined ? new Date() : props.assignedDate,
       assignedDateError: '',
       startTime: props.startTime === undefined ? '' : props.startTime,
@@ -78,7 +79,7 @@ class OfficerAssignedDate extends Component {
         <Form.Field required>
           <label> Start date </label>
           <DatePicker
-            name='assignedDate'
+            name={'guard_' + guard_id + '[assignedDate]'}
             errorText={this.state.assignedDateError}
             hintText="Start Date"
             value={this.state.assignedDate}
@@ -91,7 +92,7 @@ class OfficerAssignedDate extends Component {
           <label> Start Time </label>
           <TextField
             fullWidth={true}
-            name='startTime'
+            name={'guard_' + guard_id + '[startTime]'}
             placeholder='HH:MM'
             onChange = {e => this.change(e)}
             value = {this.state.startTime}
@@ -101,7 +102,7 @@ class OfficerAssignedDate extends Component {
           <label> End Time </label>
           <TextField
             fullWidth={true}
-            name='endTime'
+            name={'guard_' + guard_id + '[endTime]'}
             placeholder='HH:MM'
             onChange = {e => this.change(e)}
             value = {this.state.endTime}
