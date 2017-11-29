@@ -46,32 +46,6 @@ server.use('/graphql', expressGraphQL(req => ({
   pretty: process.env.NODE_ENV !== 'production',
 })));
 
-
-server.use('/exportGuards', async(req, res) => {
-
-  //TODO: ADD AUTH CHECK
-  //TODO: CHANGE REQ TO BE PASSED IN WITH THE REQ
-
-  const reqID = req.body.referenceID;
-
-  let data = [];
-
-  await expG.exportGuards(reqID).then((resp) => {
-    console.log(`EXPORTED TO ${resp}`);
-    data = resp;
-  });
-
-  setTimeout(() => {
-    if(data) {
-      res.download(data);
-    } else {
-      // TODO SHOW PROMPT INSTEAD OF REDIRECT
-      res.redirect("/");
-    }
-  }, 5000);
-
-});
-
 server.use('/guardjobcheck', async(req, res) =>{
   let data = null;
   await dbMethods.getReqForGuardJobs(req.body.dispatchNumber).then((resp) => {

@@ -134,12 +134,6 @@ const GuardArgs = {
   location: {
     type: GraphQLString,
   },
-  startDate: {
-    type: GraphQLString,
-  },
-  endDate: {
-    type: GraphQLString,
-  },
   telephone: {
     type: GraphQLString,
   },
@@ -151,6 +145,9 @@ const GuardArgs = {
   },
   grdType: {
     type: GraphQLString,
+  },
+  schedule: {
+    type: GraphQLString
   },
 };
 
