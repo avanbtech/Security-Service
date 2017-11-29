@@ -5,7 +5,7 @@
 import React from 'react';
 import GuardJobs from './GuardJobs';
 import axios from 'axios';
-import methods from '../../data/dbFetchMethods'
+import methods from '../../data/dbFetchMethods';
 
 function contains(a, obj) {
     for (var i = 0; i < a.length; i++) {
@@ -58,7 +58,7 @@ export const action = async (state) => {
 
         })
     } else {
-        
+
         for(let x = 0; x < res.length; x++){
             request.push({
                 accessID: res[x]['accessID'],
@@ -70,7 +70,7 @@ export const action = async (state) => {
         }
     }
 
-        
+
     state.context.onSetTitle(title);
     return <GuardJobs guardJobs={request} />;
 };

@@ -2,8 +2,8 @@ import React, { PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import s from './GuardView.scss';
 import OneGuardRequest from './OneGuardRequest';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
-import { Icon, Label, Menu, Table } from 'semantic-ui-react'
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import { Icon, Label, Menu, Table } from 'semantic-ui-react';
 
 function Guards({guardRequests}) {
     var rows = [];
@@ -15,7 +15,7 @@ function Guards({guardRequests}) {
         }
     }
   return (
- 
+
 
     <div className={s.root}>
         <div className={s.container}>
@@ -32,17 +32,16 @@ function Guards({guardRequests}) {
             <Table.HeaderCell>Telephone</Table.HeaderCell>
             </Table.Row>
         </Table.Header>
-    
+
         <Table.Body>
         {rows}
         </Table.Body>
         </Table>
         </MuiThemeProvider>
-    
+
         </div>
 
     </div>
   );
 }
 export default withStyles(Guards, s);
-

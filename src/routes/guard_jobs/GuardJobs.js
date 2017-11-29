@@ -2,12 +2,12 @@ import React, { PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import s from './GuardJobs.scss';
 import OneJob from './OneJob';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
-import { Icon, Label, Menu, Table } from 'semantic-ui-react'
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import { Icon, Label, Menu, Table } from 'semantic-ui-react';
 
 function GuardsJobs({guardJobs}) {
     var rows = [];
-    
+
      if(guardJobs != null){
         for(var i = 0; i < guardJobs.length; i++) {
             rows.push(<OneJob guardJob={
@@ -17,7 +17,7 @@ function GuardsJobs({guardJobs}) {
         console.log(rows);
     }
   return (
- 
+
 
     <div className={s.root}>
         <div className={s.container}>
@@ -40,11 +40,10 @@ function GuardsJobs({guardJobs}) {
         </Table.Body>
         </Table>
         </MuiThemeProvider>
-    
+
         </div>
 
     </div>
   );
 }
 export default withStyles(GuardsJobs, s);
-

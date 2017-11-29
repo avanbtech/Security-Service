@@ -20,7 +20,7 @@ const routes = [
   require('./routes/request_view'),
   require('./routes/CSV'),
   require('./routes/guard_view'),
-  require('./routes/guard_jobs')
+  require('./routes/guard_jobs'),
 ];
 
 const router = new Router(on => {

@@ -1,5 +1,5 @@
 import React, { PropTypes, Component } from 'react';
-import { Table } from 'semantic-ui-react'
+import { Table } from 'semantic-ui-react';
 import OneServiceRequest from './OneServiceRequest';
 
 export default class ServiceViewTable extends Component {
@@ -91,4 +91,3 @@ export default class ServiceViewTable extends Component {
 	    )
 	}
 }
-

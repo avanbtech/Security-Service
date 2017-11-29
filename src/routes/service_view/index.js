@@ -1,7 +1,7 @@
 import React from 'react';
 import ServiceViewReq from './ServiceView';
 import axios from 'axios';
-import methods from '../../data/dbFetchMethods'
+import methods from '../../data/dbFetchMethods';
 
 async function fetchData() {
   let res = null;
@@ -93,5 +93,3 @@ export const action = async (state) => {
     filterObject={filterObject}
   />;
 };
-
-

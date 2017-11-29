@@ -5,7 +5,7 @@
 import React from 'react';
 import GuardView from './GuardView';
 import axios from 'axios';
-import methods from '../../data/dbFetchMethods'
+import methods from '../../data/dbFetchMethods';
 
 function contains(a, obj) {
     for (var i = 0; i < a.length; i++) {
@@ -40,7 +40,7 @@ export const action = async (state) => {
   await getData(state.params.referenceID).then((response) => {
     res = response.data.reqData;
   });
- 
+
 //begin Replace with commented code above for VM use.
  // res = await methods.getReqForGuardView();
 //end
@@ -54,7 +54,7 @@ export const action = async (state) => {
       telephone: "",
     })
   } else {
-      
+
     for(let x = 0; x < res.length; x++){
         if(!contains(dispatchNumbers, res[x]['dispatchNumber'])){
             request.push({
