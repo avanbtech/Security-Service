@@ -9,7 +9,9 @@ import ActionHome from 'material-ui/svg-icons/action/find-in-page';
 class checkStatus extends Component {
   state = {
     referenceID: '',
-    referenceIDError:''
+    referenceIDError:'',
+    email:'',
+    emailError:''
   }
   validate = () => {
     let isError = false;
@@ -22,17 +24,30 @@ class checkStatus extends Component {
     else {
       errors.referenceIDError = "";
     }
+    if(this.state.email.length == 0){
+      isError = true;
+      errors.emailError = "Email should be provided";
+    } else{
+      errors.emailError = "";
+    }
     this.setState({
         ...this.state,
         ...errors
     });
     return isError;
   }
-  handleChange = (event) => {
+  /*handleChange = (event) => {
     this.setState({
       referenceID: event.target.value,
+      email: event.target.value
     });
   };
+  */
+  handleChange = e =>{
+    this.setState({
+      [e.target.name]: e.target.value
+    });
+  }
   onSubmit = e =>{
     const error = this.validate();
     if (error){
@@ -43,19 +58,32 @@ class checkStatus extends Component {
       const { value } = this.state
       return (
         <MuiThemeProvider>
-          <Form action={"/StatusForm/"+ this.state.referenceID}
+          <Form action={"/StatusForm/"+ this.state.referenceID + "/" +this.state.email}
                 method="post"
                 keyboar>
             <Form.Group widths='equal'>
                 <Form.Field required>
-                  <label> Check Status </label>
+                  <label> Reference ID </label>
                   <TextField
                     name='referenceID'
                     placeholder='Reference ID'
                     onChange={this.handleChange}
                     errorText={this.state.referenceIDError}
                   />
+                 
                 </Form.Field>
+                <Form.Field required>
+                <label> email </label>
+                  <TextField
+                  name='email'
+                  placeholder='email'
+                  onChange={this.handleChange}
+                  errorText={this.state.emailError}
+                />
+                 
+                </Form.Field>
+
+               
             </Form.Group>
             <Form.Button onClick = {e => this.onSubmit(e)} animated >
               <Button.Content visible>Search</Button.Content>

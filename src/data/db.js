@@ -23,7 +23,7 @@ const User = Conn.define('user', {
   },
   sfuBCID: {
     type: Sequelize.STRING,
-    allowNull: false,
+    allowNull: true,
   },
   department: {
     type: Sequelize.STRING,
@@ -83,10 +83,10 @@ const Request = Conn.define('request', {
   },
   accountCode: {
     type: Sequelize.STRING,
-    allowNull: false
+    allowNull: true
   },
   invoice: {
-    type: Sequelize.INTEGER,
+    type: Sequelize.STRING,
     allowNull: false
   },
   authorizedBy: {
@@ -95,7 +95,7 @@ const Request = Conn.define('request', {
   },
   authorizedID: {
     type: Sequelize.STRING,
-    allowNull: false
+    allowNull: true
   },
   authorizedDate: {
     type: Sequelize.DATE,
@@ -138,6 +138,10 @@ const Event = Conn.define('event', {
     },
   },
   times: {
+    type: Sequelize.STRING,
+    allowNull: false,
+  },
+  endTime: {
     type: Sequelize.STRING,
     allowNull: false,
   },
@@ -283,7 +287,7 @@ Security.hasMany(Guard, {foreignKey: "groupID", sourceKey: "groupID"});
 Guard.hasMany(Security,  {foreignKey: "groupID", sourceKey: "groupID"});
 
 // TODO: REPLACE FORCE PARAM
-//FOR DEPLOYING
+// //FOR DEPLOYING
 // Conn.sync({ force: false});
 
 //FOR TESTING
