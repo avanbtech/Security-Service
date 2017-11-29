@@ -29,12 +29,12 @@ function ServiceViewReq({serviceRequests, filterObject}) {
           href="//cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.12/semantic.min.css"
         />
         <ServiceViewTable serviceRequests={serviceRequests} />
-      </div>
-      <Form action="/GuardView" method="post">
+          <Form action="/GuardView" method="post">
           <div className={s.button_container}>
             <Form.Button>Guards</Form.Button>
           </div>
         </Form>
+      </div>
     </div>
   );
 }

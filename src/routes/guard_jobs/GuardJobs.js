@@ -30,8 +30,6 @@ function GuardsJobs({guardJobs}) {
             <Table.Row>
             <Table.HeaderCell>Reference ID</Table.HeaderCell>
             <Table.HeaderCell>Location</Table.HeaderCell>
-            <Table.HeaderCell>Start Date</Table.HeaderCell>
-            <Table.HeaderCell>End Date</Table.HeaderCell>
             </Table.Row>
         </Table.Header>
         <Table.Body>
