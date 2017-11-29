@@ -287,8 +287,13 @@ Security.hasMany(Guard, {foreignKey: "groupID", sourceKey: "groupID"});
 Guard.hasMany(Security,  {foreignKey: "groupID", sourceKey: "groupID"});
 
 // TODO: REPLACE FORCE PARAM
+<<<<<<< HEAD
 //FOR DEPLOYING
 //Conn.sync({ force: false});
+=======
+// //FOR DEPLOYING
+// Conn.sync({ force: false});
+>>>>>>> 7edcf9521daacd850ac19cc15e7e77a2e8037956
 
 //FOR TESTING
 Conn.sync({ force: true}).then(() => {

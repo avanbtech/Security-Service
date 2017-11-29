@@ -15,7 +15,6 @@ import Router from './routes';
 import assets from './assets';
 import { port, auth, analytics } from './config';
 import dbMethods from './data/dbFetchMethods';
-import expG from './data/exportGuardsPDF';
 
 var expressValidator = require('express-validator');
 

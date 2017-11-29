@@ -9,7 +9,7 @@ import db from '../data/db';
 import exportMethods from '../PyScripts/childProcPy'
 import nodemailer from 'nodemailer';
 import xoauth2 from 'xoauth2';
-
+import expG from '../data/exportGuardsPDF';
 import dbMethods from './dbCommitMethods';
 
 /*Helper Functions*/
@@ -116,7 +116,7 @@ function checkIfRequestInformationNotEmpty(req) {
   checkIfInputIsEmptyInField(req, 'time', 'parameter: time must be specified');
   checkIfInputIsEmptyInField(req, 'endtime', 'parameter: end time must be specified');
   checkIfInputIsEmptyInField(req, 'emergencyContact', 'emergencyContact: phone must be specified');
-  
+
 
 }
 
@@ -263,12 +263,33 @@ exports.export_to_pdf = function (req, res, next) {
       res.download(filePath.toString(), downloadPDFName);
     } else {
       console.log("INVALID PATH");
-      // TODO: SHOW AN ALERT INSTEAD OF A REDIRECTION
       res.redirect("/");
     }
   }, waitTimeInMS);
 };
 
+<<<<<<< HEAD
 exports.get_guards = function(req, res, next){
   res.redirect('/GuardView');
 };
+=======
+exports.exportGuards = async (req, res) => {
+  const reqID = req.body.referenceID;
+
+  let data = [];
+
+  await expG.exportGuards(reqID).then((resp) => {
+    console.log(`EXPORTED TO ${resp}`);
+    data = resp;
+
+    setTimeout(() => {
+      if(data) {
+
+        res.download(data);
+      } else {
+        res.redirect("/");
+      }
+    }, 5000);
+  });
+};
+>>>>>>> 7edcf9521daacd850ac19cc15e7e77a2e8037956
