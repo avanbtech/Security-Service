@@ -162,6 +162,26 @@ function getGuardSchedule(req, x) {
   }
 }
 
+function singleGuardSchedule(req) {
+  let schedule = [];
+  let x;
+  for(x = 0; ; x++) {
+    const index = `date_${x}`;
+
+    try {
+      const dateObj = req.body[index];
+      const assignedDate = dateObj.assignedDate;
+      const startTime = dateObj.startTime;
+      const endTime = dateObj.endTime;
+
+      schedule.push(`${assignedDate}?${startTime}?${endTime}`);
+
+    } catch (e){
+      return schedule;
+    }
+  }
+}
+
 function createGuards(req, grpID) {
   let x;
   const allGuards = [];
@@ -187,11 +207,14 @@ function createGuards(req, grpID) {
       });
     }
   } else {
+
+    const scheduleArray = singleGuardSchedule(req);
+
     allGuards.push({
       groupID: grpID,
       dispatchNumber: req.body.dispatchNumber,
       location: req.body.location,
-      schedule: ["NOT DEFINED"],
+      schedule: scheduleArray,
       guardname: req.body.name,
       telephone: req.body.phone,
       accessID: req.body.requestID,
