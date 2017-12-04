@@ -1,0 +1,72 @@
+====================== Security Request System - Terms and conditions ======================
+
+============================================================================================ 
+Preamble
+
+Hereinafter, The Licensee refers to Simon Fraser University.The Licensor
+refers to Team Gamma and The Software refers to the Security Request
+System developed by the licensor for Simon Fraser University.
+============================================================================================
+
+============================================================================================
+License
+
+Licensor hereby grants Licensee a Personal, Non-assignable & non-transferable,
+Perpetual, Commercial with terms, Including the rights to create but not
+distribute derivative works, Non-exclusive license, all with accordance
+with the terms set forth and other legal restrictions set forth in 3rd party
+software used while running Software.
+
+Licensee may use Software for the purpose of:
+    - Running Software on Licensee’s Website[s] and Server[s];
+    - Allowing 3rd Parties to run Software on Licensee’s Website[s] and Server[s]
+    - Publishing Software’s output to Licensee and 3rd Parties
+    - Distribute verbatim copies of Software’s output (including compiled binaries)
+    - Modify Software to suit Licensee’s needs and specifications
+
+This license is granted perpetually, as long as you do not materially breach it.
+
+Non Assignable & Non-Transferable: Licensee may not assign or transfer his rights
+and duties under this license
+
+The Licensee may not use the software for gaining any monetary profit; It is solely
+meant for improvement/benefit of the SFU community.
+
+Licensee may create derivative works based on Software, including amending Software’s
+source code, modifying it, integrating it into a larger work or removing portions of
+Software, as long as no distribution of the derivative works is made
+============================================================================================
+
+============================================================================================
+Payment
+
+The Software is provided free of cost to the Licensee.
+============================================================================================
+
+============================================================================================
+Support
+
+Software is provided under an AS-IS basis and without any support, updates or maintenance.
+Nothing in this Agreement shall require Licensor to provide Licensee with support or fixes
+to any bug, failure, mis-performance or other defect in The Software.
+============================================================================================
+
+============================================================================================
+Liability and Warranty
+
+To the extent permitted under Law, The Software is provided under an AS-IS basis.
+Licensor shall never, and without any limit, be liable for any damage, cost, expense or
+any other payment incurred by Licensee as a result of Software’s actions, failure, bugs
+and/or any other interaction between The Software  and Licensee’s end-equipment, computers,
+other software or any 3rd party, end-equipment, computer or services.  Moreover, Licensor
+shall never be liable for any defect in source code written by Licensee when relying on
+The Software or using The Software’s source code.
+The Software is provided without any warranty whatsoever.
+============================================================================================
+
+============================================================================================
+Attribution
+
+This license was generated with the help of Binpress, a software license tool
+(https://www.binpress.com/license/generator)
+============================================================================================
